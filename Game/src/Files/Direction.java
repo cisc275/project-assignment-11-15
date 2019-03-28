@@ -4,6 +4,13 @@ public enum Direction {
 	
 	private Integer hierarchy;
 
+	/**
+	 * Initializes the numbers after each enumeration in order to be called
+	 *
+	 * @author Amjed Hallak
+	 * @param hierarchy - the number attached to each enumeration 
+	 * 
+	 * */
     private Direction(final Integer hierarchy) {
         this.hierarchy = hierarchy;
     }

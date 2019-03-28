@@ -17,8 +17,8 @@ public class Model{
 	Direction dir;
 	
 	/**
-	 * Short one line description.
-	 * 
+	 * Updates the location and direction of objects and characters. Will add more methods as needed that will be called by this one.
+	 *
 	 * @author
 	 * @param
 	 * @param

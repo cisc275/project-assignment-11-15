@@ -5,10 +5,25 @@ public class RedKnot extends Bird{
 	boolean isFlying;
 	boolean isWalking;
 	
-	void picksFood() {
+	/**
+	 * Removes the food item upon contact
+	 *
+	 * @author
+	 * @param Food foodItem - the item made contact with
+	 * 
+	 * */
+	void picksFood(Food foodItem) {
 		
 	}
-	void hitsPredator() {
+	
+	/**
+	 * Activated upon making contact with a predator
+	 *
+	 * @author
+	 * @param Predator pred
+	 * 
+	 * */
+	void hitsPredator(Predator pred) {
 		
 	}
 }
