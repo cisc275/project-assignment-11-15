@@ -45,7 +45,7 @@ public class Controller{
 				//increment the x and y coordinates, alter direction if necessary
 				TVmodel.updateLocationAndDirection();
 				//update the view
-				//view.update(model.getX(), model.getY(), model.getDirect());
+				view.update(TopViewModel.clapperRail.getX(), TopViewModel.clapperRail.getY(), Direction.UP);
 			} else {
 				while(!running) {
 					try {

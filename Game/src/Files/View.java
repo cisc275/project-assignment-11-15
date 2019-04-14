@@ -19,24 +19,24 @@ public class View extends JPanel{
 	int count;
 	int x;
 	int y;
-	static int frameCount;
+	static int frameCount = 1;
 	BufferedImage[][] pics;
 	int numImages = 1;
 	Direction dir;
 	
 	public void loadImages() {
 		String[] arrOfStr = {"clapperRailSq"};
-        BufferedImage[] img10 = createImage(arrOfStr);
+        BufferedImage[] imgs = createImage(arrOfStr);
         pics = new BufferedImage[frameCount][numImages];
 
-        addImagesToArray(img10, frameCount);
+        addImagesToArray(imgs, frameCount);
 	}
 	
 	public void addImagesToArray(BufferedImage[] img, int frameCount) {
 		for(BufferedImage curImg : img) {
-			for(int i = 0; i < frameCount; i++) {
-                pics[i][count] = curImg.getSubimage(AnimalWidth*i, 0, AnimalWidth, AnimalHeight);
-            }
+		//	for(int i = 0; i < 1; i++) {
+               pics[1][1] = curImg;
+          //  }
             count ++;
 		}
 	}
@@ -93,7 +93,7 @@ public class View extends JPanel{
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[Model.getSmlPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
+		g.drawImage(pics[1][1], x, y, Color.GRAY, this);
 	}
 	
 }
