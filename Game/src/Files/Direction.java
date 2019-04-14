@@ -1,6 +1,6 @@
 package Files;
 public enum Direction {
-	NORTH(0), NORTHEAST(1), EAST(2), SOUTHEAST(3), SOUTH(4), SOUTHWEST(5), WEST(6), NORTHWEST(7);
+	UP(0), NORTHEAST(1), RIGHT(2), SOUTHEAST(3), DOWN(4), SOUTHWEST(5), LEFT(6), NORTHWEST(7);
 	
 	private Integer hierarchy;
 

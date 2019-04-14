@@ -75,7 +75,7 @@ class KeyPress implements KeyListener {
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.arrowUp) {
-			System.out.println("up");
+			TopViewModel.move(Direction.UP);
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
 			System.out.println("left");

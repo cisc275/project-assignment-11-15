@@ -15,6 +15,7 @@ public class TopViewModel{
 	int frameWidth;
 	int frameHeight;
 	String action;
+	static Animal clapperRail;
 	Direction dir;
 	
 
@@ -30,13 +31,21 @@ public class TopViewModel{
 	 * 
 	 * */;
 	void updateLocationAndDirection() {
-		//System.out.println("updating");
+		//System.out.println("x: " + clapperRail.getX());
+		//System.out.println("y: " + clapperRail.getY());
+	}
+	
+	static void move(Direction dir) {
+		System.out.println(dir);
+		clapperRail.move(dir);
 	}
 	
 	public static void main(String[] args) {
 		System.out.println("Starting point");
 		Controller ctrl = new Controller();
 		ctrl.start();
+		
+		clapperRail = new ClapperRail();
 	}
 }
 

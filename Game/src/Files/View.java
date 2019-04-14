@@ -33,7 +33,7 @@ public class View extends JPanel{
         this.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        // frame.setSize(frameWidth, frameHeight);
-        frame.setSize(800,600);
+        frame.setSize(80,60);
        // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
        // frame.getContentPane().add(btn,BorderLayout.SOUTH);
        // btn.addActionListener(new ButtonListener());
