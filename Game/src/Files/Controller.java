@@ -78,13 +78,13 @@ class KeyPress implements KeyListener {
 			TopViewModel.move(Direction.UP);
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
-			System.out.println("left");
+			TopViewModel.move(Direction.LEFT);
 		}
 		if (e.getKeyCode() == Controller.arrowRight) {
-			System.out.println("right");
+			TopViewModel.move(Direction.RIGHT);
 		}
 		if (e.getKeyCode() == Controller.arrowDown) {
-			System.out.println("down");
+			TopViewModel.move(Direction.DOWN);
 		}
 		
 		if (e.getKeyChar() == 'k') {

@@ -14,17 +14,31 @@ import javax.swing.JPanel;
 public class View extends JPanel{
 	static int frameWidth;
 	static int frameHeight;
-	static int AnimalWidth;
-	static int AnimalHeight;
+	static int AnimalWidth = 20;
+	static int AnimalHeight = 20;
 	int count;
 	int x;
 	int y;
 	static int frameCount;
 	BufferedImage[][] pics;
+	int numImages = 1;
+	Direction dir;
 	
+	public void loadImages() {
+		String[] arrOfStr = {"clapperRailSq"};
+        BufferedImage[] img10 = createImage(arrOfStr);
+        pics = new BufferedImage[frameCount][numImages];
+
+        addImagesToArray(img10, frameCount);
+	}
 	
-	void addImagesToArray() {
-		
+	public void addImagesToArray(BufferedImage[] img, int frameCount) {
+		for(BufferedImage curImg : img) {
+			for(int i = 0; i < frameCount; i++) {
+                pics[i][count] = curImg.getSubimage(AnimalWidth*i, 0, AnimalWidth, AnimalHeight);
+            }
+            count ++;
+		}
 	}
 	
 	public void buildFrame() {
@@ -44,22 +58,42 @@ public class View extends JPanel{
 	}
 	public View() { 
 
-	//	loadImages();
+		loadImages();
 		buildFrame();
 		
 	}
 	
-	BufferedImage[] createImage() {
-		return null;
-		
-	}
+    private BufferedImage[] createImage(String[] strArr){
+        BufferedImage[] bufferedImage = new BufferedImage[strArr.length];
+        String path = "src/images/";
+        int count = 0;
+        for (String str : strArr) {
+            try {
+                bufferedImage[count] = ImageIO.read(new File(path.concat(str).concat(".png")));
+                
+                count ++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bufferedImage;
+    }
 	
-	void update(int x, int y, Direction dir) {
-		
+    public void update(int x, int y, Direction dir) {
+		//System.out.println("view update");
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		repaint();
+		try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public void paint(Graphics g) {
-		
+		g.drawImage(pics[Model.getSmlPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
 	}
 	
 }

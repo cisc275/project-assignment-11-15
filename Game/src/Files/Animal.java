@@ -19,7 +19,6 @@ public class Animal{
 	
 	
 	void move(Direction dir) {
-		System.out.println("hi"); 
 		switch(dir) {
 			case UP:
 				y += 5;

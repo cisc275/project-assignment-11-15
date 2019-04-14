@@ -29,23 +29,23 @@ public class TopViewModel{
 	 * @param   
 	 * @return 
 	 * 
-	 * */;
+	 * */
 	void updateLocationAndDirection() {
-		//System.out.println("x: " + clapperRail.getX());
-		//System.out.println("y: " + clapperRail.getY());
+		System.out.println("Clapper rail x: " + clapperRail.getX());
+		System.out.println("Clapper rail y: " + clapperRail.getY());
 	}
-	
+
 	static void move(Direction dir) {
 		System.out.println(dir);
 		clapperRail.move(dir);
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println("Starting point");
+		clapperRail = new ClapperRail();
 		Controller ctrl = new Controller();
 		ctrl.start();
 		
-		clapperRail = new ClapperRail();
 	}
 }
 
