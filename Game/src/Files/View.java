@@ -22,15 +22,30 @@ public class View extends JPanel{
 	static int frameCount;
 	BufferedImage[][] pics;
 	
-	void loadImages() {
-		
-	}
 	
 	void addImagesToArray() {
 		
 	}
 	
-	void buildFrame() {
+	public void buildFrame() {
+		JFrame frame = new JFrame();
+        frame.getContentPane().add(this);
+        this.setBackground(Color.GRAY);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame.setSize(frameWidth, frameHeight);
+        frame.setSize(800,600);
+       // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
+       // frame.getContentPane().add(btn,BorderLayout.SOUTH);
+       // btn.addActionListener(new ButtonListener());
+       //.setFocusable(false);
+        this.addKeyListener(new KeyPress());
+        this.setFocusable(true);
+        frame.setVisible(true);
+	}
+	public View() { 
+
+	//	loadImages();
+		buildFrame();
 		
 	}
 	
@@ -46,6 +61,5 @@ public class View extends JPanel{
 	public void paint(Graphics g) {
 		
 	}
-	
 	
 }

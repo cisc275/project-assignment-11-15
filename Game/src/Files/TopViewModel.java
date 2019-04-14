@@ -1,6 +1,7 @@
 package Files;
 
-public class Model{
+
+public class TopViewModel{
 	int x;
 	int y;
 	int xchange;
@@ -16,6 +17,8 @@ public class Model{
 	String action;
 	Direction dir;
 	
+
+	
 	/**
 	 * Updates the location and direction of objects and characters. Will add more methods as needed that will be called by this one.
 	 *
@@ -25,12 +28,15 @@ public class Model{
 	 * @param   
 	 * @return 
 	 * 
-	 * */
+	 * */;
 	void updateLocationAndDirection() {
-		
+		//System.out.println("updating");
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		System.out.println("Starting point");
-	}*/
+		Controller ctrl = new Controller();
+		ctrl.start();
+	}
 }
+
