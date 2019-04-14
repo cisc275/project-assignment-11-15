@@ -3,6 +3,7 @@ package Files;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.*; 
 
 public class View extends JPanel{
 	static int frameWidth;
@@ -27,21 +29,28 @@ public class View extends JPanel{
 		
 	}
 	
-	public void buildFrame() {
+	public static void buildFrame() {
 		JFrame frame = new JFrame();
-        frame.getContentPane().add(this);
-        this.setBackground(Color.GRAY);
+        frame.setVisible(true);
+        frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        // frame.setSize(frameWidth, frameHeight);
-        frame.setSize(800,600);
+        
        // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
        // frame.getContentPane().add(btn,BorderLayout.SOUTH);
        // btn.addActionListener(new ButtonListener());
        //.setFocusable(false);
-        this.addKeyListener(new KeyPress());
-        this.setFocusable(true);
-        frame.setVisible(true);
+        //this.addKeyListener(new KeyPress());
+        //this.setFocusable(true);
+        
+        
+        ClapperRail object = new ClapperRail();
+        frame.add(object);
+        object.drawing();
 	}
+	
+	
+	
 	public View() { 
 
 	//	loadImages();
@@ -61,5 +70,9 @@ public class View extends JPanel{
 	public void paint(Graphics g) {
 		
 	}
+	
+	public static void main(String[] args) {
+		buildFrame();
+    }
 	
 }
