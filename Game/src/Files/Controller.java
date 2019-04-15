@@ -89,6 +89,7 @@ class KeyPress implements KeyListener {
 			System.out.println("up");
 			d = Direction.NORTH;
 			System.out.println(d);
+			Model.move(d);
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
 			System.out.println("left");

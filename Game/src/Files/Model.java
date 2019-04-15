@@ -20,6 +20,8 @@ public class Model{
 	static int arrowRight = 39;	//EAST
 	static int arrowUp = 38;	//NORTH
 	static int arrowDown = 40;	//SOUTH
+
+    static Animal clapperRail = new ClapperRail();
     
     private Direction d = Direction.NORTH;
 	
@@ -51,6 +53,13 @@ public class Model{
     
     public Direction getDirect(){
         return d;
+    }
+    
+    public static void move(Direction dir) {
+    	clapperRail.move(dir);
+    	System.out.println(clapperRail.getX());
+    	System.out.println(clapperRail.getY());
+    	
     }
     
     private Direction getDirection(int xDir, int yDir){
