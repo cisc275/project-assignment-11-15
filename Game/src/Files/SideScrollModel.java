@@ -30,7 +30,7 @@ public class SideScrollModel{
 	 * 
 	 * */;
 	void updateLocationAndDirection() {
-		//System.out.println("updating");
+		System.out.println("updating");
 	}
 	
 	public static void main(String[] args) {
