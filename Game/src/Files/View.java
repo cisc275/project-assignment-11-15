@@ -24,15 +24,20 @@ public class View extends JPanel{
 	int x;
 	int y;
 	static int frameCount;
-	private Direction direction;
+	private static Direction dir;
     private int frameNum = 0;
     private static int xloc = 50;
     private static int yloc = 50;
     private JFrame frame;
 	BufferedImage[][] pics;
 	
-	public Direction getDirect(){
-        return direction;
+	static int arrowLeft = 37;	//WEST
+	static int arrowRight = 39;	//EAST
+	static int arrowUp = 38;	//NORTH
+	static int arrowDown = 40;	//SOUTH
+	
+	public static Direction getDirect(){
+        return dir;
     }
  
 	
@@ -44,7 +49,7 @@ public class View extends JPanel{
 	public void update(int x, int y, Direction d) {
         this.xloc = x;
         this.yloc = y;
-        this.direction = d;
+        this.dir = d;
         //frameNum = (frameNum + 1) % frameCount;
         //frame.repaint();
 	}
@@ -58,6 +63,10 @@ public class View extends JPanel{
 	@SuppressWarnings("serial")
     private static void buildFrame() {
         JFrame frame = new JFrame();
+        JTextField component = new JTextField();
+	    component.addKeyListener(new KeyPress());
+
+	    frame.add(component);
         frame.setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
@@ -67,10 +76,26 @@ public class View extends JPanel{
                     g.toString();
                     //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
                     g.setColor(Color.blue);
-            		g.fillRect(xloc, yloc, 20, 20);
+            		//g.fillRect(xloc, yloc, 20, 20);
+            		
+            		
+            		if (getDirect() == Direction.NORTH) {
+            			System.out.println("up");
+            			g.fillRect(xloc, yloc-10, 20, 20);
+            			repaint();
+            		}
+            		if (getDirect() == Direction.SOUTH) {
+            			System.out.println("down");
+            			g.fillRect(xloc, yloc+10, 20, 20);
+            			repaint();
+            		}
+            		
+					
+					
 
                 }
             });
+        //button listener code
         frame.addKeyListener(new KeyPress());
         frame.setFocusable(true);
         frame.setVisible(true);
@@ -85,13 +110,7 @@ public class View extends JPanel{
 		Controller ctrl = new Controller();
 		ctrl.start();
 		
-		int x = 0;
-        while(x<10000) {
-        	xloc++;
-        	yloc++;
-        	
-        	x++;
-        }
+		
 		
     }
 	

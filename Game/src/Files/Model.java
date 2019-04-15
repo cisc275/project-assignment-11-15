@@ -76,6 +76,8 @@ public class Model{
     
 	void updateLocationAndDirection() {
 		//checkBoundry();
+		
+		//System.out.println(getDirect());
 
         int xVel = goingRight ? xIncr : -xIncr;
         int yVel = goingDown ? yIncr : -yIncr;
