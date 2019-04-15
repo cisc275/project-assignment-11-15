@@ -1,6 +1,7 @@
 package Files;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 //import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
@@ -22,17 +23,16 @@ public class View extends JPanel{
 	int x;
 	int y;
 	static int frameCount;
-	private Direction direction;;
+	private Direction direction;
     private int frameNum = 0;
-    private static int xLoc = 20;
-    private static int yLoc = 20;
+    private static int xloc = 50;
+    private static int yloc = 50;
     private JFrame frame;
 	BufferedImage[][] pics;
 	
-	
-	void addImagesToArray() {
-		
-	}
+	public Direction getDirect(){
+        return direction;
+    }
  
 	
 	BufferedImage[] createImage() {
@@ -41,11 +41,11 @@ public class View extends JPanel{
 	}
 	
 	public void update(int x, int y, Direction d) {
-        this.xLoc = x;
-        this.yLoc = y;
+        this.xloc = x;
+        this.yloc = y;
         this.direction = d;
-        frameNum = (frameNum + 1) % frameCount;
-        frame.repaint();
+        //frameNum = (frameNum + 1) % frameCount;
+        //frame.repaint();
 	}
 	
 	public int getWidth() { return this.frameWidth; }
@@ -66,7 +66,7 @@ public class View extends JPanel{
                     g.toString();
                     //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
                     g.setColor(Color.blue);
-            		g.fillRect(xLoc, yLoc, 20, 20);
+            		g.fillRect(xloc, yloc, 20, 20);
 
                 }
             });
@@ -75,13 +75,20 @@ public class View extends JPanel{
 	
 	
 	public static void main(String[] args) {
+		
 		buildFrame();
 		
 		System.out.println("Starting point");
 		Controller ctrl = new Controller();
 		ctrl.start();
 		
-		
+		int x = 0;
+        while(x<10000) {
+        	xloc++;
+        	yloc++;
+        	
+        	x++;
+        }
 		
     }
 	

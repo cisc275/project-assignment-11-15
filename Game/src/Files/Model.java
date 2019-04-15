@@ -81,6 +81,7 @@ public class Model{
         int yVel = goingDown ? yIncr : -yIncr;
 
         //getDirection(xVel, yVel);
+        
 
         xloc += xVel;
         yloc += yVel;
