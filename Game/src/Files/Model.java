@@ -45,9 +45,16 @@ public class Model{
         this.IMAGEHEIGHT = ih;
     }
     
-    static public void setUpClapperRailGame() {
+    public static void setUpClapperRailGame() {
     	spawnPredator();
     	
+    }
+    
+    public static int getPredatorPositionX(int num) {
+    	return predators.get(num).getX();
+    }
+    public static int getPredatorPositionY(int num) {
+    	return predators.get(num).getY();
     }
     
     public int getX(){
@@ -59,7 +66,7 @@ public class Model{
     }
     
     static public void spawnPredator() {
-    	predators.add(new Predator());
+    	predators.add(new Animal(40,40));
     	System.out.println("spawned pred");
     }
     
@@ -68,9 +75,10 @@ public class Model{
 	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
 	    		System.out.println("Collision");
 	    	}
-	    	System.out.println("hi");
+	    	System.out.println("Iter");
     	}
     }
+    
     
     public Direction getDirect(){
         return d;

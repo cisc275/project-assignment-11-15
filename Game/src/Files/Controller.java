@@ -48,6 +48,7 @@ public class Controller{
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
 				model.updateLocationAndDirection();
+				
 				//update the view
 				view.update(model.getX(), model.getY(), model.getDirect());
 			} else {

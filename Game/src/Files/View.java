@@ -78,9 +78,9 @@ public class View extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
-		g.drawRect(Model.clapperRail.getX(), -1*Model.clapperRail.getY(), 50, 50); //getX(), getY()
+		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.RED);
-		g.fillRect(100, 100, 20, 20); //getX(), getY()
+		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 	}
 	
 

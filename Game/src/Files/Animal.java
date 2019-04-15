@@ -6,6 +6,12 @@ public class Animal{
 	int x;
 	int y;
 	
+	public Animal() {}
+	public Animal(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	/**
 	 * Moves the animals position ***CHANGE TO SWITCH STATEMENT*****
 	 *
@@ -18,9 +24,9 @@ public class Animal{
 	 * */
 	void move(Direction dir){
 		if(dir == Direction.NORTH) {
-			this.y += 5;
-		} else if (dir == Direction.SOUTH) {
 			this.y -= 5;
+		} else if (dir == Direction.SOUTH) {
+			this.y += 5;
 		} else if (dir == Direction.EAST) {
 			this.x += 5;
 		} else if (dir == Direction.WEST) {
