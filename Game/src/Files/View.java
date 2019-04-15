@@ -2,6 +2,7 @@ package Files;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 //import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
@@ -70,6 +71,7 @@ public class View extends JPanel{
 
                 }
             });
+        frame.setFocusable(true);
         frame.setVisible(true);
     }
 	
