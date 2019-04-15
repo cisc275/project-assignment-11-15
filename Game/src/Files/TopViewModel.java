@@ -29,14 +29,15 @@ public class TopViewModel{
 	 * @return 
 	 * 
 	 * */;
-	void updateLocationAndDirection() {
-		//System.out.println("updating");
-	}
-	
-	public static void main(String[] args) {
-		System.out.println("Starting point");
-		Controller ctrl = new Controller();
-		ctrl.start();
-	}
+//	void updateLocationAndDirection() {
+//		//System.out.println("updating");
+//	}
+//	
+//	public static void main(String[] args) {
+//		
+//		System.out.println("Starting point");
+//		Controller ctrl = new Controller();
+//		ctrl.start();
+//	}
 }
 

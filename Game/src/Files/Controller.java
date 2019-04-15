@@ -3,17 +3,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.*;
 
 
 public class Controller{
-	private TopViewModel TVmodel;
-	private View view;
+	
 	public static Boolean moving;
 	public static Boolean running = true;
-	static int arrowLeft = 37;
-	static int arrowRight = 39;
-	static int arrowUp = 38;
-	static int arrowDown = 40;
+	static int arrowLeft = 37;	//WEST
+	static int arrowRight = 39;	//EAST
+	static int arrowUp = 38;	//NORTH
+	static int arrowDown = 40;	//SOUTH
+	
+	final int MOVE = 10;
+	
+	
 	/**
 	 * Initializes all the classes
 	 *
@@ -24,28 +28,29 @@ public class Controller{
 	 * @return 
 	 * 
 	 * */
+	
+	private Model model;
+	private View view;
+	
 	public Controller() {
 		view = new View();
-		TVmodel = new TopViewModel();//(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
+		model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
 	}
 	
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
-	 * @author
-	 * @param
-	 * @param
-	 * @param   
-	 * @return 
+	 * @author Amjed Hallak
 	 * 
 	 * */
 	public void start(){
 		while(running) {
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
-				TVmodel.updateLocationAndDirection();
+				model.updateLocationAndDirection();
+				
 				//update the view
-				//view.update(model.getX(), model.getY(), model.getDirect());
+				view.update(model.getX(), model.getY(), model.getDirect());
 			} else {
 				while(!running) {
 					try {
@@ -56,8 +61,6 @@ public class Controller{
 				}
 			}
 		}
-		
-		
 	}
 }
 
@@ -68,27 +71,27 @@ class ButtonListener implements ActionListener {
 }
 
 class KeyPress implements KeyListener {
-
+	
 	public void keyTyped(KeyEvent e) {
 	}
 	public void keyPressed(KeyEvent e) {
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.arrowUp) {
-			System.out.println("up");
+			Model.move(Direction.NORTH);
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
-			System.out.println("left");
+			Model.move(Direction.WEST);
 		}
 		if (e.getKeyCode() == Controller.arrowRight) {
-			System.out.println("right");
+			Model.move(Direction.EAST);
 		}
 		if (e.getKeyCode() == Controller.arrowDown) {
-			System.out.println("down");
+			Model.move(Direction.SOUTH);
 		}
 		
 		if (e.getKeyChar() == 'k') {
-			System.out.println("k pressed");
+			//System.out.println("k pressed");
 		}
 	}
 }
