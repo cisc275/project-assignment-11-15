@@ -1,4 +1,4 @@
-package Files; 
+package Files;
 
 import java.awt.Color;
 //import java.awt.Graphics;
@@ -76,6 +76,11 @@ public class View extends JPanel{
 	
 	public static void main(String[] args) {
 		buildFrame();
+		
+		System.out.println("Starting point");
+		Controller ctrl = new Controller();
+		ctrl.start();
+		
 		
 		
     }

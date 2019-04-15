@@ -33,10 +33,10 @@ public class TopViewModel{
 		//System.out.println("updating");
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("Starting point");
-		Controller ctrl = new Controller();
-		ctrl.start();
-	}
+//	public static void main(String[] args) {
+//		System.out.println("Starting point");
+//		Controller ctrl = new Controller();
+//		ctrl.start();
+//	}
 }
 
