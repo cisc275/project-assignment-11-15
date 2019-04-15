@@ -22,6 +22,11 @@ public class View extends JPanel{
 	int x;
 	int y;
 	static int frameCount;
+	private Direction direction;;
+    private int frameNum = 0;
+    private int xLoc;
+    private int yLoc;
+    private JFrame frame;
 	BufferedImage[][] pics;
 	
 	
@@ -33,6 +38,7 @@ public class View extends JPanel{
 		JFrame frame = new JFrame();
         frame.setVisible(true);
         frame.setSize(800,600);
+        //frame.setBackground(Color.blue);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        // frame.setSize(frameWidth, frameHeight);
         
@@ -44,9 +50,11 @@ public class View extends JPanel{
         //this.setFocusable(true);
         
         
-        ClapperRail object = new ClapperRail();
-        frame.add(object);
-        object.drawing();
+        ClapperRail square = new ClapperRail();
+        frame.add(square);
+        square.drawing();
+        
+     
 	}
 	
 	
@@ -63,16 +71,22 @@ public class View extends JPanel{
 		
 	}
 	
-	void update(int x, int y, Direction dir) {
-		
+	public void update(int x, int y, Direction d) {
+        this.xLoc = x;
+        this.yLoc = y;
+        this.direction = d;
+        frameNum = (frameNum + 1) % frameCount;
+        frame.repaint();
 	}
 	
-	public void paint(Graphics g) {
-		
-	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		buildFrame();
+		
+		
     }
 	
 }

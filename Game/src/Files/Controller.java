@@ -14,6 +14,8 @@ public class Controller{
 	static int arrowRight = 39;
 	static int arrowUp = 38;
 	static int arrowDown = 40;
+	
+	final int MOVE = 10;
 	/**
 	 * Initializes all the classes
 	 *
@@ -45,7 +47,7 @@ public class Controller{
 				//increment the x and y coordinates, alter direction if necessary
 				TVmodel.updateLocationAndDirection();
 				//update the view
-				//view.update(model.getX(), model.getY(), model.getDirect());
+				//view.update(TVmodel.getX(), TVmodel.getY(), TVmodel.getDirect());
 			} else {
 				while(!running) {
 					try {
@@ -76,6 +78,7 @@ class KeyPress implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.arrowUp) {
 			System.out.println("up");
+			
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
 			System.out.println("left");
