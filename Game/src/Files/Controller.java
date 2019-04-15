@@ -40,11 +40,7 @@ public class Controller{
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
-	 * @author
-	 * @param
-	 * @param
-	 * @param   
-	 * @return 
+	 * @author Amjed Hallak
 	 * 
 	 * */
 	public void start(){
@@ -64,10 +60,7 @@ public class Controller{
 				}
 			}
 		}
-		
-		
 	}
-	
 }
 
 class ButtonListener implements ActionListener {
@@ -77,8 +70,6 @@ class ButtonListener implements ActionListener {
 }
 
 class KeyPress implements KeyListener {
-
-	public Direction d = Direction.NORTH;
 	
 	public void keyTyped(KeyEvent e) {
 	}
@@ -86,29 +77,20 @@ class KeyPress implements KeyListener {
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.arrowUp) {
-			System.out.println("up");
-			d = Direction.NORTH;
-			System.out.println(d);
-			Model.move(d);
+			Model.move(Direction.NORTH);
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
-			System.out.println("left");
-			d = Direction.WEST;
-			System.out.println(d);
+			Model.move(Direction.WEST);
 		}
 		if (e.getKeyCode() == Controller.arrowRight) {
-			System.out.println("right");
-			d = Direction.EAST;
-			System.out.println(d);
+			Model.move(Direction.EAST);
 		}
 		if (e.getKeyCode() == Controller.arrowDown) {
-			System.out.println("down");
-			d = Direction.SOUTH;
-			System.out.println(d);
+			Model.move(Direction.SOUTH);
 		}
 		
 		if (e.getKeyChar() == 'k') {
-			System.out.println("k pressed");
+			//System.out.println("k pressed");
 		}
 	}
 }

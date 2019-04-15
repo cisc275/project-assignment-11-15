@@ -7,9 +7,9 @@ public class Animal{
 	int y;
 	
 	/**
-	 * Moves the animals position
+	 * Moves the animals position ***CHANGE TO SWITCH STATEMENT*****
 	 *
-	 * @author
+	 * @author Amjed Hallak
 	 * @param
 	 * @param
 	 * @param   
@@ -21,8 +21,12 @@ public class Animal{
 			this.y += 5;
 		} else if (dir == Direction.SOUTH) {
 			this.y -= 5;
+		} else if (dir == Direction.EAST) {
+			this.x += 5;
+		} else if (dir == Direction.WEST) {
+			this.x -= 5;
 		}
-		
+		 
 	}
 	
 	public int getX() {

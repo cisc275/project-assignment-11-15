@@ -36,14 +36,17 @@ public class View extends JPanel{
 	static int arrowUp = 38;	//NORTH
 	static int arrowDown = 40;	//SOUTH
 	
+	
+	View() {
+		buildFrame();
+	}
+	
 	public static Direction getDirect(){
         return dir;
     }
- 
 	
 	BufferedImage[] createImage() {
 		return null;
-		
 	}
 	
 	public void update(int x, int y, Direction d) {
@@ -51,7 +54,7 @@ public class View extends JPanel{
         this.yloc = y;
         this.dir = d;
         //frameNum = (frameNum + 1) % frameCount;
-        //frame.repaint();
+        repaint();
 	}
 	
 	public int getWidth() { return this.frameWidth; }
@@ -61,56 +64,15 @@ public class View extends JPanel{
 	
 	
 	
-    private static void buildFrame() {
-        JFrame frame = new JFrame();
-        
-        frame.setBackground(Color.gray);
+	public void buildFrame() {
+		JFrame frame = new JFrame();
+        frame.getContentPane().add(this);
+        this.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
-        frame.getContentPane().add(new JPanel() {
-                public void paint(Graphics g) {
-                    g.toString();
-                    //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
-                    g.setColor(Color.blue);
-            		//g.fillRect(xloc, yloc, 20, 20);
-                    KeyPress kp = new KeyPress();
-            		//KeyEvent keyE = null;
-//            		kp.keyReleased(keyE);
-//            		System.out.println(keyE.getKeyCode());
-            		
-            		if (getDirect() == Direction.NORTH) {
-            			System.out.println("up");
-            			g.fillRect(xloc, yloc-10, 20, 20);
-            			repaint();
-            		}
-            		if (getDirect() == Direction.SOUTH) {
-            			System.out.println("down");
-            			g.fillRect(xloc, yloc+10, 20, 20);
-            			repaint();
-            		}
-            		
-					
-					
-
-                }
-            });
-        //button listener code
-        frame.addKeyListener(new KeyPress());
-        frame.setFocusable(true);
+        this.addKeyListener(new KeyPress());
+        this.setFocusable(true);
         frame.setVisible(true);
-    }
-	
-	
-	public static void main(String[] args) {
-		
-		buildFrame();
-		
-		System.out.println("Starting point");
-		Controller ctrl = new Controller();
-		ctrl.start();
-		
-		
-		
-    }
+	}
 	
 }

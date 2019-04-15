@@ -57,77 +57,23 @@ public class Model{
     
     public static void move(Direction dir) {
     	clapperRail.move(dir);
-    	System.out.println(clapperRail.getX());
-    	System.out.println(clapperRail.getY());
+    	System.out.println("X: " + clapperRail.getX());
+    	System.out.println("Y: " + clapperRail.getY());
     	
     }
     
-    private Direction getDirection(int xDir, int yDir){
-        if ( xDir < 0 ){
-            if ( yDir < 0 ){
-                d = Direction.NORTHWEST;
-            }else if (yDir > 0){
-                d = Direction.SOUTHWEST;
-            }else if (yDir == 0){
-                d = Direction.WEST;
-            }
-        }else if (xDir > 0){
-            if(yDir > 0){
-                d = Direction.SOUTHEAST;
-            }else if (yDir < 0){
-                d = Direction.NORTHEAST;
-            }else if(yDir == 0){
-                d = Direction.EAST;
-            }
-        } else {
-            if(yDir > 0){
-                d = Direction.SOUTH;
-            }else if (yDir < 0){
-                d = Direction.NORTH;
-            }
-        }
-        return d;
-    }
-    
-    
 	void updateLocationAndDirection() {
-		checkBoundry();
+		xloc = clapperRail.getX();
+		yloc = clapperRail.getY();
 		
-//		KeyPress kp = new KeyPress();
-//		KeyEvent keyE = null;
-//		kp.keyReleased(keyE);
-//		System.out.println(keyE.getKeyCode());
-		//System.out.println(getDirect());
-
-        int xVel = goingRight ? xIncr : -xIncr;
-        int yVel = goingDown ? yIncr : -yIncr;
-
-        //getDirection(xVel, yVel);
-        
-
-        xloc += xVel;
-        yloc += yVel;
-
-        try {
-            Thread.sleep(90);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
 	}
 	
-	
-	private void checkBoundry() {
-        if( xloc < 0) {
-            goingRight = true;
-        }else if (xloc + IMAGEWIDTH > FRAMEWIDTH){
-            goingRight = false;
-        }
-        if( yloc < 0) {
-            goingDown = true;
-        }else if (yloc + IMAGEHEIGHT > FRAMEHEIGHT) {
-            goingDown = false;
-        }
-    }
+	public static void main(String[] args) {
+		
+		System.out.println("Starting point");
+		Controller ctrl = new Controller();
+		ctrl.start();
+	}
 	
 	
 }
