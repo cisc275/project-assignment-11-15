@@ -1,7 +1,7 @@
-package Files;
+package Files; 
 
 import java.awt.Color;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.io.File;
@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
-	static int frameWidth;
-	static int frameHeight;
+	static int frameWidth = 600;
+	static int frameHeight = 600;
 	static int AnimalWidth;
 	static int AnimalHeight;
 	int count;
@@ -24,8 +24,8 @@ public class View extends JPanel{
 	static int frameCount;
 	private Direction direction;;
     private int frameNum = 0;
-    private int xLoc;
-    private int yLoc;
+    private static int xLoc = 20;
+    private static int yLoc = 20;
     private JFrame frame;
 	BufferedImage[][] pics;
 	
@@ -33,38 +33,7 @@ public class View extends JPanel{
 	void addImagesToArray() {
 		
 	}
-	
-	public static void buildFrame() {
-		JFrame frame = new JFrame();
-        frame.setVisible(true);
-        frame.setSize(800,600);
-        //frame.setBackground(Color.blue);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // frame.setSize(frameWidth, frameHeight);
-        
-       // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
-       // frame.getContentPane().add(btn,BorderLayout.SOUTH);
-       // btn.addActionListener(new ButtonListener());
-       //.setFocusable(false);
-        //this.addKeyListener(new KeyPress());
-        //this.setFocusable(true);
-        
-        
-        ClapperRail square = new ClapperRail();
-        frame.add(square);
-        square.drawing();
-        
-     
-	}
-	
-	
-	
-	public View() { 
-
-	//	loadImages();
-		buildFrame();
-		
-	}
+ 
 	
 	BufferedImage[] createImage() {
 		return null;
@@ -79,8 +48,30 @@ public class View extends JPanel{
         frame.repaint();
 	}
 	
+	public int getWidth() { return this.frameWidth; }
+    public int getHeight() { return this.frameHeight; }
+    public int getImageWidth() { return this.AnimalWidth; }
+    public int getImageHeight() { return this.AnimalHeight; }
 	
 	
+	@SuppressWarnings("serial")
+    private static void buildFrame() {
+        JFrame frame = new JFrame();
+        frame.setBackground(Color.gray);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(frameWidth, frameHeight);
+        frame.getContentPane().add(new JPanel() {
+                @Override
+                public void paint(Graphics g) {
+                    g.toString();
+                    //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
+                    g.setColor(Color.blue);
+            		g.fillRect(xLoc, yLoc, 20, 20);
+
+                }
+            });
+        frame.setVisible(true);
+    }
 	
 	
 	public static void main(String[] args) {
