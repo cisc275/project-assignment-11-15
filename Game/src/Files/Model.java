@@ -1,6 +1,7 @@
 package Files;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Model{
 	private final int FRAMEWIDTH;
@@ -22,6 +23,7 @@ public class Model{
 	static int arrowDown = 40;	//SOUTH
 
     static Animal clapperRail = new ClapperRail();
+    static ArrayList<Animal> predators = new ArrayList<Animal>();
     
     private Direction d = Direction.NORTH;
 	
@@ -49,6 +51,16 @@ public class Model{
     
     public int getY(){
         return yloc;
+    }
+    
+    public void spawnPredator() {
+    	predators.add(new Predator());
+    }
+    
+    public void chkBoundary(Animal b, Animal p) {
+    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
+    		System.out.println("Collision");
+    	}
     }
     
     public Direction getDirect(){
