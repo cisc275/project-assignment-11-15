@@ -5,7 +5,7 @@ public class Animal{
 	int x = 0;
 	int y = 0;
 	boolean life;
-	
+
 	/**
 	 * Moves the animals position
 	 *
@@ -16,6 +16,7 @@ public class Animal{
 	 * @return 
 	 * 
 	 * */
+<<<<<<< HEAD
 	
 	
 	void move(Direction dir) {
@@ -36,8 +37,30 @@ public class Animal{
 			break;
 				
 		}
+=======
+	void move(Direction dir){
+		switch(dir){
+			case UP:
+				y+=5;
+				break;
+			case DOWN:
+				y-=5;
+				break;
+		default:
+			break;
+>>>>>>> RedKnot
 		
+		}
 	}
+	
+	public int getX(){
+		return x;
+	}
+
+	public int getY(){
+		return y;
+	}
+<<<<<<< HEAD
 	
 	public int getX() {
 		return x;
@@ -46,3 +69,6 @@ public class Animal{
 		return y;
 	}
 }
+=======
+}
+>>>>>>> RedKnot
