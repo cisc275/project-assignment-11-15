@@ -45,6 +45,11 @@ public class Model{
         this.IMAGEHEIGHT = ih;
     }
     
+    static public void setUpClapperRailGame() {
+    	spawnPredator();
+    	
+    }
+    
     public int getX(){
         return xloc;
     }
@@ -53,13 +58,17 @@ public class Model{
         return yloc;
     }
     
-    public void spawnPredator() {
+    static public void spawnPredator() {
     	predators.add(new Predator());
+    	System.out.println("spawned pred");
     }
     
-    public void chkBoundary(Animal b, Animal p) {
-    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
-    		System.out.println("Collision");
+    public static void chkCollision(Animal b, ArrayList<Animal> preds) {
+    	for(Animal p: preds) {
+	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
+	    		System.out.println("Collision");
+	    	}
+	    	System.out.println("hi");
     	}
     }
     
@@ -71,6 +80,7 @@ public class Model{
     	clapperRail.move(dir);
     	System.out.println("X: " + clapperRail.getX());
     	System.out.println("Y: " + clapperRail.getY());
+    	chkCollision(clapperRail, predators);
     	
     }
     
@@ -84,6 +94,7 @@ public class Model{
 		
 		System.out.println("Starting point");
 		Controller ctrl = new Controller();
+		setUpClapperRailGame();
 		ctrl.start();
 	}
 	
