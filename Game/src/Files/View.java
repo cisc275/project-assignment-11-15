@@ -40,6 +40,7 @@ public class View extends JPanel{
 	View() {
 		buildFrame();
 	}
+
 	
 	public static Direction getDirect(){
         return dir;
