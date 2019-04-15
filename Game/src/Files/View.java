@@ -60,24 +60,23 @@ public class View extends JPanel{
     public int getImageHeight() { return this.AnimalHeight; }
 	
 	
-	@SuppressWarnings("serial")
+	
     private static void buildFrame() {
         JFrame frame = new JFrame();
-        JTextField component = new JTextField();
-	    component.addKeyListener(new KeyPress());
-
-	    frame.add(component);
+        
         frame.setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
         frame.getContentPane().add(new JPanel() {
-                @Override
                 public void paint(Graphics g) {
                     g.toString();
                     //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
                     g.setColor(Color.blue);
             		//g.fillRect(xloc, yloc, 20, 20);
-            		
+                    KeyPress kp = new KeyPress();
+            		//KeyEvent keyE = null;
+//            		kp.keyReleased(keyE);
+//            		System.out.println(keyE.getKeyCode());
             		
             		if (getDirect() == Direction.NORTH) {
             			System.out.println("up");

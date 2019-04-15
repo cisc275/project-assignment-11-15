@@ -1,5 +1,7 @@
 package Files;
 
+import java.awt.event.KeyEvent;
+
 public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
@@ -11,8 +13,13 @@ public class Model{
 
     private int xloc = 20;
     private int yloc = 20;
-    private final int xIncr = 8;
-    private final int yIncr = 4;
+    private final int xIncr = 10;
+    private final int yIncr = 10;
+    
+    static int arrowLeft = 37;	//WEST
+	static int arrowRight = 39;	//EAST
+	static int arrowUp = 38;	//NORTH
+	static int arrowDown = 40;	//SOUTH
     
     private Direction d = Direction.NORTH;
 	
@@ -77,6 +84,10 @@ public class Model{
 	void updateLocationAndDirection() {
 		checkBoundry();
 		
+//		KeyPress kp = new KeyPress();
+//		KeyEvent keyE = null;
+//		kp.keyReleased(keyE);
+//		System.out.println(keyE.getKeyCode());
 		//System.out.println(getDirect());
 
         int xVel = goingRight ? xIncr : -xIncr;
