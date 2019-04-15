@@ -1,0 +1,112 @@
+package Files;
+
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+//import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.*; 
+
+public class View extends JPanel{
+	static int frameWidth = 600;
+	static int frameHeight = 600;
+	static int AnimalWidth;
+	static int AnimalHeight;
+	int count;
+	int x;
+	int y;
+	static int frameCount;
+	private static Direction dir;
+    private int frameNum = 0;
+    private static int xloc = 50;
+    private static int yloc = 50;
+    private JFrame frame;
+	BufferedImage[][] pics;
+	
+	static int arrowLeft = 37;	//WEST
+	static int arrowRight = 39;	//EAST
+	static int arrowUp = 38;	//NORTH
+	static int arrowDown = 40;	//SOUTH
+	
+	
+	View() {
+		buildFrame();
+	}
+
+	
+	public static Direction getDirect(){
+        return dir;
+    }
+	
+	BufferedImage[] createImage() {
+		return null;
+	}
+	
+	public void update(int x, int y, Direction d) {
+        this.xloc = x;
+        this.yloc = y;
+        this.dir = d;
+        //frameNum = (frameNum + 1) % frameCount;
+        repaint();
+	}
+	
+	public int getWidth() { return this.frameWidth; }
+    public int getHeight() { return this.frameHeight; }
+    public int getImageWidth() { return this.AnimalWidth; }
+    public int getImageHeight() { return this.AnimalHeight; }
+	
+	
+	
+	public void buildFrame() {
+		JFrame frame = new JFrame();
+        frame.getContentPane().add(this);
+        this.setBackground(Color.GRAY);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(frameWidth, frameHeight);
+<<<<<<< HEAD
+        frame.getContentPane().add(new JPanel() {
+                public void paint(Graphics g) {
+                    g.toString();
+                    //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
+                    g.setColor(Color.red);
+            		//g.fillRect(xloc, yloc, 20, 20);
+                    KeyPress kp = new KeyPress();
+            		//KeyEvent keyE = null;
+//            		kp.keyReleased(keyE);
+//            		System.out.println(keyE.getKeyCode());
+            		
+            		if (getDirect() == Direction.NORTH) {
+            			System.out.println("up");
+            			g.fillRect(xloc, yloc-10, 20, 20);
+            			repaint();
+            		}
+            		if (getDirect() == Direction.SOUTH) {
+            			System.out.println("down");
+            			g.fillRect(xloc, yloc+10, 20, 20);
+            			repaint();
+            		}
+            		
+					
+					
+
+                }
+            });
+        //button listener code
+        frame.addKeyListener(new KeyPress());
+        frame.setFocusable(true);
+=======
+        this.addKeyListener(new KeyPress());
+        this.setFocusable(true);
+>>>>>>> 6e15c975f91d0a5327bed66f1b9a97ddb8fab5e8
+        frame.setVisible(true);
+	}
+	
+}
