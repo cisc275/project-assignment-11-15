@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class Controller implements KeyListener{
+public class Controller{
 	
 	public static Boolean moving;
 	public static Boolean running = true;
@@ -64,7 +64,40 @@ public class Controller implements KeyListener{
 		
 		
 	}
-	
+	/*
+	public void keyTyped(KeyEvent e) {
+	}
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == Controller.arrowUp) {
+			System.out.println("up");
+			
+		}
+		if (e.getKeyCode() == Controller.arrowLeft) {
+			System.out.println("left");
+		}
+		if (e.getKeyCode() == Controller.arrowRight) {
+			System.out.println("right");
+		}
+		if (e.getKeyCode() == Controller.arrowDown) {
+			System.out.println("down");
+		}
+		
+		if (e.getKeyChar() == 'k') {
+			System.out.println("k pressed");
+		}
+	}*/
+}
+
+class ButtonListener implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		Controller.running = !Controller.running;
+	}
+}
+
+class KeyPress implements KeyListener {
+
 	public void keyTyped(KeyEvent e) {
 	}
 	public void keyPressed(KeyEvent e) {
@@ -89,36 +122,3 @@ public class Controller implements KeyListener{
 		}
 	}
 }
-
-class ButtonListener implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-		Controller.running = !Controller.running;
-	}
-}
-
-//class KeyPress implements KeyListener {
-//
-//	public void keyTyped(KeyEvent e) {
-//	}
-//	public void keyPressed(KeyEvent e) {
-//	}
-//	public void keyReleased(KeyEvent e) {
-//		if (e.getKeyCode() == Controller.arrowUp) {
-//			System.out.println("up");
-//			
-//		}
-//		if (e.getKeyCode() == Controller.arrowLeft) {
-//			System.out.println("left");
-//		}
-//		if (e.getKeyCode() == Controller.arrowRight) {
-//			System.out.println("right");
-//		}
-//		if (e.getKeyCode() == Controller.arrowDown) {
-//			System.out.println("down");
-//		}
-//		
-//		if (e.getKeyChar() == 'k') {
-//			System.out.println("k pressed");
-//		}
-//	}
-//}

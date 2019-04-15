@@ -71,6 +71,7 @@ public class View extends JPanel{
 
                 }
             });
+        frame.addKeyListener(new KeyPress());
         frame.setFocusable(true);
         frame.setVisible(true);
     }
