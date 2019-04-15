@@ -6,12 +6,10 @@ import java.awt.event.KeyListener;
 
 
 public class Controller{
-	private TopViewModel TVmodel;
+	private SideScrollModel SSmodel;
 	private View view;
 	public static Boolean moving;
 	public static Boolean running = true;
-	static int arrowLeft = 37;
-	static int arrowRight = 39;
 	static int arrowUp = 38;
 	static int arrowDown = 40;
 	/**
@@ -26,7 +24,7 @@ public class Controller{
 	 * */
 	public Controller() {
 		view = new View();
-		TVmodel = new TopViewModel();//(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
+		SSmodel = new SideScrollModel();//(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
 	}
 	
 	/**
@@ -44,7 +42,7 @@ public class Controller{
 		while(running) {
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
-				TVmodel.updateLocationAndDirection();
+				SSmodel.updateLocationAndDirection();
 				//update the view
 				//view.update(model.getX(), model.getY(), model.getDirect());
 			} else {
@@ -76,16 +74,10 @@ class KeyPress implements KeyListener {
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.arrowUp) {
-			System.out.println("up");
-		}
-		if (e.getKeyCode() == Controller.arrowLeft) {
-			System.out.println("left");
-		}
-		if (e.getKeyCode() == Controller.arrowRight) {
-			System.out.println("right");
+			SideScrollModel.move(Direction.UP);;
 		}
 		if (e.getKeyCode() == Controller.arrowDown) {
-			System.out.println("down");
+			SideScrollModel.move(Direction.DOWN);;
 		}
 		
 		if (e.getKeyChar() == 'k') {
