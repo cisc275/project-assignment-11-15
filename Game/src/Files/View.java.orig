@@ -3,7 +3,7 @@ package Files;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.io.File;
@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
-	static int FRAMEWIDTH = 600;
-	static int FRAMEHEIGHT = 600;
+	static int frameWidth = 600;
+	static int frameHeight = 600;
 	static int AnimalWidth;
 	static int AnimalHeight;
 	int count;
@@ -58,8 +58,8 @@ public class View extends JPanel{
         repaint();
 	}
 	
-	public int getWidth() { return this.FRAMEWIDTH; }
-    public int getHeight() { return this.FRAMEHEIGHT; }
+	public int getWidth() { return this.frameWidth; }
+    public int getHeight() { return this.frameHeight; }
     public int getImageWidth() { return this.AnimalWidth; }
     public int getImageHeight() { return this.AnimalHeight; }
 	
@@ -70,20 +70,43 @@ public class View extends JPanel{
         frame.getContentPane().add(this);
         this.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
+        frame.setSize(frameWidth, frameHeight);
+<<<<<<< HEAD
+        frame.getContentPane().add(new JPanel() {
+                public void paint(Graphics g) {
+                    g.toString();
+                    //g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
+                    g.setColor(Color.red);
+            		//g.fillRect(xloc, yloc, 20, 20);
+                    KeyPress kp = new KeyPress();
+            		//KeyEvent keyE = null;
+//            		kp.keyReleased(keyE);
+//            		System.out.println(keyE.getKeyCode());
+            		
+            		if (getDirect() == Direction.NORTH) {
+            			System.out.println("up");
+            			g.fillRect(xloc, yloc-10, 20, 20);
+            			repaint();
+            		}
+            		if (getDirect() == Direction.SOUTH) {
+            			System.out.println("down");
+            			g.fillRect(xloc, yloc+10, 20, 20);
+            			repaint();
+            		}
+            		
+					
+					
+
+                }
+            });
+        //button listener code
+        frame.addKeyListener(new KeyPress());
+        frame.setFocusable(true);
+=======
         this.addKeyListener(new KeyPress());
         this.setFocusable(true);
+>>>>>>> 6e15c975f91d0a5327bed66f1b9a97ddb8fab5e8
         frame.setVisible(true);
 	}
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(Color.RED);
-		g.drawRect(10, 10, 50, 50); //getX(), getY()
-		g.setColor(Color.BLUE);
-		g.fillRect(100, 100, 20, 20); //getX(), getY()
-	}
 	
-
-
-	
-}//end class View
+}
