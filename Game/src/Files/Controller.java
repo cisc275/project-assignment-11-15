@@ -40,6 +40,7 @@ public class Controller{
 	 * 
 	 * */
 	public void start(){
+		System.out.println("starting");
 		while(running) {
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
