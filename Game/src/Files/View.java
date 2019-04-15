@@ -81,6 +81,9 @@ public class View extends JPanel{
 		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.RED);
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
+		g.setColor(Color.BLACK);
+		g.drawString("Clapper Rail", 500, 20);
+		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 	}
 	
 	

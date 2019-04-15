@@ -25,6 +25,8 @@ public class Model{
     static Animal clapperRail = new ClapperRail();
     static ArrayList<Animal> predators = new ArrayList<Animal>();
     
+    public static int collisionCount = 0;
+    
     private Direction d = Direction.NORTH;
 	
 	/**
@@ -65,6 +67,10 @@ public class Model{
         return yloc;
     }
     
+    public static int getCollisionCount() {
+    	return collisionCount;
+    }
+    
     static public void spawnPredator(int x, int y) {
     	predators.add(new Animal(x,y));
     	System.out.println("spawned pred");
@@ -74,6 +80,7 @@ public class Model{
     	for(Animal p: preds) {
 	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
 	    		System.out.println("Collision");
+	    		collisionCount++;
 	    	}
 	    	System.out.println("Iter");
     	}
