@@ -75,7 +75,7 @@ public class Model{
     
     
 	void updateLocationAndDirection() {
-		//checkBoundry();
+		checkBoundry();
 		
 		//System.out.println(getDirect());
 
