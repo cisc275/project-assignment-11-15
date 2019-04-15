@@ -83,7 +83,5 @@ public class View extends JPanel{
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 	}
 	
-
-
 	
 }//end class View
