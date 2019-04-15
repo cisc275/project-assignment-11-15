@@ -24,13 +24,13 @@ public class Animal{
 	 * */
 	void move(Direction dir){
 		if(dir == Direction.NORTH) {
-			this.y -= 5;
+			this.y -= 50;
 		} else if (dir == Direction.SOUTH) {
-			this.y += 5;
+			this.y += 50;
 		} else if (dir == Direction.EAST) {
-			this.x += 5;
+			this.x += 50;
 		} else if (dir == Direction.WEST) {
-			this.x -= 5;
+			this.x -= 50;
 		}
 		 
 	}

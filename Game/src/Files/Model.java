@@ -46,7 +46,7 @@ public class Model{
     }
     
     public static void setUpClapperRailGame() {
-    	spawnPredator();
+    	spawnPredator(100,100);
     	
     }
     
@@ -65,8 +65,8 @@ public class Model{
         return yloc;
     }
     
-    static public void spawnPredator() {
-    	predators.add(new Animal(40,40));
+    static public void spawnPredator(int x, int y) {
+    	predators.add(new Animal(x,y));
     	System.out.println("spawned pred");
     }
     
@@ -78,7 +78,6 @@ public class Model{
 	    	System.out.println("Iter");
     	}
     }
-    
     
     public Direction getDirect(){
         return d;
