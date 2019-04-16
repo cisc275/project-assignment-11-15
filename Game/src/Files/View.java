@@ -67,13 +67,23 @@ public class View extends JPanel{
 	
 	public void buildFrame() {
 		JFrame frame = new JFrame();
-        frame.getContentPane().add(this);
-        this.setBackground(Color.GRAY);
+		frame.getContentPane().add(this);
+        frame.getContentPane().setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-        this.addKeyListener(new KeyPress());
-        this.setFocusable(true);
+        frame.addKeyListener(new KeyPress());
+        frame.setFocusable(true);
         frame.setVisible(true);
+        
+//        JFrame intro = new JFrame();
+//        intro.getContentPane().setBackground(Color.CYAN);
+//        intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        intro.setSize(FRAMEWIDTH, FRAMEHEIGHT);
+//        intro.addKeyListener(new KeyPress());
+//        intro.setFocusable(true);
+//        intro.setVisible(true);
+        
+        
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
