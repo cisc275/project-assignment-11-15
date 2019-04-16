@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
-	static int FRAMEWIDTH = 600;
+	static int FRAMEWIDTH = 800;
 	static int FRAMEHEIGHT = 600;
 	static int AnimalWidth;
 	static int AnimalHeight;
@@ -83,15 +84,39 @@ public class View extends JPanel{
 //        intro.setFocusable(true);
 //        intro.setVisible(true);
         
-        
+       
 	}
+	
+	public Color randColor() {
+		int rand = (int) (Math.random() * (6 - 0)) + 0;
+		switch(rand) {
+		case(0):
+			return Color.red;
+		case(1):
+			return Color.blue;
+		case(2):
+			return Color.green;
+		case(3):
+			return Color.yellow;
+		case(4):
+			return Color.pink;
+		}
+		return Color.white;
+	}
+	
 	public void paintComponent(Graphics g) {
+		ArrayList<Object> allObj = Model.getAllObjects();
+		//Color color = randColor();
 		super.paintComponent(g);
+		g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.BLUE);
+		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
+		g.setColor(Color.BLACK);
+		/*g.setColor(Color.BLUE);
 		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.RED);
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK);*/
 		g.drawString("Clapper Rail", 500, 20);
 		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 	}

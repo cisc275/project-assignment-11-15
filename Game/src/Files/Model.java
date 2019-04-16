@@ -48,8 +48,18 @@ public class Model{
     }
     
     public static void setUpClapperRailGame() {
-    	spawnPredator(100,100);
-    	
+    	spawnObject(100,100);
+    	spawnObject(300,500);
+    }
+    
+    public static ArrayList<Object> getAllObjects(){
+    	ArrayList<Object> allObjects = new ArrayList<Object>();
+    	allObjects.add(clapperRail);
+    	for(Object c: predators) {
+    		allObjects.add(c);
+    	}
+    	System.out.println(allObjects.size());
+    	return allObjects;
     }
     
     public static int getPredatorPositionX(int num) {
@@ -71,7 +81,7 @@ public class Model{
     	return collisionCount;
     }
     
-    static public void spawnPredator(int x, int y) {
+    static public void spawnObject(int x, int y) {
     	predators.add(new Animal(x,y));
     	System.out.println("spawned pred");
     }
@@ -82,7 +92,6 @@ public class Model{
 	    		System.out.println("Collision");
 	    		collisionCount++;
 	    	}
-	    	System.out.println("Iter");
     	}
     }
     
