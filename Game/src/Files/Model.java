@@ -95,7 +95,7 @@ public class Model{
     public static void chkCollision(Animal b) {
     	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
-    		System.out.println(o.getClass());
+    		//System.out.println(o.getClass());
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		System.out.println("Collision at " + b.getX() + " " + o.getX() + " " + b.getY() + " " + o.getY());
 	    		collisionCount++;
