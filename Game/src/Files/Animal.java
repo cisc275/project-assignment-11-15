@@ -1,10 +1,8 @@
 package Files;
 
-public class Animal{
+public class Animal extends GamePiece{
 	Direction dir;
 	boolean life;
-	int x;
-	int y;
 	
 	public Animal() {}
 	public Animal(int x, int y) {
@@ -34,14 +32,6 @@ public class Animal{
 		}
 		 
 	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
+
 	
 }

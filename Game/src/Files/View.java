@@ -51,10 +51,7 @@ public class View extends JPanel{
 		return null;
 	}
 	
-	public void update(int x, int y, Direction d) {
-        this.xloc = x;
-        this.yloc = y;
-        this.dir = d;
+	public void update() {
         //frameNum = (frameNum + 1) % frameCount;
         repaint();
 	}
@@ -105,7 +102,7 @@ public class View extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		ArrayList<Object> allObj = Model.getAllObjects();
+		ArrayList<GamePiece> allObj = Model.getAllObjects();
 		//Color color = randColor();
 		super.paintComponent(g);
 		g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()

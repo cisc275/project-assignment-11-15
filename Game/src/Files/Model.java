@@ -52,13 +52,13 @@ public class Model{
     	spawnObject(300,500);
     }
     
-    public static ArrayList<Object> getAllObjects(){
-    	ArrayList<Object> allObjects = new ArrayList<Object>();
+    public static ArrayList<GamePiece> getAllObjects(){
+    	ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
     	allObjects.add(clapperRail);
-    	for(Object c: predators) {
-    		allObjects.add(c);
+    	for(GamePiece p: predators) {
+    		allObjects.add(p);
     	}
-    	System.out.println(allObjects.size());
+    	//System.out.println(allObjects.size());
     	return allObjects;
     }
     
@@ -69,13 +69,6 @@ public class Model{
     	return predators.get(num).getY();
     }
     
-    public int getX(){
-        return xloc;
-    }
-    
-    public int getY(){
-        return yloc;
-    }
     
     public static int getCollisionCount() {
     	return collisionCount;
@@ -86,9 +79,10 @@ public class Model{
     	System.out.println("spawned pred");
     }
     
-    public static void chkCollision(Animal b, ArrayList<Animal> preds) {
-    	for(Animal p: preds) {
-	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
+    public static void chkCollision(Animal b) {
+    	ArrayList<GamePiece> objs = getAllObjects();
+    	for(Object o: objs) {
+	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		System.out.println("Collision");
 	    		collisionCount++;
 	    	}
@@ -103,7 +97,7 @@ public class Model{
     	clapperRail.move(dir);
     	System.out.println("X: " + clapperRail.getX());
     	System.out.println("Y: " + clapperRail.getY());
-    	chkCollision(clapperRail, predators);
+    	chkCollision(clapperRail);
     	
     }
     

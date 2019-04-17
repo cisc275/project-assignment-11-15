@@ -50,7 +50,7 @@ public class Controller{
 				model.updateLocationAndDirection();
 				
 				//update the view
-				view.update(model.getX(), model.getY(), model.getDirect());
+				view.update();
 			} else {
 				while(!running) {
 					try {
