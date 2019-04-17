@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -18,25 +19,20 @@ import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
-	static int FRAMEWIDTH = 600;
+	static int FRAMEWIDTH = 800;
 	static int FRAMEHEIGHT = 600;
-	static int AnimalWidth;
-	static int AnimalHeight;
 	int count;
-	int x;
-	int y;
-	static int frameCount;
+	static int FRAMECOUNT;
 	private static Direction dir;
     private int frameNum = 0;
-    private static int xloc = 50;
-    private static int yloc = 50;
-    //private JFrame frame;
+    private JFrame frame;
 	BufferedImage[][] pics;
 	
-	static int arrowLeft = 37;	//WEST
-	static int arrowRight = 39;	//EAST
-	static int arrowUp = 38;	//NORTH
-	static int arrowDown = 40;	//SOUTH
+	int RANDMAX = 6;
+	int RANDMIN = 0;
+	
+	Boolean withPlayer = true;
+	Boolean withoutPlayer = false;
 	
 	public static int gamePanel = 1;
 	
@@ -64,6 +60,7 @@ public class View extends JPanel{
         this.xloc = x;
         this.yloc = y;
         this.dir = d;
+	public void update() {
         //frameNum = (frameNum + 1) % frameCount;
         repaint();
         
@@ -82,8 +79,8 @@ public class View extends JPanel{
 	
 	public int getWidth() { return this.FRAMEWIDTH; }
     public int getHeight() { return this.FRAMEHEIGHT; }
-    public int getImageWidth() { return this.AnimalWidth; }
-    public int getImageHeight() { return this.AnimalHeight; }
+  //  public int getImageWidth() { return this.AnimalWidth; }
+   // public int getImageHeight() { return this.AnimalHeight; }
 	
 	
 	
@@ -168,5 +165,43 @@ public class View extends JPanel{
 //		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 //	}
 	
+	public Color randColor() {
+		int rand = (int) (Math.random() * (RANDMAX - RANDMIN)) + RANDMIN;
+		switch(rand) {
+		case(0):
+			return Color.red;
+		case(1):
+			return Color.blue;
+		case(2):
+			return Color.green;
+		case(3):
+			return Color.yellow;
+		case(4):
+			return Color.pink;
+		}
+		return Color.white;
+	}
 	
-}//end class View
+	public void paintComponent(Graphics g) {
+		ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
+		//Color color = randColor();
+		super.paintComponent(g);
+		for(GamePiece gp: allObj) {
+			g.fillRect(gp.getX(), gp.getY(), 50, 50);
+			g.setColor(Color.RED);
+		}
+	/*	g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
+		g.setColor(Color.BLUE);
+		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
+		g.setColor(Color.BLACK);
+		/*g.setColor(Color.BLUE);
+		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
+		g.setColor(Color.RED);
+		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
+		g.setColor(Color.BLACK);*/
+		g.drawString("Clapper Rail", 500, 20);
+		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
+	}
+	
+	
+}

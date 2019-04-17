@@ -1,47 +1,41 @@
 package Files;
 
-public class Animal{
+public class Animal extends GamePiece{
 	Direction dir;
 	boolean life;
-	int x;
-	int y;
-	
+	int INCR = 50;
+
+
 	public Animal() {}
+	
 	public Animal(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
 	/**
-	 * Moves the animals position ***CHANGE TO SWITCH STATEMENT*****
+	 * Moves the animals position based on the input direction
 	 *
 	 * @author Amjed Hallak
-	 * @param
-	 * @param
-	 * @param   
-	 * @return 
+	 * @param Enumerated direction
 	 * 
 	 * */
 	void move(Direction dir){
-		if(dir == Direction.NORTH) {
-			this.y -= 50;
-		} else if (dir == Direction.SOUTH) {
-			this.y += 50;
-		} else if (dir == Direction.EAST) {
-			this.x += 50;
-		} else if (dir == Direction.WEST) {
-			this.x -= 50;
+		switch(dir) {
+		case NORTH:
+			this.y -= INCR;
+			break;
+		case SOUTH:
+			this.y += INCR;
+			break;
+		case EAST:
+			this.x += INCR;
+			break;
+		case WEST:
+			this.x -= INCR;
+			
 		}
-		 
 	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
+
 	
 }
