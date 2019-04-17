@@ -90,25 +90,36 @@ public class View extends JPanel{
     
     JFrame frame = new JFrame("Estuary Project");
     JPanel panelCont = new JPanel();
-    JPanel introCard = new JPanel(); 
+    JPanel homeCard = new JPanel(); 
     JPanel clapperRail = new JPanel();
     JPanel redKnot = new JPanel();
     JButton clapperRailBtn = new JButton("Clapper Rail");
 	JButton redKnotBtn = new JButton("Red Knot");
+	JButton homeBtn = new JButton("Home");
 	
 	CardLayout cl = new CardLayout();
 	
 	public View() {
 		panelCont.setLayout(cl);
-		introCard.add(clapperRailBtn); //adding buttons to home screen
-		introCard.add(redKnotBtn);
-		clapperRail.setBackground(Color.BLUE);
+		homeCard.add(clapperRailBtn);
+		homeCard.add(redKnotBtn);
+		
+		redKnot.add(homeBtn);
+		clapperRail.add(homeBtn);
+		
+		clapperRail.setBackground(Color.GRAY);
 		redKnot.setBackground(Color.GREEN);
 		
-		panelCont.add(introCard, "1");
+		panelCont.add(homeCard, "1");
 		panelCont.add(clapperRail, "2");
 		panelCont.add(redKnot, "3");
 		cl.show(panelCont, "1");
+		
+		homeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "1");
+			}
+		});
 		
 		clapperRailBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -121,6 +132,8 @@ public class View extends JPanel{
 				cl.show(panelCont, "3");
 			}
 		});
+		
+
 		
 		frame.add(panelCont);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
