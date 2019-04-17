@@ -54,7 +54,7 @@ public class Model{
     	if(inclPlayer) {
     		allObjects.add(clapperRail);
     	}
-    	for(GamePiece p: predators) {
+    	for(Animal p: predators) {
     		allObjects.add(p);
     	}
     	for(GamePiece p: gamePieces) {

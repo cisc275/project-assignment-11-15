@@ -25,7 +25,6 @@ public class View extends JPanel{
 	static int FRAMECOUNT;
 	private static Direction dir;
     private int frameNum = 0;
-    private JFrame frame;
 	BufferedImage[][] pics;
 	
 	int RANDMAX = 6;
@@ -35,6 +34,16 @@ public class View extends JPanel{
 	Boolean withoutPlayer = false;
 	
 	public static int gamePanel = 1;
+	
+    JFrame frame = new JFrame("Estuary Project");
+    JPanel panelCont = new JPanel();
+    JPanel homeCard = new JPanel(); 
+    JPanel clapperRail = new JPanel();
+    JPanel redKnot = new JPanel();
+    JButton clapperRailBtn = new JButton("Clapper Rail");
+	JButton redKnotBtn = new JButton("Red Knot");
+	JButton homeBtn = new JButton("Home");
+	CardLayout cl = new CardLayout();
 	
 	
 //	View() {
@@ -56,64 +65,28 @@ public class View extends JPanel{
 	 * @author Paul Jureidini, Amjed Hallak
 	 * 
 	 * */
-	public void update(int x, int y, Direction d) {
-        this.xloc = x;
-        this.yloc = y;
-        this.dir = d;
 	public void update() {
+
+		frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
         //frameNum = (frameNum + 1) % frameCount;
-        repaint();
-        
-        //if(gamePanel == 1) { // home screen
         	if(gamePanel == 2) { // clapper rail
-        		System.out.println("gamePanel 2 reached");
-        		cl.show(panelCont, "2");
+        		cl.show(panelCont, "CR");
         	}
         	if(gamePanel == 3) { // red knot
-        		System.out.println("gamePanel 3 reached");
-        		cl.show(panelCont, "3");
+        		cl.show(panelCont, "RK");
         	}
-        //}
+            clapperRail.repaint();
+            redKnot.repaint();
+            repaint();
+            frame.repaint();
+            homeCard.repaint();
         
 	}
 	
-	public int getWidth() { return this.FRAMEWIDTH; }
-    public int getHeight() { return this.FRAMEHEIGHT; }
-  //  public int getImageWidth() { return this.AnimalWidth; }
-   // public int getImageHeight() { return this.AnimalHeight; }
-	
-	
-	
-	//public void buildFrame() {
-//		JFrame frame = new JFrame();
-//		frame.getContentPane().add(this);
-//        frame.getContentPane().setBackground(Color.GRAY);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-//        frame.addKeyListener(new KeyPress());
-//        frame.setFocusable(true);
-//        frame.setVisible(true);
-        
-//        JFrame intro = new JFrame();
-//        intro.getContentPane().setBackground(Color.CYAN);
-//        intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        intro.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-//        intro.addKeyListener(new KeyPress());
-//        intro.setFocusable(true);
-//        intro.setVisible(true);
-        
-        
-	//}
+
+
     
-    JFrame frame = new JFrame("Estuary Project");
-    JPanel panelCont = new JPanel();
-    JPanel homeCard = new JPanel(); 
-    JPanel clapperRail = new JPanel();
-    JPanel redKnot = new JPanel();
-    JButton clapperRailBtn = new JButton("Clapper Rail");
-	JButton redKnotBtn = new JButton("Red Knot");
-	JButton homeBtn = new JButton("Home");
-	CardLayout cl = new CardLayout();
+
 	
 	/**
 	 * JFrame and JPanels that display the game
@@ -123,25 +96,21 @@ public class View extends JPanel{
 	 * */
 	
 	public View() {
+
+		frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
 		panelCont.setLayout(cl);
 		
-//		homeCard.add(clapperRailBtn);
-//		homeCard.add(redKnotBtn);
-//		redKnot.add(homeBtn);
-//		clapperRail.add(homeBtn);
+		clapperRail.setBackground(Color.GREEN);
+		redKnot.setBackground(Color.BLUE);
 		
-		clapperRail.setBackground(Color.BLUE);
-		redKnot.setBackground(Color.RED);
-		
-		panelCont.add(homeCard, "1");
-		panelCont.add(clapperRail, "2");
-		panelCont.add(redKnot, "3");
-		cl.show(panelCont, "1");
+		panelCont.add(homeCard, "HOME");
+		panelCont.add(clapperRail, "CR");
+		panelCont.add(redKnot, "RK");
+		cl.show(panelCont, "HOME");
 		
 		
 				
 		frame.add(panelCont);
-		frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.addKeyListener(new KeyPress());
@@ -183,25 +152,21 @@ public class View extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
-		//Color color = randColor();
-		super.paintComponent(g);
-		for(GamePiece gp: allObj) {
-			g.fillRect(gp.getX(), gp.getY(), 50, 50);
-			g.setColor(Color.RED);
+		System.out.println("hi");
+		if(gamePanel == 2) {
+			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
+			//Color color = randColor();
+			super.paintComponent(g);
+			for(GamePiece gp: allObj) {
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				g.setColor(Color.RED);
+			}
+			g.drawString("Clapper Rail", 500, 20);
+			g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 		}
-	/*	g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
-		g.setColor(Color.BLUE);
-		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
-		g.setColor(Color.BLACK);
-		/*g.setColor(Color.BLUE);
-		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
-		g.setColor(Color.RED);
-		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
-		g.setColor(Color.BLACK);*/
-		g.drawString("Clapper Rail", 500, 20);
-		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 	}
 	
+	public int getWidth() { return this.FRAMEWIDTH; }
+    public int getHeight() { return this.FRAMEHEIGHT; }
 	
 }
