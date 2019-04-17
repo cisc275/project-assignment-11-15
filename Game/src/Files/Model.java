@@ -7,16 +7,19 @@ public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
 
-    private boolean goingRight = true;
-    private boolean goingDown = true;
+	static Boolean withPlayer = true;
+	static Boolean withoutPlayer = false;
 
     private int xloc = 20;
     private int yloc = 20;
     private final int xIncr = 10;
     private final int yIncr = 10;
+    static String predStr = "Predator";
+    static String gamePcString = "GamePiece";
     
     static Animal clapperRail = new ClapperRail();
     static ArrayList<Animal> predators = new ArrayList<Animal>();
+    static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     
     public static int collisionCount = 0;
     
@@ -34,8 +37,8 @@ public class Model{
 	 * 
 	 * */
     public static void setUpClapperRailGame() {
-    	spawnObject(100,100);
-    	spawnObject(300,500);
+    	spawnObject(predStr, 100,100);
+    	spawnObject(gamePcString, 300,500);
     }
     
     /**
@@ -44,10 +47,15 @@ public class Model{
 	 * @author Amjed Hallak
 	 * @return ArrayList of all the birds, predators, and other objects on screen
 	 * */
-    public static ArrayList<GamePiece> getAllObjects(){
+    public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer){
     	ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
-    	allObjects.add(clapperRail);
+    	if(inclPlayer) {
+    		allObjects.add(clapperRail);
+    	}
     	for(GamePiece p: predators) {
+    		allObjects.add(p);
+    	}
+    	for(GamePiece p: gamePieces) {
     		allObjects.add(p);
     	}
     	//System.out.println(allObjects.size());
@@ -60,12 +68,20 @@ public class Model{
 	 * Spawns a new object at a specified x and y position
 	 *
 	 * @author Amjed Hallak
+	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
+	 * @param
 	 * 
 	 * */
-    static public void spawnObject(int x, int y) {
-    	predators.add(new Animal(x,y));
-    	System.out.println("spawned pred");
+    static public void spawnObject(String type, int x, int y) {
+    	switch(type) {
+    	case("Predator"):
+    		predators.add(new Animal(x,y));
+    		break;
+    	case("GamePiece"):
+    		gamePieces.add(new GamePiece(x,y));
+    		break;
+    	}
     }
     
     /**
@@ -76,10 +92,11 @@ public class Model{
 	 * 
 	 * */
     public static void chkCollision(Animal b) {
-    	ArrayList<GamePiece> objs = getAllObjects();
+    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
+    		System.out.println(o.getClass());
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		System.out.println("Collision");
+	    		System.out.println("Collision at " + b.getX() + " " + o.getX() + " " + b.getY() + " " + o.getY());
 	    		collisionCount++;
 	    	}
     	}
@@ -94,8 +111,8 @@ public class Model{
 	 * */
     public static void move(Direction dir) {
     	clapperRail.move(dir);
-    	System.out.println("X: " + clapperRail.getX());
-    	System.out.println("Y: " + clapperRail.getY());
+    //	System.out.println("X: " + clapperRail.getX());
+    //	System.out.println("Y: " + clapperRail.getY());
     	chkCollision(clapperRail);
     	
     }
@@ -103,7 +120,7 @@ public class Model{
     /**
 	 * Method for View class to call to check player x and y direction
 	 *
-	 * @author Unknown - Supplied by MVC Orc Lab
+	 * @author Team 11-15
 	 * 
 	 * */
 	void updateLocationAndDirection() {

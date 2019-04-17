@@ -4,8 +4,10 @@ public class Animal extends GamePiece{
 	Direction dir;
 	boolean life;
 	int INCR = 50;
-	
+
+
 	public Animal() {}
+	
 	public Animal(int x, int y) {
 		this.x = x;
 		this.y = y;

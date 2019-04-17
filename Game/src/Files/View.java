@@ -31,6 +31,9 @@ public class View extends JPanel{
 	int RANDMAX = 6;
 	int RANDMIN = 0;
 	
+	Boolean withPlayer = true;
+	Boolean withoutPlayer = false;
+	
 	
 	View() {
 		buildFrame();
@@ -96,10 +99,14 @@ public class View extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		ArrayList<GamePiece> allObj = Model.getAllObjects();
+		ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
 		//Color color = randColor();
 		super.paintComponent(g);
-		g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
+		for(GamePiece gp: allObj) {
+			g.fillRect(gp.getX(), gp.getY(), 50, 50);
+			g.setColor(Color.RED);
+		}
+	/*	g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.BLUE);
 		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 		g.setColor(Color.BLACK);
