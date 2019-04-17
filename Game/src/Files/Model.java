@@ -81,7 +81,7 @@ public class Model{
     
     public static void chkCollision(Animal b) {
     	ArrayList<GamePiece> objs = getAllObjects();
-    	for(Object o: objs) {
+    	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		System.out.println("Collision");
 	    		collisionCount++;
