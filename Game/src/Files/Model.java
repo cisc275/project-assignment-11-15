@@ -39,6 +39,7 @@ public class Model{
     public static void setUpClapperRailGame() {
     	spawnObject(predStr, 100,100);
     	spawnObject(gamePcString, 300,500);
+    	spawnObject(predStr, 500, 300);
     }
     
     /**
@@ -46,6 +47,7 @@ public class Model{
 	 *
 	 * @author Amjed Hallak
 	 * @return ArrayList of all the birds, predators, and other objects on screen
+	 * 
 	 * */
     public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer){
     	ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
@@ -70,7 +72,6 @@ public class Model{
 	 * @author Amjed Hallak
 	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
-	 * @param
 	 * 
 	 * */
     static public void spawnObject(String type, int x, int y) {
