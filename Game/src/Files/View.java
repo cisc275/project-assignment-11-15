@@ -113,4 +113,4 @@ public class View extends JPanel{
 	}
 	
 	
-}//end class View
+}

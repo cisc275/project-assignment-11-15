@@ -54,17 +54,7 @@ public class Model{
     	return allObjects;
     }
     
-    /*public static int getPredatorPositionX(int num) {
-    	return predators.get(num).getX();
-    }
-    public static int getPredatorPositionY(int num) {
-    	return predators.get(num).getY();
-    }*/
-    
-    
-    public static int getCollisionCount() {
-    	return collisionCount;
-    }
+
     
     /**
 	 * Spawns a new object at a specified x and y position
@@ -113,7 +103,7 @@ public class Model{
     /**
 	 * Method for View class to call to check player x and y direction
 	 *
-	 * @author Unknown
+	 * @author Unknown - Supplied by MVC Orc Lab
 	 * 
 	 * */
 	void updateLocationAndDirection() {
@@ -138,5 +128,9 @@ public class Model{
 		ctrl.start();
 	}
 	
+	//ACCESSORS & MUTATORS
+    public static int getCollisionCount() {
+    	return collisionCount;
+    }
 	
 }
