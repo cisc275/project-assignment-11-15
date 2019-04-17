@@ -19,23 +19,17 @@ import javax.swing.*;
 public class View extends JPanel{
 	static int FRAMEWIDTH = 800;
 	static int FRAMEHEIGHT = 600;
-	static int AnimalWidth;
-	static int AnimalHeight;
 	int count;
-	int x;
-	int y;
-	static int frameCount;
+	static int FRAMECOUNT;
 	private static Direction dir;
     private int frameNum = 0;
-    private static int xloc = 50;
-    private static int yloc = 50;
+   // private static int xloc = 50;
+   // private static int yloc = 50;
     private JFrame frame;
 	BufferedImage[][] pics;
 	
-	static int arrowLeft = 37;	//WEST
-	static int arrowRight = 39;	//EAST
-	static int arrowUp = 38;	//NORTH
-	static int arrowDown = 40;	//SOUTH
+	int RANDMAX = 6;
+	int RANDMIN = 0;
 	
 	
 	View() {
@@ -58,8 +52,8 @@ public class View extends JPanel{
 	
 	public int getWidth() { return this.FRAMEWIDTH; }
     public int getHeight() { return this.FRAMEHEIGHT; }
-    public int getImageWidth() { return this.AnimalWidth; }
-    public int getImageHeight() { return this.AnimalHeight; }
+  //  public int getImageWidth() { return this.AnimalWidth; }
+   // public int getImageHeight() { return this.AnimalHeight; }
 	
 	
 	
@@ -85,7 +79,7 @@ public class View extends JPanel{
 	}
 	
 	public Color randColor() {
-		int rand = (int) (Math.random() * (6 - 0)) + 0;
+		int rand = (int) (Math.random() * (RANDMAX - RANDMIN)) + RANDMIN;
 		switch(rand) {
 		case(0):
 			return Color.red;
@@ -107,7 +101,7 @@ public class View extends JPanel{
 		super.paintComponent(g);
 		g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.BLUE);
-		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
+		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 		g.setColor(Color.BLACK);
 		/*g.setColor(Color.BLUE);
 		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
