@@ -82,9 +82,13 @@ class KeyPress implements KeyListener {
 		}
 		if (e.getKeyCode() == Controller.arrowLeft) {
 			Model.move(Direction.WEST);
+			View.gamePanel = 2; //select clapper rail game 
+			System.out.println("clapper rail");
 		}
 		if (e.getKeyCode() == Controller.arrowRight) {
 			Model.move(Direction.EAST);
+			View.gamePanel = 3; //select red knot game
+			System.out.println("red knot");
 		}
 		if (e.getKeyCode() == Controller.arrowDown) {
 			Model.move(Direction.SOUTH);

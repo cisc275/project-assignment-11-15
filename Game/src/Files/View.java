@@ -38,6 +38,8 @@ public class View extends JPanel{
 	static int arrowUp = 38;	//NORTH
 	static int arrowDown = 40;	//SOUTH
 	
+	public static int gamePanel = 1;
+	
 	
 //	View() {
 //		buildFrame();
@@ -58,6 +60,18 @@ public class View extends JPanel{
         this.dir = d;
         //frameNum = (frameNum + 1) % frameCount;
         repaint();
+        
+        //if(gamePanel == 1) { // home screen
+        	if(gamePanel == 2) { // clapper rail
+        		System.out.println("gamePanel 2 reached");
+        		cl.show(panelCont, "2");
+        	}
+        	if(gamePanel == 3) { // red knot
+        		System.out.println("gamePanel 3 reached");
+        		cl.show(panelCont, "3");
+        	}
+        //}
+        
 	}
 	
 	public int getWidth() { return this.FRAMEWIDTH; }
@@ -96,51 +110,45 @@ public class View extends JPanel{
     JButton clapperRailBtn = new JButton("Clapper Rail");
 	JButton redKnotBtn = new JButton("Red Knot");
 	JButton homeBtn = new JButton("Home");
-	
 	CardLayout cl = new CardLayout();
+	
+	/**
+	 * JFrame and JPanels that display the game
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
 	
 	public View() {
 		panelCont.setLayout(cl);
-		homeCard.add(clapperRailBtn);
-		homeCard.add(redKnotBtn);
 		
-		redKnot.add(homeBtn);
-		clapperRail.add(homeBtn);
+//		homeCard.add(clapperRailBtn);
+//		homeCard.add(redKnotBtn);
+//		redKnot.add(homeBtn);
+//		clapperRail.add(homeBtn);
 		
-		clapperRail.setBackground(Color.GRAY);
-		redKnot.setBackground(Color.GREEN);
+		clapperRail.setBackground(Color.BLUE);
+		redKnot.setBackground(Color.RED);
 		
 		panelCont.add(homeCard, "1");
 		panelCont.add(clapperRail, "2");
 		panelCont.add(redKnot, "3");
 		cl.show(panelCont, "1");
 		
-		homeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "1");
-			}
-		});
 		
-		clapperRailBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "2");
-			}
-		});
-		
-		redKnotBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "3");
-			}
-		});
-		
-
-		
+				
 		frame.add(panelCont);
+		frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
-		frame.setVisible(true);
+		frame.addKeyListener(new KeyPress());
+		frame.setFocusable(true);
+	    frame.setVisible(true);
 		
-	}
+	} //end public View()
+	
+	
+	
     
     
 //	public void paintComponent(Graphics g) {
