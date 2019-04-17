@@ -54,6 +54,12 @@ public class View extends JPanel{
 		return null;
 	}
 	
+	/**
+	 * Updates game
+	 *
+	 * @author Paul Jureidini, Amjed Hallak
+	 * 
+	 * */
 	public void update(int x, int y, Direction d) {
         this.xloc = x;
         this.yloc = y;
