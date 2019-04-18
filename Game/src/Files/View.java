@@ -83,11 +83,6 @@ public class View extends JPanel{
         
 	}
 	
-
-
-    
-
-	
 	/**
 	 * JFrame and JPanels that display the game
 	 *
@@ -117,7 +112,7 @@ public class View extends JPanel{
 		frame.setFocusable(true);
 	    frame.setVisible(true);
 		
-	} //end public View()
+	}
 	
 	
 	
