@@ -1,5 +1,6 @@
 package Files;
 
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -74,11 +75,20 @@ public class View extends JPanel{
         this.addKeyListener(new KeyPress());
         this.setFocusable(true);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
-		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
+		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50);//getX(), getY()
+		
+
+		
+		for (int i = 0; i<250; i = i +50) {
+			g.setColor(Color.CYAN);
+			g.drawRect(i, 10, 25, 25);
+		}
+
 		g.setColor(Color.RED);
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 	}

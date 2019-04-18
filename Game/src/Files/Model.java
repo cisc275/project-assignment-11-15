@@ -70,14 +70,20 @@ public class Model{
     	System.out.println("spawned pred");
     }
     
+    
+    static int collisionCount = 0;
+    
     public static void chkCollision(Animal b, ArrayList<Animal> preds) {
     	for(Animal p: preds) {
 	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
 	    		System.out.println("Collision");
+	    		collisionCount++;
+	    		System.out.println(collisionCount);
 	    	}
 	    	System.out.println("Iter");
     	}
     }
+    
     
     public Direction getDirect(){
         return d;
@@ -85,11 +91,20 @@ public class Model{
     
     public static void move(Direction dir) {
     	clapperRail.move(dir);
-    	System.out.println("X: " + clapperRail.getX());
+    	System.out.println("\nX: " + clapperRail.getX());
     	System.out.println("Y: " + clapperRail.getY());
     	chkCollision(clapperRail, predators);
     	
     }
+    
+//    public static void displayHealth(int h){
+//		System.out.print("Health: ");
+//		for (int i =0; i < h; i = i+1) {
+//			System.out.print("*");
+//		}
+//		
+//		
+//	}
     
 	void updateLocationAndDirection() {
 		xloc = clapperRail.getX();
