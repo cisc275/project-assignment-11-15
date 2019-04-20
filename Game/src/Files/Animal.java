@@ -37,5 +37,8 @@ public class Animal extends GamePiece{
 		}
 	}
 
+	public String toString() {
+		return "Animal";
+	}
 	
 }

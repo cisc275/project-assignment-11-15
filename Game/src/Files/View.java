@@ -23,8 +23,6 @@ public class View extends JPanel{
 	static int FRAMECOUNT;
 	private static Direction dir;
     private int frameNum = 0;
-   // private static int xloc = 50;
-   // private static int yloc = 50;
     private JFrame frame;
 	BufferedImage[][] pics;
 	
@@ -60,13 +58,6 @@ public class View extends JPanel{
         repaint();
 	}
 	
-	public int getWidth() { return this.FRAMEWIDTH; }
-    public int getHeight() { return this.FRAMEHEIGHT; }
-  //  public int getImageWidth() { return this.AnimalWidth; }
-   // public int getImageHeight() { return this.AnimalHeight; }
-	
-	
-	
 	public void buildFrame() {
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(this);
@@ -77,30 +68,19 @@ public class View extends JPanel{
         frame.setFocusable(true);
         frame.setVisible(true);
         gameMode = MENU;
-        
-//        JFrame intro = new JFrame();
-//        intro.getContentPane().setBackground(Color.CYAN);
-//        intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        intro.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-//        intro.addKeyListener(new KeyPress());
-//        intro.setFocusable(true);
-//        intro.setVisible(true);
-        
-       
 	}
 	
-	public Color randColor() {
-		int rand = (int) (Math.random() * (RANDMAX - RANDMIN)) + RANDMIN;
-		switch(rand) {
-		case(0):
-			return Color.red;
-		case(1):
-			return Color.blue;
-		case(2):
-			return Color.green;
-		case(3):
+	public Color getColor(String type) {
+		switch(type) {
+		case("Clapper Rail"):
+			return Color.BLACK;
+		case("Animal"):
+			return Color.RED;
+		case("GamePiece"):
+			return Color.GREEN;
+		case("alt1"):
 			return Color.yellow;
-		case(4):
+		case("alt2"):
 			return Color.pink;
 		}
 		return Color.white;
@@ -108,6 +88,8 @@ public class View extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		if(gameMode == MENU) {
+			/* Main menu Game View Logic
+			 */
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
@@ -119,30 +101,24 @@ public class View extends JPanel{
 			g.drawString("Press right for Red Knot game", 500, 400);
 			g.drawString("Press k at any time to return to menu", 300, 500);
 		} else if (gameMode == CLAPPERRAIL) {
+			/* Clapper Rail Game View Logic
+			 */
 			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
 			//Color color = randColor();
 			super.paintComponent(g);
 			for(GamePiece gp: allObj) {
+				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				g.setColor(Color.RED);
 			}
 		} else if (gameMode == REDKNOT) {
+			/* Red Knot Game View Logic
+			 */
 			g.drawString("REDKNOT GAME", 100, 100);
 		}
-		
-		
-	/*	g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
-		g.setColor(Color.BLUE);
-		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
-		g.setColor(Color.BLACK);
-		/*g.setColor(Color.BLUE);
-		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
-		g.setColor(Color.RED);
-		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
-		g.setColor(Color.BLACK);*/
-		//g.drawString("Clapper Rail", 500, 20);
-		//g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 	}
+	
+	public int getWidth() { return this.FRAMEWIDTH; }
+    public int getHeight() { return this.FRAMEHEIGHT; }
 	
 	
 }

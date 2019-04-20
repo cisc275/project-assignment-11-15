@@ -11,6 +11,10 @@ public class GamePiece{
 		this.y = y;
 	}
 	
+	public String toString() {
+		return "GamePiece";
+	}
+	
 	public int getX() {
 		return x;
 	}

@@ -80,6 +80,12 @@ class KeyPress implements KeyListener {
 	}
 	public void keyPressed(KeyEvent e) {
 	}
+	/**
+	 * Starts the game looping and effectively powers the model and view.
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.UP) {
 			switch(View.gameMode) {
