@@ -40,6 +40,7 @@ public class Model{
         this.FRAMEWIDTH = fw;
         this.FRAMEHEIGHT = fh;
     }
+    
     /**
 	 * Sets up general testbed for the Clapper Rail game. Currently spawns objects
 	 *
@@ -100,8 +101,6 @@ public class Model{
     	//System.out.println(allObjects.size());
     	return allObjects;
     }
-    
-
     
     /**
 	 * Spawns a new object at a specified x and y position
@@ -166,7 +165,6 @@ public class Model{
     	}
     }
     
-    
     /**
 	 * Moves the animals position based on the input direction
 	 *
@@ -185,7 +183,7 @@ public class Model{
     /**
 	 * Method for View class to call to check player x and y direction
 	 *
-	 * @author Team 11-15
+	 * @author Amjed Hallak
 	 * 
 	 * */
 	void updateLocationAndDirection() {

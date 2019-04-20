@@ -39,25 +39,43 @@ public class View extends JPanel{
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
 	
-	
+    /**
+	 * Constrcutor. Calls method to build frame
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
 	View() {
 		buildFrame();
 	}
-
 	
-	public static Direction getDirect(){
-        return dir;
-    }
-	
+    /**
+	 * TBD - should load images into game
+	 *
+	 * @author TBD
+	 * 
+	 * */
 	BufferedImage[] createImage() {
 		return null;
 	}
 	
+    /**
+	 * Update method for controller. Calls method to repaint frame.
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
 	public void update() {
         //frameNum = (frameNum + 1) % frameCount;
         repaint();
 	}
 	
+    /**
+	 *Sets up a new JFrame and adds listeners. Sets game mode to default (MENU)
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
 	public void buildFrame() {
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(this);
@@ -70,6 +88,13 @@ public class View extends JPanel{
         gameMode = MENU;
 	}
 	
+    /**
+	 * Returns a color based on the type of object. For alpha/beta use.
+	 *
+	 * @author Amjed Hallak
+	 * @param String from toString of class
+	 * 
+	 * */
 	public Color getColor(String type) {
 		switch(type) {
 		case("Clapper Rail"):
@@ -86,6 +111,13 @@ public class View extends JPanel{
 		return Color.white;
 	}
 	
+    /**
+	 * Paints the frame based on the current game mode and model logic
+	 *
+	 * @author Amjed Hallak
+	 * @param The view "graphic"
+	 * 
+	 * */
 	public void paintComponent(Graphics g) {
 		if(gameMode == MENU) {
 			/* Main menu Game View Logic
@@ -104,8 +136,7 @@ public class View extends JPanel{
 			/* Clapper Rail Game View Logic
 			 */
 			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
-			//Color color = randColor();
-			super.paintComponent(g);
+			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
