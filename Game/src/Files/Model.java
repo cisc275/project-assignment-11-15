@@ -33,9 +33,10 @@ public class Model{
 	static final int REDKNOT = 2;
 	
 	static int clkCount = 0;
-	static final int CLKMAX = 1000000;
+	static final int CLKMAX = 10000000;
 	static final int OBLIVION = 1000;
 	static int twigCount = 0;
+	static int deathToll; //temp
 	static int playerHealth = 100;
     
     private Direction dir = Direction.NORTH;
@@ -58,16 +59,16 @@ public class Model{
     	spawnObject(gamePcString, 300,500);
     	spawnObject(predStr, 500, 300);
     	
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 600, 500);
+    	spawnObject(predStr, 150, 250);
+    	spawnObject(predStr, 250, 100);
+    	spawnObject(predStr, 400, 200);
+    	spawnObject(predStr, 200, 400);
+    	spawnObject(predStr, 300, 300);
+    	spawnObject(predStr, 350, 350);
+    	spawnObject(predStr, 700, 300);
+    	spawnObject(predStr, 700, 200);
+    	spawnObject(predStr, 700, 550);
     	
     }
     
@@ -156,6 +157,7 @@ public class Model{
 	    		}
 	    		if(o.toString() == "Animal") {
 	    			playerHealth--;
+	    			deathToll++;
 	    		}
 	    	}
     	}
@@ -191,9 +193,7 @@ public class Model{
 	 * */
     public static void move(Direction dir) {
     	clapperRail.move(dir);
-    //	System.out.println("X: " + clapperRail.getX());
-    //	System.out.println("Y: " + clapperRail.getY());
-    	chkCollision(clapperRail);
+		chkCollision(clapperRail);
     	
     }
     
@@ -215,43 +215,45 @@ public class Model{
 	 * */
 	void updateLocationAndDirection() {
 		if(clapperRail != null) { //If game is active
+	    	
 			xloc = clapperRail.getX();
 			yloc = clapperRail.getY();
 			updateClock();
-			for(Animal p: predators) {
-				int random = (int)(Math.random() * RANDMAX + RANDMIN);
-				if(movePredators) {
-					switch(random) {
-					case(1):
-						if(p.getX() < (View.FRAMEWIDTH - p.INCR)) {
-							p.move(Direction.EAST);
-						} else {
-							p.move(Direction.WEST);
+			if(movePredators) {
+				for(Animal p: predators) {
+					int random = (int)(Math.random() * RANDMAX + RANDMIN);
+						switch(random) {
+						case(1):
+							if(p.getX() < (View.FRAMEWIDTH - p.INCR)) {
+								p.move(Direction.EAST);
+							} else {
+								p.move(Direction.WEST);
+							}
+							break;
+						case(2):
+							if(p.getX() > 0) {
+								p.move(Direction.WEST);
+							} else {
+								p.move(Direction.EAST);
+							}
+							break;
+						case(3):
+							if(p.getY() < (View.FRAMEHEIGHT - p.INCR)) {
+								p.move(Direction.SOUTH);
+							} else {
+								p.move(Direction.NORTH);
+							}
+							break;
+						case(4):
+							if(p.getY() > 0) {
+								p.move(Direction.NORTH);
+							} else {
+								p.move(Direction.SOUTH);
+							}
+							break;
 						}
-						break;
-					case(2):
-						if(p.getX() > 0) {
-							p.move(Direction.WEST);
-						} else {
-							p.move(Direction.EAST);
-						}
-						break;
-					case(3):
-						if(p.getY() < (View.FRAMEHEIGHT - p.INCR)) {
-							p.move(Direction.SOUTH);
-						} else {
-							p.move(Direction.NORTH);
-						}
-						break;
-					case(4):
-						if(p.getY() > 0) {
-							p.move(Direction.NORTH);
-						} else {
-							p.move(Direction.SOUTH);
-						}
-						break;
-					}
 				}
+				chkCollision(clapperRail);
 			}
 		}
 	}
@@ -270,10 +272,5 @@ public class Model{
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
-	
-	//ACCESSORS & MUTATORS
-    public static int getCollisionCount() {
-    	return collisionCount;
-    }
 	
 }

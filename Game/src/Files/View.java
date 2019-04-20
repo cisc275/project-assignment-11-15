@@ -144,6 +144,7 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
+			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 		} else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
 			 */
