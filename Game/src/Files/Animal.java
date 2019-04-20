@@ -3,7 +3,7 @@ package Files;
 public class Animal extends GamePiece{
 	Direction dir;
 	boolean life;
-	int INCR = 50;
+	static int INCR = 50;
 
 
 	public Animal() {}

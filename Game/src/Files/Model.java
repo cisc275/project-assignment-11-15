@@ -10,6 +10,7 @@ public class Model{
 
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
+	static Boolean movePredators = false;
 
     private int xloc = 20;
     private int yloc = 20;
@@ -23,17 +24,21 @@ public class Model{
     static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     
     public static int collisionCount = 0;
-    
+	int RANDMAX = 4;
+	int RANDMIN = 1;
+   
 	static int gameMode;
 	static final int MENU = 0;
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
 	
+	static int clkCount = 0;
+	static final int CLKMAX = 1000000;
 	static final int OBLIVION = 1000;
 	static int twigCount = 0;
 	static int playerHealth = 100;
     
-    private Direction d = Direction.NORTH;
+    private Direction dir = Direction.NORTH;
 	
 
     public Model(int fw, int fh){
@@ -52,6 +57,18 @@ public class Model{
     	spawnObject(predStr, 100,100);
     	spawnObject(gamePcString, 300,500);
     	spawnObject(predStr, 500, 300);
+    	
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	spawnObject(predStr, 500, 300);
+    	
     }
     
     /**
@@ -180,6 +197,16 @@ public class Model{
     	
     }
     
+    public static void updateClock() {
+    	clkCount++;
+    	if(clkCount > CLKMAX) {
+    		movePredators = true;
+    		clkCount = 0;
+    	} else {
+    		movePredators = false;
+    	}
+    }
+    
     /**
 	 * Method for View class to call to check player x and y direction
 	 *
@@ -187,9 +214,45 @@ public class Model{
 	 * 
 	 * */
 	void updateLocationAndDirection() {
-		if(clapperRail != null) {
+		if(clapperRail != null) { //If game is active
 			xloc = clapperRail.getX();
 			yloc = clapperRail.getY();
+			updateClock();
+			for(Animal p: predators) {
+				int random = (int)(Math.random() * RANDMAX + RANDMIN);
+				if(movePredators) {
+					switch(random) {
+					case(1):
+						if(p.getX() < (View.FRAMEWIDTH - p.INCR)) {
+							p.move(Direction.EAST);
+						} else {
+							p.move(Direction.WEST);
+						}
+						break;
+					case(2):
+						if(p.getX() > 0) {
+							p.move(Direction.WEST);
+						} else {
+							p.move(Direction.EAST);
+						}
+						break;
+					case(3):
+						if(p.getY() < (View.FRAMEHEIGHT - p.INCR)) {
+							p.move(Direction.SOUTH);
+						} else {
+							p.move(Direction.NORTH);
+						}
+						break;
+					case(4):
+						if(p.getY() > 0) {
+							p.move(Direction.NORTH);
+						} else {
+							p.move(Direction.SOUTH);
+						}
+						break;
+					}
+				}
+			}
 		}
 	}
 	
@@ -197,7 +260,7 @@ public class Model{
 	 * Main method
 	 *
 	 * @author Team 11-15
-	 * @param Array of string arguments. Not currently used
+	 * @param Array of string arguments. Parameter not currently used
 	 * 
 	 * */
 	
