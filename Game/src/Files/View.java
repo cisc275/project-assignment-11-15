@@ -75,12 +75,12 @@ public class View extends JPanel{
         	if(gamePanel == 3) { // red knot
         		cl.show(panelCont, "RK");
         	}
-            clapperRail.repaint();
-            redKnot.repaint();
-            repaint();
-            frame.repaint();
-            homeCard.repaint();
-            panelCont.repaint();
+        clapperRail.repaint();
+        redKnot.repaint();
+        repaint();
+        frame.repaint();
+        homeCard.repaint();
+        panelCont.repaint();
         
 	}
 	
@@ -94,6 +94,7 @@ public class View extends JPanel{
 	public View() {
 
 		frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
+		
 		panelCont.setLayout(cl);
 		
 		clapperRail.setBackground(Color.GREEN);
@@ -102,9 +103,8 @@ public class View extends JPanel{
 		panelCont.add(homeCard, "HOME");
 		panelCont.add(clapperRail, "CR");
 		panelCont.add(redKnot, "RK");
+		
 		cl.show(panelCont, "HOME");
-		
-		
 				
 		frame.add(panelCont);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -146,7 +146,7 @@ public class View extends JPanel{
 		}
 		return Color.white;
 	}
-	
+	@Override
 	public void paintComponent(Graphics g) {
 		System.out.println("hi");
 		if(gamePanel == 2) {
