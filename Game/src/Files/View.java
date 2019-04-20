@@ -80,6 +80,7 @@ public class View extends JPanel{
             repaint();
             frame.repaint();
             homeCard.repaint();
+            panelCont.repaint();
         
 	}
 	
