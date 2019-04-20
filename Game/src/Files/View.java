@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
+	
 	static int FRAMEWIDTH = 800;
 	static int FRAMEHEIGHT = 600;
 	int count;
@@ -83,7 +84,7 @@ public class View extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
         frame.addKeyListener(new KeyPress());
-        frame.setFocusable(true);
+        //frame.setFocusable(true);
         frame.setVisible(true);
         gameMode = MENU;
 	}

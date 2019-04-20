@@ -19,9 +19,6 @@ public class Controller{
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
 	
-	final int MOVE = 10;
-	
-	
 	/**
 	 * Initializes all the classes
 	 *

@@ -2,20 +2,21 @@ package Files;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
 
-	static Boolean withPlayer = true;
-	static Boolean withoutPlayer = false;
-	static Boolean movePredators = false;
+	static Boolean withPlayer;
+	static Boolean withoutPlayer;
+	static Boolean movePredators;
 
-    private int xloc = 20;
-    private int yloc = 20;
-    private final int xIncr = 10;
-    private final int yIncr = 10;
+    private int xloc;
+    private int yloc;
+    
     static String predStr = "Predator";
     static String gamePcString = "GamePiece";
     
@@ -88,6 +89,7 @@ public class Model{
     		break;
     	case(CLAPPERRAIL):
     		twigCount = 0;
+    		deathToll = 0;
     		playerHealth = 100;
     		setUpClapperRailGame();
     		View.gameMode = CLAPPERRAIL;
@@ -215,7 +217,6 @@ public class Model{
 	 * */
 	void updateLocationAndDirection() {
 		if(clapperRail != null) { //If game is active
-	    	
 			xloc = clapperRail.getX();
 			yloc = clapperRail.getY();
 			updateClock();
