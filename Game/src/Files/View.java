@@ -110,6 +110,9 @@ public class View extends JPanel{
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
 			}
+			g.setColor(Color.BLUE);
+			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
+			g.drawString("Twig count: " + Model.twigCount, 500,25);
 		} else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
 			 */

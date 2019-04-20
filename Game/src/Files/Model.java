@@ -2,6 +2,7 @@ package Files;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Model{
 	private final int FRAMEWIDTH;
@@ -17,7 +18,7 @@ public class Model{
     static String predStr = "Predator";
     static String gamePcString = "GamePiece";
     
-    static Animal clapperRail = new ClapperRail();
+    static Animal clapperRail;
     static ArrayList<Animal> predators = new ArrayList<Animal>();
     static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     
@@ -27,6 +28,10 @@ public class Model{
 	static final int MENU = 0;
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
+	
+	static final int OBLIVION = 1000;
+	static int twigCount = 0;
+	static int playerHealth = 100;
     
     private Direction d = Direction.NORTH;
 	
@@ -42,6 +47,7 @@ public class Model{
 	 * 
 	 * */
     public static void setUpClapperRailGame() {
+    	clapperRail = new ClapperRail();
     	spawnObject(predStr, 100,100);
     	spawnObject(gamePcString, 300,500);
     	spawnObject(predStr, 500, 300);
@@ -57,9 +63,14 @@ public class Model{
     public static void changeGameMode(int gameMode) {
     	switch(gameMode) {
     	case(MENU):
+    		removeAllObjects();
+    		clapperRail = null;
     		View.gameMode = MENU;
     		break;
     	case(CLAPPERRAIL):
+    		twigCount = 0;
+    		playerHealth = 100;
+    		setUpClapperRailGame();
     		View.gameMode = CLAPPERRAIL;
     		break;
     	case(REDKNOT):
@@ -121,13 +132,40 @@ public class Model{
     public static void chkCollision(Animal b) {
     	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
-    		System.out.println(o.getClass());
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		System.out.println("Collision at " + b.getX() + " " + o.getX() + " " + b.getY() + " " + o.getY());
-	    		collisionCount++;
+	    		if(o.toString() == "GamePiece") {
+	    			System.out.println("twig");
+	    			o.x += OBLIVION;
+	    			twigCount++;
+	    		}
+	    		if(o.toString() == "Animal") {
+	    			playerHealth--;
+	    		}
 	    	}
     	}
     }
+    
+    /**
+	 * Removes all objects for game reset
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+    public static void removeAllObjects() {
+    	Iterator preds = predators.iterator();
+    	Iterator gps = gamePieces.iterator();
+    	System.out.println(preds);
+    	System.out.println("start");
+    	while(preds.hasNext()) {
+    		preds.next();
+	    	preds.remove();
+    	}
+    	while(gps.hasNext()) {
+    		gps.next();
+    		gps.remove();
+    	}
+    }
+    
     
     /**
 	 * Moves the animals position based on the input direction
@@ -151,9 +189,10 @@ public class Model{
 	 * 
 	 * */
 	void updateLocationAndDirection() {
-		xloc = clapperRail.getX();
-		yloc = clapperRail.getY();
-		
+		if(clapperRail != null) {
+			xloc = clapperRail.getX();
+			yloc = clapperRail.getY();
+		}
 	}
 	
 	/**
@@ -168,7 +207,6 @@ public class Model{
 		
 		System.out.println("Starting point");
 		Controller ctrl = new Controller();
-		setUpClapperRailGame();
 		ctrl.start();
 	}
 	
