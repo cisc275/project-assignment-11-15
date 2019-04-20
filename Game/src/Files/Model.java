@@ -10,12 +10,12 @@ public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
 
-	static Boolean withPlayer;
-	static Boolean withoutPlayer;
+	static Boolean withPlayer = true;
+	static Boolean withoutPlayer = false;
 	static Boolean movePredators;
 
-    private int xloc;
-    private int yloc;
+    private static int xloc;
+    private static int yloc;
     
     static String predStr = "Predator";
     static String gamePcString = "GamePiece";
@@ -273,5 +273,8 @@ public class Model{
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
+	
+	public static int getX() { return xloc; }
+	public static int getY() { return yloc; }
 	
 }

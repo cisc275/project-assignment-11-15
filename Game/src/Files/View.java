@@ -40,6 +40,8 @@ public class View extends JPanel{
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
 	
+	BufferedImage img;
+	
     /**
 	 * Constrcutor. Calls method to build frame
 	 *
@@ -89,6 +91,25 @@ public class View extends JPanel{
         gameMode = MENU;
 	}
 	
+	/**
+	 * Returns a BufferedImage 
+	 *
+	 * @author Unknown
+	 * @param String of file path
+	 * @returns BufferedImage from source file
+	 * 
+	 * */
+	private BufferedImage createImage(String filename){
+		BufferedImage bufferedImage;
+    	try {
+    		bufferedImage = ImageIO.read(new File(filename));
+    		return bufferedImage;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+	}
+	
     /**
 	 * Returns a color based on the type of object. For alpha/beta use.
 	 *
@@ -136,12 +157,13 @@ public class View extends JPanel{
 		} else if (gameMode == CLAPPERRAIL) {
 			/* Clapper Rail Game View Logic
 			 */
-			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
+			ArrayList<GamePiece> allObj = Model.getAllObjects(withoutPlayer);
 			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
 			}
+			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
