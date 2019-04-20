@@ -28,8 +28,15 @@ public class View extends JPanel{
     private JFrame frame;
 	BufferedImage[][] pics;
 	
+	static int gameMode;
+	static final int MENU = 0;
+	static final int CLAPPERRAIL = 1;
+	static final int REDKNOT = 2;
+	
 	int RANDMAX = 6;
 	int RANDMIN = 0;
+	
+	int bigText = 40;
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
@@ -69,6 +76,7 @@ public class View extends JPanel{
         frame.addKeyListener(new KeyPress());
         frame.setFocusable(true);
         frame.setVisible(true);
+        gameMode = MENU;
         
 //        JFrame intro = new JFrame();
 //        intro.getContentPane().setBackground(Color.CYAN);
@@ -99,13 +107,30 @@ public class View extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
-		//Color color = randColor();
-		super.paintComponent(g);
-		for(GamePiece gp: allObj) {
-			g.fillRect(gp.getX(), gp.getY(), 50, 50);
-			g.setColor(Color.RED);
+		if(gameMode == MENU) {
+			g.setColor(Color.BLUE);
+			g.fillRect(0, 0, FRAMEWIDTH, 100);
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
+			g.drawString("Fly away?", 325, 65);
+			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
+			g.setColor(Color.BLACK);
+			g.drawString("Press left for Clapper Rail game", 100, 400);
+			g.drawString("Press right for Red Knot game", 500, 400);
+			g.drawString("Press k at any time to return to menu", 300, 500);
+		} else if (gameMode == CLAPPERRAIL) {
+			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
+			//Color color = randColor();
+			super.paintComponent(g);
+			for(GamePiece gp: allObj) {
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				g.setColor(Color.RED);
+			}
+		} else if (gameMode == REDKNOT) {
+			g.drawString("REDKNOT GAME", 100, 100);
 		}
+		
+		
 	/*	g.fillRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50); //getX(), getY()
 		g.setColor(Color.BLUE);
 		//g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
@@ -115,8 +140,8 @@ public class View extends JPanel{
 		g.setColor(Color.RED);
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 		g.setColor(Color.BLACK);*/
-		g.drawString("Clapper Rail", 500, 20);
-		g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
+		//g.drawString("Clapper Rail", 500, 20);
+		//g.drawString("Number of Collisions: " + Integer.toString(Model.getCollisionCount()), 400, 40);
 	}
 	
 	

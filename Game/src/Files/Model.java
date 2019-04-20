@@ -23,6 +23,11 @@ public class Model{
     
     public static int collisionCount = 0;
     
+	static int gameMode;
+	static final int MENU = 0;
+	static final int CLAPPERRAIL = 1;
+	static final int REDKNOT = 2;
+    
     private Direction d = Direction.NORTH;
 	
 
@@ -40,6 +45,27 @@ public class Model{
     	spawnObject(predStr, 100,100);
     	spawnObject(gamePcString, 300,500);
     	spawnObject(predStr, 500, 300);
+    }
+    
+    /**
+	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
+	 *
+	 * @author Amjed Hallak
+	 * @param Game mode to change to. Either 0, 1, or 2
+	 * 
+	 * */
+    public static void changeGameMode(int gameMode) {
+    	switch(gameMode) {
+    	case(MENU):
+    		View.gameMode = MENU;
+    		break;
+    	case(CLAPPERRAIL):
+    		View.gameMode = CLAPPERRAIL;
+    		break;
+    	case(REDKNOT):
+    		View.gameMode = REDKNOT;
+    		break;
+    	}
     }
     
     /**

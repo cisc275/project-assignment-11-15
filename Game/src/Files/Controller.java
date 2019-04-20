@@ -10,10 +10,14 @@ public class Controller{
 	
 	public static Boolean moving;
 	public static Boolean running = true;
-	static int arrowLeft = 37;	//WEST
-	static int arrowRight = 39;	//EAST
-	static int arrowUp = 38;	//NORTH
-	static int arrowDown = 40;	//SOUTH
+	static int LEFT = 37;	//WEST
+	static int RIGHT = 39;	//EAST
+	static int UP = 38;	//NORTH
+	static int DOWN = 40;	//SOUTH
+	
+	static final int MENU = 0;
+	static final int CLAPPERRAIL = 1;
+	static final int REDKNOT = 2;
 	
 	final int MOVE = 10;
 	
@@ -77,20 +81,56 @@ class KeyPress implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 	}
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == Controller.arrowUp) {
-			Model.move(Direction.NORTH);
+		if (e.getKeyCode() == Controller.UP) {
+			switch(View.gameMode) {
+	    	case(Controller.MENU):
+	    		break;
+	    	case(Controller.CLAPPERRAIL):
+	    		Model.move(Direction.NORTH);
+	    		break;
+	    	case(Controller.REDKNOT):
+	    		break;
+	    	}
+			
 		}
-		if (e.getKeyCode() == Controller.arrowLeft) {
-			Model.move(Direction.WEST);
+		if (e.getKeyCode() == Controller.LEFT) {
+			switch(View.gameMode) {
+	    	case(Controller.MENU):
+	    		Model.changeGameMode(Controller.CLAPPERRAIL);
+	    		break;
+	    	case(Controller.CLAPPERRAIL):
+				Model.move(Direction.WEST);
+	    		break;
+	    	case(Controller.REDKNOT):
+	    		break;
+	    	}
 		}
-		if (e.getKeyCode() == Controller.arrowRight) {
-			Model.move(Direction.EAST);
+		if (e.getKeyCode() == Controller.RIGHT) {
+			switch(View.gameMode) {
+	    	case(Controller.MENU):
+	    		Model.changeGameMode(Controller.REDKNOT);
+	    		break;
+	    	case(Controller.CLAPPERRAIL):
+				Model.move(Direction.EAST);
+	    		break;
+	    	case(Controller.REDKNOT):
+	    		break;
+	    	}
 		}
-		if (e.getKeyCode() == Controller.arrowDown) {
-			Model.move(Direction.SOUTH);
+		if (e.getKeyCode() == Controller.DOWN) {
+			switch(View.gameMode) {
+	    	case(Controller.MENU):
+	    		break;
+	    	case(Controller.CLAPPERRAIL):
+				Model.move(Direction.SOUTH);
+	    		break;
+	    	case(Controller.REDKNOT):
+	    		break;
+	    	}
 		}
 		
 		if (e.getKeyChar() == 'k') {
+			Model.changeGameMode(Controller.MENU);
 			//System.out.println("k pressed");
 		}
 	}
