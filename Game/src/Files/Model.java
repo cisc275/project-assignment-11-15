@@ -21,6 +21,7 @@ public class Model{
     static String gamePcString = "GamePiece";
     
     static Animal clapperRail;
+    static Animal redKnot;
     static ArrayList<Animal> predators = new ArrayList<Animal>();
     static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     
@@ -49,13 +50,44 @@ public class Model{
     }
     
     /**
-	 * Sets up general testbed for the Clapper Rail game. Currently spawns objects
+	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
+	 *
+	 * @author Amjed Hallak
+	 * @param Game mode to change to. Either 0, 1, or 2
+	 * 
+	 * */
+    public static void changeGameMode(int gameMode) {
+    	switch(gameMode) {
+    	case(MENU):
+    		gameMode = MENU;
+    		removeAllObjects();
+    		clapperRail = null;
+    		redKnot = null;
+    		View.gameMode = MENU;
+    		break;
+    	case(CLAPPERRAIL):
+    		twigCount = 0;
+    		deathToll = 0;
+    		playerHealth = 100;
+    		setUpClapperRailGame();
+    		View.gameMode = CLAPPERRAIL;
+    		break;
+    	case(REDKNOT):
+    		View.gameMode = REDKNOT;
+    		setUpRedKnotGame();
+    		break;
+    	}
+    }
+    
+    /**
+	 * Sets up general objects for the Clapper Rail game. Currently spawns objects
 	 *
 	 * @author Amjed Hallak
 	 * 
 	 * */
     public static void setUpClapperRailGame() {
     	clapperRail = new ClapperRail();
+		gameMode = CLAPPERRAIL;
     	spawnObject(predStr, 100,100);
     	spawnObject(gamePcString, 300,500);
     	spawnObject(predStr, 500, 300);
@@ -74,32 +106,32 @@ public class Model{
     }
     
     /**
-	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
+	 * Sets up general testbed for the Red Knot game. Currently spawns objects
 	 *
 	 * @author Amjed Hallak
-	 * @param Game mode to change to. Either 0, 1, or 2
 	 * 
 	 * */
-    public static void changeGameMode(int gameMode) {
-    	switch(gameMode) {
-    	case(MENU):
-    		removeAllObjects();
-    		clapperRail = null;
-    		View.gameMode = MENU;
-    		break;
-    	case(CLAPPERRAIL):
-    		twigCount = 0;
-    		deathToll = 0;
-    		playerHealth = 100;
-    		setUpClapperRailGame();
-    		View.gameMode = CLAPPERRAIL;
-    		break;
-    	case(REDKNOT):
-    		View.gameMode = REDKNOT;
-    		break;
-    	}
+    public static void setUpRedKnotGame() {
+    	redKnot = new RedKnot();
+		gameMode = REDKNOT;
+    	spawnObject(predStr, 100,100);
+    	spawnObject(gamePcString, 300,500);
+    	spawnObject(predStr, 500, 300);
+    	
+    	spawnObject(predStr, 600, 500);
+    	spawnObject(predStr, 150, 250);
+    	spawnObject(predStr, 250, 100);
+    	spawnObject(predStr, 400, 200);
+    	spawnObject(predStr, 200, 400);
+    	spawnObject(predStr, 300, 300);
+    	spawnObject(predStr, 350, 350);
+    	spawnObject(predStr, 700, 300);
+    	spawnObject(predStr, 700, 200);
+    	spawnObject(predStr, 700, 550);
+    	
     }
     
+
     /**
 	 * Function to return a list of all the present objects on the screen
 	 *
@@ -174,7 +206,6 @@ public class Model{
     public static void removeAllObjects() {
     	Iterator preds = predators.iterator();
     	Iterator gps = gamePieces.iterator();
-    	System.out.println(preds);
     	System.out.println("start");
     	while(preds.hasNext()) {
     		preds.next();
@@ -194,9 +225,13 @@ public class Model{
 	 * 
 	 * */
     public static void move(Direction dir) {
-    	clapperRail.move(dir);
-		chkCollision(clapperRail);
-    	
+    	if(clapperRail != null) { //if game is active
+	    	clapperRail.move(dir);
+			chkCollision(clapperRail);
+    	} else if (redKnot != null) {
+			redKnot.move(dir);
+			chkCollision(redKnot);
+    	}
     }
     
     public static void updateClock() {
@@ -220,6 +255,23 @@ public class Model{
 			xloc = clapperRail.getX();
 			yloc = clapperRail.getY();
 			updateClock();
+			movePredators();
+		} else if (redKnot != null) {
+			xloc = redKnot.getX();
+			yloc = redKnot.getY();
+			updateClock();
+			movePredators();
+		}
+	}
+	
+    /**
+	 * Method to create random movement of the predators in the games
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+	void movePredators() {
+		if (gameMode == CLAPPERRAIL) {
 			if(movePredators) {
 				for(Animal p: predators) {
 					int random = (int)(Math.random() * RANDMAX + RANDMIN);
@@ -256,6 +308,7 @@ public class Model{
 				}
 				chkCollision(clapperRail);
 			}
+		} else if (gameMode == REDKNOT) {
 		}
 	}
 	

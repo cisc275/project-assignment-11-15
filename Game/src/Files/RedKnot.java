@@ -26,4 +26,8 @@ public class RedKnot extends Bird{
 	void hitsPredator(Predator pred) {
 		
 	}
+	
+	public String toString() {
+		return "Red Knot";
+	}
 }

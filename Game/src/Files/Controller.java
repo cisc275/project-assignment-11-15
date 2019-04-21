@@ -92,6 +92,7 @@ class KeyPress implements KeyListener {
 	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
+	    		Model.move(Direction.NORTH);
 	    		break;
 	    	}
 			
@@ -128,6 +129,7 @@ class KeyPress implements KeyListener {
 				Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.REDKNOT):
+	    		Model.move(Direction.SOUTH);
 	    		break;
 	    	}
 		}

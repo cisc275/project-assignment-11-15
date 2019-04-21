@@ -172,6 +172,8 @@ public class View extends JPanel{
 			/* Red Knot Game View Logic
 			 */
 			g.drawString("REDKNOT GAME", 100, 100);
+			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), Color.RED, this);
+
 		}
 	}
 	
