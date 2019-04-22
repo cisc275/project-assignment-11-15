@@ -162,6 +162,7 @@ public class View extends JPanel{
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);

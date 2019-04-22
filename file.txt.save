@@ -1,0 +1,6 @@
+: " + Model.deathToll, 500,50);
+		} else if (gameMode == REDKNOT) {
+			/* Red Knot Game View Logic
+			 */
+			g.drawString("REDKNOT GAME", 100, 100);
+			g.drawImage(createImage("src/image
