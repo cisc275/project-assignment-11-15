@@ -37,6 +37,7 @@ public class Model{
 	static final int CLKMAX = 10000000;
 	static final int GRAVEYARD = 1000;
 	static int twigCount = 0;
+	static int bushCount = 0;
 	static int deathToll; //temp
 	static int playerHealth = 100;
     
@@ -51,7 +52,7 @@ public class Model{
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Game mode to change to. Either 0, 1, or 2
 	 * 
 	 * */
@@ -66,6 +67,7 @@ public class Model{
     		break;
     	case(CLAPPERRAIL):
     		twigCount = 0;
+    		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
     		setUpClapperRailGame();
@@ -81,7 +83,7 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game. Currently spawns objects
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
     public static void setUpClapperRailGame() {
@@ -156,7 +158,7 @@ public class Model{
     /**
 	 * Spawns a new object at a specified x and y position
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
 	 * 
@@ -178,7 +180,7 @@ public class Model{
     /**
 	 * Checks for collisions between an animal object, and all game objects ont he screen
 	 *
-	 * @author Amjed Hallak, Paul J
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Animal being compared to for a grid collision
 	 * 
 	 * */
@@ -193,6 +195,9 @@ public class Model{
 	    		if(o.toString().equals("Animal")) {
 	    			playerHealth--;
 	    			deathToll++;
+	    		}
+	    		if(o.toString().equals("Bush")) {
+	    			bushCount++;
 	    		}
 	    	}
     	}

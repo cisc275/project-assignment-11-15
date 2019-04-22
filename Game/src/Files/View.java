@@ -108,7 +108,7 @@ public class View extends JPanel{
     /**
 	 * Returns a color based on the type of object. For alpha/beta use.
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param String from toString of class
 	 * 
 	 * */
@@ -131,7 +131,7 @@ public class View extends JPanel{
     /**
 	 * Paints the frame based on the current game mode and model logic
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param The view "graphic"
 	 * 
 	 * */
@@ -144,7 +144,7 @@ public class View extends JPanel{
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("game w birds??", 325, 65);
+			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			g.drawString("Press left for Clapper Rail game", 100, 400);
@@ -166,6 +166,7 @@ public class View extends JPanel{
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
+			g.drawString("Bush count: " + Model.bushCount, 500,75);
 		} else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
 			 */
