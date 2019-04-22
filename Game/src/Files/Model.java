@@ -185,8 +185,7 @@ public class Model{
     	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		if(o.toString().equals("GamePiece")) {
-	    			System.out.println("twig");
-	    			o.x += OBLIVION;
+	    			o.x = OBLIVION;
 	    			twigCount++;
 	    		}
 	    		if(o.toString().equals("Animal")) {
