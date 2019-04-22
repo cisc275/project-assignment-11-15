@@ -123,9 +123,9 @@ public class View extends JPanel{
 			return Color.BLACK;
 		case("Animal"):
 			return Color.RED;
-		case("GamePiece"):
+		case("Twig"):
 			return Color.GREEN;
-		case("alt1"):
+		case("GamePiece"):
 			return Color.yellow;
 		case("alt2"):
 			return Color.pink;

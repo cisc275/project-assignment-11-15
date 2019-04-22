@@ -19,6 +19,7 @@ public class Model{
     
     static String predStr = "Predator";
     static String gamePcString = "GamePiece";
+    static String twigString = "Twig";
     
     static Animal clapperRail;
     static Animal redKnot;
@@ -36,7 +37,7 @@ public class Model{
 	
 	static int clkCount = 0;
 	static final int CLKMAX = 10000000;
-	static final int OBLIVION = 1000;
+	static final int GRAVEYARD = 1000;
 	static int twigCount = 0;
 	static int deathToll; //temp
 	static int playerHealth = 100;
@@ -89,7 +90,7 @@ public class Model{
     	clapperRail = new ClapperRail();
 		gameMode = CLAPPERRAIL;
     	spawnObject(predStr, 100,100);
-    	spawnObject(gamePcString, 300,500);
+    	spawnObject(twigString, 300,500);
     	spawnObject(predStr, 500, 300);
     	
     	spawnObject(predStr, 600, 500);
@@ -167,8 +168,8 @@ public class Model{
     	case("Predator"):
     		predators.add(new Animal(x,y));
     		break;
-    	case("GamePiece"):
-    		gamePieces.add(new GamePiece(x,y));
+    	case("Twig"):
+    		gamePieces.add(new Twig(x,y));
     		break;
     	}
     }
@@ -184,8 +185,8 @@ public class Model{
     	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		if(o.toString().equals("GamePiece")) {
-	    			o.x = OBLIVION;
+	    		if(o.toString().equals("Twig")) {
+	    			o.x = GRAVEYARD;
 	    			twigCount++;
 	    		}
 	    		if(o.toString().equals("Animal")) {
