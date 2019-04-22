@@ -71,18 +71,29 @@ public class Model{
     }
     
     
-    static int collisionCount = 0;
+   
+    static int health = 5;
+    
+   
     
     public static void chkCollision(Animal b, ArrayList<Animal> preds) {
     	for(Animal p: preds) {
 	    	if (b.getX() == p.getX() && b.getY() == p.getY()) {
 	    		System.out.println("Collision");
-	    		collisionCount++;
-	    		System.out.println(collisionCount);
+	    		health--;
+	    		System.out.println(health);
 	    	}
 	    	System.out.println("Iter");
     	}
+    	
+    	System.out.print("Health: ");
+    	for (int i =0; i <health; i++) {
+    		System.out.print("*");
+
+    	}
     }
+    
+    
     
     
     public Direction getDirect(){

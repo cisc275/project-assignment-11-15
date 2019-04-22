@@ -1,6 +1,4 @@
 package Files;
-
-
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -82,17 +80,36 @@ public class View extends JPanel{
 		g.setColor(Color.BLUE);
 		g.drawRect(Model.clapperRail.getX(), Model.clapperRail.getY(), 50, 50);//getX(), getY()
 		
-
+//		for (int i = 0; i<250; i = i +50) {
+//			g.setColor(Color.CYAN);
+//			g.drawRect(i, 10, 25, 25);
+//		}
 		
-		for (int i = 0; i<250; i = i +50) {
-			g.setColor(Color.CYAN);
-			g.drawRect(i, 10, 25, 25);
-		}
-
+		int healthBar= Model.health;
+		
+		
+			for(int i =0; i < 250; i = i + 50) {
+				g.setColor(Color.GREEN);
+				g.drawRect(i, 10, 25, 25);
+			}
+			
+			
+//			for(int i =0; i < (healthBar * 5); i = i + 50) {
+//				g.setColor(Color.RED);
+//				g.drawRect(i, 10, 25, 25);
+//			}
+			
+			for(int i = 250; i > (50 * healthBar); i = i - 50) {
+				g.setColor(Color.RED);
+				g.drawRect(i, 10, 25, 25);
+			}
+		
+		
 		g.setColor(Color.RED);
 		g.fillRect(Model.getPredatorPositionX(0), Model.getPredatorPositionY(0), 50, 50); //getX(), getY()
 	}
 	
+
 
 
 	
