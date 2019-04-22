@@ -176,7 +176,7 @@ public class Model{
     /**
 	 * Checks for collisions between an animal object, and all game objects ont he screen
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul J
 	 * @param Animal being compared to for a grid collision
 	 * 
 	 * */
@@ -184,12 +184,12 @@ public class Model{
     	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		if(o.toString() == "GamePiece") {
+	    		if(o.toString().equals("GamePiece")) {
 	    			System.out.println("twig");
 	    			o.x += OBLIVION;
 	    			twigCount++;
 	    		}
-	    		if(o.toString() == "Animal") {
+	    		if(o.toString().equals("Animal")) {
 	    			playerHealth--;
 	    			deathToll++;
 	    		}
