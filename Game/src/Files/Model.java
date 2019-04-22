@@ -37,6 +37,7 @@ public class Model{
 	static final int CLKMAX = 10000000;
 	static final int OBLIVION = 1000;
 	static int twigCount = 0;
+	static int bushCount = 0;
 	static int deathToll; //temp
 	static int playerHealth = 100;
     
@@ -88,6 +89,7 @@ public class Model{
     		View.gameMode = MENU;
     		break;
     	case(CLAPPERRAIL):
+    		bushCount = 0;
     		twigCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
@@ -144,7 +146,7 @@ public class Model{
     /**
 	 * Checks for collisions between an animal object, and all game objects ont he screen
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Animal being compared to for a grid collision
 	 * 
 	 * */
@@ -152,12 +154,12 @@ public class Model{
     	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		if(o.toString() == "GamePiece") {
+	    		if(o.toString().equals( "GamePiece") ){
 	    			System.out.println("twig");
 	    			o.x += OBLIVION;
 	    			twigCount++;
 	    		}
-	    		if(o.toString() == "Animal") {
+	    		if(o.toString().equals("Animal")) {
 	    			playerHealth--;
 	    			deathToll++;
 	    		}

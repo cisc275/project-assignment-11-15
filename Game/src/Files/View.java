@@ -20,7 +20,7 @@ public class View extends JPanel{
 	
 	static int FRAMEWIDTH = 800;
 	static int FRAMEHEIGHT = 600;
-	int count;
+	//int count;
 	static int FRAMECOUNT;
 	private static Direction dir;
     private int frameNum = 0;
@@ -136,7 +136,7 @@ public class View extends JPanel{
     /**
 	 * Paints the frame based on the current game mode and model logic
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param The view "graphic"
 	 * 
 	 * */
@@ -148,7 +148,7 @@ public class View extends JPanel{
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("game w birds??", 325, 65);
+			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			g.drawString("Press left for Clapper Rail game", 100, 400);
