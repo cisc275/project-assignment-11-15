@@ -83,15 +83,11 @@ public class View extends JPanel{
         
 	}
 	
-
-
-    
-
 	
 	/**
 	 * JFrame and JPanels that display the game
 	 *
-	 * @author Paul Jureidini
+	 * @author Paul Jureidini, Amjed Hallak
 	 * 
 	 * */
 	
@@ -107,9 +103,7 @@ public class View extends JPanel{
 		panelCont.add(clapperRail, "CR");
 		panelCont.add(redKnot, "RK");
 		cl.show(panelCont, "HOME");
-		
-		
-				
+			
 		frame.add(panelCont);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
@@ -151,7 +145,9 @@ public class View extends JPanel{
 		return Color.white;
 	}
 	
+	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		System.out.println("hi");
 		if(gamePanel == 2) {
 			ArrayList<GamePiece> allObj = Model.getAllObjects(withPlayer);
