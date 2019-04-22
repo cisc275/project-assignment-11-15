@@ -1,10 +1,7 @@
 package Files;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Model{
 	private final int FRAMEWIDTH;
@@ -20,6 +17,7 @@ public class Model{
     static String predStr = "Predator";
     static String gamePcString = "GamePiece";
     static String twigString = "Twig";
+    static String bushString = "Bush";
     
     static Animal clapperRail;
     static Animal redKnot;
@@ -92,7 +90,7 @@ public class Model{
     	spawnObject(predStr, 100,100);
     	spawnObject(twigString, 300,500);
     	spawnObject(predStr, 500, 300);
-    	
+    	spawnObject(bushString, 500,500);
     	spawnObject(predStr, 600, 500);
     	spawnObject(predStr, 150, 250);
     	spawnObject(predStr, 250, 100);
@@ -171,7 +169,10 @@ public class Model{
     	case("Twig"):
     		gamePieces.add(new Twig(x,y));
     		break;
-    	}
+	    case("Bush"):
+			gamePieces.add(new Bush(x,y));
+			break;
+		}
     }
     
     /**
@@ -277,7 +278,7 @@ public class Model{
 					int random = (int)(Math.random() * RANDMAX + RANDMIN);
 						switch(random) {
 						case(1):
-							if(p.getX() < (View.FRAMEWIDTH - p.INCR)) {
+							if(p.getX() < (View.FRAMEWIDTH - Animal.INCR)) {
 								p.move(Direction.EAST);
 							} else {
 								p.move(Direction.WEST);
@@ -291,7 +292,7 @@ public class Model{
 							}
 							break;
 						case(3):
-							if(p.getY() < (View.FRAMEHEIGHT - p.INCR)) {
+							if(p.getY() < (View.FRAMEHEIGHT - Animal.INCR)) {
 								p.move(Direction.SOUTH);
 							} else {
 								p.move(Direction.NORTH);

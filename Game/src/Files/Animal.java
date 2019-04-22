@@ -37,6 +37,7 @@ public class Animal extends GamePiece{
 		}
 	}
 
+	@Override
 	public String toString() {
 		return "Animal";
 	}

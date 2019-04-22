@@ -11,6 +11,7 @@ public class GamePiece{
 		this.y = y;
 	}
 	
+	@Override
 	public String toString() {
 		return "GamePiece";
 	}

@@ -1,8 +1,6 @@
 package Files;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
@@ -11,9 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.*; 
 
 public class View extends JPanel{
@@ -83,7 +78,7 @@ public class View extends JPanel{
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(this);
         frame.getContentPane().setBackground(Color.GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
@@ -127,7 +122,7 @@ public class View extends JPanel{
 			return Color.GREEN;
 		case("GamePiece"):
 			return Color.yellow;
-		case("alt2"):
+		case("Bush"):
 			return Color.pink;
 		}
 		return Color.white;
@@ -140,6 +135,7 @@ public class View extends JPanel{
 	 * @param The view "graphic"
 	 * 
 	 * */
+	@Override
 	public void paintComponent(Graphics g) {
 		if(gameMode == MENU) {
 			/* Main menu Game View Logic
@@ -164,6 +160,7 @@ public class View extends JPanel{
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
+			
 			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -178,8 +175,10 @@ public class View extends JPanel{
 		}
 	}
 	
-	public int getWidth() { return this.FRAMEWIDTH; }
-    public int getHeight() { return this.FRAMEHEIGHT; }
+	@Override
+	public int getWidth() { return View.FRAMEWIDTH; }
+    @Override
+	public int getHeight() { return View.FRAMEHEIGHT; }
 	
 	
 }

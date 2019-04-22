@@ -5,6 +5,7 @@ public class Twig extends GamePiece{
 		this.x = x;
 		this.y = y;
 	}
+	@Override
 	public String toString() {
 		return "Twig";
 	}
