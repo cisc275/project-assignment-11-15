@@ -27,6 +27,8 @@ public class View extends JPanel{
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
 	
+	//static int bushMax = 4;
+	
 	int RANDMAX = 6;
 	int RANDMIN = 0;
 	
@@ -123,7 +125,11 @@ public class View extends JPanel{
 		case("GamePiece"):
 			return Color.yellow;
 		case("Bush"):
-			return Color.pink;
+			if(Model.getBushCount() < Model.getBushMax()) {
+				return Color.pink;
+			}else {
+				return Color.YELLOW;
+			}
 		}
 		return Color.white;
 	}

@@ -52,6 +52,20 @@ public class Model{
     }
     
     /**
+	 * getter for bushCount, used in View
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+    public static int getBushCount() {
+    	return bushCount;
+    }
+    public static int getBushMax() {
+    	return bushMax;
+    }
+    
+    
+    /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
@@ -209,7 +223,7 @@ public class Model{
 	    			if(twigCount>0 && bushCount<bushMax) {
 	    				bushCount += twigCount;
 	    				twigCount = 0;
-	    			}else if(bushCount == bushMax) {
+	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
 	    			}
 	    		}
