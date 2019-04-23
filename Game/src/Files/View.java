@@ -1,4 +1,5 @@
 package Files;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -103,6 +104,8 @@ public class View extends JPanel{
 				g.setColor(Color.RED);
 				g.drawRect(i, 10, 25, 25);
 			}
+			
+			
 		
 		
 		g.setColor(Color.RED);

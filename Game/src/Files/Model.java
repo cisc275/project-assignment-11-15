@@ -91,6 +91,9 @@ public class Model{
     		System.out.print("*");
 
     	}
+    	if (health <= 0) {
+			System.out.println("Game Over!");
+		}
     }
     
     
