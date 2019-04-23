@@ -40,6 +40,8 @@ public class Model{
 	static int bushCount = 0;
 	static int deathToll; //temp
 	static int playerHealth = 100;
+	static int twigMax = 2; //bird can only hold 2 twigs at a time
+	static int bushMax = 4; 
     
     private Direction dir = Direction.NORTH;
 	
@@ -91,6 +93,10 @@ public class Model{
 		gameMode = CLAPPERRAIL;
     	spawnObject(predStr, 100,100);
     	spawnObject(twigString, 300,500);
+    	spawnObject(twigString, 200,500);
+    	spawnObject(twigString, 100,500);
+    	spawnObject(twigString, 400,500);
+    	spawnObject(twigString, 600,500);
     	spawnObject(predStr, 500, 300);
     	spawnObject(bushString, 500,500);
     	spawnObject(predStr, 600, 500);
@@ -178,7 +184,7 @@ public class Model{
     }
     
     /**
-	 * Checks for collisions between an animal object, and all game objects ont he screen
+	 * Checks for collisions between an animal object, and all game objects onto he screen
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Animal being compared to for a grid collision
@@ -189,15 +195,23 @@ public class Model{
     	for(GamePiece o: objs) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		if(o.toString().equals("Twig")) {
-	    			o.x = GRAVEYARD;
-	    			twigCount++;
-	    		}
+	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
+	    				o.x = GRAVEYARD;
+	    				twigCount++;
+	    				System.out.println("Twig Collected");
+	    			}
+	    		}//end "Twig"
 	    		if(o.toString().equals("Animal")) {
 	    			playerHealth--;
 	    			deathToll++;
 	    		}
 	    		if(o.toString().equals("Bush")) {
-	    			bushCount++;
+	    			if(twigCount>0 && bushCount<bushMax) {
+	    				bushCount += twigCount;
+	    				twigCount = 0;
+	    			}else if(bushCount == bushMax) {
+	    				System.out.println("Reached max bush size!");
+	    			}
 	    		}
 	    	}
     	}
