@@ -127,10 +127,11 @@ public class View extends JPanel{
 		case("Bush"):
 			int alpha = 10;
 			if(Model.getBushCount() < Model.getBushMax()) {
-				Color myColour = new Color(255, 0, 255, Model.getBushTrans());
+				Color myColour = new Color(102, 51, 0, Model.getBushTrans());
 				return myColour;
 			}else {
-				return Color.YELLOW;
+				Color color = new Color(0,102,0);
+				return color;
 			}
 		}
 		return Color.white;

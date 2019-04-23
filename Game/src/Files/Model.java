@@ -42,7 +42,7 @@ public class Model{
 	static int playerHealth = 100;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
-	static int bushTrans = 25;
+	static int bushTrans = 50;
     
     private Direction dir = Direction.NORTH;
 	
@@ -229,7 +229,7 @@ public class Model{
 	    		if(o.toString().equals("Bush")) {
 	    			if(twigCount>0 && bushCount<bushMax) {
 	    				bushCount += twigCount;
-	    				bushTrans += 25*twigCount; //increment bush transparency 
+	    				bushTrans += 50*twigCount; //increment bush transparency 
 	    				System.out.println(bushTrans);
 	    				twigCount = 0;
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
