@@ -125,8 +125,10 @@ public class View extends JPanel{
 		case("GamePiece"):
 			return Color.yellow;
 		case("Bush"):
+			int alpha = 10;
 			if(Model.getBushCount() < Model.getBushMax()) {
-				return Color.pink;
+				Color myColour = new Color(255, 0, 255, Model.getBushTrans());
+				return myColour;
 			}else {
 				return Color.YELLOW;
 			}

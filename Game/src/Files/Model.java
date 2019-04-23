@@ -42,6 +42,7 @@ public class Model{
 	static int playerHealth = 100;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
+	static int bushTrans = 25;
     
     private Direction dir = Direction.NORTH;
 	
@@ -62,6 +63,12 @@ public class Model{
     }
     public static int getBushMax() {
     	return bushMax;
+    }
+    public static int getTwigCount() {
+    	return twigCount;
+    }
+    public static int getBushTrans() {
+    	return bushTrans;
     }
     
     
@@ -212,7 +219,7 @@ public class Model{
 	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
 	    				o.x = GRAVEYARD;
 	    				twigCount++;
-	    				System.out.println("Twig Collected");
+	    				System.out.println("Twig Collected"); 
 	    			}
 	    		}//end "Twig"
 	    		if(o.toString().equals("Animal")) {
@@ -222,6 +229,8 @@ public class Model{
 	    		if(o.toString().equals("Bush")) {
 	    			if(twigCount>0 && bushCount<bushMax) {
 	    				bushCount += twigCount;
+	    				bushTrans += 25*twigCount; //increment bush transparency 
+	    				System.out.println(bushTrans);
 	    				twigCount = 0;
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
