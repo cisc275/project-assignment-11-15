@@ -93,10 +93,10 @@ public class Model{
 		gameMode = CLAPPERRAIL;
     	spawnObject(predStr, 100,100);
     	spawnObject(twigString, 300,500);
-    	spawnObject(twigString, 200,500);
-    	spawnObject(twigString, 100,500);
-    	spawnObject(twigString, 400,500);
-    	spawnObject(twigString, 600,500);
+    	spawnObject(twigString, 200,400);
+    	spawnObject(twigString, 100,300);
+    	spawnObject(twigString, 400,200);
+    	spawnObject(twigString, 600,100);
     	spawnObject(predStr, 500, 300);
     	spawnObject(bushString, 500,500);
     	spawnObject(predStr, 600, 500);
