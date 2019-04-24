@@ -10,6 +10,7 @@ public class Model{
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
 	static Boolean movePredators;
+	static Boolean slideObjects;
 
     private static int xloc;
     private static int yloc;
@@ -33,9 +34,13 @@ public class Model{
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
 	
-	static int clkCount = 0;
+	
+	static int clk1Count = 0;
+	static int clk2Count = 0;
 	static final int CLKMAX = 10000000;
+	static final int CLK2MAX = CLKMAX/64;
 	static final int GRAVEYARD = 1000;
+	static final int SPAWN_X = 850;
 	static int twigCount = 0;
 	static int bushCount = 0;
 	static int deathToll; //temp
@@ -141,21 +146,14 @@ public class Model{
 	 * */
     public static void setUpRedKnotGame() {
     	redKnot = new RedKnot();
+    	redKnot.move(Direction.EAST);
+    	redKnot.move(Direction.EAST);
 		gameMode = REDKNOT;
-    	spawnObject(predStr, 100,100);
-    	spawnObject(gamePcString, 300,500);
-    	spawnObject(predStr, 500, 300);
-    	
-    	spawnObject(predStr, 600, 500);
-    	spawnObject(predStr, 150, 250);
-    	spawnObject(predStr, 250, 100);
-    	spawnObject(predStr, 400, 200);
-    	spawnObject(predStr, 200, 400);
-    	spawnObject(predStr, 300, 300);
-    	spawnObject(predStr, 350, 350);
-    	spawnObject(predStr, 700, 300);
-    	spawnObject(predStr, 700, 200);
-    	spawnObject(predStr, 700, 550);
+    	spawnObject(predStr, SPAWN_X, 200);
+    	spawnObject(predStr, SPAWN_X, 250);
+    	spawnObject(predStr, SPAWN_X, 300);
+    	spawnObject(predStr, SPAWN_X, 500);
+    	spawnObject(predStr, SPAWN_X, 50);
     	
     }
     
@@ -277,13 +275,38 @@ public class Model{
     	}
     }
     
+    /**
+	 * Method to increment all objects toward the left side of the screen
+	 * in the Red Knot game
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+    public static void slideObjectsLeft() {
+    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
+    	if(slideObjects) {
+    		for(GamePiece p: objs) {
+    			p.x -= 1;
+    		}
+    	}
+    	
+    	
+    }
+    
     public static void updateClock() {
-    	clkCount++;
-    	if(clkCount > CLKMAX) {
+    	clk1Count++;
+    	clk2Count++;
+    	if(clk1Count > CLKMAX) {
     		movePredators = true;
-    		clkCount = 0;
+    		clk1Count = 0;
     	} else {
     		movePredators = false;
+    	}
+    	if(clk2Count > CLK2MAX) {
+    		slideObjects = true;
+    		clk2Count = 0;
+    	} else {
+    		slideObjects = false;
     	}
     }
     
@@ -303,6 +326,7 @@ public class Model{
 			xloc = redKnot.getX();
 			yloc = redKnot.getY();
 			updateClock();
+			slideObjectsLeft();
 			movePredators();
 		}
 	}

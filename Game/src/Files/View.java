@@ -34,6 +34,8 @@ public class View extends JPanel{
 	
 	int bigText = 40;
 	
+	ArrayList<GamePiece> allObj;
+	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
 	
@@ -161,15 +163,17 @@ public class View extends JPanel{
 			g.drawString("Press k at any time to return to menu", 300, 500);
 		} else if (gameMode == CLAPPERRAIL) {
 			/* Clapper Rail Game View Logic
+			 * 
+			 * 
 			 */
-			ArrayList<GamePiece> allObj = Model.getAllObjects(withoutPlayer);
+			allObj = Model.getAllObjects(withoutPlayer);
 			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
-			
+
 			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -178,9 +182,17 @@ public class View extends JPanel{
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
 		} else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
+			 * 
+			 * 
 			 */
 			g.drawString("REDKNOT GAME", 100, 100);
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), Color.RED, this);
+			allObj = Model.getAllObjects(withoutPlayer);
+			for(GamePiece gp: allObj) {
+				g.setColor(getColor(gp.toString()));
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+			}
+			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			
 
 		}
 	}
