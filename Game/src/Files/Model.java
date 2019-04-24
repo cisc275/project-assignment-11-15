@@ -26,8 +26,10 @@ public class Model{
     static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     
     public static int collisionCount = 0;
-	int RANDMAX = 4;
-	int RANDMIN = 1;
+	static int M_RANDMAX = 4;
+	static int M_RANDMIN = 1;
+	static int P_RANDMAX = 12;
+	static int P_RANDMIN = 0;
    
 	static int gameMode;
 	static final int MENU = 0;
@@ -38,9 +40,13 @@ public class Model{
 	static int clk1Count = 0;
 	static int clk2Count = 0;
 	static final int CLKMAX = 10000000;
-	static final int CLK2MAX = CLKMAX/64;
+	static final int CLK2MAX = CLKMAX/512;
 	static final int GRAVEYARD = 1000;
 	static final int SPAWN_X = 850;
+	static final int LEVEL_END = 100001;
+	static final int PREDATOR_SIZE = 50;
+	static final int PREDATOR_SPACE = PREDATOR_SIZE*4;
+	
 	static int twigCount = 0;
 	static int bushCount = 0;
 	static int deathToll; //temp
@@ -48,6 +54,9 @@ public class Model{
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
 	static int bushTrans = 50;
+	static int flightTime = 0;
+	
+	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
     
     private Direction dir = Direction.NORTH;
 	
@@ -156,7 +165,6 @@ public class Model{
     	spawnObject(predStr, SPAWN_X, 50);
     	
     }
-    
 
     /**
 	 * Function to return a list of all the present objects on the screen
@@ -238,6 +246,125 @@ public class Model{
     	}
     }
     
+
+    
+    /**
+	 * Moves the animals position based on the input direction
+	 *
+	 * @author Amjed Hallak
+	 * @param Enumerated direction
+	 * 
+	 * */
+    public static void move(Direction dir) {
+    	if(clapperRail != null) { //if game is active
+	    	clapperRail.move(dir);
+			chkCollision(clapperRail);
+    	} else if (redKnot != null) {
+			redKnot.move(dir);
+			chkCollision(redKnot);
+    	}
+    }
+    
+    /**
+	 * Method to increment all objects toward the left side of the screen
+	 * in the Red Knot game. Also generates new objects
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+    public static void slideObjectsLeft() {
+    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
+    	if(slideObjects) {
+    		for(GamePiece p: objs) {
+    			p.x -= 1;
+    		}
+    	}
+    	//System.out.println(flightTime);
+    	if((flightTime < LEVEL_END) && slideObjects) {
+    		if((flightTime % PREDATOR_SPACE) == 0) {
+    			int[] yCoords = getRandY();
+    			int i = 0;
+    			while(i < 5) {
+    				spawnObject(predStr, SPAWN_X, yCoords[i]);
+    				i++;
+    			}
+    		}
+    	}
+    }
+    
+    /**
+	 * Generates a random y-coordinate for the Red knot game
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+    public static int[] getRandY() {
+    	int i = 0;
+    	int[] randPts = new int[P_RANDMAX];
+    	while(i < 5) {
+    		int random = (int)(Math.random() * P_RANDMAX + P_RANDMIN);
+    		randPts[i] = yPoints[random];
+    		i++;
+    	}
+    	return randPts;
+    }
+    
+    public static void updateClock() {
+    	clk1Count++;
+    	clk2Count++;
+    	if(clk1Count > CLKMAX) {
+    		movePredators = true;
+    		clk1Count = 0;
+    	} else {
+    		movePredators = false;
+    	}
+    	if(clk2Count > CLK2MAX) {
+    		slideObjects = true;
+    		clk2Count = 0;
+    		flightTime++;
+    	} else {
+    		slideObjects = false;
+    	}
+    }
+    
+    /**
+	 * Method for View class to call to check player x and y direction
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+	void updateLocationAndDirection() {
+		clean();
+		if(clapperRail != null) { //If game is active
+			xloc = clapperRail.getX();
+			yloc = clapperRail.getY();
+			updateClock();
+			movePredators();
+		} else if (redKnot != null) {
+			xloc = redKnot.getX();
+			yloc = redKnot.getY();
+			updateClock();
+			slideObjectsLeft();
+			movePredators();
+		}
+	}
+    /**
+	 * Cleans out all objects that are no longer necessary.
+	 * Effectively backup/manual garbage collection.
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+	public void clean() {
+		ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
+    	
+    	for(GamePiece gp: gamePieces) {
+    		if(gp.x == GRAVEYARD) {
+    			gamePieces.remove(gp);
+    		}
+    	}
+	}
+	
     /**
 	 * Removes all objects for game reset
 	 *
@@ -259,79 +386,6 @@ public class Model{
     }
     
     /**
-	 * Moves the animals position based on the input direction
-	 *
-	 * @author Amjed Hallak
-	 * @param Enumerated direction
-	 * 
-	 * */
-    public static void move(Direction dir) {
-    	if(clapperRail != null) { //if game is active
-	    	clapperRail.move(dir);
-			chkCollision(clapperRail);
-    	} else if (redKnot != null) {
-			redKnot.move(dir);
-			chkCollision(redKnot);
-    	}
-    }
-    
-    /**
-	 * Method to increment all objects toward the left side of the screen
-	 * in the Red Knot game
-	 *
-	 * @author Amjed Hallak
-	 * 
-	 * */
-    public static void slideObjectsLeft() {
-    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
-    	if(slideObjects) {
-    		for(GamePiece p: objs) {
-    			p.x -= 1;
-    		}
-    	}
-    	
-    	
-    }
-    
-    public static void updateClock() {
-    	clk1Count++;
-    	clk2Count++;
-    	if(clk1Count > CLKMAX) {
-    		movePredators = true;
-    		clk1Count = 0;
-    	} else {
-    		movePredators = false;
-    	}
-    	if(clk2Count > CLK2MAX) {
-    		slideObjects = true;
-    		clk2Count = 0;
-    	} else {
-    		slideObjects = false;
-    	}
-    }
-    
-    /**
-	 * Method for View class to call to check player x and y direction
-	 *
-	 * @author Amjed Hallak
-	 * 
-	 * */
-	void updateLocationAndDirection() {
-		if(clapperRail != null) { //If game is active
-			xloc = clapperRail.getX();
-			yloc = clapperRail.getY();
-			updateClock();
-			movePredators();
-		} else if (redKnot != null) {
-			xloc = redKnot.getX();
-			yloc = redKnot.getY();
-			updateClock();
-			slideObjectsLeft();
-			movePredators();
-		}
-	}
-	
-    /**
 	 * Method to create random movement of the predators in the games
 	 *
 	 * @author Amjed Hallak
@@ -341,7 +395,7 @@ public class Model{
 		if (gameMode == CLAPPERRAIL) {
 			if(movePredators) {
 				for(Animal p: predators) {
-					int random = (int)(Math.random() * RANDMAX + RANDMIN);
+					int random = (int)(Math.random() * M_RANDMAX + M_RANDMIN);
 						switch(random) {
 						case(1):
 							if(p.getX() < (View.FRAMEWIDTH - Animal.INCR)) {
