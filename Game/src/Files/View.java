@@ -2,7 +2,6 @@ package Files;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +31,6 @@ public class View extends JPanel{
 	static int arrowDown = 40;	//SOUTH
 	
 	final static int numImages = 14;
-	
-	Image backgroundImg;
-	
 	
 	
 	
@@ -76,12 +72,6 @@ public class View extends JPanel{
 	public View() {
 		loadImages();
 		buildFrame();
-		try {
-			backgroundImg = ImageIO.read(new File("sideScroll.png"));
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private BufferedImage[] createImage(String[] strArr) {
@@ -128,7 +118,6 @@ public class View extends JPanel{
 	public int getHeight() { return View.FRAMEHEIGHT; }
     public int getImageWidth() { return View.AnimalWidth; }
     public int getImageHeight() { return View.AnimalHeight; }
-
 
 	
 }//end class View
