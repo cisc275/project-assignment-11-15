@@ -348,7 +348,7 @@ public class Model{
 			movePredators();
 		}
 	}
-    /**
+    /**  DONE FROM EHRE
 	 * Cleans out all objects that are no longer necessary.
 	 * Effectively backup/manual garbage collection.
 	 *
@@ -356,13 +356,13 @@ public class Model{
 	 * 
 	 * */
 	public void clean() {
-		ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
+		//ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	
-    	for(GamePiece gp: gamePieces) {
-    		if(gp.x == GRAVEYARD) {
-    			gamePieces.remove(gp);
-    		}
-    	}
+    	//for(GamePiece gp: gamePieces) {
+    	//	if(gp.x == GRAVEYARD) {
+    			//gamePieces.remove(gp);
+    	//	}
+    	//}
 	}
 	
     /**
