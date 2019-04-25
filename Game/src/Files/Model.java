@@ -42,8 +42,8 @@ public class Model{
 	
 	static int clk1Count = 0;
 	static int clk2Count = 0;
-	static final long CLKMAX = 10000000;
-	static final long CLK2MAX = CLKMAX/1310720;
+	static final double CLKMAX = 1000;
+	static final double CLK2MAX = CLKMAX/256;
 	static final int GRAVEYARD = 1000;
 	static final int SPAWN_X = 850;
 	static final int LEVEL_END = 100001;
@@ -69,24 +69,7 @@ public class Model{
         this.FRAMEHEIGHT = fh;
     }
     
-    /**
-	 * getter for bushCount, used in View
-	 *
-	 * @author Paul Jureidini
-	 * 
-	 * */
-    public static int getBushCount() {
-    	return bushCount;
-    }
-    public static int getBushMax() {
-    	return bushMax;
-    }
-    public static int getTwigCount() {
-    	return twigCount;
-    }
-    public static int getBushTrans() {
-    	return bushTrans;
-    }
+
     
     
     /**
@@ -166,7 +149,6 @@ public class Model{
     	spawnObject(predStr, SPAWN_X, 300);
     	spawnObject(predStr, SPAWN_X, 500);
     	spawnObject(predStr, SPAWN_X, 50);
-    	
     }
 
     /**
@@ -177,14 +159,12 @@ public class Model{
 	 * 
 	 * */
     public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer, Boolean inclPreds){
-    	if(inclPlayer) {
+    	if(inclPlayer)
     		allObjects.add(clapperRail);
-    	}
-    	if(inclPreds) {
-    		for(Animal p: predators) {
+    	/*if(inclPreds) {
+    		for(Animal p: predators)
     			allObjects.add(p);
-    		}
-    	}
+    	}*/
     	return allObjects;
     }
     
@@ -197,7 +177,7 @@ public class Model{
 	 * 
 	 * */
     static public void spawnObject(String type, int x, int y) {
-    	switch(type) {
+    	switch(type) { 
     	case("Predator"):
     		predators.add(new Animal(x,y));
     		break;
@@ -220,18 +200,18 @@ public class Model{
     public static void chkCollision(Animal b) {
     	for(GamePiece o: allObjects) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		if(o.toString().equals("Twig")) {
+	    		if(o instanceof Twig) {
 	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
 	    				o.x = GRAVEYARD;
 	    				twigCount++;
 	    				System.out.println("Twig Collected"); 
 	    			}
 	    		}//end "Twig"
-	    		if(o.toString().equals("Animal")) {
+	    		if(o instanceof Animal) {
 	    			playerHealth--;
 	    			deathToll++;
 	    		}
-	    		if(o.toString().equals("Bush")) {
+	    		if(o instanceof Bush) {
 	    			if(twigCount>0 && bushCount<bushMax) {
 	    				bushCount += twigCount;
 	    				bushTrans += 50*twigCount; //increment bush transparency 
@@ -240,6 +220,14 @@ public class Model{
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
 	    			}
+	    		}
+	    	}
+    	}
+    	for(Animal a: predators) {
+	    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
+	    		if(a instanceof Animal) {
+	    			playerHealth--;
+	    			deathToll++;
 	    		}
 	    	}
     	}
@@ -273,7 +261,7 @@ public class Model{
 	 * */
     public static void slideObjectsLeft() {
     	if(slideObjects) {
-    		for(GamePiece p: allObjects) {
+    		for(Animal p: predators) {
     			p.x -= 1;
     		}
     	}
@@ -353,12 +341,12 @@ public class Model{
 	 * 
 	 * */
 	public void clean() {
-		/*Iterator<GamePiece> iter = getAllObjects(withoutPlayer, withoutPreds).iterator();
+		Iterator<Animal> iter = predators.iterator();
     	while(iter.hasNext()) {
-    		if(iter.next().getX() == GRAVEYARD) {
+    		if(iter.next().getX() < 50) {
     			iter.remove();
     		}
-    	}*/
+    	}
 	}
 	
     /**
@@ -428,6 +416,7 @@ public class Model{
 				clean();
 			}
 		} else if (gameMode == REDKNOT) {
+			clean();
 		}
 	}
 	
@@ -446,7 +435,12 @@ public class Model{
 		ctrl.start();
 	}
 	
+	public static ArrayList<Animal> getPredators() { return predators; }
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }
+    public static int getBushCount() { return bushCount; }
+    public static int getBushMax() { return bushMax; }
+    public static int getTwigCount() { return twigCount; }
+    public static int getBushTrans() { return bushTrans; }
 	
 }

@@ -51,6 +51,11 @@ public class Controller{
 				
 				//update the view
 				view.update();
+				try {
+		            Thread.sleep(1);
+		        } catch (InterruptedException e) {
+		            e.printStackTrace();
+		        }
 			} else {
 				while(!running) {
 					try {

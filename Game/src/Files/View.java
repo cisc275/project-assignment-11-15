@@ -35,6 +35,7 @@ public class View extends JPanel{
 	int bigText = 40;
 	
 	ArrayList<GamePiece> allObj;
+	ArrayList<Animal> predators;
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
@@ -169,10 +170,17 @@ public class View extends JPanel{
 			 * 
 			 */
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
 			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+
+			for(Animal p: predators) {
+				g.setColor(getColor(p.toString()));
+				g.fillRect(p.getX(), p.getY(), 50, 50);
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 
@@ -187,11 +195,18 @@ public class View extends JPanel{
 			 * 
 			 * 
 			 */
-			g.drawString("REDKNOT GAME", 100, 100);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
+			g.drawString("REDKNOT GAME", 100, 100);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+			for(Animal p: predators) {
+				g.setColor(getColor(p.toString()));
+				//g.fillRect(p.getX(), p.getY(), 50, 50);
+				g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
 			}
 			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			
