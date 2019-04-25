@@ -9,6 +9,8 @@ public class Model{
 
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
+	static Boolean withPreds = true;
+	static Boolean withoutPreds = false;
 	static Boolean movePredators;
 	static Boolean slideObjects;
 
@@ -23,7 +25,8 @@ public class Model{
     static Animal clapperRail;
     static Animal redKnot;
     static ArrayList<Animal> predators = new ArrayList<Animal>();
-    static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
+    //static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
+    static ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
     
     public static int collisionCount = 0;
 	static int M_RANDMAX = 4;
@@ -39,8 +42,8 @@ public class Model{
 	
 	static int clk1Count = 0;
 	static int clk2Count = 0;
-	static final int CLKMAX = 10000000;
-	static final int CLK2MAX = CLKMAX/512;
+	static final long CLKMAX = 10000000;
+	static final long CLK2MAX = CLKMAX/1310720;
 	static final int GRAVEYARD = 1000;
 	static final int SPAWN_X = 850;
 	static final int LEVEL_END = 100001;
@@ -173,18 +176,15 @@ public class Model{
 	 * @return ArrayList of all the birds, predators, and other objects on screen
 	 * 
 	 * */
-    public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer){
-    	ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
+    public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer, Boolean inclPreds){
     	if(inclPlayer) {
     		allObjects.add(clapperRail);
     	}
-    	for(GamePiece p: predators) {
-    		allObjects.add(p);
+    	if(inclPreds) {
+    		for(Animal p: predators) {
+    			allObjects.add(p);
+    		}
     	}
-    	for(GamePiece p: gamePieces) {
-    		allObjects.add(p);
-    	}
-    	//System.out.println(allObjects.size());
     	return allObjects;
     }
     
@@ -202,10 +202,10 @@ public class Model{
     		predators.add(new Animal(x,y));
     		break;
     	case("Twig"):
-    		gamePieces.add(new Twig(x,y));
+    		allObjects.add(new Twig(x,y));
     		break;
 	    case("Bush"):
-			gamePieces.add(new Bush(x,y));
+			allObjects.add(new Bush(x,y));
 			break;
 		}
     }
@@ -218,8 +218,7 @@ public class Model{
 	 * 
 	 * */
     public static void chkCollision(Animal b) {
-    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
-    	for(GamePiece o: objs) {
+    	for(GamePiece o: allObjects) {
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
 	    		if(o.toString().equals("Twig")) {
 	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
@@ -273,9 +272,8 @@ public class Model{
 	 * 
 	 * */
     public static void slideObjectsLeft() {
-    	ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
     	if(slideObjects) {
-    		for(GamePiece p: objs) {
+    		for(GamePiece p: allObjects) {
     			p.x -= 1;
     		}
     	}
@@ -334,7 +332,6 @@ public class Model{
 	 * 
 	 * */
 	void updateLocationAndDirection() {
-		clean();
 		if(clapperRail != null) { //If game is active
 			xloc = clapperRail.getX();
 			yloc = clapperRail.getY();
@@ -348,7 +345,7 @@ public class Model{
 			movePredators();
 		}
 	}
-    /**  DONE FROM EHRE
+    /**
 	 * Cleans out all objects that are no longer necessary.
 	 * Effectively backup/manual garbage collection.
 	 *
@@ -356,13 +353,12 @@ public class Model{
 	 * 
 	 * */
 	public void clean() {
-		//ArrayList<GamePiece> objs = getAllObjects(withoutPlayer);
-    	
-    	//for(GamePiece gp: gamePieces) {
-    	//	if(gp.x == GRAVEYARD) {
-    			//gamePieces.remove(gp);
-    	//	}
-    	//}
+		/*Iterator<GamePiece> iter = getAllObjects(withoutPlayer, withoutPreds).iterator();
+    	while(iter.hasNext()) {
+    		if(iter.next().getX() == GRAVEYARD) {
+    			iter.remove();
+    		}
+    	}*/
 	}
 	
     /**
@@ -373,15 +369,15 @@ public class Model{
 	 * */
     public static void removeAllObjects() {
     	Iterator preds = predators.iterator();
-    	Iterator gps = gamePieces.iterator();
+    	Iterator ao = allObjects.iterator();
     	System.out.println("start");
     	while(preds.hasNext()) {
     		preds.next();
 	    	preds.remove();
     	}
-    	while(gps.hasNext()) {
-    		gps.next();
-    		gps.remove();
+    	while(ao.hasNext()) {
+    		ao.next();
+    		ao.remove();
     	}
     }
     
@@ -428,6 +424,8 @@ public class Model{
 						}
 				}
 				chkCollision(clapperRail);
+
+				clean();
 			}
 		} else if (gameMode == REDKNOT) {
 		}

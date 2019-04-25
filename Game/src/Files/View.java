@@ -38,6 +38,8 @@ public class View extends JPanel{
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
+	Boolean withPreds = true;
+	Boolean withoutPreds = false;
 	
 	BufferedImage img;
 	
@@ -166,7 +168,7 @@ public class View extends JPanel{
 			 * 
 			 * 
 			 */
-			allObj = Model.getAllObjects(withoutPlayer);
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
@@ -186,7 +188,7 @@ public class View extends JPanel{
 			 * 
 			 */
 			g.drawString("REDKNOT GAME", 100, 100);
-			allObj = Model.getAllObjects(withoutPlayer);
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
