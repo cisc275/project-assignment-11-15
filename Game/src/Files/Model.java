@@ -6,6 +6,9 @@ import java.util.*;
 public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
+    
+    static final int PREDHEIGHT = 50;
+    static final int PREDWIDTH = 50;
 
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
@@ -340,7 +343,7 @@ public class Model{
 	public void clean() {
 		Iterator<Animal> iter = predators.iterator();
     	while(iter.hasNext()) {
-    		if(iter.next().getX() < 50) {
+    		if(iter.next().getX() < (-1*PREDWIDTH)) {
     			iter.remove();
     		}
     	}
