@@ -61,11 +61,11 @@ public class Model{
 	static int bushMax = 4; 
 	static int bushTrans = 50;
 	static int flightTime = 0;
+	static int predCount = 5;
 	
 	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
     
     private Direction dir = Direction.NORTH;
-	
 
     public Model(int fw, int fh){
         this.FRAMEWIDTH = fw;
@@ -130,7 +130,6 @@ public class Model{
     	spawnObject(predStr, 700, 300);
     	spawnObject(predStr, 700, 200);
     	spawnObject(predStr, 700, 550);
-    	
     }
     
     /**
@@ -233,8 +232,6 @@ public class Model{
     	}
     }
     
-
-    
     /**
 	 * Moves the animals position based on the input direction
 	 *
@@ -270,7 +267,7 @@ public class Model{
     		if((flightTime % PREDATOR_SPACE) == 0) {
     			int[] yCoords = getRandY();
     			int i = 0;
-    			while(i < 5) {
+    			while(i < predCount) {
     				spawnObject(predStr, SPAWN_X, yCoords[i]);
     				i++;
     			}
@@ -287,7 +284,7 @@ public class Model{
     public static int[] getRandY() {
     	int i = 0;
     	int[] randPts = new int[P_RANDMAX];
-    	while(i < 5) {
+    	while(i < predCount) {
     		int random = (int)(Math.random() * P_RANDMAX + P_RANDMIN);
     		randPts[i] = yPoints[random];
     		i++;
@@ -295,6 +292,13 @@ public class Model{
     	return randPts;
     }
     
+    /**
+	 * Method to increment a clock. Effectivley timer method for different
+	 * game functions.
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
     public static void updateClock() {
     	clk1Count++;
     	clk2Count++;
@@ -333,6 +337,7 @@ public class Model{
 			movePredators();
 		}
 	}
+	
     /**
 	 * Cleans out all objects that are no longer necessary.
 	 * Effectively backup/manual garbage collection.
@@ -435,6 +440,15 @@ public class Model{
 		ctrl.start();
 	}
 	
+    /**
+	 * Modified getter for View class to iterate predators. 
+	 * This method of returning prevents comodification exceptions.
+	 *
+	 * @author Amjed Hallak
+	 * @return Arraylist of animals containing all the current predators
+	 * at the time of calling
+	 * 
+	 * */
 	public static ArrayList<Animal> getPredators() { 
 		ArrayList<Animal> cpPredators = new ArrayList<Animal>();
 		for(Animal p: predators)

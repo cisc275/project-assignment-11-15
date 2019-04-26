@@ -151,9 +151,8 @@ public class View extends JPanel{
 	 * */
 	@Override
 	public void paintComponent(Graphics g) {
-		if(gameMode == MENU) {
-			/* Main menu Game View Logic
-			 */
+		switch(gameMode) {
+		case(MENU): // Main menu Game View Logic
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
@@ -164,11 +163,10 @@ public class View extends JPanel{
 			g.drawString("Press left for Clapper Rail game", 100, 400);
 			g.drawString("Press right for Red Knot game", 500, 400);
 			g.drawString("Press k at any time to return to menu", 300, 500);
-		} else if (gameMode == CLAPPERRAIL) {
-			/* Clapper Rail Game View Logic
-			 * 
-			 * 
-			 */
+			
+			break;
+			
+		case(CLAPPERRAIL): // Clapper Rail Game View Logic
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			//super.paintComponent(g);
@@ -190,11 +188,10 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
-		} else if (gameMode == REDKNOT) {
-			/* Red Knot Game View Logic
-			 * 
-			 * 
-			 */
+			
+			break;
+			
+		case(REDKNOT): // Red Knot Game View Logic
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			g.drawString("REDKNOT GAME", 100, 100);
@@ -211,7 +208,8 @@ public class View extends JPanel{
 			}
 			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
 			
-
+			break;
+			
 		}
 	}
 	
