@@ -204,7 +204,8 @@ public class View extends JPanel{
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 			for(Animal p: predators) {
-				g.setColor(getColor(p.toString()));
+				//g.setColor(getColor(p.toString()));
+				g.setColor(Color.PINK);
 				//g.fillRect(p.getX(), p.getY(), 50, 50);
 				g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
 			}

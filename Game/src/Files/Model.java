@@ -69,9 +69,6 @@ public class Model{
         this.FRAMEHEIGHT = fh;
     }
     
-
-    
-    
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
@@ -435,7 +432,12 @@ public class Model{
 		ctrl.start();
 	}
 	
-	public static ArrayList<Animal> getPredators() { return predators; }
+	public static ArrayList<Animal> getPredators() { 
+		ArrayList<Animal> cpPredators = new ArrayList<Animal>();
+		for(Animal p: predators)
+			cpPredators.add(p);
+		return cpPredators;
+	}
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }
     public static int getBushCount() { return bushCount; }
