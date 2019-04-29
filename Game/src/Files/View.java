@@ -20,9 +20,9 @@ public class View extends JPanel{
 	private static Direction dir;
     private int frameNum = 0;
     private JFrame frame;
-	BufferedImage[][] pics;
+	//BufferedImage[] pics;
 	
-	static int gameMode;
+	static int gameMode = -1;
 	static final int MENU = 0;
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
@@ -36,6 +36,7 @@ public class View extends JPanel{
 	
 	ArrayList<GamePiece> allObj;
 	ArrayList<Animal> predators;
+	ArrayList<BufferedImage> pics;
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
@@ -52,16 +53,6 @@ public class View extends JPanel{
 	 * */
 	View() {
 		buildFrame();
-	}
-	
-    /**
-	 * TBD - should load images into game
-	 *
-	 * @author TBD
-	 * 
-	 * */
-	BufferedImage[] createImage() {
-		return null;
 	}
 	
     /**
@@ -90,7 +81,17 @@ public class View extends JPanel{
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
         frame.setVisible(true);
+        loadImages();
+
         gameMode = MENU;
+	}
+	
+	public void loadImages() {
+		pics = new ArrayList<BufferedImage>();
+		String[] arrOfStr = {"mmenubkg", "test-face"};
+		for(String s: arrOfStr) {
+			pics.add(createImage(s));
+		}
 	}
 	
 	/**
@@ -101,10 +102,11 @@ public class View extends JPanel{
 	 * @returns BufferedImage from source file
 	 * 
 	 * */
-	private BufferedImage createImage(String filename){
+	public BufferedImage createImage(String filename){
 		BufferedImage bufferedImage;
+		String path = "src/images/";
     	try {
-    		bufferedImage = ImageIO.read(new File(filename));
+    		bufferedImage = ImageIO.read(new File(path.concat(filename).concat(".png")));
     		return bufferedImage;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -156,6 +158,7 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
+			g.drawImage(pics.get(0), 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
 			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -173,7 +176,7 @@ public class View extends JPanel{
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+				//g.drawImage(pics.get(0), gp.getX(), gp.getY(), null, this);
 			}
 
 			for(Animal p: predators) {
@@ -182,7 +185,7 @@ public class View extends JPanel{
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get(1), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
@@ -207,10 +210,11 @@ public class View extends JPanel{
 				g.fillRect(p.getX(), p.getY(), 50, 50);
 				//g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
 			}
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get(1), Model.getX(), Model.getY(), null, this);
 			
 			break;
-			
+		default:
+			break;	
 		}
 	}
 	
