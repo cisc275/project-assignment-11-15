@@ -363,7 +363,6 @@ public class Model{
     public static void removeAllObjects() {
     	Iterator preds = predators.iterator();
     	Iterator ao = allObjects.iterator();
-    	System.out.println("start");
     	while(preds.hasNext()) {
     		preds.next();
 	    	preds.remove();
@@ -385,6 +384,8 @@ public class Model{
 			if(movePredators) {
 				for(Animal p: predators) {
 					int random = (int)(Math.random() * M_RANDMAX + M_RANDMIN);
+						//Generate random # between 1 and 4 to determine
+						//random direction of movement 
 						switch(random) {
 						case(1):
 							if(p.getX() < (View.FRAMEWIDTH - Animal.INCR)) {

@@ -192,6 +192,7 @@ public class View extends JPanel{
 			break;
 			
 		case(REDKNOT): // Red Knot Game View Logic
+			this.setBackground(Color.CYAN);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			g.drawString("REDKNOT GAME", 100, 100);
