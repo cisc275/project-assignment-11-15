@@ -39,8 +39,10 @@ public class Model{
    
 	static int gameMode;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL = 1;
-	static final int REDKNOT = 2;
+	static final int CLAPPERRAIL1 = 1;
+	static final int CLAPPERRAIL2 = 2;
+	static final int CLAPPERRAIL3 = 3;
+	static final int REDKNOT = 4;
 	
 	
 	static int clk1Count = 0;
@@ -88,13 +90,29 @@ public class Model{
     		redKnot = null;
     		View.gameMode = MENU;
     		break;
-    	case(CLAPPERRAIL):
+    	case(CLAPPERRAIL1):
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
     		setUpClapperRailGame();
-    		View.gameMode = CLAPPERRAIL;
+    		View.gameMode = CLAPPERRAIL1;
+    		break;
+    	case(CLAPPERRAIL2):
+    		twigCount = 0;
+    		bushCount = 0;
+    		deathToll = 0;
+    		playerHealth = 100;
+    		setUpClapperRailGame();
+    		View.gameMode = CLAPPERRAIL2;
+    		break;
+    	case(CLAPPERRAIL3):
+    		twigCount = 0;
+    		bushCount = 0;
+    		deathToll = 0;
+    		playerHealth = 100;
+    		setUpClapperRailGame();
+    		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
     		View.gameMode = REDKNOT;
@@ -111,7 +129,7 @@ public class Model{
 	 * */
     public static void setUpClapperRailGame() {
     	clapperRail = new ClapperRail();
-		gameMode = CLAPPERRAIL;
+		gameMode = CLAPPERRAIL1;
     	spawnObject(predStr, 100,100);
     	spawnObject(twigString, 300,500);
     	spawnObject(twigString, 200,400);
@@ -376,11 +394,11 @@ public class Model{
     /**
 	 * Method to create random movement of the predators in the games
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
 	void movePredators() {
-		if (gameMode == CLAPPERRAIL) {
+		if (gameMode == CLAPPERRAIL1 ) {
 			if(movePredators) {
 				for(Animal p: predators) {
 					int random = (int)(Math.random() * M_RANDMAX + M_RANDMIN);

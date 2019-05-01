@@ -24,8 +24,10 @@ public class View extends JPanel{
 	
 	static int gameMode;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL = 1;
-	static final int REDKNOT = 2;
+	static final int CLAPPERRAIL1 = 1;
+	static final int CLAPPERRAIL2 = 2;
+	static final int CLAPPERRAIL3 = 3;
+	static final int REDKNOT = 4;
 	
 	//static int bushMax = 4;
 	
@@ -166,7 +168,57 @@ public class View extends JPanel{
 			
 			break;
 			
-		case(CLAPPERRAIL): // Clapper Rail Game View Logic
+		case(CLAPPERRAIL1): // Clapper Rail Game View Logic
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
+			//super.paintComponent(g);
+			for(GamePiece gp: allObj) {
+				g.setColor(getColor(gp.toString()));
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+
+			for(Animal p: predators) {
+				g.setColor(getColor(p.toString()));
+				g.fillRect(p.getX(), p.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+
+			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.setColor(Color.BLUE);
+			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
+			g.drawString("Twig count: " + Model.twigCount, 500,25);
+			g.drawString("death toll lol: " + Model.deathToll, 500,50);
+			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			
+			break;
+			
+		case(CLAPPERRAIL2): // Clapper Rail Game View Logic
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
+			//super.paintComponent(g);
+			for(GamePiece gp: allObj) {
+				g.setColor(getColor(gp.toString()));
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+
+			for(Animal p: predators) {
+				g.setColor(getColor(p.toString()));
+				g.fillRect(p.getX(), p.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+
+			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.setColor(Color.BLUE);
+			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
+			g.drawString("Twig count: " + Model.twigCount, 500,25);
+			g.drawString("death toll lol: " + Model.deathToll, 500,50);
+			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			
+			break;
+		
+		case(CLAPPERRAIL3): // Clapper Rail Game View Logic
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			//super.paintComponent(g);

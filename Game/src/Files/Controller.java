@@ -15,8 +15,10 @@ public class Controller{
 	static int DOWN = 40;	//SOUTH
 	
 	static final int MENU = 0;
-	static final int CLAPPERRAIL = 1;
-	static final int REDKNOT = 2;
+	static final int CLAPPERRAIL1 = 1;
+	static final int CLAPPERRAIL2 = 2;
+	static final int CLAPPERRAIL3 = 3;
+	static final int REDKNOT = 4;
 	
 	/**
 	 * Initializes all the classes
@@ -87,7 +89,7 @@ class KeyPress implements KeyListener {
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
 	@Override
@@ -96,7 +98,13 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
-	    	case(Controller.CLAPPERRAIL):
+	    	case(Controller.CLAPPERRAIL1):
+	    		Model.move(Direction.NORTH);
+	    		break;
+	    	case(Controller.CLAPPERRAIL2):
+	    		Model.move(Direction.NORTH);
+	    		break;
+	    	case(Controller.CLAPPERRAIL3):
 	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
@@ -108,9 +116,15 @@ class KeyPress implements KeyListener {
 		if (e.getKeyCode() == Controller.LEFT) {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
-	    		Model.changeGameMode(Controller.CLAPPERRAIL);
+	    		Model.changeGameMode(Controller.CLAPPERRAIL1);
 	    		break;
-	    	case(Controller.CLAPPERRAIL):
+	    	case(Controller.CLAPPERRAIL1):
+				Model.move(Direction.WEST);
+	    		break;
+	    	case(Controller.CLAPPERRAIL2):
+				Model.move(Direction.WEST);
+	    		break;
+	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.WEST);
 	    		break;
 	    	case(Controller.REDKNOT):
@@ -122,7 +136,13 @@ class KeyPress implements KeyListener {
 	    	case(Controller.MENU):
 	    		Model.changeGameMode(Controller.REDKNOT);
 	    		break;
-	    	case(Controller.CLAPPERRAIL):
+	    	case(Controller.CLAPPERRAIL1):
+				Model.move(Direction.EAST);
+	    		break;
+	    	case(Controller.CLAPPERRAIL2):
+				Model.move(Direction.EAST);
+	    		break;
+	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.EAST);
 	    		break;
 	    	case(Controller.REDKNOT):
@@ -133,7 +153,13 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
-	    	case(Controller.CLAPPERRAIL):
+	    	case(Controller.CLAPPERRAIL1):
+				Model.move(Direction.SOUTH);
+	    		break;
+	    	case(Controller.CLAPPERRAIL2):
+				Model.move(Direction.SOUTH);
+	    		break;
+	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.REDKNOT):
