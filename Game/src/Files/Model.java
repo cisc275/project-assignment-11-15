@@ -15,7 +15,7 @@ public class Model{
 	static Boolean withPreds = true;
 	static Boolean withoutPreds = false;
 	static Boolean movePredators;
-	static Boolean slideObjects;
+	static Boolean slideObjects = false;
 
     private static int xloc;
     private static int yloc;
@@ -30,6 +30,7 @@ public class Model{
     static ArrayList<Animal> predators = new ArrayList<Animal>();
     //static ArrayList<GamePiece> gamePieces = new ArrayList<GamePiece>();
     static ArrayList<GamePiece> allObjects = new ArrayList<GamePiece>();
+    static ArrayList<Cloud> clouds = new ArrayList<Cloud>();
     
     public static int collisionCount = 0;
 	static int M_RANDMAX = 4;
@@ -84,6 +85,7 @@ public class Model{
     	case(MENU):
     		gameMode = MENU;
     		removeAllObjects();
+    		startMenu();
     		clapperRail = null;
     		redKnot = null;
     		View.gameMode = MENU;
@@ -101,6 +103,17 @@ public class Model{
     		setUpRedKnotGame();
     		break;
     	}
+    }
+    
+    /**
+   	 * Sets up moving visual objects for the main menu
+   	 *
+   	 * @author Amjed Hallak
+   	 * 
+   	 * */
+    public static void startMenu() {
+    	clouds.add(new Cloud(500, 40, 1));
+    	clouds.add(new Cloud(400, 75, 2));
     }
     
     /**
@@ -335,6 +348,13 @@ public class Model{
 			updateClock();
 			slideObjectsLeft();
 			movePredators();
+		} else {
+			if(slideObjects) {
+				for(Cloud c: clouds) {
+		    		c.move();
+		    	}
+			}
+			updateClock();
 		}
 	}
 	
@@ -455,6 +475,21 @@ public class Model{
 		for(Animal p: predators)
 			cpPredators.add(p);
 		return cpPredators;
+	}
+    /**
+	 * Modified getter for View class to iterate clouds. 
+	 * This method of returning prevents comodification exceptions.
+	 *
+	 * @author Amjed Hallak
+	 * @return Arraylist of clouds containing all the current clouds
+	 * at the time of calling
+	 * 
+	 * */
+	public static ArrayList<Cloud> getClouds() { 
+		ArrayList<Cloud> cpclouds = new ArrayList<Cloud>();
+		for(Cloud c: clouds)
+			cpclouds.add(c);
+		return cpclouds;
 	}
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }

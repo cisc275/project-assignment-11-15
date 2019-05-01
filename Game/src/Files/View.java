@@ -38,6 +38,7 @@ public class View extends JPanel{
 	
 	ArrayList<GamePiece> allObj;
 	ArrayList<Animal> predators;
+	ArrayList<Cloud> clouds;
 	Map<String, BufferedImage> pics;
 	
 	Boolean withPlayer = true;
@@ -169,7 +170,9 @@ public class View extends JPanel{
 			g.drawString("Press left for Clapper Rail game", 100, 400);
 			g.drawString("Press right for Red Knot game", 500, 400);
 			g.drawString("Press k at any time to return to menu", 300, 500);
-			
+			clouds = Model.getClouds();
+			g.drawImage(pics.get("cloud1"), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
+			g.drawImage(pics.get("cloud2"), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			break;
 			
 		case(CLAPPERRAIL): // Clapper Rail Game View Logic

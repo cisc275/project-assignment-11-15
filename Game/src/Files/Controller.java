@@ -44,6 +44,7 @@ public class Controller{
 	 * 
 	 * */
 	public void start(){
+		Model.changeGameMode(MENU);
 		while(running) {
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
