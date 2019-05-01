@@ -7,6 +7,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*; 
@@ -36,7 +38,7 @@ public class View extends JPanel{
 	
 	ArrayList<GamePiece> allObj;
 	ArrayList<Animal> predators;
-	ArrayList<BufferedImage> pics;
+	Map<String, BufferedImage> pics;
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
@@ -87,10 +89,11 @@ public class View extends JPanel{
 	}
 	
 	public void loadImages() {
-		pics = new ArrayList<BufferedImage>();
-		String[] arrOfStr = {"mmenubkg", "test-face"};
+		pics = new HashMap<>();
+		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2"};
 		for(String s: arrOfStr) {
-			pics.add(createImage(s));
+			pics.put(s, createImage(s));
+			//pics.add(createImage(s));
 		}
 	}
 	
@@ -158,7 +161,7 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
-			g.drawImage(pics.get(0), 0, 0, null, this);
+			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
 			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -182,7 +185,7 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
 				g.fillRect(p.getX(), p.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+				//g.drawImage(pics.get(2), p.getX(), p.getY(), null, this);
 			}
 
 			g.drawImage(pics.get(1), Model.getX(), Model.getY(), null, this);
