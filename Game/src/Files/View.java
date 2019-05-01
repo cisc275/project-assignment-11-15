@@ -188,7 +188,7 @@ public class View extends JPanel{
 				//g.drawImage(pics.get(2), p.getX(), p.getY(), null, this);
 			}
 
-			g.drawImage(pics.get(1), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
@@ -213,7 +213,7 @@ public class View extends JPanel{
 				g.fillRect(p.getX(), p.getY(), 50, 50);
 				//g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
 			}
-			g.drawImage(pics.get(1), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			
 			break;
 		default:
