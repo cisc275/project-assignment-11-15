@@ -67,6 +67,7 @@ public class Model{
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 5;
+	static int DEAD = 4; //clapper rail game, 5 collisions = dead
 	
 	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
     
@@ -332,6 +333,7 @@ public class Model{
 	    		if(o instanceof Animal) {
 	    			playerHealth--;
 	    			deathToll++;
+	    			
 	    		}
 	    		if(o instanceof Bush) {
 	    			if(twigCount>0 && bushCount<bushMax) {
@@ -354,6 +356,9 @@ public class Model{
 	    		if(a instanceof Animal) {
 	    			playerHealth--;
 	    			deathToll++;
+	    			if (deathToll >= DEAD) { //LOSER screen clapper rail
+	    				changeGameMode(LOSER);
+	    			}
 	    		}
 	    	}
     	}
