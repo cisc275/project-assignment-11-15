@@ -78,7 +78,7 @@ public class Model{
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
-	 * @param Game mode to change to. Either 0, 1, or 2
+	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
 	 * 
 	 * */
     public static void changeGameMode(int gameMode) {
@@ -95,7 +95,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGame();
+    		setUpClapperRailGameLevel1();
     		View.gameMode = CLAPPERRAIL1;
     		break;
     	case(CLAPPERRAIL2):
@@ -103,7 +103,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGame();
+    		setUpClapperRailGameLevel2();
     		View.gameMode = CLAPPERRAIL2;
     		break;
     	case(CLAPPERRAIL3):
@@ -111,7 +111,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGame();
+    		setUpClapperRailGameLevel3();
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
@@ -122,33 +122,108 @@ public class Model{
     }
     
     /**
-	 * Sets up general objects for the Clapper Rail game. Currently spawns objects
+	 * Switching game levels in Clapper Rail game
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+    public static void gameLevelClapperRail() {
+    	if(bushCount < bushMax && gameMode == CLAPPERRAIL1) {
+    		gameMode = CLAPPERRAIL1;
+    	}
+    	else if (bushCount == bushMax && gameMode == CLAPPERRAIL1) {
+    		changeGameMode(CLAPPERRAIL2);
+    	}
+    	else if(bushCount == bushMax && gameMode == CLAPPERRAIL2) {
+    		changeGameMode(CLAPPERRAIL3);
+    	}
+    }
+    
+    
+    /**
+	 * Sets up general objects for the Clapper Rail game LEVEL 1. Currently spawns objects
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
-    public static void setUpClapperRailGame() {
-    	clapperRail = new ClapperRail();
-		gameMode = CLAPPERRAIL1;
-    	spawnObject(predStr, 100,100);
-    	spawnObject(twigString, 300,500);
-    	spawnObject(twigString, 200,400);
-    	spawnObject(twigString, 100,300);
-    	spawnObject(twigString, 400,200);
-    	spawnObject(twigString, 600,100);
-    	spawnObject(predStr, 500, 300);
-    	spawnObject(bushString, 500,500);
-    	spawnObject(predStr, 600, 500);
-    	spawnObject(predStr, 150, 250);
-    	spawnObject(predStr, 250, 100);
-    	spawnObject(predStr, 400, 200);
-    	spawnObject(predStr, 200, 400);
-    	spawnObject(predStr, 300, 300);
-    	spawnObject(predStr, 350, 350);
-    	spawnObject(predStr, 700, 300);
-    	spawnObject(predStr, 700, 200);
-    	spawnObject(predStr, 700, 550);
+    public static void setUpClapperRailGameLevel1() {
+    	
+    	//if(gameMode == CLAPPERRAIL1) {
+    		System.out.println("Clapper Rail Level 1");
+    		clapperRail = new ClapperRail();
+    		gameMode = CLAPPERRAIL1;
+        	spawnObject(predStr, 100,100);
+        	spawnObject(twigString, 300,500);
+        	spawnObject(twigString, 200,400);
+        	spawnObject(twigString, 100,300);
+        	spawnObject(twigString, 400,200);
+        	spawnObject(twigString, 600,100);
+        	spawnObject(predStr, 500, 300);
+        	spawnObject(bushString, 500,500);
+    	
     }
+    
+    /**
+	 * Sets up general objects for the Clapper Rail game LEVEL 2. Currently spawns objects
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+    public static void setUpClapperRailGameLevel2() {
+    	
+    	
+    		//chkCollision(clapperRail);
+    		System.out.println("Clapper Rail Level 2");
+    		clapperRail = new ClapperRail();
+    		gameMode = CLAPPERRAIL2;
+        	spawnObject(predStr, 100,100);
+        	spawnObject(twigString, 300,500);
+        	spawnObject(twigString, 200,400);
+        	spawnObject(twigString, 100,300);
+        	spawnObject(twigString, 400,200);
+        	spawnObject(twigString, 600,100);
+        	spawnObject(predStr, 500, 300);
+        	spawnObject(bushString, 500,500);
+        	spawnObject(predStr, 600, 500);
+        	spawnObject(predStr, 150, 250);
+        	
+    	
+    }
+     
+    /**
+	 * Sets up general objects for the Clapper Rail game LEVEL 3. Currently spawns objects
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+    public static void setUpClapperRailGameLevel3() {
+    	
+    	
+    		//chkCollision(clapperRail);
+    		System.out.println("Clapper Rail Level 2");
+    		clapperRail = new ClapperRail();
+    		gameMode = CLAPPERRAIL2;
+        	spawnObject(predStr, 100,100);
+        	spawnObject(twigString, 300,500);
+        	spawnObject(twigString, 200,400);
+        	spawnObject(twigString, 100,300);
+        	spawnObject(twigString, 400,200);
+        	spawnObject(twigString, 600,100);
+        	spawnObject(predStr, 500, 300);
+        	spawnObject(bushString, 500,500);
+        	spawnObject(predStr, 600, 500);
+        	spawnObject(predStr, 150, 250);
+        	spawnObject(predStr, 250, 100);
+        	spawnObject(predStr, 400, 200);
+        	spawnObject(predStr, 200, 400);
+        	spawnObject(predStr, 300, 300);
+        	spawnObject(predStr, 350, 350);
+        	spawnObject(predStr, 700, 300);
+        	spawnObject(predStr, 700, 200);
+        	spawnObject(predStr, 700, 550);
+    	
+    }
+    
     
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
@@ -216,7 +291,10 @@ public class Model{
 	 * */
     public static void chkCollision(Animal b) {
     	for(GamePiece o: allObjects) {
+    		
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
+	    		gameLevelClapperRail();
+	    		
 	    		if(o instanceof Twig) {
 	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
 	    				o.x = GRAVEYARD;
@@ -231,15 +309,18 @@ public class Model{
 	    		if(o instanceof Bush) {
 	    			if(twigCount>0 && bushCount<bushMax) {
 	    				bushCount += twigCount;
+	    				//System.out.println(bushCount);
 	    				bushTrans += 50*twigCount; //increment bush transparency 
 	    				System.out.println(bushTrans);
 	    				twigCount = 0;
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
+	    				//gameLevelClapperRail();
+	    				
 	    			}
 	    		}
 	    	}
-    	}
+    	}//end for
     	for(Animal a: predators) {
 	    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
 	    		if(a instanceof Animal) {
@@ -398,7 +479,7 @@ public class Model{
 	 * 
 	 * */
 	void movePredators() {
-		if (gameMode == CLAPPERRAIL1 ) {
+		if (gameMode == CLAPPERRAIL1 || gameMode == CLAPPERRAIL2 || gameMode == CLAPPERRAIL3) {
 			if(movePredators) {
 				for(Animal p: predators) {
 					int random = (int)(Math.random() * M_RANDMAX + M_RANDMIN);

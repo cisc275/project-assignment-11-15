@@ -155,6 +155,7 @@ public class View extends JPanel{
 	public void paintComponent(Graphics g) {
 		switch(gameMode) {
 		case(MENU): // Main menu Game View Logic
+			this.setBackground(Color.GRAY);
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
