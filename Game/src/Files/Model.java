@@ -1,10 +1,7 @@
 package Files;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Model{
 	private final int FRAMEWIDTH;
@@ -31,6 +28,9 @@ public class Model{
 	int RANDMIN = 1;
    
 	static int gameMode;
+	
+	static boolean tutorial;
+	
 	static final int MENU = 0;
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
@@ -103,6 +103,7 @@ public class Model{
     	spawnObject(predStr, 700, 300);
     	spawnObject(predStr, 700, 200);
     	spawnObject(predStr, 700, 550);
+    	tutorial = true;
     	
     }
     
@@ -129,6 +130,7 @@ public class Model{
     	spawnObject(predStr, 700, 300);
     	spawnObject(predStr, 700, 200);
     	spawnObject(predStr, 700, 550);
+    	tutorial = false;
     	
     }
     
@@ -277,7 +279,7 @@ public class Model{
 					int random = (int)(Math.random() * RANDMAX + RANDMIN);
 						switch(random) {
 						case(1):
-							if(p.getX() < (View.FRAMEWIDTH - p.INCR)) {
+							if(p.getX() < (View.FRAMEWIDTH - Animal.INCR)) {
 								p.move(Direction.EAST);
 							} else {
 								p.move(Direction.WEST);
@@ -291,7 +293,7 @@ public class Model{
 							}
 							break;
 						case(3):
-							if(p.getY() < (View.FRAMEHEIGHT - p.INCR)) {
+							if(p.getY() < (View.FRAMEHEIGHT - Animal.INCR)) {
 								p.move(Direction.SOUTH);
 							} else {
 								p.move(Direction.NORTH);
@@ -326,6 +328,8 @@ public class Model{
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
+	
+	public static boolean getTutorial() {return tutorial;}
 	
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }

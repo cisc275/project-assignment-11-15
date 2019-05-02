@@ -27,6 +27,7 @@ public class RedKnot extends Bird{
 		
 	}
 	
+	@Override
 	public String toString() {
 		return "Red Knot";
 	}

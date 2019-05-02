@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.*;
 
 
 public class Controller{
@@ -66,6 +65,7 @@ public class Controller{
 }
 
 class ButtonListener implements ActionListener {
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		Controller.running = !Controller.running;
 	}
@@ -73,8 +73,10 @@ class ButtonListener implements ActionListener {
 
 class KeyPress implements KeyListener {
 	
+	@Override
 	public void keyTyped(KeyEvent e) {
 	}
+	@Override
 	public void keyPressed(KeyEvent e) {
 	}
 	/**
@@ -83,6 +85,7 @@ class KeyPress implements KeyListener {
 	 * @author Amjed Hallak
 	 * 
 	 * */
+	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == Controller.UP) {
 			switch(View.gameMode) {
