@@ -38,6 +38,7 @@ public class Model{
 	static int P_RANDMIN = 0;
    
 	static int gameMode;
+	//static int alpha;
 	static final int MENU = 0;
 	static final int CLAPPERRAIL1 = 1;
 	static final int CLAPPERRAIL2 = 2;
@@ -75,6 +76,16 @@ public class Model{
     }
     
     /**
+	 * Used to reset bushTrans when the game levels change
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+	public static void resetBushTrans() {
+		bushTrans = 50;
+	}
+    
+    /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
@@ -91,6 +102,7 @@ public class Model{
     		View.gameMode = MENU;
     		break;
     	case(CLAPPERRAIL1):
+    		resetBushTrans();
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
@@ -99,14 +111,20 @@ public class Model{
     		View.gameMode = CLAPPERRAIL1;
     		break;
     	case(CLAPPERRAIL2):
+    		resetBushTrans();
+    		removeAllObjects();
+    		bushTrans = 50; //reset bushTrans
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
     		setUpClapperRailGameLevel2();
     		View.gameMode = CLAPPERRAIL2;
+    		//View.resetAlpha();
     		break;
     	case(CLAPPERRAIL3):
+    		resetBushTrans();
+    		removeAllObjects();
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
@@ -170,8 +188,7 @@ public class Model{
 	 * 
 	 * */
     public static void setUpClapperRailGameLevel2() {
-    	
-    	
+
     		//chkCollision(clapperRail);
     		System.out.println("Clapper Rail Level 2");
     		clapperRail = new ClapperRail();
@@ -187,7 +204,6 @@ public class Model{
         	spawnObject(predStr, 600, 500);
         	spawnObject(predStr, 150, 250);
         	
-    	
     }
      
     /**
@@ -200,7 +216,7 @@ public class Model{
     	
     	
     		//chkCollision(clapperRail);
-    		System.out.println("Clapper Rail Level 2");
+    		System.out.println("Clapper Rail Level 3");
     		clapperRail = new ClapperRail();
     		gameMode = CLAPPERRAIL2;
         	spawnObject(predStr, 100,100);
@@ -215,12 +231,7 @@ public class Model{
         	spawnObject(predStr, 150, 250);
         	spawnObject(predStr, 250, 100);
         	spawnObject(predStr, 400, 200);
-        	spawnObject(predStr, 200, 400);
-        	spawnObject(predStr, 300, 300);
-        	spawnObject(predStr, 350, 350);
-        	spawnObject(predStr, 700, 300);
-        	spawnObject(predStr, 700, 200);
-        	spawnObject(predStr, 700, 550);
+        	
     	
     }
     
@@ -315,6 +326,7 @@ public class Model{
 	    				twigCount = 0;
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
+	    				
 	    				//gameLevelClapperRail();
 	    				
 	    			}

@@ -23,6 +23,7 @@ public class View extends JPanel{
 	BufferedImage[][] pics;
 	
 	static int gameMode;
+	
 	static final int MENU = 0;
 	static final int CLAPPERRAIL1 = 1;
 	static final int CLAPPERRAIL2 = 2;
@@ -35,6 +36,7 @@ public class View extends JPanel{
 	int RANDMIN = 0;
 	
 	int bigText = 40;
+	
 	
 	ArrayList<GamePiece> allObj;
 	ArrayList<Animal> predators;
@@ -132,9 +134,9 @@ public class View extends JPanel{
 		case("GamePiece"):
 			return Color.yellow;
 		case("Bush"):
-			int alpha = 10;
+			
 			if(Model.getBushCount() < Model.getBushMax()) {
-				Color myColour = new Color(102, 51, 0, Model.getBushTrans());
+				Color myColour = new Color(102, 51, 0, Model.getBushTrans()); //bushTrans
 				return myColour;
 			}else {
 				Color color = new Color(0,102,0);
@@ -195,6 +197,7 @@ public class View extends JPanel{
 			break;
 			
 		case(CLAPPERRAIL2): // Clapper Rail Game View Logic
+			
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			//super.paintComponent(g);
