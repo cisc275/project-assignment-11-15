@@ -143,9 +143,8 @@ class KeyPress implements KeyListener {
 	    	}
 		}
 		
-		if (e.getKeyChar() == 'k') {
+		if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
 			Model.changeGameMode(Controller.MENU);
-			//System.out.println("k pressed");
 		}
 	}
 }

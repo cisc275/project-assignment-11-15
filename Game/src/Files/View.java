@@ -91,7 +91,8 @@ public class View extends JPanel{
 	
 	public void loadImages() {
 		pics = new HashMap<>();
-		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2"};
+		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
+				"arrowMap"};
 		for(String s: arrOfStr) {
 			pics.put(s, createImage(s));
 			//pics.add(createImage(s));
@@ -167,9 +168,10 @@ public class View extends JPanel{
 			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
-			g.drawString("Press left for Clapper Rail game", 100, 400);
-			g.drawString("Press right for Red Knot game", 500, 400);
-			g.drawString("Press k at any time to return to menu", 300, 500);
+			//g.drawString("Press left for Clapper Rail game", 100, 400);
+			//g.drawString("Press right for Red Knot game", 500, 400);
+			g.drawImage(pics.get("arrowMap"), 100, 400, null, this);
+			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
 			g.drawImage(pics.get("cloud1"), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
 			g.drawImage(pics.get("cloud2"), clouds.get(1).getX(), clouds.get(1).getY(), null, this);

@@ -15,7 +15,7 @@ public class Cloud {
 	void move() {
 		x -= .1*speed;
 		if(x < -200) {
-			x = 1000;
+			x = 800;
 		}
 	}
 	
