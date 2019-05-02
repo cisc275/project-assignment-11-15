@@ -29,6 +29,8 @@ public class View extends JPanel{
 	static final int CLAPPERRAIL2 = 2;
 	static final int CLAPPERRAIL3 = 3;
 	static final int REDKNOT = 4;
+	static final int WINNER = 5;
+	static final int LOSER = 6;
 	
 	//static int bushMax = 4;
 	
@@ -193,6 +195,7 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			g.drawString("LEVEL 1", 10, 20);
 			
 			break;
 			
@@ -219,7 +222,7 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			
+			g.drawString("LEVEL 2", 10, 20);
 			break;
 		
 		case(CLAPPERRAIL3): // Clapper Rail Game View Logic
@@ -244,6 +247,7 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			g.drawString("LEVEL 3", 10, 20);
 			
 			break;
 			
@@ -267,6 +271,15 @@ public class View extends JPanel{
 			
 			break;
 			
+		case(WINNER): //WINNER screen 
+			this.setBackground(Color.GREEN);
+			g.drawString("WINNER", 200, 200);
+			break;
+			
+		case(LOSER): //LOSER screen 
+			this.setBackground(Color.RED);
+			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
+			break;
 		}
 	}
 	

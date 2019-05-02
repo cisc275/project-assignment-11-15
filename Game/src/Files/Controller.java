@@ -19,6 +19,8 @@ public class Controller{
 	static final int CLAPPERRAIL2 = 2;
 	static final int CLAPPERRAIL3 = 3;
 	static final int REDKNOT = 4;
+	static final int WINNER = 5;
+	static final int LOSER = 6;
 	
 	/**
 	 * Initializes all the classes

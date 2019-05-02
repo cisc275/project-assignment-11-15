@@ -44,6 +44,8 @@ public class Model{
 	static final int CLAPPERRAIL2 = 2;
 	static final int CLAPPERRAIL3 = 3;
 	static final int REDKNOT = 4;
+	static final int WINNER = 5;
+	static final int LOSER = 6;
 	
 	
 	static int clk1Count = 0;
@@ -136,6 +138,16 @@ public class Model{
     		View.gameMode = REDKNOT;
     		setUpRedKnotGame();
     		break;
+    		
+    	case(WINNER):
+    		View.gameMode = WINNER;
+    		
+    		break;
+    		
+    	case(LOSER):
+    		View.gameMode = LOSER;
+    		
+    		break;
     	}
     }
     
@@ -155,6 +167,9 @@ public class Model{
     	else if(bushCount == bushMax && gameMode == CLAPPERRAIL2) {
     		changeGameMode(CLAPPERRAIL3);
     	}
+    	if(bushCount == bushMax && gameMode == CLAPPERRAIL3) {
+    		changeGameMode(WINNER);
+    	}
     }
     
     
@@ -170,14 +185,15 @@ public class Model{
     		System.out.println("Clapper Rail Level 1");
     		clapperRail = new ClapperRail();
     		gameMode = CLAPPERRAIL1;
-        	spawnObject(predStr, 100,100);
-        	spawnObject(twigString, 300,500);
-        	spawnObject(twigString, 200,400);
-        	spawnObject(twigString, 100,300);
-        	spawnObject(twigString, 400,200);
-        	spawnObject(twigString, 600,100);
+        	
+        	spawnObject(twigString, 300,100);
+        	spawnObject(twigString, 200,100);
+        	spawnObject(twigString, 100,100);
+        	spawnObject(twigString, 400,100);
+        	spawnObject(twigString, 500,100);
+        	spawnObject(bushString, 500,200);
         	spawnObject(predStr, 500, 300);
-        	spawnObject(bushString, 500,500);
+        	spawnObject(predStr, 100,100);
     	
     }
     
@@ -193,14 +209,14 @@ public class Model{
     		System.out.println("Clapper Rail Level 2");
     		clapperRail = new ClapperRail();
     		gameMode = CLAPPERRAIL2;
-        	spawnObject(predStr, 100,100);
-        	spawnObject(twigString, 300,500);
-        	spawnObject(twigString, 200,400);
-        	spawnObject(twigString, 100,300);
-        	spawnObject(twigString, 400,200);
-        	spawnObject(twigString, 600,100);
+    		spawnObject(twigString, 300,100);
+        	spawnObject(twigString, 200,100);
+        	spawnObject(twigString, 100,100);
+        	spawnObject(twigString, 400,100);
+        	spawnObject(twigString, 500,100);
+        	spawnObject(bushString, 500,200);
         	spawnObject(predStr, 500, 300);
-        	spawnObject(bushString, 500,500);
+        	spawnObject(predStr, 100,100);
         	spawnObject(predStr, 600, 500);
         	spawnObject(predStr, 150, 250);
         	
@@ -218,15 +234,15 @@ public class Model{
     		//chkCollision(clapperRail);
     		System.out.println("Clapper Rail Level 3");
     		clapperRail = new ClapperRail();
-    		gameMode = CLAPPERRAIL2;
-        	spawnObject(predStr, 100,100);
-        	spawnObject(twigString, 300,500);
-        	spawnObject(twigString, 200,400);
-        	spawnObject(twigString, 100,300);
-        	spawnObject(twigString, 400,200);
-        	spawnObject(twigString, 600,100);
+    		gameMode = CLAPPERRAIL3;
+    		spawnObject(twigString, 300,100);
+        	spawnObject(twigString, 200,100);
+        	spawnObject(twigString, 100,100);
+        	spawnObject(twigString, 400,100);
+        	spawnObject(twigString, 500,100);
+        	spawnObject(bushString, 500,200);
         	spawnObject(predStr, 500, 300);
-        	spawnObject(bushString, 500,500);
+        	spawnObject(predStr, 100,100);
         	spawnObject(predStr, 600, 500);
         	spawnObject(predStr, 150, 250);
         	spawnObject(predStr, 250, 100);
@@ -304,7 +320,7 @@ public class Model{
     	for(GamePiece o: allObjects) {
     		
 	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		gameLevelClapperRail();
+	    		gameLevelClapperRail(); //gets called on collision to change levels
 	    		
 	    		if(o instanceof Twig) {
 	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
@@ -322,7 +338,7 @@ public class Model{
 	    				bushCount += twigCount;
 	    				//System.out.println(bushCount);
 	    				bushTrans += 50*twigCount; //increment bush transparency 
-	    				System.out.println(bushTrans);
+	    				//System.out.println(bushTrans);
 	    				twigCount = 0;
 	    			}else if(twigCount>0 && bushCount == bushMax ) {
 	    				System.out.println("Reached max bush size!");
