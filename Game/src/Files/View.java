@@ -195,7 +195,7 @@ public class View extends JPanel{
 
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
-			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
+			g.setFont(new Font("Helvetica", Font.PmLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
