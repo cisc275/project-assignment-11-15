@@ -190,7 +190,7 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game LEVEL 1. Currently spawns objects
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak
 	 * 
 	 * */
     public static void setUpClapperRailGameLevel1() {
@@ -304,7 +304,7 @@ public class Model{
     /**
 	 * Spawns a new object at a specified x and y position
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak
 	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
 	 * 
@@ -331,49 +331,51 @@ public class Model{
 	 * 
 	 * */
     public static void chkCollision(Animal b) {
-    	for(GamePiece o: allObjects) {
-    		
-	    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-	    		gameLevelClapperRail(); //gets called on collision to change levels
+    	try {
+	    	for(GamePiece o: allObjects) {
 	    		
-	    		if(o instanceof Twig) {
-	    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
-	    				o.x = GRAVEYARD;
-	    				twigCount++;
-	    				System.out.println("Twig Collected"); 
-	    			}
-	    		}//end "Twig"
-	    		if(o instanceof Animal) {
-	    			playerHealth--;
-	    			deathToll++;
-	    			
-	    		}
-	    		if(o instanceof Bush) {
-	    			if(twigCount>0 && bushCount<bushMax) {
-	    				bushCount += twigCount;
-	    				//System.out.println(bushCount);
-	    				bushTrans += 50*twigCount; //increment bush transparency 
-	    				//System.out.println(bushTrans);
-	    				twigCount = 0;
-	    			}else if(twigCount>0 && bushCount == bushMax ) {
-	    				System.out.println("Reached max bush size!");
-	    				
-	    				//gameLevelClapperRail();
-	    				
-	    			}
-	    		}
+		    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
+		    		gameLevelClapperRail(); //gets called on collision to change levels
+		    		
+		    		if(o instanceof Twig) {
+		    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
+		    				o.x = GRAVEYARD;
+		    				twigCount++;
+		    			}
+		    		}//end "Twig"
+		    		if(o instanceof Animal) {
+		    			playerHealth--;
+		    			deathToll++;
+		    			
+		    		}
+		    		if(o instanceof Bush) {
+		    			if(twigCount>0 && bushCount<bushMax) {
+		    				bushCount += twigCount;
+		    				//System.out.println(bushCount);
+		    				bushTrans += 50*twigCount; //increment bush transparency 
+		    				//System.out.println(bushTrans);
+		    				twigCount = 0;
+		    			}else if(twigCount>0 && bushCount == bushMax ) {
+		    				
+		    				//gameLevelClapperRail();
+		    				
+		    			}
+		    		}
+		    	}
+	    	}//end for
+	    	for(Animal a: predators) {
+		    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
+		    		if(a instanceof Animal) {
+		    			playerHealth--;
+		    			deathToll++;
+		    			if (deathToll >= DEAD) { //LOSER screen clapper rail
+		    				changeGameMode(LOSER);
+		    			}
+		    		}
+		    	}
 	    	}
-    	}//end for
-    	for(Animal a: predators) {
-	    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
-	    		if(a instanceof Animal) {
-	    			playerHealth--;
-	    			deathToll++;
-	    			if (deathToll >= DEAD) { //LOSER screen clapper rail
-	    				changeGameMode(LOSER);
-	    			}
-	    		}
-	    	}
+    	} catch(ConcurrentModificationException e) {
+    		
     	}
     }
     
@@ -529,11 +531,11 @@ public class Model{
     /**
 	 * Method to create random movement of the predators in the games
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak
 	 * 
 	 * */
 	void movePredators() {
-		if (gameMode == CLAPPERRAIL1 || gameMode == CLAPPERRAIL2 || gameMode == CLAPPERRAIL3) {
+		if (clapperRail != null) {
 			if(movePredators) {
 				for(Animal p: predators) {
 					int random = (int)(Math.random() * M_RANDMAX + M_RANDMIN);

@@ -127,7 +127,7 @@ public class View extends JPanel{
     /**
 	 * Returns a color based on the type of object. For alpha/beta use.
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak
 	 * @param String from toString of class
 	 * 
 	 * */
@@ -227,7 +227,7 @@ public class View extends JPanel{
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
@@ -252,7 +252,7 @@ public class View extends JPanel{
 				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
