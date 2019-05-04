@@ -184,7 +184,9 @@ public class View extends JPanel{
 			g.drawString("Estuary Birds", 325, 65);
 			break;
 			
-		case(CLAPPERRAIL1): // Clapper Rail Game View Logic
+		case(CLAPPERRAIL1): //Cycle through all levels
+		case(CLAPPERRAIL2):
+		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			//super.paintComponent(g);
@@ -206,60 +208,17 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			g.drawString("LEVEL 1", 10, 20);
-			
-			break;
-			
-		case(CLAPPERRAIL2): // Clapper Rail Game View Logic
-			
-			allObj = Model.getAllObjects(withoutPlayer, withPreds);
-			predators = Model.getPredators();
-			//super.paintComponent(g);
-			for(GamePiece gp: allObj) {
-				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			switch(gameMode) {
+			case(CLAPPERRAIL1): //Cycle through all levels
+				g.drawString("LEVEL 1", 10, 20);
+				break;
+			case(CLAPPERRAIL2):
+				g.drawString("LEVEL 2", 10, 20);
+				break;
+			case(CLAPPERRAIL3):
+				g.drawString("LEVEL 3", 10, 20);
+				break;
 			}
-
-			for(Animal p: predators) {
-				g.setColor(getColor(p.toString()));
-				g.fillRect(p.getX(), p.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
-			}
-
-			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
-			g.setColor(Color.BLUE);
-			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
-			g.drawString("Twig count: " + Model.twigCount, 500,25);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			g.drawString("LEVEL 2", 10, 20);
-			break;
-		
-		case(CLAPPERRAIL3): // Clapper Rail Game View Logic
-			allObj = Model.getAllObjects(withoutPlayer, withPreds);
-			predators = Model.getPredators();
-			//super.paintComponent(g);
-			for(GamePiece gp: allObj) {
-				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
-			}
-
-			for(Animal p: predators) {
-				g.setColor(getColor(p.toString()));
-				g.fillRect(p.getX(), p.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
-			}
-
-			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
-			g.setColor(Color.BLUE);
-			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
-			g.drawString("Twig count: " + Model.twigCount, 500,25);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			g.drawString("LEVEL 3", 10, 20);
-			
 			break;
 			
 		case(REDKNOT): // Red Knot Game View Logic
