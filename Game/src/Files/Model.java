@@ -112,7 +112,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGameLevel1();
+    		setUpClapperRailGameLevel(1);
     		View.gameMode = CLAPPERRAIL1;
     		break;
     	case(CLAPPERRAIL2):
@@ -123,7 +123,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGameLevel2();
+    		setUpClapperRailGameLevel(2);
     		View.gameMode = CLAPPERRAIL2;
     		//View.resetAlpha();
     		break;
@@ -134,7 +134,7 @@ public class Model{
     		bushCount = 0;
     		deathToll = 0;
     		playerHealth = 100;
-    		setUpClapperRailGameLevel3();
+    		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
@@ -188,83 +188,64 @@ public class Model{
     }
     
     /**
-	 * Sets up general objects for the Clapper Rail game LEVEL 1. Currently spawns objects
-	 *
+	 * Sets up general objects for the Clapper Rail game 
+	 * 
 	 * @author Amjed Hallak
+	 * @param Level number
 	 * 
 	 * */
-    public static void setUpClapperRailGameLevel1() {
-    	
-    	//if(gameMode == CLAPPERRAIL1) {
+    public static void setUpClapperRailGameLevel(int level) {
+    	switch(level) {
+    	case(1):
     		System.out.println("Clapper Rail Level 1");
-    		clapperRail = new ClapperRail();
-    		gameMode = CLAPPERRAIL1;
-        	
-        	spawnObject(twigString, 300,100);
-        	spawnObject(twigString, 200,100);
-        	spawnObject(twigString, 100,100);
-        	spawnObject(twigString, 400,100);
-        	spawnObject(twigString, 500,100);
-        	spawnObject(bushString, 500,200);
-        	spawnObject(predStr, 500, 300);
-        	spawnObject(predStr, 100,100);
-    	
-    }
-    
-    /**
-	 * Sets up general objects for the Clapper Rail game LEVEL 2. Currently spawns objects
-	 *
-	 * @author Paul Jureidini
-	 * 
-	 * */
-    public static void setUpClapperRailGameLevel2() {
-
-    		//chkCollision(clapperRail);
+			clapperRail = new ClapperRail();
+			gameMode = CLAPPERRAIL1;
+	    	
+	    	spawnObject(twigString, 300,100);
+	    	spawnObject(twigString, 200,100);
+	    	spawnObject(twigString, 100,100);
+	    	spawnObject(twigString, 400,100);
+	    	spawnObject(twigString, 500,100);
+	    	spawnObject(bushString, 500,200);
+	    	spawnObject(predStr, 500, 300);
+	    	spawnObject(predStr, 100,100);
+    		break;
+    	case(2):
     		System.out.println("Clapper Rail Level 2");
-    		clapperRail = new ClapperRail();
-    		gameMode = CLAPPERRAIL2;
-    		spawnObject(twigString, 300,100);
-        	spawnObject(twigString, 200,100);
-        	spawnObject(twigString, 100,100);
-        	spawnObject(twigString, 400,100);
-        	spawnObject(twigString, 500,100);
-        	spawnObject(bushString, 500,200);
-        	spawnObject(predStr, 500, 300);
-        	spawnObject(predStr, 100,100);
-        	spawnObject(predStr, 600, 500);
-        	spawnObject(predStr, 150, 250);
-        	
-    }
-     
-    /**
-	 * Sets up general objects for the Clapper Rail game LEVEL 3. Currently spawns objects
-	 *
-	 * @author Paul Jureidini
-	 * 
-	 * */
-    public static void setUpClapperRailGameLevel3() {
-    	
-    	
-    		//chkCollision(clapperRail);
+			clapperRail = new ClapperRail();
+			gameMode = CLAPPERRAIL2;
+			spawnObject(twigString, 300,100);
+	    	spawnObject(twigString, 200,100);
+	    	spawnObject(twigString, 100,100);
+	    	spawnObject(twigString, 400,100);
+	    	spawnObject(twigString, 500,100);
+	    	spawnObject(bushString, 500,200);
+	    	spawnObject(predStr, 500, 300);
+	    	spawnObject(predStr, 100,100);
+	    	spawnObject(predStr, 600, 500);
+	    	spawnObject(predStr, 150, 250);
+    		break;
+    	case(3):
     		System.out.println("Clapper Rail Level 3");
-    		clapperRail = new ClapperRail();
-    		gameMode = CLAPPERRAIL3;
-    		spawnObject(twigString, 300,100);
-        	spawnObject(twigString, 200,100);
-        	spawnObject(twigString, 100,100);
-        	spawnObject(twigString, 400,100);
-        	spawnObject(twigString, 500,100);
-        	spawnObject(bushString, 500,200);
-        	spawnObject(predStr, 500, 300);
-        	spawnObject(predStr, 100,100);
-        	spawnObject(predStr, 600, 500);
-        	spawnObject(predStr, 150, 250);
-        	spawnObject(predStr, 250, 100);
-        	spawnObject(predStr, 400, 200);
-        	
+			clapperRail = new ClapperRail();
+			gameMode = CLAPPERRAIL3;
+			spawnObject(twigString, 300,100);
+	    	spawnObject(twigString, 200,100);
+	    	spawnObject(twigString, 100,100);
+	    	spawnObject(twigString, 400,100);
+	    	spawnObject(twigString, 500,100);
+	    	spawnObject(bushString, 500,200);
+	    	spawnObject(predStr, 500, 300);
+	    	spawnObject(predStr, 100,100);
+	    	spawnObject(predStr, 600, 500);
+	    	spawnObject(predStr, 150, 250);
+	    	spawnObject(predStr, 250, 100);
+	    	spawnObject(predStr, 400, 200);
+    		break;
+    	}
+		
     	
     }
-    
     
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
