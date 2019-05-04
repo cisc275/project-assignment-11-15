@@ -144,12 +144,9 @@ public class Model{
     		
     	case(WINNER):
     		View.gameMode = WINNER;
-    		
     		break;
-    		
     	case(LOSER):
     		View.gameMode = LOSER;
-    		
     		break;
     	}
     }
