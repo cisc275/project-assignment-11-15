@@ -274,6 +274,7 @@ public class Model{
     		for(Animal p: predators) {
     			p.x -= 1;
     		}
+    		chkCollision(redKnot);
     	}
     	//System.out.println(flightTime);
     	if((flightTime < LEVEL_END) && slideObjects) {

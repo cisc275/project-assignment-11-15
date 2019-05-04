@@ -164,8 +164,7 @@ public class View extends JPanel{
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
 			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
-			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("Estuary Birds", 325, 65);
+			
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			//g.drawString("Press left for Clapper Rail game", 100, 400);
@@ -175,6 +174,8 @@ public class View extends JPanel{
 			clouds = Model.getClouds();
 			g.drawImage(pics.get("cloud1"), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
 			g.drawImage(pics.get("cloud2"), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
+			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
+			g.drawString("Estuary Birds", 325, 65);
 			break;
 			
 		case(CLAPPERRAIL): // Clapper Rail Game View Logic
@@ -195,7 +196,7 @@ public class View extends JPanel{
 
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
-			g.setFont(new Font("Helvetica", Font.PmLAIN, 20)); 
+			//g.setFont(new Font("Helvetica", Font.PmLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
@@ -219,6 +220,7 @@ public class View extends JPanel{
 				//g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
 			}
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
+			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			
 			break;
 		default:
