@@ -58,6 +58,7 @@ public class Model{
 	static final int LEVEL_END = 100001;
 	static final int PREDATOR_SIZE = 50;
 	static final int PREDATOR_SPACE = PREDATOR_SIZE*4;
+	static final int DEFAULT_BUSH_ALPHA = 50;
 	
 	static int twigCount = 0;
 	static int bushCount = 0;
@@ -79,16 +80,7 @@ public class Model{
         this.FRAMEHEIGHT = fh;
     }
     
-    /**
-	 * Used to reset bushTrans when the game levels change
-	 *
-	 * @author Paul Jureidini
-	 * 
-	 * */
-	public static void resetBushTrans() {
-		bushTrans = 50;
-	}
-    
+
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
@@ -154,7 +146,7 @@ public class Model{
     /**
 	 * Switching game levels in Clapper Rail game
 	 *
-	 * @author Paul Jureidini
+	 * @author Paul Jureidini, Amjed Hallak
 	 * 
 	 * */
     public static void gameLevelClapperRail() {
@@ -272,10 +264,6 @@ public class Model{
     public static ArrayList<GamePiece> getAllObjects(Boolean inclPlayer, Boolean inclPreds){
     	if(inclPlayer)
     		allObjects.add(clapperRail);
-    	/*if(inclPreds) {
-    		for(Animal p: predators)
-    			allObjects.add(p);
-    	}*/
     	return allObjects;
     }
     
@@ -313,7 +301,6 @@ public class Model{
 	    	for(GamePiece o: allObjects) {
 	    		
 		    	if (b.getX() == o.getX() && b.getY() == o.getY()) {
-		    		gameLevelClapperRail(); //gets called on collision to change levels
 		    		
 		    		if(o instanceof Twig) {
 		    			if(twigCount < twigMax) { //makes sure that there are not more than 2 twigs collected
@@ -340,7 +327,8 @@ public class Model{
 		    			}
 		    		}
 		    	}
-	    	}//end for
+	    	}
+	    	gameLevelClapperRail(); //gets called on collision to change levels
 	    	for(Animal a: predators) {
 		    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
 		    		if(a instanceof Animal) {
@@ -568,12 +556,20 @@ public class Model{
 	 * */
 	
 	public static void main(String[] args) {
-		
-		System.out.println("Starting point");
+		//System.out.println("Starting point");
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
-	
+    /**
+	 * Used to reset bushTrans when the game levels change
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
+	public static void resetBushTrans() {
+		bushTrans = DEFAULT_BUSH_ALPHA;
+	}
+    
     /**
 	 * Modified getter for View class to iterate predators. 
 	 * This method of returning prevents comodification exceptions.
