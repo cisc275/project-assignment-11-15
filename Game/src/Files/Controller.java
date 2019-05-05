@@ -132,6 +132,9 @@ class KeyPress implements KeyListener {
 	    		break;
 	    	case(Controller.REDKNOT):
 	    		break;
+	    	case(Controller.WINNER):
+	    	case(Controller.LOSER):
+	    		Model.changeGameMode(Controller.MENU);
 	    	}
 		}
 		if (e.getKeyCode() == Controller.RIGHT) {

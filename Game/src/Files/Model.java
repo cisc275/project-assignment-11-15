@@ -16,6 +16,7 @@ public class Model{
 	static Boolean withoutPreds = false;
 	static Boolean movePredators;
 	static Boolean slideObjects = false;
+	static Boolean slidePredators = false;
 
     private static int xloc;
     private static int yloc;
@@ -37,6 +38,7 @@ public class Model{
 	static int M_RANDMIN = 1;
 	static int P_RANDMAX = 12;
 	static int P_RANDMIN = 0;
+	static int xTotal = 0;
    
 	static int gameMode;
 	//static int alpha;
@@ -51,6 +53,7 @@ public class Model{
 	
 	static int clk1Count = 0;
 	static int clk2Count = 0;
+	static double clk3Count = 0;
 	static final double CLKMAX = 1000;
 	static final double CLK2MAX = CLKMAX/256;
 	static final int GRAVEYARD = 1000;
@@ -59,11 +62,14 @@ public class Model{
 	static final int PREDATOR_SIZE = 50;
 	static final int PREDATOR_SPACE = PREDATOR_SIZE*4;
 	static final int DEFAULT_BUSH_ALPHA = 50;
+	static final int MAX_HEALTH = 100;
+	static final int DEFAULT_RK_X = 100;
 	
+	static double variableClock = CLK2MAX;
 	static int twigCount = 0;
 	static int bushCount = 0;
 	static int deathToll; //temp
-	static int playerHealth = 100;
+	static int playerHealth;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
 	static int bushTrans = 50;
@@ -103,18 +109,18 @@ public class Model{
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
-    		playerHealth = 100;
+    		playerHealth = MAX_HEALTH;
     		setUpClapperRailGameLevel(1);
     		View.gameMode = CLAPPERRAIL1;
     		break;
     	case(CLAPPERRAIL2):
     		resetBushTrans();
     		removeAllObjects();
-    		bushTrans = 50; //reset bushTrans
+    		bushTrans = DEFAULT_BUSH_ALPHA; //reset bushTrans
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
-    		playerHealth = 100;
+    		playerHealth = MAX_HEALTH;
     		setUpClapperRailGameLevel(2);
     		View.gameMode = CLAPPERRAIL2;
     		//View.resetAlpha();
@@ -125,12 +131,16 @@ public class Model{
     		twigCount = 0;
     		bushCount = 0;
     		deathToll = 0;
-    		playerHealth = 100;
+    		playerHealth = MAX_HEALTH;
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
+    		removeAllObjects();
     		View.gameMode = REDKNOT;
+    		playerHealth = MAX_HEALTH;
+    		deathToll = 0;
+    		variableClock = CLK2MAX;
     		setUpRedKnotGame();
     		break;
     		
@@ -172,8 +182,8 @@ public class Model{
    	 * 
    	 * */
     public static void startMenu() {
-    	clouds.add(new Cloud(500, 40, 1));
-    	clouds.add(new Cloud(400, 75, 2));
+    	clouds.add(new Cloud(500, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud type 1
+    	clouds.add(new Cloud(400, 75, 2, 2)); //Spawn cloud at 400(x) 75(y), cloud type 2
     }
     
     /**
@@ -189,14 +199,13 @@ public class Model{
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL1;
-	    	
-	    	spawnObject(twigString, 300,100);
+	    	spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
 	    	spawnObject(twigString, 200,100);
 	    	spawnObject(twigString, 100,100);
 	    	spawnObject(twigString, 400,100);
 	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);
-	    	spawnObject(predStr, 500, 300);
+	    	spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
+	    	spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
 	    	spawnObject(predStr, 100,100);
     		break;
     	case(2):
@@ -232,8 +241,6 @@ public class Model{
 	    	spawnObject(predStr, 400, 200);
     		break;
     	}
-		
-    	
     }
     
     /**
@@ -244,14 +251,12 @@ public class Model{
 	 * */
     public static void setUpRedKnotGame() {
     	redKnot = new RedKnot();
-    	redKnot.move(Direction.EAST);
-    	redKnot.move(Direction.EAST);
+    	redKnot.setX(DEFAULT_RK_X);
+    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+    	clouds.add(new Cloud(1200, 400, 1.4, 1));
 		gameMode = REDKNOT;
-    	spawnObject(predStr, SPAWN_X, 200);
-    	spawnObject(predStr, SPAWN_X, 250);
-    	spawnObject(predStr, SPAWN_X, 300);
-    	spawnObject(predStr, SPAWN_X, 500);
-    	spawnObject(predStr, SPAWN_X, 50);
     }
 
     /**
@@ -317,12 +322,10 @@ public class Model{
 		    			if(twigCount>0 && bushCount<bushMax) {
 		    				bushCount += twigCount;
 		    				//System.out.println(bushCount);
-		    				bushTrans += 50*twigCount; //increment bush transparency 
+		    				bushTrans += DEFAULT_BUSH_ALPHA*twigCount; //increment bush transparency 
 		    				//System.out.println(bushTrans);
 		    				twigCount = 0;
 		    			}else if(twigCount>0 && bushCount == bushMax ) {
-		    				
-		    				//gameLevelClapperRail();
 		    				
 		    			}
 		    		}
@@ -370,10 +373,16 @@ public class Model{
 	 * 
 	 * */
     public static void slideObjectsLeft() {
-    	if(slideObjects) {
+    	if(slidePredators) {
     		for(Animal p: predators) {
     			p.x -= 1;
     		}
+    		for(Cloud c: clouds) {
+    			c.move(16);
+    		}
+
+			xTotal++;
+			//System.out.println(xTotal);
     		chkCollision(redKnot);
     	}
     	//System.out.println(flightTime);
@@ -400,7 +409,7 @@ public class Model{
     	int[] randPts = new int[P_RANDMAX];
     	while(i < predCount) {
     		int random = (int)(Math.random() * P_RANDMAX + P_RANDMIN);
-    		randPts[i] = yPoints[random];
+			randPts[i] = yPoints[random];
     		i++;
     	}
     	return randPts;
@@ -416,6 +425,7 @@ public class Model{
     public static void updateClock() {
     	clk1Count++;
     	clk2Count++;
+    	clk3Count++;
     	if(clk1Count > CLKMAX) {
     		movePredators = true;
     		clk1Count = 0;
@@ -428,6 +438,14 @@ public class Model{
     		flightTime++;
     	} else {
     		slideObjects = false;
+    	}
+    	if(clk3Count > variableClock) {
+    		slidePredators = true;
+    		clk3Count = 0;
+    		//variableClock -= 0.01;
+    		//System.out.println(variableClock);
+    	} else {
+    		slidePredators = false;
     	}
     }
     
@@ -452,7 +470,7 @@ public class Model{
 		} else {
 			if(slideObjects) {
 				for(Cloud c: clouds) {
-		    		c.move();
+		    		c.move(1);
 		    	}
 			}
 			updateClock();
@@ -484,6 +502,7 @@ public class Model{
     public static void removeAllObjects() {
     	Iterator preds = predators.iterator();
     	Iterator ao = allObjects.iterator();
+    	Iterator co = clouds.iterator();
     	while(preds.hasNext()) {
     		preds.next();
 	    	preds.remove();
@@ -491,6 +510,10 @@ public class Model{
     	while(ao.hasNext()) {
     		ao.next();
     		ao.remove();
+    	}
+    	while(co.hasNext()) {
+    		co.next();
+    		co.remove();
     	}
     }
     

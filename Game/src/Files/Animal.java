@@ -37,6 +37,10 @@ public class Animal extends GamePiece{
 		}
 	}
 
+	public void setX(int x) {
+		this.x = x;
+	}
+	
 	@Override
 	public String toString() {
 		return "Animal";

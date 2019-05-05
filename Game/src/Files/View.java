@@ -15,15 +15,18 @@ import javax.swing.*;
 
 public class View extends JPanel{
 	
-	static int FRAMEWIDTH = 800;
-	static int FRAMEHEIGHT = 600;
-	int count;
-	static int FRAMECOUNT;
+	static final int FRAMEWIDTH = 800;
+	static final int FRAMEHEIGHT = 600;
+	static final int IMGHEIGHT = 50;
+	static final int IMGWIDTH = 50;
+	static final int FRAMECOUNT = 2;
 	private static Direction dir;
     private int frameNum = 0;
+    private int frameCount = 2;
     private JFrame frame;
-	//BufferedImage[] pics;
-	
+
+	int count;
+	int clk = 0;
 	static int gameMode = -1;
 	static final int MENU = 0;
 	static final int CLAPPERRAIL1 = 1;
@@ -32,6 +35,7 @@ public class View extends JPanel{
 	static final int REDKNOT = 4;
 	static final int WINNER = 5;
 	static final int LOSER = 6;
+	static final int CLK_MAX = 150;
 	
 	//static int bushMax = 4;
 	
@@ -70,7 +74,11 @@ public class View extends JPanel{
 	 * 
 	 * */
 	public void update() {
-        //frameNum = (frameNum + 1) % frameCount;
+		clk++;
+		if(clk > CLK_MAX) {
+			frameNum = (frameNum + 1) % frameCount;
+			clk = 0;
+		}
         repaint();
 	}
 	
@@ -97,10 +105,20 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap"};
+				"arrowMap", "redKnot", "falcon"};
 		for(String s: arrOfStr) {
-			pics.put(s, createImage(s));
-			//pics.add(createImage(s));
+			BufferedImage newImg = createImage(s);
+			if(newImg.getWidth() == IMGWIDTH) {
+				pics.put(s, newImg);
+			} else if(newImg.getWidth() == 2*IMGWIDTH) {
+				//System.out.println(s);
+				String str1 = s.concat("1");
+				String str2 = s.concat("2");
+				pics.put(str1, newImg.getSubimage(0*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
+				pics.put(str2, newImg.getSubimage(1*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
+			} else { 
+				pics.put(s, newImg);
+			}
 		}
 	}
 	
@@ -117,6 +135,9 @@ public class View extends JPanel{
 		String path = "src/images/";
     	try {
     		bufferedImage = ImageIO.read(new File(path.concat(filename).concat(".png")));
+    		if(bufferedImage.getWidth() > IMGWIDTH) {
+    			
+    		}
     		return bufferedImage;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -178,8 +199,8 @@ public class View extends JPanel{
 			g.drawImage(pics.get("arrowMap"), 100, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
-			g.drawImage(pics.get("cloud1"), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
-			g.drawImage(pics.get("cloud2"), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
+			g.drawImage(pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
+			g.drawImage(pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
 			g.drawString("Estuary Birds", 325, 65);
 			break;
@@ -189,22 +210,18 @@ public class View extends JPanel{
 		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
-			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				//g.drawImage(pics.get(0), gp.getX(), gp.getY(), null, this);
 			}
 
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
 				g.fillRect(p.getX(), p.getY(), 50, 50);
-				//g.drawImage(pics.get(2), p.getX(), p.getY(), null, this);
 			}
 
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
-			//g.setFont(new Font("Helvetica", Font.PmLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
@@ -226,29 +243,44 @@ public class View extends JPanel{
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
 			g.drawString("REDKNOT GAME", 100, 100);
+			g.drawString("death toll lol: " + Model.deathToll, 500,50);
+			clouds = Model.getClouds();
+			for (Cloud c: clouds) {
+				g.drawImage(pics.get(c.getType()), c.getX(), c.getY(), null, this);
+			}
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
 			}
 			for(Animal p: predators) {
-				//g.setColor(getColor(p.toString()));
-				g.setColor(Color.PINK);
-				g.fillRect(p.getX(), p.getY(), 50, 50);
-				//g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
+				switch(frameNum) {
+				case(0):
+					g.drawImage(pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+					break;
+				case(1):
+					g.drawImage(pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+					break;
+				}
 			}
-			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			
+			switch(frameNum) {
+			case(0):
+				g.drawImage(pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
+				break;
+			case(1):
+				g.drawImage(pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
+				break;
+			}	
 			break;
 		case(WINNER): //WINNER screen 
 			this.setBackground(Color.GREEN);
 			g.drawString("WINNER", 200, 200);
+			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
 			break;
 			
 		case(LOSER): //LOSER screen 
 			this.setBackground(Color.RED);
 			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
+			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
 			break;
 		}
 	}

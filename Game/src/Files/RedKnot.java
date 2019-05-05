@@ -5,26 +5,14 @@ public class RedKnot extends Bird{
 	boolean isFlying;
 	boolean isWalking;
 	
-	/**
-	 * Removes the food item upon contact
+	/**	 
+	 * Force position of RedKnot - for setting up the RedKnot game
 	 *
-	 * @author
-	 * @param Food foodItem - the item made contact with
+	 * @author Amjed Hallak
 	 * 
 	 * */
-	void picksFood(Food foodItem) {
-		
-	}
-	
-	/**
-	 * Activated upon making contact with a predator
-	 *
-	 * @author
-	 * @param Predator pred
-	 * 
-	 * */
-	void hitsPredator(Predator pred) {
-		
+	void setPosition() {
+		this.setX(INCR*2);
 	}
 	
 	@Override
