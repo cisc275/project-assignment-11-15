@@ -44,6 +44,7 @@ public class Controller{
 	 * 
 	 * */
 	public void start(){
+		Model.changeGameMode(MENU);
 		while(running) {
 			if(running) {
 				//increment the x and y coordinates, alter direction if necessary
@@ -51,6 +52,11 @@ public class Controller{
 				
 				//update the view
 				view.update();
+				try {
+		            Thread.sleep(1);
+		        } catch (InterruptedException e) {
+		            e.printStackTrace();
+		        }
 			} else {
 				while(!running) {
 					try {
@@ -118,8 +124,14 @@ class KeyPress implements KeyListener {
 	    		Model.changeGameMode(Controller.REDKNOT);
 	    		break;
 	    	case(Controller.CLAPPERRAIL):
-				Model.move(Direction.EAST);
-	    		break;
+	    		if(Model.getTutorial()) {
+	    			
+	    		}
+	    		else {
+	    			Model.move(Direction.EAST);
+		    		break;
+	    		}
+				
 	    	case(Controller.REDKNOT):
 	    		break;
 	    	}

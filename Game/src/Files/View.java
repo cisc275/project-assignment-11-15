@@ -7,6 +7,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*; 
@@ -20,20 +22,31 @@ public class View extends JPanel{
 	private static Direction dir;
     private int frameNum = 0;
     private JFrame frame;
-	BufferedImage[][] pics;
+	//BufferedImage[] pics;
 	
-	static int gameMode;
+	static int gameMode = -1;
 	static final int MENU = 0;
 	static final int CLAPPERRAIL = 1;
 	static final int REDKNOT = 2;
+	
+	static boolean tutorial;
+	
+	//static int bushMax = 4;
 	
 	int RANDMAX = 6;
 	int RANDMIN = 0;
 	
 	int bigText = 40;
 	
+	ArrayList<GamePiece> allObj;
+	ArrayList<Animal> predators;
+	ArrayList<Cloud> clouds;
+	Map<String, BufferedImage> pics;
+	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
+	Boolean withPreds = true;
+	Boolean withoutPreds = false;
 	
 	BufferedImage img;
 	
@@ -45,16 +58,6 @@ public class View extends JPanel{
 	 * */
 	View() {
 		buildFrame();
-	}
-	
-    /**
-	 * TBD - should load images into game
-	 *
-	 * @author TBD
-	 * 
-	 * */
-	BufferedImage[] createImage() {
-		return null;
 	}
 	
     /**
@@ -83,7 +86,18 @@ public class View extends JPanel{
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
         frame.setVisible(true);
+        loadImages();
+
         gameMode = MENU;
+	}
+	
+	public void loadImages() {
+		pics = new HashMap<>();
+		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2"};
+		for(String s: arrOfStr) {
+			pics.put(s, createImage(s));
+			//pics.add(createImage(s));
+		}
 	}
 	
 	/**
@@ -94,10 +108,11 @@ public class View extends JPanel{
 	 * @returns BufferedImage from source file
 	 * 
 	 * */
-	private BufferedImage createImage(String filename){
+	public BufferedImage createImage(String filename){
 		BufferedImage bufferedImage;
+		String path = "src/images/";
     	try {
-    		bufferedImage = ImageIO.read(new File(filename));
+    		bufferedImage = ImageIO.read(new File(path.concat(filename).concat(".png")));
     		return bufferedImage;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -108,7 +123,7 @@ public class View extends JPanel{
     /**
 	 * Returns a color based on the type of object. For alpha/beta use.
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param String from toString of class
 	 * 
 	 * */
@@ -122,8 +137,15 @@ public class View extends JPanel{
 			return Color.GREEN;
 		case("GamePiece"):
 			return Color.yellow;
-		case("alt2"):
-			return Color.pink;
+		case("Bush"):
+			int alpha = 10;
+			if(Model.getBushCount() < Model.getBushMax()) {
+				Color myColour = new Color(102, 51, 0, Model.getBushTrans());
+				return myColour;
+			}else {
+				Color color = new Color(0,102,0);
+				return color;
+			}
 		}
 		return Color.white;
 	}
@@ -139,56 +161,105 @@ public class View extends JPanel{
 	
 	public void RedKnotTutorial() {
 		System.out.println("Red Knot Tutorial");
+		
 	}
 	
     /**
 	 * Paints the frame based on the current game mode and model logic
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param The view "graphic"
 	 * 
 	 * */
 	@Override
 	public void paintComponent(Graphics g) {
-		if(gameMode == MENU) {
-			/* Main menu Game View Logic
-			 */
+		switch(gameMode) {
+		case(MENU): // Main menu Game View Logic
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
+			BufferedImage b = pics.get("mmenubkg");
+			g.drawImage(b, 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("game w birds??", 325, 65);
+			g.drawString("Estuary Birds", 325, 65);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			g.drawString("Press left for Clapper Rail game", 100, 400);
 			g.drawString("Press right for Red Knot game", 500, 400);
 			g.drawString("Press k at any time to return to menu", 300, 500);
-		} else if (gameMode == CLAPPERRAIL) {
-			/* Clapper Rail Game View Logic
-			 */
-			ArrayList<GamePiece> allObj = Model.getAllObjects(withoutPlayer);
+			clouds = Model.getClouds();
+			g.drawImage((BufferedImage)pics.get("cloud1"), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
+			g.drawImage((BufferedImage)pics.get("cloud2"), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
+			break;
+			
+		case(CLAPPERRAIL): // Clapper Rail Game View Logic
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
 			//super.paintComponent(g);
 			for(GamePiece gp: allObj) {
+
 				//g.setColor(getColor(gp.toString()));
 				//g.fillRect(gp.getX(), gp.getY(), 50, 50);
-				g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get("myth"), gp.getX(), gp.getY(), null, this);
+
+				g.setColor(getColor(gp.toString()));
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(pics.get(0), gp.getX(), gp.getY(), null, this);
+
 			}
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), null, this);
+
+			for(Animal p: predators) {
+				g.setColor(getColor(p.toString()));
+				g.fillRect(p.getX(), p.getY(), 50, 50);
+				//g.drawImage(pics.get(2), p.getX(), p.getY(), null, this);
+			}
+
+			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
+
 			if (Model.getTutorial() == true){
 				g.drawString("Use up, down, left, and right arrows to move your clapper rail to avoid predators.", 100, 100);
 			}
-		} else if (gameMode == REDKNOT) {
+		 else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
 			 */
-			g.drawString("REDKNOT GAME", 100, 100);
-			g.drawImage(createImage("src/images/test-face.png"), Model.getX(), Model.getY(), Color.RED, this);
 
+			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			
+			break;
+		}
+			
+		case(REDKNOT): // Red Knot Game View Logic
+			this.setBackground(Color.CYAN);
+			allObj = Model.getAllObjects(withoutPlayer, withPreds);
+			predators = Model.getPredators();
+
+			g.drawString("REDKNOT GAME", 100, 100);
+			for(GamePiece gp: allObj) {
+				g.setColor(getColor(gp.toString()));
+				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), gp.getX(), gp.getY(), null, this);
+			}
+			for(Animal p: predators) {
+				//g.setColor(getColor(p.toString()));
+				g.setColor(Color.PINK);
+				g.fillRect(p.getX(), p.getY(), 50, 50);
+				//g.drawImage(createImage("src/images/myth.png"), p.getX(), p.getY(), null, this);
+			}
+			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
+			
+			break;
+	
+		default:
+			break;	
 		}
 	}
+	
+	public boolean getTutorial() { return View.tutorial;}
+	public void setTutorial(boolean bool) {this.tutorial = bool;}
 	
 	
 	@Override
