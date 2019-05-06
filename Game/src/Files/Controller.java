@@ -15,12 +15,14 @@ public class Controller{
 	static int DOWN = 40;	//SOUTH
 	
 	static final int MENU = 0;
-	static final int CLAPPERRAIL1 = 1;
-	static final int CLAPPERRAIL2 = 2;
-	static final int CLAPPERRAIL3 = 3;
-	static final int REDKNOT = 4;
-	static final int WINNER = 5;
-	static final int LOSER = 6;
+	static final int CLAPPERRAIL0 = 1; 
+	static final int CLAPPERRAIL1 = 2;
+	static final int CLAPPERRAIL2 = 3;
+	static final int CLAPPERRAIL3 = 4;
+	static final int REDKNOT0 = 5;
+	static final int REDKNOT = 6;
+	static final int WINNER = 7;
+	static final int LOSER = 8;
 	
 	/**
 	 * Initializes all the classes
@@ -92,7 +94,7 @@ class KeyPress implements KeyListener {
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
 	 * 
 	 * */
 	@Override
@@ -101,6 +103,8 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
+	    	case(Controller.CLAPPERRAIL0):
+	    		//tutorial
 	    	case(Controller.CLAPPERRAIL1):
 	    		Model.move(Direction.NORTH);
 	    		break;
@@ -121,6 +125,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.MENU):
 	    		Model.changeGameMode(Controller.CLAPPERRAIL1);
 	    		break;
+	    	case(Controller.CLAPPERRAIL0):
+	    		//tutorial
 	    	case(Controller.CLAPPERRAIL1):
 				Model.move(Direction.WEST);
 	    		break;
@@ -142,6 +148,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.MENU):
 	    		Model.changeGameMode(Controller.REDKNOT);
 	    		break;
+	    	case(Controller.CLAPPERRAIL0):
+	    		//tutorial
 	    	case(Controller.CLAPPERRAIL1):
 				Model.move(Direction.EAST);
 	    		break;
@@ -159,6 +167,8 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
+	    	case(Controller.CLAPPERRAIL0):
+	    		//tutorial
 	    	case(Controller.CLAPPERRAIL1):
 				Model.move(Direction.SOUTH);
 	    		break;

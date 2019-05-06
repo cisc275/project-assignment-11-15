@@ -29,12 +29,14 @@ public class View extends JPanel{
 	int clk = 0;
 	static int gameMode = -1;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL1 = 1;
-	static final int CLAPPERRAIL2 = 2;
-	static final int CLAPPERRAIL3 = 3;
-	static final int REDKNOT = 4;
-	static final int WINNER = 5;
-	static final int LOSER = 6;
+	static final int CLAPPERRAIL0 = 1; 
+	static final int CLAPPERRAIL1 = 2;
+	static final int CLAPPERRAIL2 = 3;
+	static final int CLAPPERRAIL3 = 4;
+	static final int REDKNOT0 = 5;
+	static final int REDKNOT = 6;
+	static final int WINNER = 7;
+	static final int LOSER = 8;
 	static final int CLK_MAX = 150;
 	
 	//static int bushMax = 4;
@@ -178,7 +180,7 @@ public class View extends JPanel{
     /**
 	 * Paints the frame based on the current game mode and model logic
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
 	 * @param The view "graphic"
 	 * 
 	 * */
@@ -190,21 +192,25 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
-			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
+			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, null, this);
 			
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			//g.drawString("Press left for Clapper Rail game", 100, 400);
 			//g.drawString("Press right for Red Knot game", 500, 400);
-			g.drawImage(pics.get("arrowMap"), 100, 400, null, this);
+			g.drawImage((BufferedImage)pics.get("arrowMap"), 100, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
-			g.drawImage(pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
-			g.drawImage(pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
+			g.drawImage((BufferedImage)pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
+			g.drawImage((BufferedImage)pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
 			g.drawString("Estuary Birds", 325, 65);
 			break;
 			
+		//Amelia Abobo
+		case(CLAPPERRAIL0):
+			//tutorial
+			// add strings
 		case(CLAPPERRAIL1): //Cycle through all levels
 		case(CLAPPERRAIL2):
 		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
@@ -220,7 +226,7 @@ public class View extends JPanel{
 				g.fillRect(p.getX(), p.getY(), 50, 50);
 			}
 
-			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
+			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
@@ -246,7 +252,7 @@ public class View extends JPanel{
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			clouds = Model.getClouds();
 			for (Cloud c: clouds) {
-				g.drawImage(pics.get(c.getType()), c.getX(), c.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
 			}
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
@@ -255,19 +261,19 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				switch(frameNum) {
 				case(0):
-					g.drawImage(pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
 					break;
 				case(1):
-					g.drawImage(pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
 					break;
 				}
 			}
 			switch(frameNum) {
 			case(0):
-				g.drawImage(pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
 				break;
 			case(1):
-				g.drawImage(pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 				break;
 			}	
 			break;

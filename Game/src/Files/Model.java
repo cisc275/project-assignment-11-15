@@ -2,10 +2,6 @@ package Files;
 
 import java.util.ArrayList;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
 import java.util.*;
 
 public class Model{
@@ -48,12 +44,14 @@ public class Model{
 	static int gameMode;
 	//static int alpha;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL1 = 1;
-	static final int CLAPPERRAIL2 = 2;
-	static final int CLAPPERRAIL3 = 3;
-	static final int REDKNOT = 4;
-	static final int WINNER = 5;
-	static final int LOSER = 6;
+	static final int CLAPPERRAIL0 = 1; 
+	static final int CLAPPERRAIL1 = 2;
+	static final int CLAPPERRAIL2 = 3;
+	static final int CLAPPERRAIL3 = 4;
+	static final int REDKNOT0 = 5;
+	static final int REDKNOT = 6;
+	static final int WINNER = 7;
+	static final int LOSER = 8;
 
 	static final int CLOUD_FAST = 16;
 	
@@ -97,7 +95,7 @@ public class Model{
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
 	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
 	 * 
 	 * */
@@ -111,6 +109,8 @@ public class Model{
     		redKnot = null;
     		View.gameMode = MENU;
     		break;
+    	case(CLAPPERRAIL0):
+    		//tutorial
     	case(CLAPPERRAIL1):
     		resetBushTrans();
     		twigCount = 0;
@@ -196,12 +196,14 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game 
 	 * 
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Amelia Abobo
 	 * @param Level number
 	 * 
 	 * */
     public static void setUpClapperRailGameLevel(int level) {
     	switch(level) {
+    	case(0):
+    		//tutorial
     	case(1):
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
