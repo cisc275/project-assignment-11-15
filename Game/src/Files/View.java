@@ -105,7 +105,7 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -191,11 +191,8 @@ public class View extends JPanel{
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
 			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
-			
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
-			//g.drawString("Press left for Clapper Rail game", 100, 400);
-			//g.drawString("Press right for Red Knot game", 500, 400);
 			g.drawImage(pics.get("arrowMap"), 100, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
@@ -218,6 +215,7 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
 				g.fillRect(p.getX(), p.getY(), 50, 50);
+				g.drawImage(pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
 			}
 
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);

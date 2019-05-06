@@ -396,7 +396,7 @@ public class Model{
     	//System.out.println(flightTime);
     	if((flightTime < LEVEL_END) && slideObjects) {
     		if((flightTime % PREDATOR_SPACE) == 0) {
-    			int[] yCoords = getRandY();
+    			int[] yCoords = getRandYlist();
     			int i = 0;
     			while(i < predCount) {
     				spawnObject(predStr, SPAWN_X, yCoords[i]);
@@ -412,7 +412,7 @@ public class Model{
 	 * @author Amjed Hallak
 	 * 
 	 * */
-    public static int[] getRandY() {
+    public static int[] getRandYlist() {
     	int i = 0;
     	int[] randPts = new int[P_RANDMAX];
     	while(i < predCount) {
@@ -587,6 +587,12 @@ public class Model{
 	 * */
 	
 	public static void main(String[] args) {
+		// INTERACTIVE TUTORIAL
+		//SERIALIZABLE
+		//JAVADOC
+		//FULL SCREEN
+		//MAGIC NUMBERS
+		
 		//System.out.println("Starting point");
 		Controller ctrl = new Controller();
 		ctrl.start();
