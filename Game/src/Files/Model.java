@@ -1,6 +1,11 @@
 package Files;
 
 import java.util.ArrayList;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import java.util.*;
 
 public class Model{
@@ -365,6 +370,7 @@ public class Model{
     	}
     }
     
+    
     /**
 	 * Method to increment all objects toward the left side of the screen
 	 * in the Red Knot game. Also generates new objects
@@ -629,5 +635,5 @@ public class Model{
     public static int getBushMax() { return bushMax; }
     public static int getTwigCount() { return twigCount; }
     public static int getBushTrans() { return bushTrans; }
-	
+    
 }
