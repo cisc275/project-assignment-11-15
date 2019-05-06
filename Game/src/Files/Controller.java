@@ -15,8 +15,10 @@ public class Controller{
 	static int DOWN = 40;	//SOUTH
 	
 	static final int MENU = 0;
-	static final int CLAPPERRAIL = 1;
-	static final int REDKNOT = 2;
+	static final int CLAPPERRAILTUTORIAL = 1;
+	static final int CLAPPERRAIL = 2;
+	static final int REDKNOTTUTORIAL = 3;
+	static final int REDKNOT = 4;
 	
 	/**
 	 * Initializes all the classes
@@ -97,8 +99,6 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
-	    	case(Controller.CLAPPERRAIL):
-	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.NORTH);
