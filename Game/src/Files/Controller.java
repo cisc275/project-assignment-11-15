@@ -99,6 +99,8 @@ class KeyPress implements KeyListener {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
 	    		break;
+	    	case(Controller.CLAPPERRAIL):
+	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.NORTH);

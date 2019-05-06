@@ -220,8 +220,10 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 
-			if (Model.getTutorial() == true){
-				g.drawString("Use up, down, left, and right arrows to move your clapper rail to avoid predators.", 100, 100);
+			if (tutorial) {
+				g.setColor(Color.RED);
+				g.setFont(new Font("Courier", Font.BOLD, 40)); 
+				g.drawString("Use the up, down, left, and right arrows to move your clapper rail.", 100,50);
 			}
 		 else if (gameMode == REDKNOT) {
 			/* Red Knot Game View Logic
@@ -251,6 +253,11 @@ public class View extends JPanel{
 			}
 			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			
+			if (tutorial) {
+				g.setColor(Color.RED);
+				g.setFont(new Font("Courier", Font.BOLD, 40)); 
+				g.drawString("Use the up and down arrows to move your red knot.", 100,50);
+			}
 			break;
 	
 		default:
@@ -258,8 +265,8 @@ public class View extends JPanel{
 		}
 	}
 	
-	public boolean getTutorial() { return View.tutorial;}
-	public void setTutorial(boolean bool) {this.tutorial = bool;}
+	//public boolean getTutorial() { return View.tutorial;}
+	//public void setTutorial(boolean bool) {this.tutorial = bool;}
 	
 	
 	@Override

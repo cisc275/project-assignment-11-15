@@ -115,7 +115,7 @@ public class Model{
     		View.gameMode = CLAPPERRAIL;
     		break;
     	case(REDKNOTTUTORIAL):
-    		View.stutorial = true;
+    		View.tutorial = true;
     		View.gameMode = REDKNOT;
     		changeGameMode(REDKNOT);
     		break;
