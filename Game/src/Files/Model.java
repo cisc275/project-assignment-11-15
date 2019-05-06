@@ -54,6 +54,8 @@ public class Model{
 	static final int REDKNOT = 4;
 	static final int WINNER = 5;
 	static final int LOSER = 6;
+
+	static final int CLOUD_FAST = 16;
 	
 	
 	static int clk1Count = 0;
@@ -384,7 +386,7 @@ public class Model{
     			p.x -= 1;
     		}
     		for(Cloud c: clouds) {
-    			c.move(16);
+    			c.move(CLOUD_FAST);
     		}
 
 			xTotal++;
