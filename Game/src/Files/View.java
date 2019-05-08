@@ -248,6 +248,10 @@ public class View extends JPanel{
 		case(REDKNOT0):
 			//redknot tutorial
 			g.drawString("This is the Redknot Tutorial ", 100,50);
+		
+		//while (Controller.e.getKeyCode() != Direction.NORTH) OR (Controller.e.getKeyCode() != Direction.SOUTH)
+		//tracker for key movements?? remove string after bird goes both up and down
+		
 			g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
 		
 		case(REDKNOT): // Red Knot Game View Logic
