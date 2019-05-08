@@ -105,7 +105,7 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon", "myth", "boss"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -209,13 +209,17 @@ public class View extends JPanel{
 			predators = Model.getPredators();
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				if(gp instanceof Twig)
+					g.drawImage(pics.get("new-twig"), gp.getX(), gp.getY(), 50, 50, this);
+				if(gp instanceof Bush)
+					g.fillRect(gp.getX(), gp.getY(), 50, 50);
+
 			}
 
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
-				g.fillRect(p.getX(), p.getY(), 50, 50);
-				g.drawImage(pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
+				//g.fillRect(p.getX(), p.getY(), 50, 50);
+				g.drawImage(pics.get("rt-hawk"), p.getX(), p.getY(), 50, 50, this); 
 			}
 
 			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
