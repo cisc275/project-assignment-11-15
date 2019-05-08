@@ -8,5 +8,12 @@ public class Question {
 		this.prompt = prompt;
 		this.answer = answer;
 	}
+	
+	public String getPrompt() {
+		return prompt;
+	}
 
+	public String getAnswer() {
+		return answer;
+	}
 }

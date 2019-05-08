@@ -50,8 +50,7 @@ public class View extends JPanel{
 	ArrayList<Animal> predators;
 	ArrayList<Cloud> clouds;
 	Map<String, BufferedImage> pics;
-	
-	Quiz quiz = new Quiz();
+	Quiz quiz;
 	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
@@ -68,6 +67,7 @@ public class View extends JPanel{
 	 * */
 	View() {
 		buildFrame();
+		quiz = new Quiz();
 	}
 	
     /**
@@ -284,8 +284,8 @@ public class View extends JPanel{
 			this.setBackground(Color.RED);
 			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
 			//Quiz.quiz();
-			//g.drawString(Quiz.getPrompt(), 10, 10);
-			System.out.println(quiz.getPrompt());
+			g.drawString(Quiz.getPrompt(), 10, 10);
+			//System.out.println(quiz.getPrompt());
 			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
 			break;
 		}
