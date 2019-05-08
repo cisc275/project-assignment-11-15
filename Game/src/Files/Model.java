@@ -95,7 +95,7 @@ public class Model{
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
-	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo, Adheena Chacko
 	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
 	 * 
 	 * */
@@ -142,6 +142,8 @@ public class Model{
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
+    	case(REDKNOT0):
+    		//redknot tutorial
     	case(REDKNOT):
     		removeAllObjects();
     		View.gameMode = REDKNOT;
@@ -258,14 +260,43 @@ public class Model{
 	 * @author Amjed Hallak
 	 * 
 	 * */
-    public static void setUpRedKnotGame() {
-    	redKnot = new RedKnot();
-    	redKnot.setX(DEFAULT_RK_X);
-    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
-    	clouds.add(new Cloud(1200, 100, 1.5, 2));
-    	clouds.add(new Cloud(1200, 240, 1.2, 2));
-    	clouds.add(new Cloud(1200, 400, 1.4, 1));
-		gameMode = REDKNOT;
+    public static void setUpRedKnotGame(int level) {
+    	
+    	switch(level) {
+    	case(0):
+	    	redKnot = new RedKnot();
+	    	redKnot.setX(DEFAULT_RK_X);
+	    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+	    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+	    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+	    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+			gameMode = REDKNOT0;
+    	case(1):
+    		redKnot = new RedKnot();
+	    	redKnot.setX(DEFAULT_RK_X);
+	    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+	    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+	    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+	    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+			gameMode = REDKNOT;
+    	
+    	}
+    	
+    	/**
+    	 * Switching from tutorial mode to game mode for Redknot game
+    	 *
+    	 * @author Adheena Chacko
+    	 * 
+    	 * */
+    	public static void gameLevelRedKnot() {
+    		
+    		while((Controller.e.getKeyCode() != Controller.UP) || (Controller.e.getKeyCode() != Controller.DOWN)) {
+    			gameMode=REDKNOT0;
+    		}
+    		
+    		gameMode=REDKNOT;
+        	
+        }
     }
 
     /**
