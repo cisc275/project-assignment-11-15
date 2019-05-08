@@ -260,6 +260,19 @@ public class Model{
     	}
     }
     
+    
+    /**
+	 * Switching from tutorial mode to game mode for Redknot game
+	 *
+	 * @author Adheena Chacko
+	 * 
+	 * */
+	public static void gameLevelRedKnot(int level) {
+		
+	}
+	
+
+    
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
 	 *
@@ -287,23 +300,10 @@ public class Model{
 			gameMode = REDKNOT;
     	
     	}
-    	
-    	/**
-    	 * Switching from tutorial mode to game mode for Redknot game
-    	 *
-    	 * @author Adheena Chacko
-    	 * 
-    	 * */
-    	public static void gameLevelRedKnot() {
-    		
-    		while((Controller.e.getKeyCode() != Controller.UP) || (Controller.e.getKeyCode() != Controller.DOWN)) {
-    			gameMode=REDKNOT0;
-    		}
-    		
-    		gameMode=REDKNOT;
-        	
-        }
     }
+    	
+    	
+    		
 
     /**
 	 * Function to return a list of all the present objects on the screen
