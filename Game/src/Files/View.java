@@ -244,6 +244,12 @@ public class View extends JPanel{
 			}
 			break;
 			
+		//Adheena Chacko
+		case(REDKNOT0):
+			//redknot tutorial
+			g.drawString("This is the Redknot Tutorial ", 100,50);
+			g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
+		
 		case(REDKNOT): // Red Knot Game View Logic
 			this.setBackground(Color.CYAN);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
