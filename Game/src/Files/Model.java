@@ -206,46 +206,46 @@ public class Model{
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL1;
-	    	spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
-	    	spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
-	    	spawnObject(predStr, 100,100);
+	    	spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
+	    	spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
+	    	spawnObject(predStr, 100,100, 0);
     		break;
     	case(2):
     		System.out.println("Clapper Rail Level 2");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL2;
-			spawnObject(twigString, 300,100);
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);
-	    	spawnObject(predStr, 500, 300);
-	    	spawnObject(predStr, 100,100);
-	    	spawnObject(predStr, 600, 500);
-	    	spawnObject(predStr, 150, 250);
+			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);
+	    	spawnObject(predStr, 500, 300, 0);
+	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 600, 500,0);
+	    	spawnObject(predStr, 150, 250, 0);
     		break;
     	case(3):
     		System.out.println("Clapper Rail Level 3");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL3;
-			spawnObject(twigString, 300,100);
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);
-	    	spawnObject(predStr, 500, 300);
-	    	spawnObject(predStr, 100,100);
-	    	spawnObject(predStr, 600, 500);
-	    	spawnObject(predStr, 150, 250);
-	    	spawnObject(predStr, 250, 100);
-	    	spawnObject(predStr, 400, 200);
+			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);
+	    	spawnObject(predStr, 500, 300, 0);
+	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 600, 500, 0);
+	    	spawnObject(predStr, 150, 250, 0);
+	    	spawnObject(predStr, 250, 100, 0);
+	    	spawnObject(predStr, 400, 200, 0);
     		break;
     	}
     }
@@ -287,13 +287,13 @@ public class Model{
 	 * @param x and y coordinates of the object being spawned
 	 * 
 	 * */
-    static public void spawnObject(String type, int x, int y) {
+    static public void spawnObject(String type, int x, int y, int angle) {
     	switch(type) { 
     	case("Predator"):
     		predators.add(new Animal(x,y));
     		break;
     	case("Twig"):
-    		allObjects.add(new Twig(x,y));
+    		allObjects.add(new Twig(x,y, angle));
     		break;
 	    case("Bush"):
 			allObjects.add(new Bush(x,y));
@@ -399,7 +399,7 @@ public class Model{
     			int[] yCoords = getRandYlist();
     			int i = 0;
     			while(i < predCount) {
-    				spawnObject(predStr, SPAWN_X, yCoords[i]);
+    				spawnObject(predStr, SPAWN_X, yCoords[i], 0);
     				i++;
     			}
     		}
@@ -475,6 +475,7 @@ public class Model{
 			updateClock();
 			slideObjectsLeft();
 			movePredators();
+			rotateTwigs();
 		} else {
 			if(slideObjects) {
 				for(Cloud c: clouds) {
@@ -482,6 +483,20 @@ public class Model{
 		    	}
 			}
 			updateClock();
+		}
+	}
+	
+    /**
+	 * Implements logic for the visual of twig rotation
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+	public void rotateTwigs() {
+		for(GamePiece p: allObjects) {
+			if (p instanceof Twig) {
+				((Twig) p).rotate();
+			}
 		}
 	}
 	

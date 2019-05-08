@@ -135,9 +135,6 @@ public class View extends JPanel{
 		String path = "src/images/";
     	try {
     		bufferedImage = ImageIO.read(new File(path.concat(filename).concat(".png")));
-    		if(bufferedImage.getWidth() > IMGWIDTH) {
-    			
-    		}
     		return bufferedImage;
     	} catch (IOException e) {
     		e.printStackTrace();
