@@ -52,6 +52,8 @@ public class Model{
 	static final int REDKNOT = 6;
 	static final int WINNER = 7;
 	static final int LOSER = 8;
+	
+	static boolean movedTutorial = false;
 
 	static final int CLOUD_FAST = 16;
 	
@@ -77,6 +79,7 @@ public class Model{
 	static int playerHealth;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
+	static int bushMaxTutorial = 2;
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 5;
@@ -110,7 +113,14 @@ public class Model{
     		View.gameMode = MENU;
     		break;
     	case(CLAPPERRAIL0):
-    		//tutorial
+    		resetBushTrans();
+			twigCount = 0;
+			bushCount = 0;
+			deathToll = 0;
+			playerHealth = MAX_HEALTH;
+			setUpClapperRailGameLevel(0);
+			View.gameMode = CLAPPERRAIL0;
+			break;
     	case(CLAPPERRAIL1):
     		resetBushTrans();
     		twigCount = 0;
@@ -163,12 +173,15 @@ public class Model{
     /**
 	 * Switching game levels in Clapper Rail game
 	 *
-	 * @author Paul Jureidini, Amjed Hallak
+	 * @author Paul Jureidini, Amjed Hallak, Amelia Abobo
 	 * 
 	 * */
     public static void gameLevelClapperRail() {
-    	if(bushCount < bushMax && gameMode == CLAPPERRAIL1) {
-    		gameMode = CLAPPERRAIL1;
+    	if(bushCount < bushMaxTutorial && gameMode == CLAPPERRAIL0) {
+    		gameMode = CLAPPERRAIL0;
+    	}
+    	else if(bushCount == bushMaxTutorial && gameMode == CLAPPERRAIL0) {
+    		changeGameMode(CLAPPERRAIL1);
     	}
     	else if (bushCount == bushMax && gameMode == CLAPPERRAIL1) {
     		changeGameMode(CLAPPERRAIL2);
@@ -203,7 +216,14 @@ public class Model{
     public static void setUpClapperRailGameLevel(int level) {
     	switch(level) {
     	case(0):
-    		//tutorial
+    		System.out.println("Clapper Rail Tutorial");
+			clapperRail = new ClapperRail();
+			gameMode = CLAPPERRAIL0;
+			spawnObject(twigString, 200,400); //Spawn twig at 200(x) 400(y)
+			spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
+			spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
+			spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
+			break;
     	case(1):
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
@@ -633,6 +653,9 @@ public class Model{
 			cpclouds.add(c);
 		return cpclouds;
 	}
+	public static boolean getMovedTutorial() { return movedTutorial;}
+	public static void setMovedTutorial(boolean bool) {movedTutorial=bool;}
+	
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }
     public static int getBushCount() { return bushCount; }

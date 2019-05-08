@@ -104,13 +104,9 @@ class KeyPress implements KeyListener {
 	    	case(Controller.MENU):
 	    		break;
 	    	case(Controller.CLAPPERRAIL0):
-	    		//tutorial
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.CLAPPERRAIL1):
-	    		Model.move(Direction.NORTH);
-	    		break;
 	    	case(Controller.CLAPPERRAIL2):
-	    		Model.move(Direction.NORTH);
-	    		break;
 	    	case(Controller.CLAPPERRAIL3):
 	    		Model.move(Direction.NORTH);
 	    		break;
@@ -123,16 +119,12 @@ class KeyPress implements KeyListener {
 		if (e.getKeyCode() == Controller.LEFT) {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
-	    		Model.changeGameMode(Controller.CLAPPERRAIL1);
+	    		Model.changeGameMode(Controller.CLAPPERRAIL0);
 	    		break;
 	    	case(Controller.CLAPPERRAIL0):
-	    		//tutorial
+	    		Model.setMovedTutorial(true);	    	
 	    	case(Controller.CLAPPERRAIL1):
-				Model.move(Direction.WEST);
-	    		break;
 	    	case(Controller.CLAPPERRAIL2):
-				Model.move(Direction.WEST);
-	    		break;
 	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.WEST);
 	    		break;
@@ -149,13 +141,9 @@ class KeyPress implements KeyListener {
 	    		Model.changeGameMode(Controller.REDKNOT);
 	    		break;
 	    	case(Controller.CLAPPERRAIL0):
-	    		//tutorial
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.CLAPPERRAIL1):
-				Model.move(Direction.EAST);
-	    		break;
 	    	case(Controller.CLAPPERRAIL2):
-				Model.move(Direction.EAST);
-	    		break;
 	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.EAST);
 	    		break;
@@ -168,16 +156,11 @@ class KeyPress implements KeyListener {
 	    	case(Controller.MENU):
 	    		break;
 	    	case(Controller.CLAPPERRAIL0):
-	    		//tutorial
+	    		Model.move(Direction.SOUTH);
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.CLAPPERRAIL1):
-				Model.move(Direction.SOUTH);
-	    		break;
 	    	case(Controller.CLAPPERRAIL2):
-				Model.move(Direction.SOUTH);
-	    		break;
 	    	case(Controller.CLAPPERRAIL3):
-				Model.move(Direction.SOUTH);
-	    		break;
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.SOUTH);
 	    		break;

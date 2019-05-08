@@ -209,8 +209,6 @@ public class View extends JPanel{
 			
 		//Amelia Abobo
 		case(CLAPPERRAIL0):
-			//tutorial
-			// add strings
 		case(CLAPPERRAIL1): //Cycle through all levels
 		case(CLAPPERRAIL2):
 		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
@@ -231,7 +229,20 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			switch(gameMode) {
+		
+		switch(gameMode) {
+			case(CLAPPERRAIL0):
+				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
+				g.setColor(Color.red);
+				g.drawString("CLAPPER RAIL TUTORIAL", 10, 20);
+				g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 50, 300);
+				if (Model.getMovedTutorial()) {
+					g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 50, 350);
+				}
+				if(Model.getTwigCount()==2) {
+					g.drawString("BRING TWIGS TO THE BUSH", 50, 400);
+				}
+				break;
 			case(CLAPPERRAIL1): //Cycle through all levels
 				g.drawString("LEVEL 1", 10, 20);
 				break;
