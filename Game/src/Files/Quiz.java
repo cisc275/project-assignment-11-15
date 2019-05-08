@@ -1,12 +1,21 @@
 package Files;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import Files.Question;
 
 public class Quiz {
-	//public static void main(String [] args) {
-	public static void quizQuestions() {
+	
+	static String qPrompt;
+	static Question [] questions;
+	
+	public static String getPrompt() {
+		//quiz();
+		return questions[1].prompt;
+	}
+	
+	public static void quiz() {
 		String q1 = "What kind of animal is a Clapper Rail?\n"
 				+"(a)bird\n(b)fox\n(c)fish\n";
 		
@@ -25,21 +34,28 @@ public class Quiz {
 		takeTest(questions);
 	}
 		
-	//}// end main
 	
-	public static void takeTest(Question [] questions) {
+	public static boolean takeTest(Question [] questions) {
 		int score = 0;
 		
 		Scanner keyboardInput = new Scanner(System.in);
 		
-		for(int i=0; i<questions.length; i++) {
-			System.out.println(questions[i].prompt);
-			String answer = keyboardInput.nextLine();
-			if(answer.equals(questions[i].answer)) {
-				score++;
-			}
+		int max = questions.length -1; 
+		int min = 0;
+		Random rand = new Random();
+		int randQuestion = rand.nextInt((max - min) + 1) + min;
+		
+		qPrompt = questions[randQuestion].prompt;
+		
+		System.out.println(questions[randQuestion].prompt);
+		String answer = keyboardInput.nextLine();
+		if(answer.equals(questions[randQuestion].answer)) {
+			System.out.println("CORRECT!");
+			return true;
+		}else {
+			System.out.println("WRONG!");
+			return false;
 		}
-		System.out.println("You got " + score + "/" + questions.length);
 	}
 
 }

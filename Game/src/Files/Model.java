@@ -156,6 +156,7 @@ public class Model{
     		break;
     	case(LOSER):
     		View.gameMode = LOSER;
+    		Quiz.quiz();
     		break;
     	}
     }

@@ -51,6 +51,8 @@ public class View extends JPanel{
 	ArrayList<Cloud> clouds;
 	Map<String, BufferedImage> pics;
 	
+	Quiz quiz = new Quiz();
+	
 	Boolean withPlayer = true;
 	Boolean withoutPlayer = false;
 	Boolean withPreds = true;
@@ -281,6 +283,9 @@ public class View extends JPanel{
 		case(LOSER): //LOSER screen 
 			this.setBackground(Color.RED);
 			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
+			//Quiz.quiz();
+			//g.drawString(Quiz.getPrompt(), 10, 10);
+			System.out.println(quiz.getPrompt());
 			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
 			break;
 		}
