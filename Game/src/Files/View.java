@@ -235,12 +235,12 @@ public class View extends JPanel{
 				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
 				g.setColor(Color.red);
 				g.drawString("CLAPPER RAIL TUTORIAL", 10, 20);
-				g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 50, 300);
+				g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
 				if (Model.getMovedTutorial()) {
-					g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 50, 350);
+					g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 10, 350);
 				}
 				if(Model.getTwigCount()==2) {
-					g.drawString("BRING TWIGS TO THE BUSH", 50, 400);
+					g.drawString("BRING TWIGS TO THE BUSH", 0, 400);
 				}
 				break;
 			case(CLAPPERRAIL1): //Cycle through all levels

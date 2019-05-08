@@ -111,6 +111,7 @@ public class Model{
     		clapperRail = null;
     		redKnot = null;
     		View.gameMode = MENU;
+    		movedTutorial = false;
     		break;
     	case(CLAPPERRAIL0):
     		resetBushTrans();
