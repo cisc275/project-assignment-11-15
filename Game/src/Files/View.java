@@ -251,6 +251,8 @@ public class View extends JPanel{
 			g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
 		
 		case(REDKNOT): // Red Knot Game View Logic
+			g.drawString("This is the Redknot Tutorial ", 100,50);
+		g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
 			this.setBackground(Color.CYAN);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();

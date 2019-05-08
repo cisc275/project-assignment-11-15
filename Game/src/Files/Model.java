@@ -143,14 +143,20 @@ public class Model{
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT0):
-    		//redknot tutorial
+    		removeAllObjects();
+			View.gameMode = REDKNOT;
+			playerHealth = MAX_HEALTH;
+			deathToll = 0;
+			variableClock = CLK2MAX;
+			setUpRedKnotGame(0);
+			break;
     	case(REDKNOT):
     		removeAllObjects();
     		View.gameMode = REDKNOT;
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
-    		setUpRedKnotGame();
+    		setUpRedKnotGame(1);
     		break;
     		
     	case(WINNER):
