@@ -98,7 +98,7 @@ public class Model{
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
-	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo, Adheena Chacko
 	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
 	 * 
 	 * */
@@ -153,6 +153,14 @@ public class Model{
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
+    	case(REDKNOT0):
+    		removeAllObjects();
+			View.gameMode = REDKNOT0;
+			playerHealth = MAX_HEALTH;
+			deathToll = 0;
+			variableClock = CLK2MAX;
+			setUpRedKnotGame(0);
+			break;
     	case(REDKNOT):
     		removeAllObjects();
     		View.gameMode = REDKNOT;

@@ -94,7 +94,7 @@ class KeyPress implements KeyListener {
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
-	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo, Adheena Chacko
 	 * 
 	 * */
 	@Override
@@ -110,6 +110,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.CLAPPERRAIL3):
 	    		Model.move(Direction.NORTH);
 	    		break;
+	    	case(Controller.REDKNOT0):
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.NORTH);
 	    		break;
@@ -128,6 +130,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.WEST);
 	    		break;
+	    	case(Controller.REDKNOT0):
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.REDKNOT):
 	    		break;
 	    	case(Controller.WINNER):
@@ -147,6 +151,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.CLAPPERRAIL3):
 				Model.move(Direction.EAST);
 	    		break;
+	    	case(Controller.REDKNOT0):
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.REDKNOT):
 	    		break;
 	    	}
@@ -161,6 +167,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.CLAPPERRAIL1):
 	    	case(Controller.CLAPPERRAIL2):
 	    	case(Controller.CLAPPERRAIL3):
+	    	case(Controller.REDKNOT0):
+	    		Model.setMovedTutorial(true);
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.SOUTH);
 	    		break;

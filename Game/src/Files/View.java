@@ -255,6 +255,15 @@ public class View extends JPanel{
 			}
 			break;
 			
+		case(REDKNOT0):
+			g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+			g.setColor(Color.red);
+			g.drawString("RED KNOT TUTORIAL", 10, 20);
+			g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
+			if (Model.getMovedTutorial()) {
+				g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 10, 350);
+			}
+			break;
 		case(REDKNOT): // Red Knot Game View Logic
 			this.setBackground(Color.CYAN);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
