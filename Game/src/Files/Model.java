@@ -167,7 +167,7 @@ public class Model{
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
-    		setUpRedKnotGame();
+    		setUpRedKnotGame(1);
     		break;
     		
     	case(WINNER):
@@ -287,15 +287,30 @@ public class Model{
 	 * @author Amjed Hallak
 	 * 
 	 * */
-    public static void setUpRedKnotGame() {
-    	redKnot = new RedKnot();
-    	redKnot.setX(DEFAULT_RK_X);
-    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
-    	clouds.add(new Cloud(1200, 100, 1.5, 2));
-    	clouds.add(new Cloud(1200, 240, 1.2, 2));
-    	clouds.add(new Cloud(1200, 400, 1.4, 1));
-		gameMode = REDKNOT;
-    }
+  
+    
+	public static void setUpRedKnotGame(int level) {
+	    	
+	    	switch(level) {
+	    	case(0):
+		    	redKnot = new RedKnot();
+		    	redKnot.setX(DEFAULT_RK_X);
+		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+				gameMode = REDKNOT0;
+	    	case(1):
+	    		redKnot = new RedKnot();
+		    	redKnot.setX(DEFAULT_RK_X);
+		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+				gameMode = REDKNOT;
+	    	
+	    	}
+	    }
 
     /**
 	 * Function to return a list of all the present objects on the screen
