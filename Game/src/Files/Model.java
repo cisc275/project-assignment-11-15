@@ -281,6 +281,26 @@ public class Model{
     	}
     }
     
+    
+    
+    
+    /**
+	 * Switching from tutorial mode to game mode for Redknot game
+	 *
+	 * @author Adheena Chacko
+	 * 
+	 * */
+	public static void gameLevelRedKnot(int level) {
+		if(Model.movedTutorial==false && gameMode == REDKNOT0) {
+    		gameMode = REDKNOT0;
+    	}
+    	else if(Model.movedTutorial && gameMode == REDKNOT0) {
+    		changeGameMode(REDKNOT);
+    	}
+    	
+	}
+	
+    
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
 	 *
