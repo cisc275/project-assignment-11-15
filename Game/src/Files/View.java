@@ -255,61 +255,61 @@ public class View extends JPanel{
 			}
 			break;
 			
-		case(REDKNOT0):
-			g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
-			g.setColor(Color.red);
-			g.drawString("RED KNOT TUTORIAL", 10, 20);
-			g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
-			if (Model.getMovedTutorial()) {
-				g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 10, 350);
-			}
-			break;
-		case(REDKNOT): // Red Knot Game View Logic
-			this.setBackground(Color.CYAN);
-			allObj = Model.getAllObjects(withoutPlayer, withPreds);
-			predators = Model.getPredators();
-			g.drawString("REDKNOT GAME", 100, 100);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			clouds = Model.getClouds();
-			for (Cloud c: clouds) {
-				g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
-			}
-			for(GamePiece gp: allObj) {
-				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-			}
-			for(Animal p: predators) {
+			case(REDKNOT0):
+				g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+				g.setColor(Color.red);
+				g.drawString("RED KNOT TUTORIAL", 10, 20);
+				g.drawString("USE UP AND DOWN ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
+				if (Model.getMovedTutorial()) {
+					g.drawString("AVOID PREDATORS", 10, 350);
+				}
+				break;
+			case(REDKNOT): // Red Knot Game View Logic
+				this.setBackground(Color.CYAN);
+				allObj = Model.getAllObjects(withoutPlayer, withPreds);
+				predators = Model.getPredators();
+				g.drawString("REDKNOT GAME", 100, 100);
+				g.drawString("death toll lol: " + Model.deathToll, 500,50);
+				clouds = Model.getClouds();
+				for (Cloud c: clouds) {
+					g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
+				}
+				for(GamePiece gp: allObj) {
+					g.setColor(getColor(gp.toString()));
+					g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				}
+				for(Animal p: predators) {
+					switch(frameNum) {
+					case(0):
+						g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+						break;
+					case(1):
+						g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+						break;
+					}
+				}
 				switch(frameNum) {
 				case(0):
-					g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
 					break;
 				case(1):
-					g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 					break;
-				}
+				}	
+				break;
+			case(WINNER): //WINNER screen 
+				this.setBackground(Color.GREEN);
+				g.drawString("WINNER", 200, 200);
+				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
+				break;
+				
+			case(LOSER): //LOSER screen 
+				this.setBackground(Color.RED);
+				g.drawString("Sorry, You Lost. Try Again!", 200, 200);
+				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
+				break;
 			}
-			switch(frameNum) {
-			case(0):
-				g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
-				break;
-			case(1):
-				g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
-				break;
-			}	
-			break;
-		case(WINNER): //WINNER screen 
-			this.setBackground(Color.GREEN);
-			g.drawString("WINNER", 200, 200);
-			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
-			break;
-			
-		case(LOSER): //LOSER screen 
-			this.setBackground(Color.RED);
-			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
-			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
-			break;
 		}
-	}
 	
 	@Override
 	public int getWidth() { return View.FRAMEWIDTH; }

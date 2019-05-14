@@ -99,7 +99,7 @@ public class Model{
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
 	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo, Adheena Chacko
-	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
+	 * @param Game mode to change to. Either 0, 1, 2, 3, 4, 5, 6, 7, or 8
 	 * 
 	 * */
     public static void changeGameMode(int gameMode) {
@@ -304,7 +304,7 @@ public class Model{
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Adheena Chacko
 	 * 
 	 * */
   
