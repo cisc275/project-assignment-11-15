@@ -186,6 +186,7 @@ public class View extends JPanel{
 	 * */
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		switch(gameMode) {
 		case(MENU): // Main menu Game View Logic
 			this.setBackground(Color.CYAN);
@@ -248,8 +249,10 @@ public class View extends JPanel{
 		case(REDKNOT0):
 			//redknot tutorial
 			g.drawString("This is the Redknot Tutorial ", 100,50);
-			g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
-		
+			g.drawString("Move the up and down arrow keys to avoid predators!", 100,100);
+			
+			
+			break;
 		case(REDKNOT): // Red Knot Game View Logic
 			g.drawString("This is the Redknot Tutorial ", 100,50);
 		g.drawString("Move the up and down arrow keys to avoid predators!", 50,50);
