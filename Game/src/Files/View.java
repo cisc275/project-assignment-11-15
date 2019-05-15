@@ -15,8 +15,8 @@ import javax.swing.*;
 
 public class View extends JPanel{
 	
-	static final int FRAMEWIDTH = 800;
-	static final int FRAMEHEIGHT = 600;
+	static int frameWidth;//= 1920;
+	static int frameHeight; //= 1080;
 	static final int IMGHEIGHT = 50;
 	static final int IMGWIDTH = 50;
 	static final int FRAMECOUNT = 2;
@@ -93,10 +93,17 @@ public class View extends JPanel{
 		frame.getContentPane().add(this);
         frame.getContentPane().setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
+       // frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
+       // frame.setVisible(true);
+        
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        frame.pack();
         frame.setVisible(true);
+        frameHeight = frame.getHeight();
+        frameWidth = frame.getWidth();
         loadImages();
 
         gameMode = MENU;
@@ -176,7 +183,7 @@ public class View extends JPanel{
 	 * Paints the frame based on the current game mode and model logic
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
-	 * @param The view "graphic"
+	 * @param The view. Everything you see in the game.
 	 * 
 	 * */
 	@Override
@@ -185,7 +192,7 @@ public class View extends JPanel{
 		case(MENU): // Main menu Game View Logic
 			this.setBackground(Color.CYAN);
 			g.setColor(Color.BLUE);
-			g.fillRect(0, 0, FRAMEWIDTH, 100);
+			g.fillRect(0, 0, frameWidth, 100);
 			g.setColor(Color.WHITE);
 			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -285,9 +292,9 @@ public class View extends JPanel{
 	}
 	
 	@Override
-	public int getWidth() { return View.FRAMEWIDTH; }
+	public int getWidth() { return View.frameWidth; }
     @Override
-	public int getHeight() { return View.FRAMEHEIGHT; }
+	public int getHeight() { return View.frameHeight; }
 	
 	
 }

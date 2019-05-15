@@ -17,7 +17,7 @@ public class Cloud {
 	void move(int multiplier) {
 		x -= .1*speed*multiplier;
 		if(x < -200) {
-			x = 800;
+			x = View.frameWidth;
 		}
 	}
 	

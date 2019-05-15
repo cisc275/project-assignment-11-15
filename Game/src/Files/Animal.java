@@ -30,14 +30,14 @@ public class Animal extends GamePiece{
 				break;
 			}
 		case SOUTH:
-			if(this.y > (View.FRAMEHEIGHT - View.IMGHEIGHT*2)) {
+			if(this.y > (View.frameHeight - View.IMGHEIGHT*2)) {
 				break;
 			} else {
 				this.y += INCR;
 				break;
 			}
 		case EAST:
-			if(this.x > (View.FRAMEWIDTH - View.IMGWIDTH*2)) {
+			if(this.x > (View.frameWidth - View.IMGWIDTH*2)) {
 				break;
 			} else {
 				this.x += INCR;
