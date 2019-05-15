@@ -156,7 +156,7 @@ public class Model{
     		break;
     	case(LOSER):
     		View.gameMode = LOSER;
-    		Quiz.quiz();
+    		//Quiz.quiz();
     		break;
     	}
     }
@@ -197,7 +197,7 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game 
 	 * 
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Level number
 	 * 
 	 * */
@@ -283,7 +283,7 @@ public class Model{
     /**
 	 * Spawns a new object at a specified x and y position
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
 	 * 

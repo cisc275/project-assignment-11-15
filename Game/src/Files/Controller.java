@@ -133,8 +133,10 @@ class KeyPress implements KeyListener {
 	    	case(Controller.REDKNOT):
 	    		break;
 	    	case(Controller.WINNER):
+	    		break;
 	    	case(Controller.LOSER):
-	    		Model.changeGameMode(Controller.MENU);
+	    		//Model.changeGameMode(Controller.MENU);
+	    		break;
 	    	}
 		}
 		if (e.getKeyCode() == Controller.RIGHT) {
@@ -170,6 +172,9 @@ class KeyPress implements KeyListener {
 	    		break;
 	    	case(Controller.REDKNOT):
 	    		Model.move(Direction.SOUTH);
+	    		break;
+	    	case(Controller.LOSER):
+	    		Model.changeGameMode(Controller.MENU);
 	    		break;
 	    	}
 		}

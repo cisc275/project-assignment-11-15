@@ -9,8 +9,15 @@ import Files.Question;
 public class Quiz {
 	
 	static String qPrompt;
+	static Question randQuestion;
 	static ArrayList<Question> questions;
 	
+	/**
+	 * Creates an array of quiz questions 
+	 *
+	 * @author Paul Jureidini
+	 * 
+	 * */
 	Quiz() {
 		questions = new ArrayList<Question>();
 		String q1 = "What kind of animal is a Clapper Rail?\n"
@@ -42,21 +49,29 @@ public class Quiz {
 	}
 		
 	
-	public static boolean takeTest(ArrayList<Question> questions2) {
+    /**
+	 * Allows you to answer a quiz question
+	 *
+	 * @author Paul Jureidini
+	 * @param ArrayList<Questions>
+	 * 
+	 * */
+	public static boolean takeTest(ArrayList<Question> questions) {
 		int score = 0;
 		
 		Scanner keyboardInput = new Scanner(System.in);
 		
-		int max = questions2.size() -1; 
+		int max = questions.size() -1; 
 		int min = 0;
 		Random rand = new Random();
-		int randQuestion = rand.nextInt((max - min) + 1) + min;
+		int randNum = rand.nextInt((max - min) + 1) + min;
 		
-		qPrompt = questions2.get(randQuestion).getPrompt();
+		randQuestion = questions.get(randNum);  //gets a random question
+		qPrompt = randQuestion.getPrompt();		//gets the prompt for the random question
 		
-		System.out.println(questions2.get(randQuestion).getPrompt());
+		System.out.println(questions.get(randNum).getPrompt());
 		String answer = keyboardInput.nextLine();
-		if(answer.equals(questions2.get(randQuestion).getPrompt())) {
+		if(answer.equals(randQuestion.answer)) {
 			System.out.println("CORRECT!");
 			return true;
 		}else {

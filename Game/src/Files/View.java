@@ -62,7 +62,7 @@ public class View extends JPanel{
     /**
 	 * Constrcutor. Calls method to build frame
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
 	View() {
@@ -283,10 +283,10 @@ public class View extends JPanel{
 		case(LOSER): //LOSER screen 
 			this.setBackground(Color.RED);
 			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
-			//Quiz.quiz();
-			g.drawString(Quiz.getPrompt(), 10, 10);
+			g.drawString(Quiz.getPrompt(), 10, 10); //gets the question prompt to display
 			//System.out.println(quiz.getPrompt());
-			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
+			g.drawString("Press the DOWN arrow key to go back to the main menu", 200, 400);
+			//Quiz.quiz();
 			break;
 		}
 	}
