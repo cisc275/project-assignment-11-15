@@ -186,6 +186,7 @@ public class View extends JPanel{
 	 * */
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		switch(gameMode) {
 		case(MENU): // Main menu Game View Logic
 			this.setBackground(Color.CYAN);
