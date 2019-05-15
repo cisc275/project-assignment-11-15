@@ -23,16 +23,33 @@ public class Animal extends GamePiece{
 	void move(Direction dir){
 		switch(dir) {
 		case NORTH:
-			this.y -= INCR;
-			break;
+			if(this.y == 0) {
+				break;
+			} else {
+				this.y -= INCR;
+				break;
+			}
 		case SOUTH:
-			this.y += INCR;
-			break;
+			if(this.y > (View.frameHeight - View.IMGHEIGHT*2)) {
+				break;
+			} else {
+				this.y += INCR;
+				break;
+			}
 		case EAST:
-			this.x += INCR;
-			break;
+			if(this.x > (View.frameWidth - View.IMGWIDTH*2)) {
+				break;
+			} else {
+				this.x += INCR;
+				break;
+			}
 		case WEST:
-			this.x -= INCR;
+			if(this.x == 0) {
+				break;
+			} else {
+				this.x -= INCR;
+				break;
+			}
 			
 		}
 	}

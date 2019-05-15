@@ -1,5 +1,4 @@
 package Files;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,8 +14,8 @@ import javax.swing.*;
 
 public class View extends JPanel{
 	
-	static final int FRAMEWIDTH = 800;
-	static final int FRAMEHEIGHT = 600;
+	static int frameWidth;//= 1920;
+	static int frameHeight; //= 1080;
 	static final int IMGHEIGHT = 50;
 	static final int IMGWIDTH = 50;
 	static final int FRAMECOUNT = 2;
@@ -93,10 +92,17 @@ public class View extends JPanel{
 		frame.getContentPane().add(this);
         frame.getContentPane().setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
+       // frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
+       // frame.setVisible(true);
+        
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        frame.pack();
         frame.setVisible(true);
+        frameHeight = frame.getHeight();
+        frameWidth = frame.getWidth();
         loadImages();
 
         gameMode = MENU;
@@ -105,7 +111,7 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon", "myth", "boss"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -135,9 +141,6 @@ public class View extends JPanel{
 		String path = "src/images/";
     	try {
     		bufferedImage = ImageIO.read(new File(path.concat(filename).concat(".png")));
-    		if(bufferedImage.getWidth() > IMGWIDTH) {
-    			
-    		}
     		return bufferedImage;
     	} catch (IOException e) {
     		e.printStackTrace();
@@ -179,16 +182,17 @@ public class View extends JPanel{
 	 * Paints the frame based on the current game mode and model logic
 	 *
 	 * @author Amjed Hallak, Paul Jureidini
-	 * @param The view "graphic"
+	 * @param The view. Everything you see in the game.
 	 * 
 	 * */
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		switch(gameMode) {
 		case(MENU): // Main menu Game View Logic
 			this.setBackground(Color.CYAN);
 			g.setColor(Color.BLUE);
-			g.fillRect(0, 0, FRAMEWIDTH, 100);
+			g.fillRect(0, 0, frameWidth, 100);
 			g.setColor(Color.WHITE);
 			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
@@ -209,13 +213,22 @@ public class View extends JPanel{
 			predators = Model.getPredators();
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				if(gp instanceof Twig)
+					g.drawImage((BufferedImage)pics.get("new-twig"), gp.getX(), gp.getY(), 50, 50, this);
+				if(gp instanceof Bush)
+					g.fillRect(gp.getX(), gp.getY(), 50, 50);
+
 			}
 
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
+
 				g.fillRect(p.getX(), p.getY(), 50, 50);
 				g.drawImage((BufferedImage)pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
+
+				//g.fillRect(p.getX(), p.getY(), 50, 50);
+				g.drawImage((BufferedImage)pics.get("rt-hawk"), p.getX(), p.getY(), 50, 50, this); 
+
 			}
 
 			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
@@ -284,9 +297,9 @@ public class View extends JPanel{
 	}
 	
 	@Override
-	public int getWidth() { return View.FRAMEWIDTH; }
+	public int getWidth() { return View.frameWidth; }
     @Override
-	public int getHeight() { return View.FRAMEHEIGHT; }
+	public int getHeight() { return View.frameHeight; }
 	
 	
 }

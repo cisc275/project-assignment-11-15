@@ -41,7 +41,7 @@ public class Model{
     public static int collisionCount = 0;
 	static int M_RANDMAX = 4;
 	static int M_RANDMIN = 1;
-	static int P_RANDMAX = 12;
+	static int P_RANDMAX = 23;
 	static int P_RANDMIN = 0;
 	static int xTotal = 0;
    
@@ -63,8 +63,8 @@ public class Model{
 	static double clk3Count = 0;
 	static final double CLKMAX = 1000;
 	static final double CLK2MAX = CLKMAX/256;
-	static final int GRAVEYARD = 1000;
-	static final int SPAWN_X = 850;
+	static final int GRAVEYARD = 100000;
+	static int spawnX;
 	static final int LEVEL_END = 100001;
 	static final int PREDATOR_SIZE = 50;
 	static final int PREDATOR_SPACE = PREDATOR_SIZE*4;
@@ -81,10 +81,12 @@ public class Model{
 	static int bushMax = 4; 
 	static int bushTrans = 50;
 	static int flightTime = 0;
-	static int predCount = 5;
+	static int predCount = 9;
 	static int DEAD = 4; //clapper rail game, 5 collisions = dead
 	
-	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
+	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600,
+			650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300,
+			1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700};
     
     private Direction dir = Direction.NORTH;
 
@@ -102,6 +104,7 @@ public class Model{
 	 * 
 	 * */
     public static void changeGameMode(int gameMode) {
+
     	switch(gameMode) {
     	case(MENU):
     		gameMode = MENU;
@@ -143,6 +146,7 @@ public class Model{
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
+    		spawnX = View.frameWidth + 50;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
     		playerHealth = MAX_HEALTH;
@@ -206,46 +210,46 @@ public class Model{
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL1;
-	    	spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
-	    	spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
-	    	spawnObject(predStr, 100,100);
+	    	spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
+	    	spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
+	    	spawnObject(predStr, 100,100, 0);
     		break;
     	case(2):
     		System.out.println("Clapper Rail Level 2");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL2;
-			spawnObject(twigString, 300,100);
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);
-	    	spawnObject(predStr, 500, 300);
-	    	spawnObject(predStr, 100,100);
-	    	spawnObject(predStr, 600, 500);
-	    	spawnObject(predStr, 150, 250);
+			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);
+	    	spawnObject(predStr, 500, 300, 0);
+	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 600, 500,0);
+	    	spawnObject(predStr, 150, 250, 0);
     		break;
     	case(3):
     		System.out.println("Clapper Rail Level 3");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL3;
-			spawnObject(twigString, 300,100);
-	    	spawnObject(twigString, 200,100);
-	    	spawnObject(twigString, 100,100);
-	    	spawnObject(twigString, 400,100);
-	    	spawnObject(twigString, 500,100);
-	    	spawnObject(bushString, 500,200);
-	    	spawnObject(predStr, 500, 300);
-	    	spawnObject(predStr, 100,100);
-	    	spawnObject(predStr, 600, 500);
-	    	spawnObject(predStr, 150, 250);
-	    	spawnObject(predStr, 250, 100);
-	    	spawnObject(predStr, 400, 200);
+			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,100,40);
+	    	spawnObject(twigString, 100,100,60);
+	    	spawnObject(twigString, 400,100,80);
+	    	spawnObject(twigString, 500,100,100);
+	    	spawnObject(bushString, 500,200, 0);
+	    	spawnObject(predStr, 500, 300, 0);
+	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 600, 500, 0);
+	    	spawnObject(predStr, 150, 250, 0);
+	    	spawnObject(predStr, 250, 100, 0);
+	    	spawnObject(predStr, 400, 200, 0);
     		break;
     	}
     }
@@ -259,10 +263,10 @@ public class Model{
     public static void setUpRedKnotGame() {
     	redKnot = new RedKnot();
     	redKnot.setX(DEFAULT_RK_X);
-    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
-    	clouds.add(new Cloud(1200, 100, 1.5, 2));
-    	clouds.add(new Cloud(1200, 240, 1.2, 2));
-    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+    	clouds.add(new Cloud(spawnX, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+    	clouds.add(new Cloud(spawnX, 100, 1.5, 2));
+    	clouds.add(new Cloud(spawnX, 240, 1.2, 2));
+    	clouds.add(new Cloud(spawnX, 400, 1.4, 1));
 		gameMode = REDKNOT;
     }
 
@@ -287,13 +291,13 @@ public class Model{
 	 * @param x and y coordinates of the object being spawned
 	 * 
 	 * */
-    static public void spawnObject(String type, int x, int y) {
+    static public void spawnObject(String type, int x, int y, int angle) {
     	switch(type) { 
     	case("Predator"):
     		predators.add(new Animal(x,y));
     		break;
     	case("Twig"):
-    		allObjects.add(new Twig(x,y));
+    		allObjects.add(new Twig(x,y, angle));
     		break;
 	    case("Bush"):
 			allObjects.add(new Bush(x,y));
@@ -399,7 +403,7 @@ public class Model{
     			int[] yCoords = getRandYlist();
     			int i = 0;
     			while(i < predCount) {
-    				spawnObject(predStr, SPAWN_X, yCoords[i]);
+    				spawnObject(predStr, spawnX, yCoords[i], 0);
     				i++;
     			}
     		}
@@ -475,6 +479,7 @@ public class Model{
 			updateClock();
 			slideObjectsLeft();
 			movePredators();
+			rotateTwigs();
 		} else {
 			if(slideObjects) {
 				for(Cloud c: clouds) {
@@ -482,6 +487,20 @@ public class Model{
 		    	}
 			}
 			updateClock();
+		}
+	}
+	
+    /**
+	 * Implements logic for the visual of twig rotation
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+	public void rotateTwigs() {
+		for(GamePiece p: allObjects) {
+			if (p instanceof Twig) {
+				((Twig) p).rotate();
+			}
 		}
 	}
 	
@@ -540,7 +559,7 @@ public class Model{
 						//random direction of movement 
 						switch(random) {
 						case(1):
-							if(p.getX() < (View.FRAMEWIDTH - Animal.INCR)) {
+							if(p.getX() < (View.frameWidth - Animal.INCR)) {
 								p.move(Direction.EAST);
 							} else {
 								p.move(Direction.WEST);
@@ -554,7 +573,7 @@ public class Model{
 							}
 							break;
 						case(3):
-							if(p.getY() < (View.FRAMEHEIGHT - Animal.INCR)) {
+							if(p.getY() < (View.frameHeight - Animal.INCR)) {
 								p.move(Direction.SOUTH);
 							} else {
 								p.move(Direction.NORTH);
