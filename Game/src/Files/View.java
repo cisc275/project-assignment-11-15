@@ -190,14 +190,14 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, FRAMEWIDTH, 100);
 			g.setColor(Color.WHITE);
-			g.drawImage(pics.get("mmenubkg"), 0, 0, null, this);
+			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
-			g.drawImage(pics.get("arrowMap"), 100, 400, null, this);
+			g.drawImage((BufferedImage)pics.get("arrowMap"), 100, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
-			g.drawImage(pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
-			g.drawImage(pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
+			g.drawImage((BufferedImage)pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
+			g.drawImage((BufferedImage)pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
 			g.drawString("Estuary Birds", 325, 65);
 			break;
@@ -215,10 +215,10 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
 				g.fillRect(p.getX(), p.getY(), 50, 50);
-				g.drawImage(pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
+				g.drawImage((BufferedImage)pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
 			}
 
-			g.drawImage(pics.get("test-face"), Model.getX(), Model.getY(), null, this);
+			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
 			g.setColor(Color.BLUE);
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
@@ -244,7 +244,7 @@ public class View extends JPanel{
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			clouds = Model.getClouds();
 			for (Cloud c: clouds) {
-				g.drawImage(pics.get(c.getType()), c.getX(), c.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
 			}
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
@@ -253,19 +253,19 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				switch(frameNum) {
 				case(0):
-					g.drawImage(pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
 					break;
 				case(1):
-					g.drawImage(pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
 					break;
 				}
 			}
 			switch(frameNum) {
 			case(0):
-				g.drawImage(pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
 				break;
 			case(1):
-				g.drawImage(pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
+				g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 				break;
 			}	
 			break;
