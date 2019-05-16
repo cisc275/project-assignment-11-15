@@ -11,7 +11,7 @@ public class Controller{
 	public static Boolean running = true;
 	static int LEFT = 37;	//WEST
 	static int RIGHT = 39;	//EAST
-	static int UP = 38;	//NORTH
+	static int UP = 38;	    //NORTH
 	static int DOWN = 40;	//SOUTH
 	
 	static final int MENU = 0;
@@ -21,25 +21,27 @@ public class Controller{
 	static final int REDKNOT = 4;
 	static final int WINNER = 5;
 	static final int LOSER = 6;
+	static final int REDKNOTCTN = 7;
+	
+	
 	
 	/**
 	 * Initializes all the classes
 	 *
 	 * @author Amjed Hallak
-	 * @param
-	 * @param
-	 * @param   
-	 * @return 
 	 * 
 	 * */
 	
 	private Model model;
 	private View view;
+	private Quiz quiz;
 	
 	public Controller() {
 		view = new View();
 		model = new Model(view.getWidth(), view.getHeight());
 	}
+	
+	
 	
 	/**
 	 * Starts the game looping and effectively powers the model and view.
@@ -81,7 +83,11 @@ class ButtonListener implements ActionListener {
 	}
 }
 
+
 class KeyPress implements KeyListener {
+	
+	public static String keyAnswer; 
+	private Quiz quiz;
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -111,7 +117,12 @@ class KeyPress implements KeyListener {
 	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
+	    		quiz.userAnswer = null;
 	    		Model.move(Direction.NORTH);
+	    		break;
+	    	case(Controller.LOSER): //multiple choice B
+	    		System.out.println("multiple choice B");
+	    		keyAnswer = "b";
 	    		break;
 	    	}
 			
@@ -133,9 +144,12 @@ class KeyPress implements KeyListener {
 	    	case(Controller.REDKNOT):
 	    		break;
 	    	case(Controller.WINNER):
+	    		Model.changeGameMode(Controller.MENU);
 	    		break;
-	    	case(Controller.LOSER):
-	    		//Model.changeGameMode(Controller.MENU);
+	    	case(Controller.LOSER): //multiple choice A
+	    		System.out.println("multiple choice A");
+	    		keyAnswer = "a";
+	    		
 	    		break;
 	    	}
 		}
@@ -155,6 +169,11 @@ class KeyPress implements KeyListener {
 	    		break;
 	    	case(Controller.REDKNOT):
 	    		break;
+	    	case(Controller.LOSER): //multiple choice C
+	    		System.out.println("multiple choice C");
+	    		keyAnswer = "c";
+	    		
+	    		break;
 	    	}
 		}
 		if (e.getKeyCode() == Controller.DOWN) {
@@ -171,6 +190,7 @@ class KeyPress implements KeyListener {
 				Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.REDKNOT):
+	    		quiz.userAnswer = null;
 	    		Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.LOSER):
@@ -182,5 +202,16 @@ class KeyPress implements KeyListener {
 		if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
 			Model.changeGameMode(Controller.MENU);
 		}
+		
 	}
-}
+	
+	    //getter for quiz question answer
+		public static String getKeyAnswer() {
+			return keyAnswer;
+		}
+	
+	public static String answerA() {return "a";}
+	public static String answerB() {return "b";}
+	public static String answerC() {return "c";}
+}//end key press class
+

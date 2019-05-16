@@ -1,6 +1,5 @@
 package Files;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -251,6 +250,11 @@ public class View extends JPanel{
 			for (Cloud c: clouds) {
 				g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
 			}
+			
+//			if(Model.deathToll>=3) {
+//				g.drawString(Quiz.getPrompt(), 10, 10); //gets the question prompt to display
+//			}
+			
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				g.fillRect(gp.getX(), gp.getY(), 50, 50);

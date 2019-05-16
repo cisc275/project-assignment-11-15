@@ -9,8 +9,12 @@ import Files.Question;
 public class Quiz {
 	
 	static String qPrompt;
+	static String qAnswer;
+	static String userAnswer;
 	static Question randQuestion;
 	static ArrayList<Question> questions;
+	
+	private static KeyPress keypress;
 	
 	/**
 	 * Creates an array of quiz questions 
@@ -39,12 +43,15 @@ public class Quiz {
 	
 	public static String getPrompt() {
 		//quiz();
-		//System.out.println(questions.get(1).getPrompt());
-		return questions.get(1).getPrompt();
+		//System.out.println();
+		return qPrompt;
+	}
+	
+	public static String getAnswer() {
+		return qAnswer;
 	}
 	
 	public static void quiz() {
-		
 		takeTest(questions);
 	}
 		
@@ -56,8 +63,9 @@ public class Quiz {
 	 * @param ArrayList<Questions>
 	 * 
 	 * */
-	public static boolean takeTest(ArrayList<Question> questions) {
+	public static void takeTest(ArrayList<Question> questions) {
 		int score = 0;
+		userAnswer = null;
 		
 		Scanner keyboardInput = new Scanner(System.in);
 		
@@ -67,18 +75,53 @@ public class Quiz {
 		int randNum = rand.nextInt((max - min) + 1) + min;
 		
 		randQuestion = questions.get(randNum);  //gets a random question
-		qPrompt = randQuestion.getPrompt();		//gets the prompt for the random question
+		qPrompt = randQuestion.prompt;		//gets the prompt for the random question
+		qAnswer = randQuestion.answer;
 		
-		System.out.println(questions.get(randNum).getPrompt());
-		String answer = keyboardInput.nextLine();
-		if(answer.equals(randQuestion.answer)) {
+		System.out.println(qPrompt);
+		
+		
+		//String answer = keyboardInput.nextLine();
+		 
+		
+		//System.out.println(answer);
+//		if(userAnswer != null) {
+//			userAnswer = null;
+//			while(userAnswer == null) {
+//				userAnswer = keypress.getKeyAnswer(); //WHY WONT userAnswer GO TO NULL AFTER SECOND QUIZ QUESTION
+//			}
+//		}
+		
+		while(userAnswer == null) {
+			userAnswer = keypress.getKeyAnswer();
+		}
+		
+		
+		if(qAnswer.equals(userAnswer)) {
 			System.out.println("CORRECT!");
-			return true;
+			userAnswer = null;
+			System.out.println(userAnswer); 
+			System.out.println(qAnswer);
+			
+			Model.changeGameMode(Controller.REDKNOT); //ctn the red knot game
+			
+			//return true;
 		}else {
 			System.out.println("WRONG!");
-			return false;
+			userAnswer = null;
+			System.out.println(userAnswer); 
+			System.out.println(qAnswer);
+			
+			Model.changeGameMode(Controller.MENU);
+			
+			//return false;
 		}
+		
+		
+		
 	}
+	
+	
 
-}
+}// end Quiz class
 

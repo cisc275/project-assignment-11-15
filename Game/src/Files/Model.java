@@ -54,6 +54,7 @@ public class Model{
 	static final int REDKNOT = 4;
 	static final int WINNER = 5;
 	static final int LOSER = 6;
+	static final int REDKNOTCTN = 7; //if answer quiz question right in red knot game
 
 	static final int CLOUD_FAST = 16;
 	
@@ -82,11 +83,13 @@ public class Model{
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 5;
-	static int DEAD = 4; //clapper rail game, 5 collisions = dead
+	static int DEAD = 2; //clapper rail game, 5 collisions = dead
 	
 	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
     
     private Direction dir = Direction.NORTH;
+    
+    static Quiz quiz;
 
     public Model(int fw, int fh){
         this.FRAMEWIDTH = fw;
@@ -104,6 +107,8 @@ public class Model{
     public static void changeGameMode(int gameMode) {
     	switch(gameMode) {
     	case(MENU):
+    		quiz.userAnswer = null;
+    		
     		gameMode = MENU;
     		removeAllObjects();
     		startMenu();
@@ -143,20 +148,26 @@ public class Model{
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
+    		quiz.userAnswer = null;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
     		setUpRedKnotGame();
-    		break;
     		
+    		break;
     	case(WINNER):
     		View.gameMode = WINNER;
     		break;
     	case(LOSER):
     		View.gameMode = LOSER;
-    		//Quiz.quiz();
+    		//Quiz.userAnswer = null;
+    		//Quiz.quiz(); //run QUIZ
+    		break;
+    	case(REDKNOTCTN):
+    		deathToll = 0;
+    		View.gameMode = REDKNOT;
     		break;
     	}
     }
@@ -347,6 +358,7 @@ public class Model{
 		    			deathToll++;
 		    			if (deathToll >= DEAD) { //LOSER screen clapper rail
 		    				changeGameMode(LOSER);
+		    				Quiz.quiz();
 		    			}
 		    		}
 		    	}
