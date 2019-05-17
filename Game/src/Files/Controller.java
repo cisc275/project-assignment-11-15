@@ -88,13 +88,19 @@ class KeyPress implements KeyListener {
 	
 	public static String keyAnswer; 
 	private Quiz quiz;
+	public static int kFlag = 0;
+	
+	
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 	}
+	
+	
 	/**
 	 * Starts the game looping and effectively powers the model and view.
 	 *
@@ -103,6 +109,7 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
 		if (e.getKeyCode() == Controller.UP) {
 			switch(View.gameMode) {
 	    	case(Controller.MENU):
@@ -117,12 +124,16 @@ class KeyPress implements KeyListener {
 	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.REDKNOT):
-	    		quiz.userAnswer = null;
+	    		//quiz.userAnswer = null;
 	    		Model.move(Direction.NORTH);
 	    		break;
 	    	case(Controller.LOSER): //multiple choice B
+	    		//quiz.quiz();
 	    		System.out.println("multiple choice B");
 	    		keyAnswer = "b";
+	    		
+	    		quiz.setQuizFlag(true);
+	    		//quiz.userAnswer = keyAnswer;
 	    		break;
 	    	}
 			
@@ -149,7 +160,8 @@ class KeyPress implements KeyListener {
 	    	case(Controller.LOSER): //multiple choice A
 	    		System.out.println("multiple choice A");
 	    		keyAnswer = "a";
-	    		
+	    		quiz.setQuizFlag(true);
+	    		//quiz.userAnswer = keyAnswer;
 	    		break;
 	    	}
 		}
@@ -172,7 +184,7 @@ class KeyPress implements KeyListener {
 	    	case(Controller.LOSER): //multiple choice C
 	    		System.out.println("multiple choice C");
 	    		keyAnswer = "c";
-	    		
+	    		//quiz.userAnswer = keyAnswer;
 	    		break;
 	    	}
 		}
@@ -190,7 +202,7 @@ class KeyPress implements KeyListener {
 				Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.REDKNOT):
-	    		quiz.userAnswer = null;
+	    		//quiz.userAnswer = null;
 	    		Model.move(Direction.SOUTH);
 	    		break;
 	    	case(Controller.LOSER):
@@ -203,12 +215,17 @@ class KeyPress implements KeyListener {
 			Model.changeGameMode(Controller.MENU);
 		}
 		
+		
+		
+	}
+//	while (e.getKeyCode() != Controller.LEFT ||e.getKeyCode() != Controller.UP || e.getKeyCode() != Controller.RIGHT) {
+//	
+//}
+	public static String getQuizAnswer() {
+
+		return keyAnswer;
 	}
 	
-	    //getter for quiz question answer
-		public static String getKeyAnswer() {
-			return keyAnswer;
-		}
 	
 	public static String answerA() {return "a";}
 	public static String answerB() {return "b";}

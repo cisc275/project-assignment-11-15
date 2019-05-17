@@ -1,5 +1,7 @@
 package Files;
 
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -10,11 +12,25 @@ public class Quiz {
 	
 	static String qPrompt;
 	static String qAnswer;
-	static String userAnswer;
+	static String userAnswer = "d";
 	static Question randQuestion;
 	static ArrayList<Question> questions;
 	
+	private volatile static boolean quizFlag = false;
+
+	
 	private static KeyPress keypress;
+	private static View view;
+	private static Controller controller;
+	
+	static final int MENU = 0;
+	static final int CLAPPERRAIL1 = 1;
+	static final int CLAPPERRAIL2 = 2;
+	static final int CLAPPERRAIL3 = 3;
+	static final int REDKNOT = 4;
+	static final int WINNER = 5;
+	static final int LOSER = 6;
+	static final int REDKNOTCTN = 7;
 	
 	/**
 	 * Creates an array of quiz questions 
@@ -42,30 +58,28 @@ public class Quiz {
 	}
 	
 	public static String getPrompt() {
-		//quiz();
-		//System.out.println();
-		return qPrompt;
+			//quiz();
+			return qPrompt;	
 	}
 	
 	public static String getAnswer() {
 		return qAnswer;
 	}
 	
-	public static void quiz() {
+	public static void quiz() throws InterruptedException {
 		takeTest(questions);
 	}
-		
+	
 	
     /**
 	 * Allows you to answer a quiz question
 	 *
 	 * @author Paul Jureidini
 	 * @param ArrayList<Questions>
+     * @throws InterruptedException 
 	 * 
 	 * */
-	public static void takeTest(ArrayList<Question> questions) {
-		int score = 0;
-		userAnswer = null;
+	public static void takeTest(ArrayList<Question> questions) throws InterruptedException {
 		
 		Scanner keyboardInput = new Scanner(System.in);
 		
@@ -79,49 +93,47 @@ public class Quiz {
 		qAnswer = randQuestion.answer;
 		
 		System.out.println(qPrompt);
-		
+
 		
 		//String answer = keyboardInput.nextLine();
-		 
+		//KeyEvent e = null;
+//		Model.changeGameMode(LOSER);
 		
-		//System.out.println(answer);
-//		if(userAnswer != null) {
-//			userAnswer = null;
-//			while(userAnswer == null) {
-//				userAnswer = keypress.getKeyAnswer(); //WHY WONT userAnswer GO TO NULL AFTER SECOND QUIZ QUESTION
-//			}
+//		while(isQuizFlag() == false)
+//		{
+//		
+//		  Thread.sleep(1000);
+//		  keypress.keyReleased(null);
+//		  System.out.println("in quizFlag");
 //		}
 		
-		while(userAnswer == null) {
-			userAnswer = keypress.getKeyAnswer();
-		}
+		userAnswer = keypress.getQuizAnswer();
+
 		
-		
-		if(qAnswer.equals(userAnswer)) {
+		if(qAnswer == userAnswer) {
 			System.out.println("CORRECT!");
-			userAnswer = null;
 			System.out.println(userAnswer); 
 			System.out.println(qAnswer);
 			
-			Model.changeGameMode(Controller.REDKNOT); //ctn the red knot game
-			
-			//return true;
 		}else {
+			
 			System.out.println("WRONG!");
-			userAnswer = null;
 			System.out.println(userAnswer); 
 			System.out.println(qAnswer);
 			
-			Model.changeGameMode(Controller.MENU);
 			
-			//return false;
-		}
-		
-		
-		
+		}	
+	}
+
+	public static boolean isQuizFlag() {
+		return quizFlag;
+	}
+
+	public static void setQuizFlag(boolean quizFlag) {
+		Quiz.quizFlag = quizFlag;
 	}
 	
-	
 
+	
 }// end Quiz class
 

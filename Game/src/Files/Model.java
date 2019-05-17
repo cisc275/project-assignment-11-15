@@ -83,7 +83,10 @@ public class Model{
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 5;
-	static int DEAD = 2; //clapper rail game, 5 collisions = dead
+	static int DEAD = 200; //clapper rail game, 5 collisions = dead
+	
+	static int falconCount = 0; // initialized to 0
+	
 	
 	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600};
     
@@ -107,7 +110,7 @@ public class Model{
     public static void changeGameMode(int gameMode) {
     	switch(gameMode) {
     	case(MENU):
-    		quiz.userAnswer = null;
+    		//quiz.userAnswer = null;
     		
     		gameMode = MENU;
     		removeAllObjects();
@@ -148,12 +151,13 @@ public class Model{
     		View.gameMode = CLAPPERRAIL3;
     		break;
     	case(REDKNOT):
-    		quiz.userAnswer = null;
+    		//quiz.userAnswer = null;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
+    		falconCount = 0;
     		setUpRedKnotGame();
     		
     		break;
@@ -163,7 +167,12 @@ public class Model{
     	case(LOSER):
     		View.gameMode = LOSER;
     		//Quiz.userAnswer = null;
-    		//Quiz.quiz(); //run QUIZ
+    		try {
+				Quiz.quiz();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} //run QUIZ
     		break;
     	case(REDKNOTCTN):
     		deathToll = 0;
@@ -358,7 +367,7 @@ public class Model{
 		    			deathToll++;
 		    			if (deathToll >= DEAD) { //LOSER screen clapper rail
 		    				changeGameMode(LOSER);
-		    				Quiz.quiz();
+		    				//Quiz.quiz();
 		    			}
 		    		}
 		    	}
@@ -385,18 +394,23 @@ public class Model{
     	}
     }
     
+    public static int getFalconCount() {
+    	return falconCount;
+    }
     
     /**
 	 * Method to increment all objects toward the left side of the screen
 	 * in the Red Knot game. Also generates new objects
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * 
 	 * */
     public static void slideObjectsLeft() {
     	if(slidePredators) {
     		for(Animal p: predators) {
     			p.x -= 1;
+    			falconCount++;
+    			System.out.println(falconCount);
     		}
     		for(Cloud c: clouds) {
     			c.move(CLOUD_FAST);

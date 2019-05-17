@@ -44,6 +44,14 @@ public class View extends JPanel{
 	
 	int bigText = 40;
 	
+	//int quizFlag = 1;
+	
+	static int startMigration = 0;
+	static int quarterMigration = 62500;
+	static int halfMigration = 125000;
+	static int threequarterMigration = 187500;
+	static int endMigration = 250000; //falconCount after ~1min
+	
 	
 	ArrayList<GamePiece> allObj;
 	ArrayList<Animal> predators;
@@ -277,6 +285,22 @@ public class View extends JPanel{
 				g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 				break;
 			}	
+			
+			//handling the migration path of the red knot
+			if(Model.getFalconCount() > startMigration && Model.getFalconCount() < quarterMigration) {
+				g.drawString("Delaware", 600, 100);
+			}else if(Model.getFalconCount() > quarterMigration && Model.getFalconCount() < halfMigration) {
+				g.drawString("Quart Migration Point", 600, 100);
+			}else if(Model.getFalconCount() > halfMigration && Model.getFalconCount() < threequarterMigration) {
+				g.drawString("Half-Way Migration Point", 600, 100);
+			}else if(Model.getFalconCount() > threequarterMigration && Model.getFalconCount() < endMigration) {
+				g.drawString("Three-Quarters Migration Point", 600, 100);
+			}else if(Model.getFalconCount() > endMigration) {
+				g.drawString("South America", 600, 100);
+				Model.changeGameMode(Controller.WINNER);
+			}
+			
+			
 			break;
 		case(WINNER): //WINNER screen 
 			this.setBackground(Color.GREEN);
@@ -287,10 +311,20 @@ public class View extends JPanel{
 		case(LOSER): //LOSER screen 
 			this.setBackground(Color.RED);
 			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
-			g.drawString(Quiz.getPrompt(), 10, 10); //gets the question prompt to display
+			
+			
+//			try {
+//				Quiz.quiz();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+
+			g.drawString(quiz.getPrompt(), 10, 10); //gets the question prompt to display
+
 			//System.out.println(quiz.getPrompt());
 			g.drawString("Press the DOWN arrow key to go back to the main menu", 200, 400);
-			//Quiz.quiz();
+			
 			break;
 		}
 	}
