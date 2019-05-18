@@ -100,11 +100,16 @@ public class View extends JPanel{
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.pack();
+        try {
+            Thread.sleep(100); //Buffer to get proper frame size maximization
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         frame.setVisible(true);
         frameHeight = frame.getHeight();
         frameWidth = frame.getWidth();
         loadImages();
-
+        
         gameMode = MENU;
 	}
 	
@@ -194,7 +199,7 @@ public class View extends JPanel{
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, frameWidth, 100);
 			g.setColor(Color.WHITE);
-			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, null, this);
+			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, frameWidth, frameHeight, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 			g.drawImage((BufferedImage)pics.get("arrowMap"), 100, 400, null, this);
@@ -223,8 +228,8 @@ public class View extends JPanel{
 			for(Animal p: predators) {
 				g.setColor(getColor(p.toString()));
 
-				g.fillRect(p.getX(), p.getY(), 50, 50);
-				g.drawImage((BufferedImage)pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
+				//g.fillRect(p.getX(), p.getY(), 50, 50);
+				//g.drawImage((BufferedImage)pics.get("myth"), p.getX(), p.getY(), 50, 50, this); //THarv Image Substituion
 
 				//g.fillRect(p.getX(), p.getY(), 50, 50);
 				g.drawImage((BufferedImage)pics.get("rt-hawk"), p.getX(), p.getY(), 50, 50, this); 
