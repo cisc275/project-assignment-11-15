@@ -99,84 +99,92 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == Controller.UP) {
-			switch(View.gameMode) {
-	    	case(Controller.MENU):
-	    		break;
-	    	case(Controller.CLAPPERRAIL0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.CLAPPERRAIL1):
-	    	case(Controller.CLAPPERRAIL2):
-	    	case(Controller.CLAPPERRAIL3):
-	    		Model.move(Direction.NORTH);
-	    		break;
-	    	case(Controller.REDKNOT0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.REDKNOT):
-	    		Model.move(Direction.NORTH);
-	    		break;
-	    	}
+		if(Model.running) { 
+			if (e.getKeyCode() == Controller.UP) {
+				switch(View.gameMode) {
+		    	case(Controller.MENU):
+		    		break;
+		    	case(Controller.CLAPPERRAIL0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.CLAPPERRAIL1):
+		    	case(Controller.CLAPPERRAIL2):
+		    	case(Controller.CLAPPERRAIL3):
+		    		Model.move(Direction.NORTH);
+		    		break;
+		    	case(Controller.REDKNOT0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.REDKNOT):
+		    		Model.move(Direction.NORTH);
+		    		break;
+		    	}
+				
+			}
+			if (e.getKeyCode() == Controller.LEFT) {
+				switch(View.gameMode) {
+		    	case(Controller.MENU):
+		    		Model.changeGameMode(Controller.CLAPPERRAIL0);
+		    		break;
+		    	case(Controller.CLAPPERRAIL0):
+		    		Model.setMovedTutorial(true);	    	
+		    	case(Controller.CLAPPERRAIL1):
+		    	case(Controller.CLAPPERRAIL2):
+		    	case(Controller.CLAPPERRAIL3):
+					Model.move(Direction.WEST);
+		    		break;
+		    	case(Controller.REDKNOT0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.REDKNOT):
+		    		break;
+		    	case(Controller.WINNER):
+		    	case(Controller.LOSER):
+		    		Model.changeGameMode(Controller.MENU);
+		    	}
+			}
+			if (e.getKeyCode() == Controller.RIGHT) {
+				switch(View.gameMode) {
+		    	case(Controller.MENU):
+		    		Model.changeGameMode(Controller.REDKNOT);
+		    		break;
+		    	case(Controller.CLAPPERRAIL0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.CLAPPERRAIL1):
+		    	case(Controller.CLAPPERRAIL2):
+		    	case(Controller.CLAPPERRAIL3):
+					Model.move(Direction.EAST);
+		    		break;
+		    	case(Controller.REDKNOT0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.REDKNOT):
+		    		break;
+		    	}
+			}
+			if (e.getKeyCode() == Controller.DOWN) {
+				switch(View.gameMode) {
+		    	case(Controller.MENU):
+		    		break;
+		    	case(Controller.CLAPPERRAIL0):
+		    		Model.move(Direction.SOUTH);
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.CLAPPERRAIL1):
+		    	case(Controller.CLAPPERRAIL2):
+		    	case(Controller.CLAPPERRAIL3):
+		    	case(Controller.REDKNOT0):
+		    		Model.setMovedTutorial(true);
+		    	case(Controller.REDKNOT):
+		    		Model.move(Direction.SOUTH);
+		    		break;
+		    	}
+			}
 			
+			if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
+				Model.changeGameMode(Controller.MENU);
+			}
 		}
-		if (e.getKeyCode() == Controller.LEFT) {
-			switch(View.gameMode) {
-	    	case(Controller.MENU):
-	    		Model.changeGameMode(Controller.CLAPPERRAIL0);
-	    		break;
-	    	case(Controller.CLAPPERRAIL0):
-	    		Model.setMovedTutorial(true);	    	
-	    	case(Controller.CLAPPERRAIL1):
-	    	case(Controller.CLAPPERRAIL2):
-	    	case(Controller.CLAPPERRAIL3):
-				Model.move(Direction.WEST);
-	    		break;
-	    	case(Controller.REDKNOT0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.REDKNOT):
-	    		break;
-	    	case(Controller.WINNER):
-	    	case(Controller.LOSER):
-	    		Model.changeGameMode(Controller.MENU);
-	    	}
+		if (e.getKeyChar() == 'p' || e.getKeyChar() == 'P') {
+			Model.running = !Model.running;
 		}
-		if (e.getKeyCode() == Controller.RIGHT) {
-			switch(View.gameMode) {
-	    	case(Controller.MENU):
-	    		Model.changeGameMode(Controller.REDKNOT);
-	    		break;
-	    	case(Controller.CLAPPERRAIL0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.CLAPPERRAIL1):
-	    	case(Controller.CLAPPERRAIL2):
-	    	case(Controller.CLAPPERRAIL3):
-				Model.move(Direction.EAST);
-	    		break;
-	    	case(Controller.REDKNOT0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.REDKNOT):
-	    		break;
-	    	}
-		}
-		if (e.getKeyCode() == Controller.DOWN) {
-			switch(View.gameMode) {
-	    	case(Controller.MENU):
-	    		break;
-	    	case(Controller.CLAPPERRAIL0):
-	    		Model.move(Direction.SOUTH);
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.CLAPPERRAIL1):
-	    	case(Controller.CLAPPERRAIL2):
-	    	case(Controller.CLAPPERRAIL3):
-	    	case(Controller.REDKNOT0):
-	    		Model.setMovedTutorial(true);
-	    	case(Controller.REDKNOT):
-	    		Model.move(Direction.SOUTH);
-	    		break;
-	    	}
-		}
-		
-		if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
-			Model.changeGameMode(Controller.MENU);
+		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'd') {
+			Model.deathToll++;
 		}
 	}
 }

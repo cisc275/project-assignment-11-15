@@ -76,7 +76,7 @@ public class View extends JPanel{
 	 * */
 	public void update() {
 		clk++;
-		if(clk > CLK_MAX) {
+		if(clk > CLK_MAX && Model.running) {
 			frameNum = (frameNum + 1) % frameCount;
 			clk = 0;
 		}
@@ -98,12 +98,16 @@ public class View extends JPanel{
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
        // frame.setVisible(true);
-        
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        try {
+            Thread.sleep(300); //Buffer to get proper frame size maximization
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        frame.setExtendedState(frame.getExtendedState()|JFrame.MAXIMIZED_BOTH );
         frame.setUndecorated(true);
         frame.pack();
         try {
-            Thread.sleep(100); //Buffer to get proper frame size maximization
+            Thread.sleep(300); //Buffer to get proper frame size maximization
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -118,7 +122,7 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -312,7 +316,10 @@ public class View extends JPanel{
 				case(1):
 					g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 					break;
-				}	
+				}
+				if(Model.RKquiz) {
+					g.drawImage((BufferedImage)pics.get("quizRK"), 0, 0, this);
+				}
 				break;
 			case(WINNER): //WINNER screen 
 				this.setBackground(Color.GREEN);

@@ -8,6 +8,8 @@ public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
     
+    static RKquiz RKq = new RKquiz();
+    
     static final int PREDHEIGHT = 50;
     static final int PREDWIDTH = 50;
 
@@ -18,6 +20,9 @@ public class Model{
 	static Boolean movePredators;
 	static Boolean slideObjects = false;
 	static Boolean slidePredators = false;
+	static Boolean RKquiz = false;
+	static Boolean CRquiz = false;
+	static Boolean running = true;
 
     private static int xloc;
     private static int yloc;
@@ -83,7 +88,7 @@ public class Model{
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 9;
-	static int DEAD = 4; //clapper rail game, 5 collisions = dead
+	static final int DEAD = 5; //5 collisions = dead
 	
 	static int[] yPoints = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600,
 			650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300,
@@ -156,14 +161,14 @@ public class Model{
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
-    	case(REDKNOT0):
+    	/*case(REDKNOT0):
     		removeAllObjects();
 			View.gameMode = REDKNOT0;
 			playerHealth = MAX_HEALTH;
 			deathToll = 0;
 			variableClock = CLK2MAX;
 			setUpRedKnotGame(0);
-			break;
+			break;*/
     	case(REDKNOT):
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
@@ -171,7 +176,7 @@ public class Model{
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
-    		setUpRedKnotGame(1);
+    		setUpRedKnotGame();
     		break;
     		
     	case(WINNER):
@@ -284,25 +289,6 @@ public class Model{
     		break;
     	}
     }
-    
-    
-    
-    
-    /**
-	 * Switching from tutorial mode to game mode for Redknot game
-	 *
-	 * @author Adheena Chacko
-	 * 
-	 * */
-	public static void gameLevelRedKnot(int level) {
-		if(Model.movedTutorial==false && gameMode == REDKNOT0) {
-    		gameMode = REDKNOT0;
-    	}
-    	else if(Model.movedTutorial && gameMode == REDKNOT0) {
-    		changeGameMode(REDKNOT);
-    	}
-    	
-	}
 	
     
     /**
@@ -422,14 +408,19 @@ public class Model{
 		    		if(a instanceof Animal) {
 		    			playerHealth--;
 		    			deathToll++;
-		    			if (deathToll >= DEAD) { //LOSER screen clapper rail
-		    				changeGameMode(LOSER);
+		    			if (deathToll >= DEAD) { 
+		    				switch(gameMode) {
+		    				case(REDKNOT):
+		    					RKquiz = true;
+		    					running = false;
+		    				}
+		    				//changeGameMode(LOSER);
 		    			}
 		    		}
 		    	}
 	    	}
     	} catch(ConcurrentModificationException e) {
-    		
+    		System.out.println("CME CAUGHT");
     	}
     }
     
@@ -542,25 +533,27 @@ public class Model{
 	 * 
 	 * */
 	void updateLocationAndDirection() {
-		if(clapperRail != null) { //If game is active
-			xloc = clapperRail.getX();
-			yloc = clapperRail.getY();
-			updateClock();
-			movePredators();
-		} else if (redKnot != null) {
-			xloc = redKnot.getX();
-			yloc = redKnot.getY();
-			updateClock();
-			slideObjectsLeft();
-			movePredators();
-			rotateTwigs();
-		} else {
-			if(slideObjects) {
-				for(Cloud c: clouds) {
-		    		c.move(1);
-		    	}
+		if(running) {
+			if(clapperRail != null) { //If game is active
+				xloc = clapperRail.getX();
+				yloc = clapperRail.getY();
+				updateClock();
+				movePredators();
+			} else if (redKnot != null) {
+				xloc = redKnot.getX();
+				yloc = redKnot.getY();
+				updateClock();
+				slideObjectsLeft();
+				movePredators();
+				rotateTwigs();
+			} else {
+				if(slideObjects) {
+					for(Cloud c: clouds) {
+			    		c.move(1);
+			    	}
+				}
+				updateClock();
 			}
-			updateClock();
 		}
 	}
 	
