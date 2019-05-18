@@ -232,10 +232,10 @@ public class Model{
     		System.out.println("Clapper Rail Tutorial");
 			clapperRail = new ClapperRail();
 			gameMode = CLAPPERRAIL0;
-			spawnObject(twigString, 200,400); //Spawn twig at 200(x) 400(y)
-			spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
-			spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
-			spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
+			spawnObject(twigString, 200,400, 0); //Spawn twig at 200(x) 400(y)
+			spawnObject(twigString, 300,100, 0); //Spawn twig at 300(x) 100(y)
+			spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
+			spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
 			break;
     	case(1):
     		System.out.println("Clapper Rail Level 1");
@@ -343,7 +343,7 @@ public class Model{
 				gameMode = REDKNOT;
 	    	
 	    	}
-
+	}
     /**
 	 * Function to return a list of all the present objects on the screen
 	 *

@@ -317,7 +317,7 @@ public class View extends JPanel{
 			case(WINNER): //WINNER screen 
 				this.setBackground(Color.GREEN);
 				g.drawString("WINNER", 200, 200);
-				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);\ 
+				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
 				break;
 				
 			case(LOSER): //LOSER screen 
