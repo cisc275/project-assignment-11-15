@@ -8,8 +8,6 @@ public class Model{
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
     
-    static RKquiz RKq = new RKquiz();
-    
     static final int PREDHEIGHT = 50;
     static final int PREDWIDTH = 50;
 

@@ -18,6 +18,8 @@ public class View extends JPanel{
 	static int frameHeight; //= 1080;
 	static final int IMGHEIGHT = 50;
 	static final int IMGWIDTH = 50;
+	static final int QUIZWIDTH = 3102;
+	static final int QUIZINDWIDTH = 1034;
 	static final int FRAMECOUNT = 2;
 	private static Direction dir;
     private int frameNum = 0;
@@ -127,12 +129,19 @@ public class View extends JPanel{
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
 				pics.put(s, newImg);
-			} else if(newImg.getWidth() == 2*IMGWIDTH) {
-				//System.out.println(s);
+			} else if (newImg.getWidth() == 2*IMGWIDTH) {
 				String str1 = s.concat("1");
 				String str2 = s.concat("2");
 				pics.put(str1, newImg.getSubimage(0*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
 				pics.put(str2, newImg.getSubimage(1*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
+			} else if(newImg.getWidth() == QUIZWIDTH) {
+				System.out.println(s);
+				String str1 = s.concat("1");
+				String str2 = s.concat("2");
+				String str3 = s.concat("3");
+				pics.put(str1, newImg.getSubimage(0*QUIZINDWIDTH, 0, QUIZINDWIDTH, newImg.getHeight()));
+				pics.put(str2, newImg.getSubimage(QUIZINDWIDTH, 0, QUIZINDWIDTH, newImg.getHeight()));
+				pics.put(str3, newImg.getSubimage(2*QUIZINDWIDTH, 0, QUIZINDWIDTH, newImg.getHeight()));
 			} else { 
 				pics.put(s, newImg);
 			}
@@ -318,7 +327,7 @@ public class View extends JPanel{
 					break;
 				}
 				if(Model.RKquiz) {
-					g.drawImage((BufferedImage)pics.get("quizRK"), 0, 0, this);
+					g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
 				}
 				break;
 			case(WINNER): //WINNER screen 

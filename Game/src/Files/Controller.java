@@ -184,7 +184,9 @@ class KeyPress implements KeyListener {
 			Model.running = !Model.running;
 		}
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'd') {
-			Model.deathToll++;
+			//Model.deathToll++;
+			Model.RKquiz = true;
+			Model.running = false;
 		}
 	}
 }
