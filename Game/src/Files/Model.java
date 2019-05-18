@@ -166,13 +166,6 @@ public class Model{
     		break;
     	case(LOSER):
     		View.gameMode = LOSER;
-    		//Quiz.userAnswer = null;
-    		try {
-				Quiz.quiz();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} //run QUIZ
     		break;
     	case(REDKNOTCTN):
     		deathToll = 0;
@@ -366,6 +359,12 @@ public class Model{
 		    			playerHealth--;
 		    			deathToll++;
 		    			if (deathToll >= DEAD) { //LOSER screen clapper rail
+		    				try {
+		    					Quiz.quiz();
+		    				} catch (InterruptedException e) {
+		    					// TODO Auto-generated catch block
+		    					e.printStackTrace();
+		    				} //run QUIZ
 		    				changeGameMode(LOSER);
 		    				//Quiz.quiz();
 		    			}
