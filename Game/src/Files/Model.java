@@ -2,10 +2,6 @@ package Files;
 
 import java.util.ArrayList;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
 import java.util.*;
 
 public class Model{
@@ -48,12 +44,16 @@ public class Model{
 	static int gameMode;
 	//static int alpha;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL1 = 1;
-	static final int CLAPPERRAIL2 = 2;
-	static final int CLAPPERRAIL3 = 3;
-	static final int REDKNOT = 4;
-	static final int WINNER = 5;
-	static final int LOSER = 6;
+	static final int CLAPPERRAIL0 = 1; 
+	static final int CLAPPERRAIL1 = 2;
+	static final int CLAPPERRAIL2 = 3;
+	static final int CLAPPERRAIL3 = 4;
+	static final int REDKNOT0 = 5;
+	static final int REDKNOT = 6;
+	static final int WINNER = 7;
+	static final int LOSER = 8;
+	
+	static boolean movedTutorial = false;
 
 	static final int CLOUD_FAST = 16;
 	
@@ -79,6 +79,7 @@ public class Model{
 	static int playerHealth;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
 	static int bushMax = 4; 
+	static int bushMaxTutorial = 2;
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 9;
@@ -99,8 +100,8 @@ public class Model{
     /**
 	 * Changes the game and resets the scene. 0 = Main menu, 1 = Clapper rail, 2 = Red knot
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
-	 * @param Game mode to change to. Either 0, 1, 2, 3 OR 4
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo, Adheena Chacko
+	 * @param Game mode to change to. Either 0, 1, 2, 3, 4, 5, 6, 7, or 8
 	 * 
 	 * */
     public static void changeGameMode(int gameMode) {
@@ -113,7 +114,17 @@ public class Model{
     		clapperRail = null;
     		redKnot = null;
     		View.gameMode = MENU;
+    		movedTutorial = false;
     		break;
+    	case(CLAPPERRAIL0):
+    		resetBushTrans();
+			twigCount = 0;
+			bushCount = 0;
+			deathToll = 0;
+			playerHealth = MAX_HEALTH;
+			setUpClapperRailGameLevel(0);
+			View.gameMode = CLAPPERRAIL0;
+			break;
     	case(CLAPPERRAIL1):
     		resetBushTrans();
     		twigCount = 0;
@@ -145,6 +156,14 @@ public class Model{
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
+    	case(REDKNOT0):
+    		removeAllObjects();
+			View.gameMode = REDKNOT0;
+			playerHealth = MAX_HEALTH;
+			deathToll = 0;
+			variableClock = CLK2MAX;
+			setUpRedKnotGame(0);
+			break;
     	case(REDKNOT):
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
@@ -152,7 +171,7 @@ public class Model{
     		playerHealth = MAX_HEALTH;
     		deathToll = 0;
     		variableClock = CLK2MAX;
-    		setUpRedKnotGame();
+    		setUpRedKnotGame(1);
     		break;
     		
     	case(WINNER):
@@ -167,12 +186,15 @@ public class Model{
     /**
 	 * Switching game levels in Clapper Rail game
 	 *
-	 * @author Paul Jureidini, Amjed Hallak
+	 * @author Paul Jureidini, Amjed Hallak, Amelia Abobo
 	 * 
 	 * */
     public static void gameLevelClapperRail() {
-    	if(bushCount < bushMax && gameMode == CLAPPERRAIL1) {
-    		gameMode = CLAPPERRAIL1;
+    	if(bushCount < bushMaxTutorial && gameMode == CLAPPERRAIL0) {
+    		gameMode = CLAPPERRAIL0;
+    	}
+    	else if(bushCount == bushMaxTutorial && gameMode == CLAPPERRAIL0) {
+    		changeGameMode(CLAPPERRAIL1);
     	}
     	else if (bushCount == bushMax && gameMode == CLAPPERRAIL1) {
     		changeGameMode(CLAPPERRAIL2);
@@ -200,12 +222,21 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game 
 	 * 
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Amelia Abobo
 	 * @param Level number
 	 * 
 	 * */
     public static void setUpClapperRailGameLevel(int level) {
     	switch(level) {
+    	case(0):
+    		System.out.println("Clapper Rail Tutorial");
+			clapperRail = new ClapperRail();
+			gameMode = CLAPPERRAIL0;
+			spawnObject(twigString, 200,400); //Spawn twig at 200(x) 400(y)
+			spawnObject(twigString, 300,100); //Spawn twig at 300(x) 100(y)
+			spawnObject(bushString, 500,200);//Spawn bush at 500(x) 200(y)
+			spawnObject(predStr, 500, 300);//Spawn predator at 500(x) 300(y)
+			break;
     	case(1):
     		System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail();
@@ -254,10 +285,30 @@ public class Model{
     	}
     }
     
+    
+    
+    
+    /**
+	 * Switching from tutorial mode to game mode for Redknot game
+	 *
+	 * @author Adheena Chacko
+	 * 
+	 * */
+	public static void gameLevelRedKnot(int level) {
+		if(Model.movedTutorial==false && gameMode == REDKNOT0) {
+    		gameMode = REDKNOT0;
+    	}
+    	else if(Model.movedTutorial && gameMode == REDKNOT0) {
+    		changeGameMode(REDKNOT);
+    	}
+    	
+	}
+	
+    
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Adheena Chacko
 	 * 
 	 * */
     public static void setUpRedKnotGame() {
@@ -269,6 +320,29 @@ public class Model{
     	clouds.add(new Cloud(spawnX, 400, 1.4, 1));
 		gameMode = REDKNOT;
     }
+  
+    
+	public static void setUpRedKnotGame(int level) {
+	    	
+	    	switch(level) {
+	    	case(0):
+		    	redKnot = new RedKnot();
+		    	redKnot.setX(DEFAULT_RK_X);
+		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+				gameMode = REDKNOT0;
+	    	case(1):
+	    		redKnot = new RedKnot();
+		    	redKnot.setX(DEFAULT_RK_X);
+		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
+		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
+		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
+		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
+				gameMode = REDKNOT;
+	    	
+	    	}
 
     /**
 	 * Function to return a list of all the present objects on the screen
@@ -656,6 +730,9 @@ public class Model{
 			cpclouds.add(c);
 		return cpclouds;
 	}
+	public static boolean getMovedTutorial() { return movedTutorial;}
+	public static void setMovedTutorial(boolean bool) {movedTutorial=bool;}
+	
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }
     public static int getBushCount() { return bushCount; }

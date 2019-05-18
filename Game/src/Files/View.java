@@ -28,12 +28,14 @@ public class View extends JPanel{
 	int clk = 0;
 	static int gameMode = -1;
 	static final int MENU = 0;
-	static final int CLAPPERRAIL1 = 1;
-	static final int CLAPPERRAIL2 = 2;
-	static final int CLAPPERRAIL3 = 3;
-	static final int REDKNOT = 4;
-	static final int WINNER = 5;
-	static final int LOSER = 6;
+	static final int CLAPPERRAIL0 = 1; 
+	static final int CLAPPERRAIL1 = 2;
+	static final int CLAPPERRAIL2 = 3;
+	static final int CLAPPERRAIL3 = 4;
+	static final int REDKNOT0 = 5;
+	static final int REDKNOT = 6;
+	static final int WINNER = 7;
+	static final int LOSER = 8;
 	static final int CLK_MAX = 150;
 	
 	//static int bushMax = 4;
@@ -186,7 +188,7 @@ public class View extends JPanel{
     /**
 	 * Paints the frame based on the current game mode and model logic
 	 *
-	 * @author Amjed Hallak, Paul Jureidini
+	 * @author Amjed Hallak, Paul Jureidini, Amelia Abobo
 	 * @param The view. Everything you see in the game.
 	 * 
 	 * */
@@ -202,6 +204,7 @@ public class View extends JPanel{
 			g.drawImage((BufferedImage)pics.get("mmenubkg"), 0, 0, frameWidth, frameHeight, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
+
 			g.drawImage((BufferedImage)pics.get("arrowMap"), 100, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
@@ -211,6 +214,7 @@ public class View extends JPanel{
 			g.drawString("Estuary Birds", 325, 65);
 			break;
 			
+		case(CLAPPERRAIL0):
 		case(CLAPPERRAIL1): //Cycle through all levels
 		case(CLAPPERRAIL2):
 		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
@@ -241,7 +245,20 @@ public class View extends JPanel{
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			g.drawString("Bush count: " + Model.bushCount, 500,75);
-			switch(gameMode) {
+		
+		switch(gameMode) {
+			case(CLAPPERRAIL0):
+				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
+				g.setColor(Color.red);
+				g.drawString("CLAPPER RAIL TUTORIAL", 10, 20);
+				g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
+				if (Model.getMovedTutorial()) {
+					g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 10, 350);
+				}
+				if(Model.getTwigCount()==2) {
+					g.drawString("BRING TWIGS TO THE BUSH", 0, 400);
+				}
+				break;
 			case(CLAPPERRAIL1): //Cycle through all levels
 				g.drawString("LEVEL 1", 10, 20);
 				break;
@@ -254,52 +271,62 @@ public class View extends JPanel{
 			}
 			break;
 			
-		case(REDKNOT): // Red Knot Game View Logic
-			this.setBackground(Color.CYAN);
-			allObj = Model.getAllObjects(withoutPlayer, withPreds);
-			predators = Model.getPredators();
-			g.drawString("REDKNOT GAME", 100, 100);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			clouds = Model.getClouds();
-			for (Cloud c: clouds) {
-				g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
-			}
-			for(GamePiece gp: allObj) {
-				g.setColor(getColor(gp.toString()));
-				g.fillRect(gp.getX(), gp.getY(), 50, 50);
-			}
-			for(Animal p: predators) {
+
+			case(REDKNOT0):
+				g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+				g.setColor(Color.red);
+				g.drawString("RED KNOT TUTORIAL", 10, 20);
+				g.drawString("USE UP AND DOWN ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
+				if (Model.getMovedTutorial()) {
+					g.drawString("AVOID PREDATORS", 10, 350);
+				}
+				break;
+			case(REDKNOT): // Red Knot Game View Logic
+				this.setBackground(Color.CYAN);
+				allObj = Model.getAllObjects(withoutPlayer, withPreds);
+				predators = Model.getPredators();
+				g.drawString("REDKNOT GAME", 100, 100);
+				g.drawString("death toll lol: " + Model.deathToll, 500,50);
+				clouds = Model.getClouds();
+				for (Cloud c: clouds) {
+					g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
+				}
+				for(GamePiece gp: allObj) {
+					g.setColor(getColor(gp.toString()));
+					g.fillRect(gp.getX(), gp.getY(), 50, 50);
+				}
+				for(Animal p: predators) {
+					switch(frameNum) {
+					case(0):
+						g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+						break;
+					case(1):
+						g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+						break;
+					}
+				}
 				switch(frameNum) {
 				case(0):
-					g.drawImage((BufferedImage)pics.get("falcon1"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
 					break;
 				case(1):
-					g.drawImage((BufferedImage)pics.get("falcon2"),  p.getX(), p.getY(), null, this);
+					g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 					break;
-				}
+				}	
+				break;
+			case(WINNER): //WINNER screen 
+				this.setBackground(Color.GREEN);
+				g.drawString("WINNER", 200, 200);
+				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);\ 
+				break;
+				
+			case(LOSER): //LOSER screen 
+				this.setBackground(Color.RED);
+				g.drawString("Sorry, You Lost. Try Again!", 200, 200);
+				g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
+				break;
 			}
-			switch(frameNum) {
-			case(0):
-				g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);
-				break;
-			case(1):
-				g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
-				break;
-			}	
-			break;
-		case(WINNER): //WINNER screen 
-			this.setBackground(Color.GREEN);
-			g.drawString("WINNER", 200, 200);
-			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
-			break;
-			
-		case(LOSER): //LOSER screen 
-			this.setBackground(Color.RED);
-			g.drawString("Sorry, You Lost. Try Again!", 200, 200);
-			g.drawString("Press the LEFT arrow key to go back to the main menu", 200, 400);
-			break;
 		}
-	}
 	
 	@Override
 	public int getWidth() { return View.frameWidth; }
