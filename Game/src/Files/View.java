@@ -300,7 +300,6 @@ public class View extends JPanel{
 				Model.changeGameMode(Controller.WINNER);
 			}
 			
-			
 			break;
 		case(WINNER): //WINNER screen 
 			this.setBackground(Color.GREEN);

@@ -83,7 +83,7 @@ public class Model{
 	static int bushTrans = 50;
 	static int flightTime = 0;
 	static int predCount = 5;
-	static int DEAD = 200; //clapper rail game, 5 collisions = dead
+	static int DEAD = 5; //clapper rail game, 5 collisions = dead
 	
 	static int falconCount = 0; // initialized to 0
 	
@@ -410,7 +410,7 @@ public class Model{
     		for(Animal p: predators) {
     			p.x -= 1;
     			falconCount++;
-    			System.out.println(falconCount);
+    			//System.out.println(falconCount);
     		}
     		for(Cloud c: clouds) {
     			c.move(CLOUD_FAST);
