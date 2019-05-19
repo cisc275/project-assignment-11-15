@@ -353,6 +353,18 @@ public class View extends JPanel{
 						}
 					}
 				}
+			/*	if(Model.getFalconCount() > startMigration && Model.getFalconCount() < quarterMigration) {
+					g.drawString("Delaware", 600, 100);
+				}else if(Model.getFalconCount() > quarterMigration && Model.getFalconCount() < halfMigration) {
+					g.drawString("Quart Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > halfMigration && Model.getFalconCount() < threequarterMigration) {
+					g.drawString("Half-Way Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > threequarterMigration && Model.getFalconCount() < endMigration) {
+					g.drawString("Three-Quarters Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > endMigration) {
+					g.drawString("South America", 600, 100);
+					Model.changeGameMode(Controller.WINNER);
+				}*/
 				if(Model.RKtutorial) {
 					g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
 					g.setColor(Color.BLUE);
