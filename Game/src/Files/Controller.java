@@ -101,22 +101,27 @@ class KeyPress implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		if(Model.RKquiz) {
 			if (e.getKeyCode() == Controller.UP) {
+				if(Model.answered) {
+					Model.changeGameMode(Controller.MENU);
+				}
 				//always wrong, answer never B
 				Model.answered = true;
 			}
 			if (e.getKeyCode() == Controller.LEFT) {
-				if(Model.answered) {
-					Model.changeGameMode(Controller.MENU);
-				}
+				
 				switch(Model.quizNum) {
 				case(1): //correct
-					System.out.println("YEAH");
+					Model.running = true;
+					Model.deathToll = 0;
+					Model.RKquiz = false;
 					break;
 				case(2): //incorrect
 					Model.answered = true;
 					break;
 				case(3): //correct
-					System.out.println("YEAH");
+					Model.running = true;
+					Model.deathToll = 0;
+					Model.RKquiz = false;
 					break;
 				}
 			}
@@ -126,7 +131,9 @@ class KeyPress implements KeyListener {
 					Model.answered = true;
 					break;
 				case(2): //correct
-					System.out.println("YEAH");
+					Model.running = true;
+					Model.deathToll = 0;
+					Model.RKquiz = false;
 					break;
 				case(3): //incorrect
 					Model.answered = true;

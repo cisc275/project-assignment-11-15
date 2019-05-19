@@ -49,6 +49,7 @@ public class Model{
 	static int P_RANDMIN = 0;
 	static int xTotal = 0;
 	static int quizNum;
+	static int falconCount;
    
 	static int gameMode;
 	//static int alpha;
@@ -81,6 +82,7 @@ public class Model{
 	static final int DEFAULT_BUSH_ALPHA = 50;
 	static final int MAX_HEALTH = 100;
 	static final int DEFAULT_RK_X = 100;
+	static final int PREDS_DISABLE_TUTORIAL = 50;
 	
 	static double variableClock = CLK2MAX;
 	static int twigCount = 0;
@@ -119,6 +121,7 @@ public class Model{
     	switch(gameMode) {
     	case(MENU):
     		gameMode = MENU;
+    		running = true;
     		removeAllObjects();
     		startMenu();
     		clapperRail = null;
@@ -170,6 +173,7 @@ public class Model{
     	case(REDKNOT):
     		RKtutorial = true;
     		enableTut = true;
+    		falconCount = 0;
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
@@ -449,6 +453,7 @@ public class Model{
     			while(i < predCount) {
     				spawnObject(predStr, spawnX, yCoords[i], 0);
     				i++;
+    				falconCount++;
     			}
     		}
     	}
@@ -506,13 +511,12 @@ public class Model{
     }
     
     /**
-	 * Controls timer for showing map prior to Red Knot game
+	 * Controls scanning for showing map prior to Red Knot game
 	 *
 	 * @author Amjed Hallak
 	 * 
 	 * */
-    public void updateMapClk() {
-    	//mapClk++;
+    public void updateMapChk() {
     	if(!enableTut) {
     		showMap = false;
     		running = true;
@@ -527,7 +531,12 @@ public class Model{
 	 * 
 	 * */
 	void updateLocationAndDirection() {
-		updateMapClk();
+		if(falconCount == 0) {
+			updateMapChk();
+		}
+		if(falconCount > PREDS_DISABLE_TUTORIAL) {
+			RKtutorial = false;
+		}
 		if(running) {
 			if(clapperRail != null) { //If game is active
 				xloc = clapperRail.getX();
