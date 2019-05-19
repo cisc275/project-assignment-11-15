@@ -16,6 +16,7 @@ public class View extends JPanel{
 	
 	static int frameWidth;//= 1920;
 	static int frameHeight; //= 1080;
+	static final int MIN_FRAME_WIDTH = 100;
 	static final int IMGHEIGHT = 50;
 	static final int IMGWIDTH = 50;
 	static final int QUIZWIDTH = 3102;
@@ -100,22 +101,24 @@ public class View extends JPanel{
         frame.addKeyListener(new KeyPress());
         //frame.setFocusable(true);
        // frame.setVisible(true);
-        try {
-            Thread.sleep(300); //Buffer to get proper frame size maximization
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while(frameWidth < MIN_FRAME_WIDTH) {
+	        try {
+	            Thread.sleep(300); //Buffer to get proper frame size maximization
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	        frame.setExtendedState(frame.getExtendedState()|JFrame.MAXIMIZED_BOTH );
+	        //frame.setUndecorated(true);
+	        frame.pack();
+	        try {
+	            Thread.sleep(300); //Buffer to get proper frame size maximization
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	        frame.setVisible(true);
+	        frameHeight = frame.getHeight();
+	        frameWidth = frame.getWidth();
         }
-        frame.setExtendedState(frame.getExtendedState()|JFrame.MAXIMIZED_BOTH );
-        frame.setUndecorated(true);
-        frame.pack();
-        try {
-            Thread.sleep(300); //Buffer to get proper frame size maximization
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        frame.setVisible(true);
-        frameHeight = frame.getHeight();
-        frameWidth = frame.getWidth();
         loadImages();
         
         gameMode = MENU;
@@ -124,7 +127,8 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
+				"arrowKeys", "ptr"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -135,7 +139,7 @@ public class View extends JPanel{
 				pics.put(str1, newImg.getSubimage(0*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
 				pics.put(str2, newImg.getSubimage(1*IMGWIDTH, 0, IMGWIDTH, IMGHEIGHT));
 			} else if(newImg.getWidth() == QUIZWIDTH) {
-				System.out.println(s);
+				//System.out.println(s);
 				String str1 = s.concat("1");
 				String str2 = s.concat("2");
 				String str3 = s.concat("3");
@@ -184,9 +188,8 @@ public class View extends JPanel{
 		case("Twig"):
 			return Color.GREEN;
 		case("GamePiece"):
-			return Color.yellow;
+			return Color.YELLOW;
 		case("Bush"):
-			
 			if(Model.getBushCount() < Model.getBushMax()) {
 				Color myColour = new Color(102, 51, 0, Model.getBushTrans()); //bushTrans
 				return myColour;
@@ -262,14 +265,16 @@ public class View extends JPanel{
 		switch(gameMode) {
 			case(CLAPPERRAIL0):
 				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
-				g.setColor(Color.red);
-				g.drawString("CLAPPER RAIL TUTORIAL", 10, 20);
-				g.drawString("USE UP, DOWN, LEFT, AND RIGHT ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
+				g.setColor(Color.WHITE);
+				g.drawString("Build a nest for your safety!", 10, 20);
+				g.drawImage((BufferedImage)pics.get("ptr"), Model.getX() - 50, Model.getY() - 100, null, this);
+				g.drawString("Use the up, down, left, and right arrow keys to move the Clapper Rail", 10, 300);
+				//g.drawImage((BufferedImage)pics.get("arrowKeys"), 10, 320, 200, 150, null, this);
 				if (Model.getMovedTutorial()) {
-					g.drawString("AVOID PREDATORS AND PICK UP TO TWO TWIGS", 10, 350);
+					g.drawString("Avoid predators and pick up twigs, up to 2 at a time", 10, 350);
 				}
 				if(Model.getTwigCount()==2) {
-					g.drawString("BRING TWIGS TO THE BUSH", 0, 400);
+					g.drawString("Bring the twigs to the pile!", 0, 400);
 				}
 				break;
 			case(CLAPPERRAIL1): //Cycle through all levels
@@ -327,7 +332,17 @@ public class View extends JPanel{
 					break;
 				}
 				if(Model.RKquiz) {
-					g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
+					switch(Model.quizNum) {
+					case(1):
+						g.drawImage((BufferedImage)pics.get("quizRK1"), 0, 0, this);
+						break;
+					case(2):
+						g.drawImage((BufferedImage)pics.get("quizRK2"), 0, 0, this);
+						break;
+					case(3):
+						g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
+						break;
+					}
 				}
 				break;
 			case(WINNER): //WINNER screen 

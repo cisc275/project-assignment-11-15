@@ -10,6 +10,7 @@ public class Model{
     
     static final int PREDHEIGHT = 50;
     static final int PREDWIDTH = 50;
+    static final int QUIZCOUNT = 3;
 
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
@@ -43,6 +44,7 @@ public class Model{
 	static int P_RANDMAX = 23;
 	static int P_RANDMIN = 0;
 	static int xTotal = 0;
+	static int quizNum;
    
 	static int gameMode;
 	//static int alpha;
@@ -233,7 +235,7 @@ public class Model{
     	switch(level) {
     	case(0):
     		System.out.println("Clapper Rail Tutorial");
-			clapperRail = new ClapperRail();
+			clapperRail = new ClapperRail(150, 200);
 			gameMode = CLAPPERRAIL0;
 			spawnObject(twigString, 200,400, 0); //Spawn twig at 200(x) 400(y)
 			spawnObject(twigString, 300,100, 0); //Spawn twig at 300(x) 100(y)
@@ -242,7 +244,7 @@ public class Model{
 			break;
     	case(1):
     		System.out.println("Clapper Rail Level 1");
-			clapperRail = new ClapperRail();
+			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL1;
 	    	spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
 	    	spawnObject(twigString, 200,100,40);
@@ -255,7 +257,7 @@ public class Model{
     		break;
     	case(2):
     		System.out.println("Clapper Rail Level 2");
-			clapperRail = new ClapperRail();
+			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL2;
 			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
 	    	spawnObject(twigString, 200,100,40);
@@ -270,7 +272,7 @@ public class Model{
     		break;
     	case(3):
     		System.out.println("Clapper Rail Level 3");
-			clapperRail = new ClapperRail();
+			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL3;
 			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
 	    	spawnObject(twigString, 200,100,40);
@@ -409,6 +411,7 @@ public class Model{
 		    			if (deathToll >= DEAD) { 
 		    				switch(gameMode) {
 		    				case(REDKNOT):
+		    					quizNum = (int)(Math.random() * QUIZCOUNT + 1);
 		    					RKquiz = true;
 		    					running = false;
 		    				}
@@ -722,7 +725,7 @@ public class Model{
 		return cpclouds;
 	}
 	public static boolean getMovedTutorial() { return movedTutorial;}
-	public static void setMovedTutorial(boolean bool) {movedTutorial=bool;}
+	public static void setMovedTutorial(Boolean bool) { movedTutorial=bool; }
 	
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }

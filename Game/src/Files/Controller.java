@@ -99,6 +99,38 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if(Model.RKquiz) {
+			if (e.getKeyCode() == Controller.UP) {
+				//always wrong, answer never B
+				System.out.println("NO");
+			}
+			if (e.getKeyCode() == Controller.LEFT) {
+				switch(Model.quizNum) {
+				case(1): //correct
+					System.out.println("YEAH");
+					break;
+				case(2): //incorrect
+					System.out.println("NO");
+					break;
+				case(3): //correct
+					System.out.println("YEAH");
+					break;
+				}
+			}
+			if (e.getKeyCode() == Controller.RIGHT) {
+				switch(Model.quizNum) {
+				case(1): //incorrect
+					System.out.println("NO");
+					break;
+				case(2): //correct
+					System.out.println("YEAH");
+					break;
+				case(3): //incorrect
+					System.out.println("NO");
+					break;
+				}
+			}
+		}
 		if(Model.running) { 
 			if (e.getKeyCode() == Controller.UP) {
 				switch(View.gameMode) {
@@ -163,7 +195,6 @@ class KeyPress implements KeyListener {
 		    	case(Controller.MENU):
 		    		break;
 		    	case(Controller.CLAPPERRAIL0):
-		    		Model.move(Direction.SOUTH);
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
@@ -184,9 +215,9 @@ class KeyPress implements KeyListener {
 			Model.running = !Model.running;
 		}
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'd') {
-			//Model.deathToll++;
-			Model.RKquiz = true;
-			Model.running = false;
+			Model.deathToll++;
+			//Model.RKquiz = true;
+			//Model.running = false;
 		}
 	}
 }
