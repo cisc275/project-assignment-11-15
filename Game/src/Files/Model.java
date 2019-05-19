@@ -74,7 +74,7 @@ public class Model{
 	static int clk2Count = 0;
 	static double clk3Count = 0;
 	static int clk4Count = 0;
-	static final double CLK4MAX = 10000;
+	static final double CLK4MAX = 200;
 	static final double CLKMAX = 1000;
 	static final double CLK2MAX = CLKMAX/256;
 	static final int GRAVEYARD = 100000;
@@ -296,7 +296,6 @@ public class Model{
     		break;
     	}
     }
-	
     
     /**
 	 * Sets up general testbed for the Red Knot game. Currently spawns objects
@@ -374,7 +373,7 @@ public class Model{
 		    			if(!recovering) {
 			    			playerHealth--;
 			    			deathToll++;
-			    			System.out.println("RECOVERY BEGIN");
+			    			System.out.println("1- RECOVERY BEGIN");
 			    			recovering = true;
 		    			}
 		    		}
@@ -395,12 +394,10 @@ public class Model{
 	    	for(Animal a: predators) {
 		    	if (b.getX() == a.getX() && b.getY() == a.getY()) {
 		    		if(a instanceof Animal) {
-		    			playerHealth--;
-		    			deathToll++;
 		    			if(!recovering) {
 			    			playerHealth--;
 			    			deathToll++;
-			    			System.out.println("RECOVERY BEGIN");
+			    			System.out.println("2 - RECOVERY BEGIN");
 			    			recovering = true;
 		    			}
 		    			if (deathToll >= DEAD) { 
