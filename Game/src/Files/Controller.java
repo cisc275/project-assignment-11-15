@@ -99,6 +99,12 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if(Model.rkWin) {
+			if (e.getKeyCode() == Controller.UP) {
+				Model.changeGameMode(Controller.MENU);
+				Model.running = true;
+			}
+		}
 		if(Model.RKquiz) {
 			if (e.getKeyCode() == Controller.UP) {
 				if(Model.answered) {
@@ -180,7 +186,8 @@ class KeyPress implements KeyListener {
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
-		    		
+		    		//Model.falconCount+= 50;
+		    		//Model.distanceCount += 50;
 		    		break;
 		    	case(Controller.WINNER):
 		    	case(Controller.LOSER):
@@ -203,7 +210,6 @@ class KeyPress implements KeyListener {
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
 		    		Model.enableTut = false;
-		    		System.out.println("hi");
 		    		break;
 		    	}
 			}

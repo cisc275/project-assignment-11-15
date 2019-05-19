@@ -11,6 +11,8 @@ public class Model{
     static final int PREDHEIGHT = 50;
     static final int PREDWIDTH = 50;
     static final int QUIZCOUNT = 3;
+    static final int END_FALCON_COUNT = 600;
+    static final int DISTANCE_WIN = 700;
 
 	static Boolean withPlayer = true;
 	static Boolean withoutPlayer = false;
@@ -27,6 +29,7 @@ public class Model{
 	public static Boolean answered = false;
 	public static Boolean RKtutorial = true;
 	public static Boolean showMap = false;
+	public static Boolean rkWin = false;
 	
     private static int xloc;
     private static int yloc;
@@ -50,7 +53,8 @@ public class Model{
 	static int P_RANDMIN = 0;
 	static int xTotal = 0;
 	static int quizNum;
-	static int falconCount;
+	static int falconCount = 0;
+	static int distanceCount = 0;
    
 	static int gameMode;
 	//static int alpha;
@@ -124,6 +128,7 @@ public class Model{
     	switch(gameMode) {
     	case(MENU):
     		gameMode = MENU;
+    		rkWin = false;
     		RKquiz = false;
     		running = true;
     		removeAllObjects();
@@ -178,6 +183,7 @@ public class Model{
     		RKtutorial = true;
     		enableTut = true;
     		falconCount = 0;
+    		distanceCount = 0;
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
@@ -241,7 +247,7 @@ public class Model{
     public static void setUpClapperRailGameLevel(int level) {
     	switch(level) {
     	case(0):
-    		System.out.println("Clapper Rail Tutorial");
+    		//System.out.println("Clapper Rail Tutorial");
 			clapperRail = new ClapperRail(150, 200);
 			gameMode = CLAPPERRAIL0;
 			spawnObject(twigString, 200,400, 0); //Spawn twig at 200(x) 400(y)
@@ -250,7 +256,7 @@ public class Model{
 			spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
 			break;
     	case(1):
-    		System.out.println("Clapper Rail Level 1");
+    		//System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL1;
 	    	spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
@@ -263,7 +269,7 @@ public class Model{
 	    	spawnObject(predStr, 100,100, 0);
     		break;
     	case(2):
-    		System.out.println("Clapper Rail Level 2");
+    		//System.out.println("Clapper Rail Level 2");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL2;
 			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
@@ -278,7 +284,7 @@ public class Model{
 	    	spawnObject(predStr, 150, 250, 0);
     		break;
     	case(3):
-    		System.out.println("Clapper Rail Level 3");
+    		//System.out.println("Clapper Rail Level 3");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL3;
 			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
@@ -373,7 +379,7 @@ public class Model{
 		    			if(!recovering) {
 			    			playerHealth--;
 			    			deathToll++;
-			    			System.out.println("1- RECOVERY BEGIN");
+			    			//System.out.println("1 - RECOVERY BEGIN");
 			    			recovering = true;
 		    			}
 		    		}
@@ -384,7 +390,7 @@ public class Model{
 		    				bushTrans += DEFAULT_BUSH_ALPHA*twigCount; //increment bush transparency 
 		    				//System.out.println(bushTrans);
 		    				twigCount = 0;
-		    			}else if(twigCount>0 && bushCount == bushMax ) {
+		    			}else if(twigCount>0 && bushCount == bushMax) {
 		    				
 		    			}
 		    		}
@@ -397,7 +403,7 @@ public class Model{
 		    			if(!recovering) {
 			    			playerHealth--;
 			    			deathToll++;
-			    			System.out.println("2 - RECOVERY BEGIN");
+			    			//System.out.println("2 - RECOVERY BEGIN");
 			    			recovering = true;
 		    			}
 		    			if (deathToll >= DEAD) { 
@@ -435,7 +441,6 @@ public class Model{
     	}
     }
     
-    
     /**
 	 * Method to increment all objects toward the left side of the screen
 	 * in the Red Knot game. Also generates new objects
@@ -451,25 +456,30 @@ public class Model{
     		for(Cloud c: clouds) {
     			c.move(CLOUD_FAST);
     		}
-
 			xTotal++;
 			//System.out.println(xTotal);
     		chkCollision(redKnot);
     	}
     	//System.out.println(flightTime);
+
+
+		
     	if((flightTime < LEVEL_END) && slideObjects) {
     		if((flightTime % PREDATOR_SPACE) == 0) {
-    			int[] yCoords = getRandYlist();
-    			int i = 0;
-    			while(i < predCount) {
-    				spawnObject(predStr, spawnX, yCoords[i], 0);
-    				i++;
-    				falconCount++;
-    			}
+	    		if(falconCount < END_FALCON_COUNT) {
+	    			int[] yCoords = getRandYlist();
+	    			int i = 0;
+	    			while(i < predCount) {
+	    				spawnObject(predStr, spawnX, yCoords[i], 0);
+	    				i++;
+	    				falconCount++;
+	    			}
+	    		}
+	    		distanceCount += predCount;
     		}
     	}
     }
-    
+
     /**
 	 * Generates a random y-coordinate for the Red knot game
 	 *
@@ -522,7 +532,7 @@ public class Model{
     	}
     	if(clk4Count > CLK4MAX) {
     		recovering = false;
-    		System.out.println("RECOVERY END");
+    		//System.out.println("RECOVERY END");
     		clk4Count = 0;
     	}
     }
@@ -550,6 +560,13 @@ public class Model{
 	void updateLocationAndDirection() {
 		if(falconCount == 0) {
 			updateMapChk();
+		}
+		//System.out.println(distanceCount);
+		if(distanceCount > DISTANCE_WIN) {
+			//System.out.println(distanceCount);
+			running = false;
+			rkWin = true;
+			distanceCount = 0;
 		}
 		if(falconCount > PREDS_DISABLE_TUTORIAL) {
 			RKtutorial = false;

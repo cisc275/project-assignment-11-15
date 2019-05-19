@@ -129,7 +129,7 @@ public class View extends JPanel{
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr", "loserScreen", "map", "rightKey"};
+				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -265,6 +265,41 @@ public class View extends JPanel{
 		
 		switch(gameMode) {
 			case(CLAPPERRAIL0):
+				deathToll = Model.getDeathToll();
+				g.setColor(Color.BLACK);
+				g.drawString("Health", 20, 20);
+				g.setColor(Color.GREEN);
+				switch(deathToll) {
+				case(0):
+					g.fillRect(20, 40, 40, 40);
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(1):
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(2):
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(3):
+					g.setColor(Color.ORANGE);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(4):
+					g.setColor(Color.RED);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				default:
+					break;
+				}
 				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
 				g.setColor(Color.WHITE);
 				g.drawString("Build a nest for your safety!", 10, 20);
@@ -279,13 +314,119 @@ public class View extends JPanel{
 				}
 				break;
 			case(CLAPPERRAIL1): //Cycle through all levels
+				deathToll = Model.getDeathToll();
+				g.setColor(Color.BLACK);
+				g.drawString("Health", 20, 20);
+				g.setColor(Color.GREEN);
+				switch(deathToll) {
+				case(0):
+					g.fillRect(20, 40, 40, 40);
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(1):
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(2):
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(3):
+					g.setColor(Color.ORANGE);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(4):
+					g.setColor(Color.RED);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				default:
+					break;
+				}
 				g.drawString("LEVEL 1", 10, 20);
 				break;
 			case(CLAPPERRAIL2):
+				deathToll = Model.getDeathToll();
+				g.setColor(Color.BLACK);
+				g.drawString("Health", 20, 20);
+				g.setColor(Color.GREEN);
+				switch(deathToll) {
+				case(0):
+					g.fillRect(20, 40, 40, 40);
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(1):
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(2):
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(3):
+					g.setColor(Color.ORANGE);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(4):
+					g.setColor(Color.RED);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				default:
+					break;
+				}
 				g.drawString("LEVEL 2", 10, 20);
 				break;
 			case(CLAPPERRAIL3):
+				deathToll = Model.getDeathToll();
+				g.setColor(Color.BLACK);
+				g.drawString("Health", 20, 20);
+				g.setColor(Color.GREEN);
+				switch(deathToll) {
+				case(0):
+					g.fillRect(20, 40, 40, 40);
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(1):
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(2):
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(3):
+					g.setColor(Color.ORANGE);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				case(4):
+					g.setColor(Color.RED);
+					g.fillRect(20, 200, 40, 40);
+					break;
+				default:
+					break;
+				}
 				g.drawString("LEVEL 3", 10, 20);
+			
 				break;
 			}
 			break;
@@ -357,6 +498,9 @@ public class View extends JPanel{
 				case(1):
 					g.drawImage((BufferedImage)pics.get("redKnot2"),  Model.getX(), Model.getY(), null, this);
 					break;
+				}
+				if(Model.rkWin) { 
+					g.drawImage((BufferedImage)pics.get("rkWinScreen"), 0, 0, this);
 				}
 				if(Model.RKquiz) {
 					if(!Model.answered) { 
