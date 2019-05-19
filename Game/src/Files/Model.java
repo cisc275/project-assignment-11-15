@@ -97,7 +97,7 @@ public class Model{
 	static int deathToll; //temp
 	static int playerHealth;
 	static int twigMax = 2; //bird can only hold 2 twigs at a time
-	static int bushMax = 4; 
+	static int bushMax = 5; 
 	static int bushMaxTutorial = 2;
 	static int bushTrans = 50;
 	static int flightTime = 0;
@@ -259,46 +259,46 @@ public class Model{
     		//System.out.println("Clapper Rail Level 1");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL1;
-	    	spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
-	    	spawnObject(twigString, 200,100,40);
-	    	spawnObject(twigString, 100,100,60);
-	    	spawnObject(twigString, 400,100,80);
-	    	spawnObject(twigString, 500,100,100);
-	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
+	    	spawnObject(twigString, 150,400,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,500,40);
+	    	spawnObject(twigString, 300,250,60);
+	    	spawnObject(twigString, 350,300,80);
+	    	spawnObject(twigString, 500,150,100);
+	    	spawnObject(bushString, 500,200,0);//Spawn bush at 500(x) 200(y)
 	    	spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
-	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 400, 100, 0);
     		break;
     	case(2):
     		//System.out.println("Clapper Rail Level 2");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL2;
-			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
-	    	spawnObject(twigString, 200,100,40);
-	    	spawnObject(twigString, 100,100,60);
-	    	spawnObject(twigString, 400,100,80);
-	    	spawnObject(twigString, 500,100,100);
-	    	spawnObject(bushString, 500,200, 0);
+			spawnObject(twigString, 300,150,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 200,250,40);
+	    	spawnObject(twigString, 100,350,60);
+	    	spawnObject(twigString, 400,350,80);
+	    	spawnObject(twigString, 500,500,100);
+	    	spawnObject(bushString, 500,450, 0);
 	    	spawnObject(predStr, 500, 300, 0);
-	    	spawnObject(predStr, 100,100, 0);
-	    	spawnObject(predStr, 600, 500,0);
-	    	spawnObject(predStr, 150, 250, 0);
+	    	spawnObject(predStr, 300, 400, 0);
+	    	spawnObject(predStr, 600, 500, 0);
+	    	spawnObject(predStr, 400, 250, 0);
     		break;
     	case(3):
     		//System.out.println("Clapper Rail Level 3");
 			clapperRail = new ClapperRail(100, 100);
 			gameMode = CLAPPERRAIL3;
-			spawnObject(twigString, 300,100,20); //Spawn twig at 300(x) 100(y)
-	    	spawnObject(twigString, 200,100,40);
-	    	spawnObject(twigString, 100,100,60);
-	    	spawnObject(twigString, 400,100,80);
-	    	spawnObject(twigString, 500,100,100);
-	    	spawnObject(bushString, 500,200, 0);
+			spawnObject(twigString, 450,450,20); //Spawn twig at 300(x) 100(y)
+	    	spawnObject(twigString, 300,400,40);
+	    	spawnObject(twigString, 350,300,60);
+	    	spawnObject(twigString, 400,150,80);
+	    	spawnObject(twigString, 550,100,100);
+	    	spawnObject(bushString, 500,200,0);
 	    	spawnObject(predStr, 500, 300, 0);
-	    	spawnObject(predStr, 100,100, 0);
+	    	spawnObject(predStr, 300, 200, 0);
 	    	spawnObject(predStr, 600, 500, 0);
-	    	spawnObject(predStr, 150, 250, 0);
-	    	spawnObject(predStr, 250, 100, 0);
-	    	spawnObject(predStr, 400, 200, 0);
+	    	spawnObject(predStr, 350, 250, 0);
+	    	spawnObject(predStr, 600, 100, 0);
+	    	spawnObject(predStr, 400, 300, 0);
     		break;
     	}
     }

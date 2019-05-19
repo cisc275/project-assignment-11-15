@@ -129,7 +129,8 @@ public class View extends JPanel{
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen"};
+				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
+				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -257,7 +258,7 @@ public class View extends JPanel{
 
 			}
 
-			g.drawImage((BufferedImage)pics.get("test-face"), Model.getX(), Model.getY(), null, this);
+			g.drawImage((BufferedImage)pics.get("clapperRailPlr"), Model.getX(), Model.getY(), 50, 50, this);
 			g.setColor(Color.BLUE);
 			g.drawString("Twig count: " + Model.twigCount, 500,25);
 			g.drawString("death toll lol: " + Model.deathToll, 500,50);
@@ -267,7 +268,7 @@ public class View extends JPanel{
 			case(CLAPPERRAIL0):
 				deathToll = Model.getDeathToll();
 				g.setColor(Color.BLACK);
-				g.drawString("Health", 20, 20);
+				g.drawString("Health", 20, 30);
 				g.setColor(Color.GREEN);
 				switch(deathToll) {
 				case(0):
@@ -302,7 +303,7 @@ public class View extends JPanel{
 				}
 				g.setFont(new Font("Helvetica", Font.BOLD, 20)); 
 				g.setColor(Color.WHITE);
-				g.drawString("Build a nest for your safety!", 10, 20);
+				g.drawString("Build a nest for your safety!", 10, 320);
 				g.drawImage((BufferedImage)pics.get("ptr"), Model.getX() - 50, Model.getY() - 100, null, this);
 				g.drawString("Use the up, down, left, and right arrow keys to move the Clapper Rail", 10, 300);
 				//g.drawImage((BufferedImage)pics.get("arrowKeys"), 10, 320, 200, 150, null, this);
@@ -310,7 +311,9 @@ public class View extends JPanel{
 					g.drawString("Avoid predators and pick up twigs, up to 2 at a time", 10, 350);
 				}
 				if(Model.getTwigCount()==2) {
-					g.drawString("Bring the twigs to the pile!", 0, 400);
+					g.drawString("Bring the twigs to the pile and make a safe bush!", 20, 400);
+					g.drawImage((BufferedImage)pics.get("BushPT"), 550, 180, null, this);
+
 				}
 				break;
 			case(CLAPPERRAIL1): //Cycle through all levels
