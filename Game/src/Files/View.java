@@ -25,6 +25,7 @@ public class View extends JPanel{
 	private static Direction dir;
     private int frameNum = 0;
     private int frameCount = 2;
+    private int deathToll;
     private JFrame frame;
 
 	int count;
@@ -314,6 +315,23 @@ public class View extends JPanel{
 						break;
 					}
 				}
+				deathToll = Model.getDeathToll();
+				
+				switch(deathToll) {
+				case(0):
+					break;
+				case(1):
+					break;
+				case(2):
+					break;
+				case(3):
+					break;
+				case(4):
+					break;
+				default:
+					break;
+				}
+				
 				switch(frameNum) {
 				case(0):
 					g.drawImage((BufferedImage)pics.get("redKnot1"),  Model.getX(), Model.getY(), null, this);

@@ -677,13 +677,10 @@ public class Model{
 	 * */
 	
 	public static void main(String[] args) {
-		// INTERACTIVE TUTORIAL
 		//SERIALIZABLE
 		//JAVADOC
-		//FULL SCREEN
 		//MAGIC NUMBERS
 		
-		//System.out.println("Starting point");
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
@@ -732,6 +729,8 @@ public class Model{
 	
 	public static int getX() { return xloc; }
 	public static int getY() { return yloc; }
+	public static int getDeathToll() { return deathToll; }
+	public static int getFalconCount() { return falconCount; }
     public static int getBushCount() { return bushCount; }
     public static int getBushMax() { return bushMax; }
     public static int getTwigCount() { return twigCount; }

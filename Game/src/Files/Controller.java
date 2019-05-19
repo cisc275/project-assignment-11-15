@@ -230,7 +230,6 @@ class KeyPress implements KeyListener {
 				switch(View.gameMode) {
 		    	case(Controller.REDKNOT):
 		    		Model.enableTut = false;
-		    		System.out.println("hi");
 		    		break;
 		    	}
 			}
