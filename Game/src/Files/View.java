@@ -128,7 +128,7 @@ public class View extends JPanel{
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr", "loserScreen", "map"};
+				"arrowKeys", "ptr", "loserScreen", "map", "rightKey"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -373,7 +373,12 @@ public class View extends JPanel{
 				}
 				if(Model.showMap) {
 					g.drawImage((BufferedImage)pics.get("map"), 0, 0, null, this);
-					
+					g.setFont(new Font("Helvetica", Font.BOLD, 35)); 
+					g.setColor(Color.BLUE);
+					g.drawString("Red Knots just finished harvesting Horshoe Crab eggs", 700, 300);
+					g.drawString("in the Delaware Bay. Time to continue migrating up north!", 700, 350);
+					g.drawImage((BufferedImage)pics.get("rightKey"), 700, 475, null, this);
+					g.drawString("Press the right arrow key to begin", 700, 450);
 				}
 				break;
 			case(WINNER): //WINNER screen 

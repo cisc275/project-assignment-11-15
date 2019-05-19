@@ -22,6 +22,7 @@ public class Model{
 	static Boolean RKquiz = false;
 	static Boolean CRquiz = false;
 	static Boolean running = true;
+	static Boolean enableTut = true;
 	public static Boolean answered = false;
 	public static Boolean RKtutorial = true;
 	public static Boolean showMap = false;
@@ -168,6 +169,7 @@ public class Model{
     		break;
     	case(REDKNOT):
     		RKtutorial = true;
+    		enableTut = true;
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
     		View.gameMode = REDKNOT;
@@ -510,10 +512,11 @@ public class Model{
 	 * 
 	 * */
     public void updateMapClk() {
-    	mapClk++;
-    	if(mapClk > mapClkMax) {
+    	//mapClk++;
+    	if(!enableTut) {
     		showMap = false;
     		running = true;
+    		enableTut = false;
     	}
     }
     

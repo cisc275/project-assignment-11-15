@@ -193,6 +193,8 @@ class KeyPress implements KeyListener {
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
+		    		Model.enableTut = false;
+		    		System.out.println("hi");
 		    		break;
 		    	}
 			}
@@ -216,6 +218,16 @@ class KeyPress implements KeyListener {
 			if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
 				Model.changeGameMode(Controller.MENU);
 			}
+		} else { 
+			if (e.getKeyCode() == Controller.RIGHT) {
+				switch(View.gameMode) {
+		    	case(Controller.REDKNOT):
+		    		Model.enableTut = false;
+		    		System.out.println("hi");
+		    		break;
+		    	}
+			}
+			
 		}
 		if (e.getKeyChar() == 'p' || e.getKeyChar() == 'P') {
 			Model.running = !Model.running;
