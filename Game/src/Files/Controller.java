@@ -108,21 +108,24 @@ class KeyPress implements KeyListener {
 				Model.answered = true;
 			}
 			if (e.getKeyCode() == Controller.LEFT) {
-				
-				switch(Model.quizNum) {
-				case(1): //correct
-					Model.running = true;
-					Model.deathToll = 0;
-					Model.RKquiz = false;
-					break;
-				case(2): //incorrect
-					Model.answered = true;
-					break;
-				case(3): //correct
-					Model.running = true;
-					Model.deathToll = 0;
-					Model.RKquiz = false;
-					break;
+				if(!Model.answered) {
+					switch(Model.quizNum) {
+					case(1): //correct
+						Model.running = true;
+						Model.deathToll = 0;
+						Model.RKquiz = false;
+						Model.answered = false;
+						break;
+					case(2): //incorrect
+						Model.answered = true;
+						break;
+					case(3): //correct
+						Model.running = true;
+						Model.deathToll = 0;
+						Model.RKquiz = false;
+						Model.answered = false;
+						break;
+					}
 				}
 			}
 			if (e.getKeyCode() == Controller.RIGHT) {
@@ -132,6 +135,7 @@ class KeyPress implements KeyListener {
 					break;
 				case(2): //correct
 					Model.running = true;
+					Model.answered = false;
 					Model.deathToll = 0;
 					Model.RKquiz = false;
 					break;
@@ -176,9 +180,7 @@ class KeyPress implements KeyListener {
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
-		    		if(Model.answered) {
-		    			Model.changeGameMode(Controller.MENU);
-		    		}
+		    		
 		    		break;
 		    	case(Controller.WINNER):
 		    	case(Controller.LOSER):

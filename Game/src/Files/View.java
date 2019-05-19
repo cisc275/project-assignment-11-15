@@ -291,12 +291,11 @@ public class View extends JPanel{
 			break;
 
 			case(REDKNOT): // Red Knot Game View Logic
-				
 				this.setBackground(Color.CYAN);
 				allObj = Model.getAllObjects(withoutPlayer, withPreds);
 				predators = Model.getPredators();
 				//g.drawString("REDKNOT GAME", 100, 100);
-				g.drawString("death toll lol: " + Model.deathToll, 500,50);
+				//g.drawString("death toll lol: " + Model.deathToll, 500,50);
 				clouds = Model.getClouds();
 				for (Cloud c: clouds) {
 					g.drawImage((BufferedImage)pics.get(c.getType()), c.getX(), c.getY(), null, this);
@@ -316,17 +315,36 @@ public class View extends JPanel{
 					}
 				}
 				deathToll = Model.getDeathToll();
-				
+				g.setColor(Color.BLACK);
+				g.drawString("Health", 20, 20);
+				g.setColor(Color.GREEN);
 				switch(deathToll) {
 				case(0):
+					g.fillRect(20, 40, 40, 40);
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
 					break;
 				case(1):
+					g.fillRect(20, 80, 40, 40);
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
 					break;
 				case(2):
+					g.fillRect(20, 120, 40, 40);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
 					break;
 				case(3):
+					g.setColor(Color.ORANGE);
+					g.fillRect(20, 160, 40, 40);
+					g.fillRect(20, 200, 40, 40);
 					break;
 				case(4):
+					g.setColor(Color.RED);
+					g.fillRect(20, 200, 40, 40);
 					break;
 				default:
 					break;
@@ -351,6 +369,8 @@ public class View extends JPanel{
 							break;
 						case(3):
 							g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
+							break;
+						default:
 							break;
 						}
 					} else {

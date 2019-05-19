@@ -23,6 +23,7 @@ public class Model{
 	static Boolean CRquiz = false;
 	static Boolean running = true;
 	static Boolean enableTut = true;
+	static Boolean recovering = false;
 	public static Boolean answered = false;
 	public static Boolean RKtutorial = true;
 	public static Boolean showMap = false;
@@ -72,6 +73,8 @@ public class Model{
 	static int clk1Count = 0;
 	static int clk2Count = 0;
 	static double clk3Count = 0;
+	static int clk4Count = 0;
+	static final double CLK4MAX = 10000;
 	static final double CLKMAX = 1000;
 	static final double CLK2MAX = CLKMAX/256;
 	static final int GRAVEYARD = 100000;
@@ -121,6 +124,7 @@ public class Model{
     	switch(gameMode) {
     	case(MENU):
     		gameMode = MENU;
+    		RKquiz = false;
     		running = true;
     		removeAllObjects();
     		startMenu();
@@ -367,9 +371,12 @@ public class Model{
 		    			}
 		    		}//end "Twig"
 		    		if(o instanceof Animal) {
-		    			playerHealth--;
-		    			deathToll++;
-		    			
+		    			if(!recovering) {
+			    			playerHealth--;
+			    			deathToll++;
+			    			System.out.println("RECOVERY BEGIN");
+			    			recovering = true;
+		    			}
 		    		}
 		    		if(o instanceof Bush) {
 		    			if(twigCount>0 && bushCount<bushMax) {
@@ -390,11 +397,18 @@ public class Model{
 		    		if(a instanceof Animal) {
 		    			playerHealth--;
 		    			deathToll++;
+		    			if(!recovering) {
+			    			playerHealth--;
+			    			deathToll++;
+			    			System.out.println("RECOVERY BEGIN");
+			    			recovering = true;
+		    			}
 		    			if (deathToll >= DEAD) { 
 		    				switch(gameMode) {
 		    				case(REDKNOT):
 		    					quizNum = (int)(Math.random() * QUIZCOUNT + 1);
 		    					RKquiz = true;
+		    					answered = false;
 		    					running = false;
 		    				}
 		    				//changeGameMode(LOSER);
@@ -487,6 +501,7 @@ public class Model{
     	clk1Count++;
     	clk2Count++;
     	clk3Count++;
+    	clk4Count++;
     	if(clk1Count > CLKMAX) {
     		movePredators = true;
     		clk1Count = 0;
@@ -507,6 +522,11 @@ public class Model{
     		//System.out.println(variableClock);
     	} else {
     		slidePredators = false;
+    	}
+    	if(clk4Count > CLK4MAX) {
+    		recovering = false;
+    		System.out.println("RECOVERY END");
+    		clk4Count = 0;
     	}
     }
     
