@@ -24,6 +24,7 @@ public class Model{
 	static Boolean running = true;
 	public static Boolean answered = false;
 	public static Boolean RKtutorial = true;
+	public static Boolean showMap = false;
 	
     private static int xloc;
     private static int yloc;
@@ -64,7 +65,8 @@ public class Model{
 
 	static final int CLOUD_FAST = 16;
 	
-	
+	static int mapClk = 0;
+	static int mapClkMax = 10000;
 	static int clk1Count = 0;
 	static int clk2Count = 0;
 	static double clk3Count = 0;
@@ -164,14 +166,6 @@ public class Model{
     		setUpClapperRailGameLevel(3);
     		View.gameMode = CLAPPERRAIL3;
     		break;
-    	/*case(REDKNOT0):
-    		removeAllObjects();
-			View.gameMode = REDKNOT0;
-			playerHealth = MAX_HEALTH;
-			deathToll = 0;
-			variableClock = CLK2MAX;
-			setUpRedKnotGame(0);
-			break;*/
     	case(REDKNOT):
     		RKtutorial = true;
     		spawnX = View.frameWidth + 50;
@@ -182,7 +176,6 @@ public class Model{
     		variableClock = CLK2MAX;
     		setUpRedKnotGame();
     		break;
-    		
     	case(WINNER):
     		View.gameMode = WINNER;
     		break;
@@ -309,31 +302,10 @@ public class Model{
     	clouds.add(new Cloud(spawnX, 240, 1.2, 2));
     	clouds.add(new Cloud(spawnX, 400, 1.4, 1));
 		gameMode = REDKNOT;
+		showMap = true;
+		running = false;
     }
-  
-    
-	public static void setUpRedKnotGame(int level) {
-	    	
-	    	switch(level) {
-	    	case(0):
-		    	redKnot = new RedKnot();
-		    	redKnot.setX(DEFAULT_RK_X);
-		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
-		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
-		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
-		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
-				gameMode = REDKNOT0;
-	    	case(1):
-	    		redKnot = new RedKnot();
-		    	redKnot.setX(DEFAULT_RK_X);
-		    	clouds.add(new Cloud(1200, 40, 1, 1)); //Spawn cloud at 500(x) 40(y), cloud speed 1
-		    	clouds.add(new Cloud(1200, 100, 1.5, 2));
-		    	clouds.add(new Cloud(1200, 240, 1.2, 2));
-		    	clouds.add(new Cloud(1200, 400, 1.4, 1));
-				gameMode = REDKNOT;
-	    	
-	    	}
-	}
+ 
     /**
 	 * Function to return a list of all the present objects on the screen
 	 *
@@ -532,12 +504,27 @@ public class Model{
     }
     
     /**
+	 * Controls timer for showing map prior to Red Knot game
+	 *
+	 * @author Amjed Hallak
+	 * 
+	 * */
+    public void updateMapClk() {
+    	mapClk++;
+    	if(mapClk > mapClkMax) {
+    		showMap = false;
+    		running = true;
+    	}
+    }
+    
+    /**
 	 * Method for View class to call to check player x and y direction
 	 *
 	 * @author Amjed Hallak
 	 * 
 	 * */
 	void updateLocationAndDirection() {
+		updateMapClk();
 		if(running) {
 			if(clapperRail != null) { //If game is active
 				xloc = clapperRail.getX();

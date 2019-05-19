@@ -128,7 +128,7 @@ public class View extends JPanel{
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr", "loserScreen"};
+				"arrowKeys", "ptr", "loserScreen", "map"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -365,11 +365,15 @@ public class View extends JPanel{
 					g.drawString("South America", 600, 100);
 					Model.changeGameMode(Controller.WINNER);
 				}*/
-				if(Model.RKtutorial) {
+				if(Model.RKtutorial && !Model.showMap) {
 					g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
 					g.setColor(Color.BLUE);
 					g.drawString("Use the up and down arrow keys to move the Red Knot", 10, 300);
 					g.drawString("Avoid the falcons and migrate!", 10, 350);
+				}
+				if(Model.showMap) {
+					g.drawImage((BufferedImage)pics.get("map"), 0, 0, null, this);
+					
 				}
 				break;
 			case(WINNER): //WINNER screen 
