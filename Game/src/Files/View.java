@@ -46,7 +46,7 @@ public class View extends JPanel{
 	int RANDMAX = 6;
 	int RANDMIN = 0;
 	
-	int bigText = 40;
+	int bigText = 60;
 	
 	
 	ArrayList<GamePiece> allObj;
@@ -128,7 +128,7 @@ public class View extends JPanel{
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr"};
+				"arrowKeys", "ptr", "loserScreen"};
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -221,13 +221,13 @@ public class View extends JPanel{
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20)); 
 			g.setColor(Color.BLACK);
 
-			g.drawImage((BufferedImage)pics.get("arrowMap"), 100, 400, null, this);
+			g.drawImage((BufferedImage)pics.get("arrowMap"), frameWidth/2 - 325, 400, null, this);
 			g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
 			g.drawImage((BufferedImage)pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
 			g.drawImage((BufferedImage)pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("Estuary Birds", 325, 65);
+			g.drawString("Delaware Estuary Birds", frameWidth/2 - 320, 65);
 			break;
 			
 		case(CLAPPERRAIL0):
@@ -288,22 +288,13 @@ public class View extends JPanel{
 				break;
 			}
 			break;
-			
 
-			case(REDKNOT0):
-				g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
-				g.setColor(Color.red);
-				g.drawString("RED KNOT TUTORIAL", 10, 20);
-				g.drawString("USE UP AND DOWN ARROW KEYS TO MOVE YOUR CLAPPER RAIL", 10, 300);
-				if (Model.getMovedTutorial()) {
-					g.drawString("AVOID PREDATORS", 10, 350);
-				}
-				break;
 			case(REDKNOT): // Red Knot Game View Logic
+				
 				this.setBackground(Color.CYAN);
 				allObj = Model.getAllObjects(withoutPlayer, withPreds);
 				predators = Model.getPredators();
-				g.drawString("REDKNOT GAME", 100, 100);
+				//g.drawString("REDKNOT GAME", 100, 100);
 				g.drawString("death toll lol: " + Model.deathToll, 500,50);
 				clouds = Model.getClouds();
 				for (Cloud c: clouds) {
@@ -332,17 +323,41 @@ public class View extends JPanel{
 					break;
 				}
 				if(Model.RKquiz) {
-					switch(Model.quizNum) {
-					case(1):
-						g.drawImage((BufferedImage)pics.get("quizRK1"), 0, 0, this);
-						break;
-					case(2):
-						g.drawImage((BufferedImage)pics.get("quizRK2"), 0, 0, this);
-						break;
-					case(3):
-						g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
-						break;
+					if(!Model.answered) { 
+						switch(Model.quizNum) {
+						case(1):
+							g.drawImage((BufferedImage)pics.get("quizRK1"), 0, 0, this);
+							break;
+						case(2):
+							g.drawImage((BufferedImage)pics.get("quizRK2"), 0, 0, this);
+							break;
+						case(3):
+							g.drawImage((BufferedImage)pics.get("quizRK3"), 0, 0, this);
+							break;
+						}
+					} else {
+						g.drawImage((BufferedImage)pics.get("loserScreen"), 0, 0, this);
+						g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+						switch(Model.quizNum) {
+						case(1):
+							g.drawString("Red Knots eat horshoe crab eggs", 130, 350);
+							break;
+						case(2):
+							g.setFont(new Font("Helvetica", Font.BOLD, 40));
+							g.drawString("Red Knots are dying because there aren't", 50, 310);
+							g.drawString("enough horshoe crab eggs in the Delaware Bay", 50, 360);
+							break;
+						case(3):
+							g.drawString("Red Knots migrate north", 200, 350);
+							break;
+						}
 					}
+				}
+				if(Model.RKtutorial) {
+					g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+					g.setColor(Color.BLUE);
+					g.drawString("Use the up and down arrow keys to move the Red Knot", 10, 300);
+					g.drawString("Avoid the falcons and migrate!", 10, 350);
 				}
 				break;
 			case(WINNER): //WINNER screen 

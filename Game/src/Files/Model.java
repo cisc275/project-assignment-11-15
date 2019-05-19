@@ -22,7 +22,9 @@ public class Model{
 	static Boolean RKquiz = false;
 	static Boolean CRquiz = false;
 	static Boolean running = true;
-
+	public static Boolean answered = false;
+	public static Boolean RKtutorial = true;
+	
     private static int xloc;
     private static int yloc;
     
@@ -120,6 +122,7 @@ public class Model{
     		redKnot = null;
     		View.gameMode = MENU;
     		movedTutorial = false;
+    		answered = false;
     		break;
     	case(CLAPPERRAIL0):
     		resetBushTrans();
@@ -170,6 +173,7 @@ public class Model{
 			setUpRedKnotGame(0);
 			break;*/
     	case(REDKNOT):
+    		RKtutorial = true;
     		spawnX = View.frameWidth + 50;
     		removeAllObjects();
     		View.gameMode = REDKNOT;

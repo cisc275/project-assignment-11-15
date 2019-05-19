@@ -102,15 +102,18 @@ class KeyPress implements KeyListener {
 		if(Model.RKquiz) {
 			if (e.getKeyCode() == Controller.UP) {
 				//always wrong, answer never B
-				System.out.println("NO");
+				Model.answered = true;
 			}
 			if (e.getKeyCode() == Controller.LEFT) {
+				if(Model.answered) {
+					Model.changeGameMode(Controller.MENU);
+				}
 				switch(Model.quizNum) {
 				case(1): //correct
 					System.out.println("YEAH");
 					break;
 				case(2): //incorrect
-					System.out.println("NO");
+					Model.answered = true;
 					break;
 				case(3): //correct
 					System.out.println("YEAH");
@@ -120,13 +123,13 @@ class KeyPress implements KeyListener {
 			if (e.getKeyCode() == Controller.RIGHT) {
 				switch(Model.quizNum) {
 				case(1): //incorrect
-					System.out.println("NO");
+					Model.answered = true;
 					break;
 				case(2): //correct
 					System.out.println("YEAH");
 					break;
 				case(3): //incorrect
-					System.out.println("NO");
+					Model.answered = true;
 					break;
 				}
 			}
@@ -166,6 +169,9 @@ class KeyPress implements KeyListener {
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
+		    		if(Model.answered) {
+		    			Model.changeGameMode(Controller.MENU);
+		    		}
 		    		break;
 		    	case(Controller.WINNER):
 		    	case(Controller.LOSER):
@@ -216,6 +222,8 @@ class KeyPress implements KeyListener {
 		}
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'd') {
 			Model.deathToll++;
+			if(Model.quizNum < 4) {	Model.quizNum++; } else { Model.quizNum = 1; }
+			
 			//Model.RKquiz = true;
 			//Model.running = false;
 		}
