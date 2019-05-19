@@ -42,6 +42,12 @@ public class View extends JPanel{
 	static final int LOSER = 8;
 	static final int CLK_MAX = 150;
 	
+	static final int START_RK = 0;
+	static final int QUARTER_RK = 175;
+	static final int HALF_RK = 350;
+	static final int THREEQUARTERS_RK = 525;
+	
+	
 	//static int bushMax = 4;
 	
 	int RANDMAX = 6;
@@ -535,18 +541,20 @@ public class View extends JPanel{
 						}
 					}
 				}
-			/*	if(Model.getFalconCount() > startMigration && Model.getFalconCount() < quarterMigration) {
-					g.drawString("Delaware", 600, 100);
-				}else if(Model.getFalconCount() > quarterMigration && Model.getFalconCount() < halfMigration) {
-					g.drawString("Quart Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > halfMigration && Model.getFalconCount() < threequarterMigration) {
-					g.drawString("Half-Way Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > threequarterMigration && Model.getFalconCount() < endMigration) {
-					g.drawString("Three-Quarters Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > endMigration) {
+				
+				//display mini map
+				if(Model.getFalconCount() > START_RK && Model.getFalconCount() < QUARTER_RK) {
 					g.drawString("South America", 600, 100);
-					Model.changeGameMode(Controller.WINNER);
-				}*/
+				}else if(Model.getFalconCount() > QUARTER_RK && Model.getFalconCount() < HALF_RK) {
+					g.drawString("Quart Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > HALF_RK && Model.getFalconCount() < THREEQUARTERS_RK) {
+					g.drawString("Half-Way Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > THREEQUARTERS_RK && Model.getFalconCount() < Model.DISTANCE_WIN) {
+					g.drawString("Three-Quarters Migration Point", 600, 100);
+				}else if(Model.getFalconCount() > Model.DISTANCE_WIN) {
+					g.drawString("Delaware", 600, 100);
+				}
+				
 				if(Model.RKtutorial && !Model.showMap) {
 					g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
 					g.setColor(Color.BLUE);
