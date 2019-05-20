@@ -31,6 +31,7 @@ public class Model{
 	public static Boolean showMap = false;
 	public static Boolean rkWin = false;
 	public static Boolean crWin = false;
+	public static Boolean crLost = false;
 	
     private static int xloc;
     private static int yloc;
@@ -131,6 +132,7 @@ public class Model{
     		gameMode = MENU;
     		rkWin = false;
     		crWin = false;
+    		crLost = false;
     		RKquiz = false;
     		running = true;
     		removeAllObjects();
@@ -384,6 +386,7 @@ public class Model{
 			    			deathToll++;
 			    			//System.out.println("1 - RECOVERY BEGIN");
 			    			recovering = true;
+			    			System.out.println("hi");
 		    			}
 		    		}
 		    		if(o instanceof Bush) {
@@ -416,8 +419,15 @@ public class Model{
 		    					RKquiz = true;
 		    					answered = false;
 		    					running = false;
+		    					break;
+			    			case(CLAPPERRAIL0):
+			    			case(CLAPPERRAIL1): //Cycle through all levels
+			    			case(CLAPPERRAIL2):
+			    			case(CLAPPERRAIL3):
+			    				running = false;
+			    				crLost = true;
+			    				break;
 		    				}
-		    				//changeGameMode(LOSER);
 		    			}
 		    		}
 		    	}

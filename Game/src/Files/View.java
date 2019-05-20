@@ -144,7 +144,7 @@ public class View extends JPanel{
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
 				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
 				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4", "mm-start",
-				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg", "crWin"};
+				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg", "crWin", "CRlose"};
 				
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
@@ -295,6 +295,7 @@ public class View extends JPanel{
 
 			g.drawImage((BufferedImage)pics.get("clapperRailPlr"), Model.getX(), Model.getY(), 50, 50, this);
 			g.setColor(Color.BLUE);
+
 			//g.drawString("Twig count: " + Model.twigCount, 500,25);
 			//g.drawString("death toll lol: " + Model.deathToll, 500,50);
 			//g.drawString("Bush count: " + Model.bushCount, 500,75);
@@ -468,6 +469,10 @@ public class View extends JPanel{
 					g.drawImage((BufferedImage)pics.get("crWin"), 0, 0, this);
 				}
 				break;
+			}
+
+			if(Model.crLost) {
+				g.drawImage((BufferedImage)pics.get("CRlose"), 0, 0, this);
 			}
 			break;
 

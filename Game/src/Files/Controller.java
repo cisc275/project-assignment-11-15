@@ -99,7 +99,7 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(Model.rkWin || Model.crWin) {
+		if(Model.rkWin || Model.crWin || Model.crLost) {
 			if (e.getKeyCode() == Controller.UP) {
 				Model.changeGameMode(Controller.MENU);
 				Model.running = true;
