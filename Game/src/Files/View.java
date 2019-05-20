@@ -532,13 +532,13 @@ public class View extends JPanel{
 						}
 					} else {
 						g.drawImage((BufferedImage)pics.get("loserScreen"), 0, 0, this);
-						g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+						g.setFont(new Font("Helvetica", Font.BOLD, 30)); 
 						switch(Model.quizNum) {
 						case(1):
 							g.drawString("Red Knots eat horshoe crab eggs", 130, 350);
 							break;
 						case(2):
-							g.setFont(new Font("Helvetica", Font.BOLD, 40));
+							//g.setFont(new Font("Helvetica", Font.BOLD, 30));
 							g.drawString("Red Knots are dying because there aren't", 50, 310);
 							g.drawString("enough horshoe crab eggs in the Delaware Bay", 50, 360);
 							break;
