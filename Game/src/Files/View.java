@@ -26,6 +26,7 @@ public class View extends JPanel{
     private int frameNum = 0;
     private int frameCount = 2;
     private int deathToll;
+    private int twigCount;
     private JFrame frame;
 
 	int count;
@@ -143,7 +144,7 @@ public class View extends JPanel{
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
 				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
 				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4", "mm-start",
-				"mm-quarter", "mm-half", "mm-threequarters", "mm-end"};
+				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg"};
 				
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
@@ -250,15 +251,35 @@ public class View extends JPanel{
 		case(CLAPPERRAIL1): //Cycle through all levels
 		case(CLAPPERRAIL2):
 		case(CLAPPERRAIL3):// Clapper Rail Game View Logic
+			g.drawImage((BufferedImage)pics.get("CRbkg"), 0, 0, frameWidth, frameHeight, this);
 			allObj = Model.getAllObjects(withoutPlayer, withPreds);
 			predators = Model.getPredators();
+			g.setColor(Color.ORANGE);
 			for(GamePiece gp: allObj) {
 				g.setColor(getColor(gp.toString()));
 				if(gp instanceof Twig)
 					g.drawImage((BufferedImage)pics.get("new-twig"), gp.getX(), gp.getY(), 50, 50, this);
-				if(gp instanceof Bush)
-					g.fillRect(gp.getX(), gp.getY(), 50, 50);
-
+				if(gp instanceof Bush) {
+					twigCount = Model.bushCount;
+					switch(twigCount) {
+					case(0):
+						g.fillRect(gp.getX(), gp.getY(), 50, 50);
+						break;
+					case(1):
+						g.drawImage((BufferedImage)pics.get("bush1"), gp.getX(), gp.getY(), 50, 50, this);
+						break;
+					case(2):
+						g.drawImage((BufferedImage)pics.get("bush2"), gp.getX(), gp.getY(), 50, 50, this);
+						break;
+					case(3):
+						g.drawImage((BufferedImage)pics.get("bush3"), gp.getX(), gp.getY(), 50, 50, this);
+						break;
+					case(4):
+						g.drawImage((BufferedImage)pics.get("bush4"), gp.getX(), gp.getY(), 50, 50, this);
+						break;
+					}
+					
+				}
 			}
 
 			for(Animal p: predators) {

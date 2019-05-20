@@ -86,7 +86,7 @@ public class Model{
 	static final int LEVEL_END = 100001;
 	static final int PREDATOR_SIZE = 50;
 	static final int PREDATOR_SPACE = PREDATOR_SIZE*4;
-	static final int DEFAULT_BUSH_ALPHA = 50;
+	static final int DEFAULT_BUSH_ALPHA = 100;
 	static final int MAX_HEALTH = 100;
 	static final int DEFAULT_RK_X = 100;
 	static final int PREDS_DISABLE_TUTORIAL = 50;
@@ -250,10 +250,10 @@ public class Model{
     		//System.out.println("Clapper Rail Tutorial");
 			clapperRail = new ClapperRail(150, 200);
 			gameMode = CLAPPERRAIL0;
-			spawnObject(twigString, 200,400, 0); //Spawn twig at 200(x) 400(y)
-			spawnObject(twigString, 300,100, 0); //Spawn twig at 300(x) 100(y)
-			spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
-			spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
+			spawnObject(twigString, 500, 50, 0); //Spawn twig at 200(x) 400(y)
+			spawnObject(twigString, 300, 100, 0); //Spawn twig at 300(x) 100(y)
+			spawnObject(bushString, 500, 200, 0);//Spawn bush at 500(x) 200(y)
+			spawnObject(predStr, 500, 150, 0);//Spawn predator at 500(x) 300(y)
 			break;
     	case(1):
     		//System.out.println("Clapper Rail Level 1");
@@ -264,7 +264,7 @@ public class Model{
 	    	spawnObject(twigString, 300,250,60);
 	    	spawnObject(twigString, 350,300,80);
 	    	spawnObject(twigString, 500,150,100);
-	    	spawnObject(bushString, 500,200,0);//Spawn bush at 500(x) 200(y)
+	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
 	    	spawnObject(predStr, 500, 300, 0);//Spawn predator at 500(x) 300(y)
 	    	spawnObject(predStr, 400, 100, 0);
     		break;
@@ -277,7 +277,7 @@ public class Model{
 	    	spawnObject(twigString, 100,350,60);
 	    	spawnObject(twigString, 400,350,80);
 	    	spawnObject(twigString, 500,500,100);
-	    	spawnObject(bushString, 500,450, 0);
+	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
 	    	spawnObject(predStr, 500, 300, 0);
 	    	spawnObject(predStr, 300, 400, 0);
 	    	spawnObject(predStr, 600, 500, 0);
@@ -292,7 +292,7 @@ public class Model{
 	    	spawnObject(twigString, 350,300,60);
 	    	spawnObject(twigString, 400,150,80);
 	    	spawnObject(twigString, 550,100,100);
-	    	spawnObject(bushString, 500,200,0);
+	    	spawnObject(bushString, 500,200, 0);//Spawn bush at 500(x) 200(y)
 	    	spawnObject(predStr, 500, 300, 0);
 	    	spawnObject(predStr, 300, 200, 0);
 	    	spawnObject(predStr, 600, 500, 0);
@@ -387,11 +387,11 @@ public class Model{
 		    			if(twigCount>0 && bushCount<bushMax) {
 		    				bushCount += twigCount;
 		    				//System.out.println(bushCount);
-		    				bushTrans += DEFAULT_BUSH_ALPHA*twigCount; //increment bush transparency 
+		    				//bushTrans += DEFAULT_BUSH_ALPHA*twigCount; //increment bush transparency 
 		    				//System.out.println(bushTrans);
 		    				twigCount = 0;
 		    			}else if(twigCount>0 && bushCount == bushMax) {
-		    				
+		    				//System.out.println("checkpoint");
 		    			}
 		    		}
 		    	}
