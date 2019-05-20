@@ -274,9 +274,9 @@ public class View extends JPanel{
 
 			g.drawImage((BufferedImage)pics.get("clapperRailPlr"), Model.getX(), Model.getY(), 50, 50, this);
 			g.setColor(Color.BLUE);
-			g.drawString("Twig count: " + Model.twigCount, 500,25);
-			g.drawString("death toll lol: " + Model.deathToll, 500,50);
-			g.drawString("Bush count: " + Model.bushCount, 500,75);
+			//g.drawString("Twig count: " + Model.twigCount, 500,25);
+			//g.drawString("death toll lol: " + Model.deathToll, 500,50);
+			//g.drawString("Bush count: " + Model.bushCount, 500,75);
 		
 		switch(gameMode) {
 			case(CLAPPERRAIL0):
@@ -333,7 +333,7 @@ public class View extends JPanel{
 			case(CLAPPERRAIL1): //Cycle through all levels
 				deathToll = Model.getDeathToll();
 				g.setColor(Color.BLACK);
-				g.drawString("Health", 20, 20);
+				g.drawString("Health", 20, 30);
 				g.setColor(Color.GREEN);
 				switch(deathToll) {
 				case(0):
@@ -366,12 +366,12 @@ public class View extends JPanel{
 				default:
 					break;
 				}
-				g.drawString("LEVEL 1", 10, 20);
+				//g.drawString("LEVEL 1", 10, 20);
 				break;
 			case(CLAPPERRAIL2):
 				deathToll = Model.getDeathToll();
 				g.setColor(Color.BLACK);
-				g.drawString("Health", 20, 20);
+				g.drawString("Health", 20, 30);
 				g.setColor(Color.GREEN);
 				switch(deathToll) {
 				case(0):
@@ -404,12 +404,12 @@ public class View extends JPanel{
 				default:
 					break;
 				}
-				g.drawString("LEVEL 2", 10, 20);
+				//g.drawString("LEVEL 2", 10, 20);
 				break;
 			case(CLAPPERRAIL3):
 				deathToll = Model.getDeathToll();
 				g.setColor(Color.BLACK);
-				g.drawString("Health", 20, 20);
+				g.drawString("Health", 20, 30);
 				g.setColor(Color.GREEN);
 				switch(deathToll) {
 				case(0):
@@ -442,7 +442,7 @@ public class View extends JPanel{
 				default:
 					break;
 				}
-				g.drawString("LEVEL 3", 10, 20);
+				//g.drawString("LEVEL 3", 10, 20);
 			
 				break;
 			}
