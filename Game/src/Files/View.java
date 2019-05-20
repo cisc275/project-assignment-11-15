@@ -42,6 +42,12 @@ public class View extends JPanel{
 	static final int LOSER = 8;
 	static final int CLK_MAX = 150;
 	
+	static final int START_RK = 0;
+	static final int QUARTER_RK = 175;
+	static final int HALF_RK = 350;
+	static final int THREEQUARTERS_RK = 525;
+	
+	
 	//static int bushMax = 4;
 	
 	int RANDMAX = 6;
@@ -125,12 +131,20 @@ public class View extends JPanel{
         gameMode = MENU;
 	}
 	
+	/**
+	 *Sets up a new JFrame and adds listeners. Sets game mode to default (MENU)
+	 *
+	 * @author Amjed Hallak, Paul Jureidini
+	 * 
+	 * */
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
 				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
-				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4"};
+				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4", "mm-start",
+				"mm-quarter", "mm-half", "mm-threequarters", "mm-end"};
+				
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
 			if(newImg.getWidth() == IMGWIDTH) {
@@ -177,7 +191,7 @@ public class View extends JPanel{
     /**
 	 * Returns a color based on the type of object. For alpha/beta use.
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param String from toString of class
 	 * 
 	 * */
@@ -538,18 +552,29 @@ public class View extends JPanel{
 						}
 					}
 				}
-			/*	if(Model.getFalconCount() > startMigration && Model.getFalconCount() < quarterMigration) {
-					g.drawString("Delaware", 600, 100);
-				}else if(Model.getFalconCount() > quarterMigration && Model.getFalconCount() < halfMigration) {
-					g.drawString("Quart Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > halfMigration && Model.getFalconCount() < threequarterMigration) {
-					g.drawString("Half-Way Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > threequarterMigration && Model.getFalconCount() < endMigration) {
-					g.drawString("Three-Quarters Migration Point", 600, 100);
-				}else if(Model.getFalconCount() > endMigration) {
-					g.drawString("South America", 600, 100);
-					Model.changeGameMode(Controller.WINNER);
-				}*/
+				
+				
+				g.setColor(Color.BLACK);
+				//display mini map
+				if(Model.getFalconCount() > START_RK && Model.getFalconCount() < QUARTER_RK) {
+					g.drawString("You Are In Argentina", frameWidth-210, frameHeight-360);
+					g.drawImage((BufferedImage)pics.get("mm-start"), frameWidth-210, frameHeight-350, this);
+				}else if(Model.getFalconCount() > QUARTER_RK && Model.getFalconCount() < HALF_RK) {
+					g.drawString("You Are In Uruguay ", frameWidth-210, frameHeight-360);
+					g.drawImage((BufferedImage)pics.get("mm-quarter"), frameWidth-210, frameHeight-350, this);
+				}else if(Model.getFalconCount() > HALF_RK && Model.getFalconCount() < THREEQUARTERS_RK) {
+					g.drawString("You Are In Brazil", frameWidth-210, frameHeight-360);
+					g.drawImage((BufferedImage)pics.get("mm-half"), frameWidth-210, frameHeight-350, this);
+				}else if(Model.getFalconCount() > THREEQUARTERS_RK && Model.getFalconCount() < Model.DISTANCE_WIN-100) {
+					g.drawString("Over the Atlantic Ocean", frameWidth-210, frameHeight-360);
+					g.drawImage((BufferedImage)pics.get("mm-threequarters"), frameWidth-210, frameHeight-350, this);
+				}else if(Model.getFalconCount() > Model.DISTANCE_WIN-100) {
+					g.drawString("Arriving at Delaware Estuary", frameWidth-210, frameHeight-360);
+					g.drawImage((BufferedImage)pics.get("mm-end"), frameWidth-210, frameHeight-350, this);
+				}
+				//end mini map code
+				
+				
 				if(Model.RKtutorial && !Model.showMap) {
 					g.setFont(new Font("Helvetica", Font.BOLD, 50)); 
 					g.setColor(Color.BLUE);

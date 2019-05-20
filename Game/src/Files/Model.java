@@ -240,7 +240,7 @@ public class Model{
     /**
 	 * Sets up general objects for the Clapper Rail game 
 	 * 
-	 * @author Amjed Hallak, Amelia Abobo
+	 * @author Amjed Hallak, Amelia Abobo, Paul Jureidini
 	 * @param Level number
 	 * 
 	 * */
@@ -337,7 +337,7 @@ public class Model{
     /**
 	 * Spawns a new object at a specified x and y position
 	 *
-	 * @author Amjed Hallak
+	 * @author Amjed Hallak, Paul Jureidini
 	 * @param Type of object, whether it's a predator or a gamepiece
 	 * @param x and y coordinates of the object being spawned
 	 * 
