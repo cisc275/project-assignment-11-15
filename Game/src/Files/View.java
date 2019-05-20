@@ -144,7 +144,7 @@ public class View extends JPanel{
 				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
 				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
 				"BushPT", "clapperRailPlr", "bush1", "bush2", "bush3", "bush4", "mm-start",
-				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg"};
+				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg", "crWin"};
 				
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
@@ -464,7 +464,9 @@ public class View extends JPanel{
 					break;
 				}
 				//g.drawString("LEVEL 3", 10, 20);
-			
+				if(Model.crWin) {
+					g.drawImage((BufferedImage)pics.get("crWin"), 0, 0, this);
+				}
 				break;
 			}
 			break;
@@ -606,8 +608,8 @@ public class View extends JPanel{
 					g.drawImage((BufferedImage)pics.get("map"), 0, 0, null, this);
 					g.setFont(new Font("Helvetica", Font.BOLD, 35)); 
 					g.setColor(Color.BLUE);
-					g.drawString("Red Knots just finished harvesting Horshoe Crab eggs", 700, 300);
-					g.drawString("in the Delaware Bay. Time to continue migrating up north!", 700, 350);
+					g.drawString("It's the time of the year for Red Knot migration.", 700, 300);
+					g.drawString("Making a stop in Delaware, make your way up north!", 700, 350);
 					g.drawImage((BufferedImage)pics.get("rightKey"), 700, 475, null, this);
 					g.drawString("Press the right arrow key to begin", 700, 450);
 				}

@@ -99,7 +99,7 @@ class KeyPress implements KeyListener {
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(Model.rkWin) {
+		if(Model.rkWin || Model.crWin) {
 			if (e.getKeyCode() == Controller.UP) {
 				Model.changeGameMode(Controller.MENU);
 				Model.running = true;
@@ -161,7 +161,12 @@ class KeyPress implements KeyListener {
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
 		    	case(Controller.CLAPPERRAIL3):
-		    		Model.move(Direction.NORTH);
+		    		if(!Model.crWin) { 
+		    			Model.move(Direction.NORTH);
+		    		} else {
+		    			Model.changeGameMode(Controller.MENU);
+		    			Model.running = true;
+		    		}
 		    		break;
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);

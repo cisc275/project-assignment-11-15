@@ -30,6 +30,7 @@ public class Model{
 	public static Boolean RKtutorial = true;
 	public static Boolean showMap = false;
 	public static Boolean rkWin = false;
+	public static Boolean crWin = false;
 	
     private static int xloc;
     private static int yloc;
@@ -129,6 +130,7 @@ public class Model{
     	case(MENU):
     		gameMode = MENU;
     		rkWin = false;
+    		crWin = false;
     		RKquiz = false;
     		running = true;
     		removeAllObjects();
@@ -221,7 +223,8 @@ public class Model{
     		changeGameMode(CLAPPERRAIL3);
     	}
     	if(bushCount == bushMax && gameMode == CLAPPERRAIL3) {
-    		changeGameMode(WINNER);
+    		running = false;
+    		crWin = true;
     	}
     }
     
