@@ -1,6 +1,8 @@
 package Files;
 
-public class GamePiece{
+import java.io.Serializable;
+
+public class GamePiece implements Serializable {
 	int x;
 	int y;
 	
