@@ -142,10 +142,11 @@ public class View extends JPanel{
 	public void loadImages() {
 		pics = new HashMap<>();
 		String[] arrOfStr = {"mmenubkg", "test-face", "myth", "cloud1", "cloud2",
-				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk", "new-twig", "quizRK",
-				"arrowKeys", "ptr", "loserScreen", "map", "rightKey", "rkWinScreen",
-				"BushPT", "CR-north","CR-east", "CR-south", "CR-west", "bush1", "bush2", "bush3", "bush4", "mm-start",
-				"mm-quarter", "mm-half", "mm-threequarters", "mm-end", "CRbkg", "crWin", "CRlose"};
+				"arrowMap", "redKnot", "falcon", "myth", "boss", "rt-hawk-north", "rt-hawk-south", 
+				"rt-hawk-east", "rt-hawk-west","new-twig", "quizRK", "arrowKeys", "ptr", "loserScreen", 
+				"map", "rightKey", "rkWinScreen", "BushPT", "CR-north","CR-east", "CR-south", "CR-west",
+				"bush1", "bush2", "bush3", "bush4", "mm-start","mm-quarter", "mm-half", "mm-threequarters", 
+				"mm-end", "CRbkg", "crWin", "CRlose"};
 				
 		for(String s: arrOfStr) {
 			BufferedImage newImg = createImage(s);
@@ -293,32 +294,36 @@ public class View extends JPanel{
 //				AffineTransform at = AffineTransform.getTranslateInstance(100, 100);
 //				at.rotate(Math.toRadians(45));
 				
-				g.drawImage((BufferedImage)pics.get("rt-hawk"), p.getX(), p.getY(), 50, 50, this); 
-				if(Model.getDirection() == Direction.NORTH) {
+				//g.drawImage((BufferedImage)pics.get("rt-hawk"), p.getX(), p.getY(), 50, 50, this); 
+				if(Model.getDirPred() == Direction.NORTH) {
 					g.drawImage((BufferedImage)pics.get("rt-hawk-north"), p.getX(), p.getY(), 50, 50, this);
-				}else if(Model.getDirection() == Direction.EAST) {
+					//System.out.println("CR turn North");
+				}else if(Model.getDirPred() == Direction.EAST) {
 					g.drawImage((BufferedImage)pics.get("rt-hawk-east"), p.getX(), p.getY(), 50, 50, this); 
-				}else if(Model.getDirection() == Direction.SOUTH) {
-					g.drawImage((BufferedImage)pics.get("rt-hawk-south"), p.getX(), p.getY(), 50, 50, this); 
-				}else if(Model.getDirection() == Direction.WEST) {
+					//System.out.println("CR turn North");
+				}else if(Model.getDirPred() == Direction.SOUTH) {
+					g.drawImage((BufferedImage)pics.get("rt-hawk-south"), p.getX(), p.getY(), 50, 50, this);
+					//System.out.println("CR turn North");
+				}else if(Model.getDirPred() == Direction.WEST) {
 					g.drawImage((BufferedImage)pics.get("rt-hawk-west"), p.getX(), p.getY(), 50, 50, this); 
+					//System.out.println("CR turn North");
 				}
 				
 
 			}
 			
-			if(Model.getDirection() == Direction.NORTH) {
+			if(Model.getDir() == Direction.NORTH) {
 				g.drawImage((BufferedImage)pics.get("CR-north"), Model.getX(), Model.getY(), 50, 50, this);
 				System.out.println("CR turn North");
-			}else if(Model.getDirection() == Direction.EAST) {
+			}else if(Model.getDir() == Direction.EAST) {
 				g.drawImage((BufferedImage)pics.get("CR-east"), Model.getX(), Model.getY(), 50, 50, this);
 				System.out.println("CR turn East");
-			}else if(Model.getDirection() == Direction.SOUTH) {
+			}else if(Model.getDir() == Direction.SOUTH) {
 				g.drawImage((BufferedImage)pics.get("CR-south"), Model.getX(), Model.getY(), 50, 50, this);
 				System.out.println("CR turn South");
-			}else if(Model.getDirection() == Direction.WEST) {
+			}else if(Model.getDir() == Direction.WEST) {
 				g.drawImage((BufferedImage)pics.get("CR-west"), Model.getX(), Model.getY(), 50, 50, this);
-				System.out.println("CR turn South");
+				System.out.println("CR turn West");
 			}
 			
 			g.setColor(Color.BLUE);

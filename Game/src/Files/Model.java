@@ -111,6 +111,7 @@ public class Model{
 			1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700};
     
     private static Direction dir = Direction.NORTH;
+    private static Direction dirPred;
 
     public Model(int fw, int fh){
         this.FRAMEWIDTH = fw;
@@ -215,16 +216,16 @@ public class Model{
     	if(bushCount < bushMaxTutorial && gameMode == CLAPPERRAIL0) {
     		gameMode = CLAPPERRAIL0;
     	}
-    	else if(bushCount == bushMaxTutorial && gameMode == CLAPPERRAIL0) {
+    	else if(bushCount >= bushMaxTutorial && gameMode == CLAPPERRAIL0) {
     		changeGameMode(CLAPPERRAIL1);
     	}
-    	else if (bushCount == bushMax && gameMode == CLAPPERRAIL1) {
+    	else if (bushCount >= bushMax && gameMode == CLAPPERRAIL1) {
     		changeGameMode(CLAPPERRAIL2);
     	}
-    	else if(bushCount == bushMax && gameMode == CLAPPERRAIL2) {
+    	else if(bushCount >= bushMax && gameMode == CLAPPERRAIL2) {
     		changeGameMode(CLAPPERRAIL3);
     	}
-    	if(bushCount == bushMax && gameMode == CLAPPERRAIL3) {
+    	if(bushCount >= bushMax && gameMode == CLAPPERRAIL3) {
     		running = false;
     		crWin = true;
     	}
@@ -678,29 +679,37 @@ public class Model{
 						switch(random) {
 						case(1):
 							if(p.getX() < (View.frameWidth - Animal.INCR)) {
+								dirPred = Direction.EAST;
 								p.move(Direction.EAST);
 							} else {
+								dirPred = Direction.WEST;
 								p.move(Direction.WEST);
 							}
 							break;
 						case(2):
 							if(p.getX() > 0) {
+								dirPred = Direction.WEST;
 								p.move(Direction.WEST);
 							} else {
+								dirPred = Direction.EAST;
 								p.move(Direction.EAST);
 							}
 							break;
 						case(3):
 							if(p.getY() < (View.frameHeight - Animal.INCR)) {
+								dirPred = Direction.SOUTH;
 								p.move(Direction.SOUTH);
 							} else {
+								dirPred = Direction.NORTH;
 								p.move(Direction.NORTH);
 							}
 							break;
 						case(4):
 							if(p.getY() > 0) {
+								dirPred = Direction.NORTH;
 								p.move(Direction.NORTH);
 							} else {
+								dirPred = Direction.SOUTH;
 								p.move(Direction.SOUTH);
 							}
 							break;
@@ -782,16 +791,21 @@ public class Model{
     public static int getBushMax() { return bushMax; }
     public static int getTwigCount() { return twigCount; }
     public static int getBushTrans() { return bushTrans; }
-    public static Direction getDirection() { return getDir(); }
+    
 
-
+    //setters and getters for rotating images
 	public static Direction getDir() {
 		return dir;
 	}
-
-
 	public static void setDir(Direction dir) {
 		Model.dir = dir;
+	}
+	
+	public static Direction getDirPred() {
+		return dirPred;
+	}
+	public static void setDirPred(Direction dirPred) {
+		Model.dirPred = dirPred;
 	}
     
 }
