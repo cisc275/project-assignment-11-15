@@ -243,9 +243,9 @@ class KeyPress implements KeyListener {
 		    	}
 			}
 			
-			if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
+			/*if (e.getKeyChar() == 'k' || e.getKeyChar() == 'K') {
 				Model.changeGameMode(Controller.MENU);
-			}
+			}*/
 		} else { 
 			if (e.getKeyCode() == Controller.RIGHT) {
 				switch(View.gameMode) {
@@ -256,6 +256,7 @@ class KeyPress implements KeyListener {
 			}
 			
 		}
+		/*
 		if (e.getKeyChar() == 'p' || e.getKeyChar() == 'P') {
 			Model.running = !Model.running;
 		}
@@ -265,6 +266,7 @@ class KeyPress implements KeyListener {
 			
 			//Model.RKquiz = true;
 			//Model.running = false;
-		}
+			 
+		}*/
 	}
 }

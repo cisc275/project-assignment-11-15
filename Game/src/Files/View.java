@@ -241,7 +241,7 @@ public class View extends JPanel{
 			g.setColor(Color.BLACK);
 
 			g.drawImage((BufferedImage)pics.get("arrowMap"), frameWidth/2 - 325, 400, null, this);
-			g.drawString("Press k at any time to return to menu", 300, 300);
+			//g.drawString("Press k at any time to return to menu", 300, 300);
 			clouds = Model.getClouds();
 			g.drawImage((BufferedImage)pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
 			g.drawImage((BufferedImage)pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
