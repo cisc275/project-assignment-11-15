@@ -1,10 +1,10 @@
 package Files;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
 import java.util.*;
 
-public class Model{
+public class Model implements Serializable {
 	private final int FRAMEWIDTH;
     private final int FRAMEHEIGHT;
     
@@ -112,7 +112,7 @@ public class Model{
     
     private Direction dir = Direction.NORTH;
 
-    public Model(int fw, int fh){
+    public Model(int fw, int fh) {
         this.FRAMEWIDTH = fw;
         this.FRAMEHEIGHT = fh;
     }
