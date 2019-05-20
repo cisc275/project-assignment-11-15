@@ -246,7 +246,7 @@ public class View extends JPanel{
 			g.drawImage((BufferedImage)pics.get(clouds.get(0).getType()), clouds.get(0).getX(), clouds.get(0).getY(), null, this);
 			g.drawImage((BufferedImage)pics.get(clouds.get(1).getType()), clouds.get(1).getX(), clouds.get(1).getY(), null, this);
 			g.setFont(new Font("Helvetica", Font.PLAIN, bigText)); 
-			g.drawString("Delaware Estuary Birds", frameWidth/2 - 320, 65);
+			g.drawString("Delaware Estuary Birds vs. Nature", frameWidth/2 - 460, 160);
 			break;
 			
 		case(CLAPPERRAIL0):
