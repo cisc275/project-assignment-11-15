@@ -110,7 +110,7 @@ public class Model{
 			650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300,
 			1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700};
     
-    private Direction dir = Direction.NORTH;
+    private static Direction dir = Direction.NORTH;
 
     public Model(int fw, int fh){
         this.FRAMEWIDTH = fw;
@@ -782,5 +782,16 @@ public class Model{
     public static int getBushMax() { return bushMax; }
     public static int getTwigCount() { return twigCount; }
     public static int getBushTrans() { return bushTrans; }
+    public static Direction getDirection() { return getDir(); }
+
+
+	public static Direction getDir() {
+		return dir;
+	}
+
+
+	public static void setDir(Direction dir) {
+		Model.dir = dir;
+	}
     
 }

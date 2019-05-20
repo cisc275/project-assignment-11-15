@@ -158,9 +158,11 @@ class KeyPress implements KeyListener {
 		    		break;
 		    	case(Controller.CLAPPERRAIL0):
 		    		Model.setMovedTutorial(true);
+		    		Model.setDir(Direction.NORTH);
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
 		    	case(Controller.CLAPPERRAIL3):
+		    		Model.setDir(Direction.NORTH); 
 		    		if(!Model.crWin) { 
 		    			Model.move(Direction.NORTH);
 		    		} else {
@@ -182,10 +184,12 @@ class KeyPress implements KeyListener {
 		    		Model.changeGameMode(Controller.CLAPPERRAIL0);
 		    		break;
 		    	case(Controller.CLAPPERRAIL0):
-		    		Model.setMovedTutorial(true);	    	
+		    		Model.setMovedTutorial(true);	
+		    		Model.setDir(Direction.WEST);
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
 		    	case(Controller.CLAPPERRAIL3):
+		    		Model.setDir(Direction.WEST);
 					Model.move(Direction.WEST);
 		    		break;
 		    	case(Controller.REDKNOT0):
@@ -206,10 +210,12 @@ class KeyPress implements KeyListener {
 		    		break;
 		    	case(Controller.CLAPPERRAIL0):
 		    		Model.setMovedTutorial(true);
+		    		Model.setDir(Direction.EAST);
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
 		    	case(Controller.CLAPPERRAIL3):
 					Model.move(Direction.EAST);
+		    		Model.setDir(Direction.EAST);
 		    		break;
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
@@ -224,9 +230,11 @@ class KeyPress implements KeyListener {
 		    		break;
 		    	case(Controller.CLAPPERRAIL0):
 		    		Model.setMovedTutorial(true);
+		    		Model.setDir(Direction.SOUTH);
 		    	case(Controller.CLAPPERRAIL1):
 		    	case(Controller.CLAPPERRAIL2):
 		    	case(Controller.CLAPPERRAIL3):
+		    		Model.setDir(Direction.SOUTH);
 		    	case(Controller.REDKNOT0):
 		    		Model.setMovedTutorial(true);
 		    	case(Controller.REDKNOT):
