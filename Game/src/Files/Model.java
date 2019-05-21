@@ -395,7 +395,7 @@ public class Model implements Serializable {
 		    				bushCount += twigCount;
 		    				//System.out.println(bushCount);
 		    				//bushTrans += DEFAULT_BUSH_ALPHA*twigCount; //increment bush transparency 
-		    				//System.out.println(bushTrans);
+		    				//System.out.println(bus fhTrans);
 		    				twigCount = 0;
 		    			}else if(twigCount>0 && bushCount == bushMax) {
 		    				//System.out.println("checkpoint");
@@ -409,7 +409,7 @@ public class Model implements Serializable {
 		    		if(a instanceof Animal) {
 		    			if(!recovering) {
 			    			playerHealth--;
-			    			deathToll++;
+			    			deathToll+=2;
 			    			//System.out.println("2 - RECOVERY BEGIN");
 			    			recovering = true;
 		    			}
@@ -474,7 +474,7 @@ public class Model implements Serializable {
 			//System.out.println(xTotal);
     		chkCollision(redKnot);
     	}
-    	//System.out.println(flightTime);
+    	//System.out.println(flightTime); 
 
 
 		

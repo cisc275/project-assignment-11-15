@@ -314,16 +314,16 @@ public class View extends JPanel{
 			
 			if(Model.getDir() == Direction.NORTH) {
 				g.drawImage((BufferedImage)pics.get("CR-north"), Model.getX(), Model.getY(), 50, 50, this);
-				System.out.println("CR turn North");
+				//System.out.println("CR turn North");
 			}else if(Model.getDir() == Direction.EAST) {
 				g.drawImage((BufferedImage)pics.get("CR-east"), Model.getX(), Model.getY(), 50, 50, this);
-				System.out.println("CR turn East");
+				//System.out.println("CR turn East");
 			}else if(Model.getDir() == Direction.SOUTH) {
 				g.drawImage((BufferedImage)pics.get("CR-south"), Model.getX(), Model.getY(), 50, 50, this);
-				System.out.println("CR turn South");
+				//System.out.println("CR turn South");
 			}else if(Model.getDir() == Direction.WEST) {
 				g.drawImage((BufferedImage)pics.get("CR-west"), Model.getX(), Model.getY(), 50, 50, this);
-				System.out.println("CR turn West");
+				//System.out.println("CR turn West");
 			}
 			
 			g.setColor(Color.BLUE);
